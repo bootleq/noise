@@ -1,0 +1,46 @@
+<!ENTITY prefwindow.title "Noise 設定">
+<!ENTITY treecol.name.width "220px">
+<!ENTITY treecol.file.width "220px">
+<!ENTITY pane-general.title "全般">
+<!ENTITY check-prefs-enabled.label "音声を有効にする">
+<!ENTITY check-prefs-enabled.accesskey "N">
+<!ENTITY events.guide "イベント案内">
+<!ENTITY events.guide.tooltip "利用可能なイベントを選択するための案内ウィンドウを開きます。">
+<!ENTITY events.guide.title "Noise イベント案内">
+<!ENTITY events.guide.intro "以下の既定イベントから項目を選択して設定ウィンドウに追加してください。">
+<!ENTITY events.guide.item.name "イベント名">
+<!ENTITY events.guide.item.ver "バージョン">
+<!ENTITY events.guide.item.ver.tooltip "既定となったバージョン">
+<!ENTITY events.guide.item.check "選択">
+<!ENTITY events.guide.description.label "概要">
+<!ENTITY events.guide.description "説明を見るためには項目を選択してください">
+<!ENTITY item.name "名前">
+<!ENTITY item.event "イベント">
+<!ENTITY item.type "イベント型">
+<!ENTITY item.file "音声ファイル">
+<!ENTITY item.enabled "有効済み">
+<!ENTITY cmd_add_sound.label "追加">
+<!ENTITY new_sound.label "音声">
+<!ENTITY new_separator.label "区切り">
+<!ENTITY cmd_duplicate_sound.label "複製">
+<!ENTITY cmd_edit_sound.label "編集">
+<!ENTITY cmd_play_sound.label "再生">
+<!ENTITY cmd_toggle_enabled.true.label "有効">
+<!ENTITY cmd_toggle_enabled.false.label "無効">
+<!ENTITY cmd_remove_sound.label "除去">
+<!ENTITY cmd_findbar.commandkey "F">
+<!ENTITY findbar.label "検索:">
+<!ENTITY settings.label "設定">
+<!ENTITY settings.export "書き出し">
+<!ENTITY settings.import "取り込み">
+<!ENTITY settings.defaults "既定">
+<!ENTITY pref.notApply.tooltip "音声設定はこのウィンドウを閉じた後に適用されます。">
+<!ENTITY editdialog.title "Noise 編集">
+<!ENTITY filepicker.browser "選択...">
+<!ENTITY relative.enabled "音声ディレクトリを利用:">
+<!ENTITY relative.changebase "ディレクトリ変更">
+<!ENTITY relative.openbase "ディレクトリを開く">
+<!ENTITY item.type.observer "イベントトピック (addObserver 経由)">
+<!ENTITY item.type.browser "ブラウザイベント (gBrowser.addEventListener 経由)">
+<!ENTITY item.type.window "ウィンドウイベント (window.addEventListener 経由)">
+<!ENTITY error.loadsound "エラー: ファイルを読み込めません">

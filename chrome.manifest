@@ -1,0 +1,17 @@
+content noise jar:chrome/noise.jar!/content/noise/
+locale  noise  da-DK jar:chrome/noise.jar!/locale/da-DK/noise/
+locale  noise  de-DE jar:chrome/noise.jar!/locale/de-DE/noise/
+locale  noise  en-US jar:chrome/noise.jar!/locale/en-US/noise/
+locale  noise  fr-FR jar:chrome/noise.jar!/locale/fr-FR/noise/
+locale  noise  ja-JP jar:chrome/noise.jar!/locale/ja-JP/noise/
+locale  noise  pl-PL jar:chrome/noise.jar!/locale/pl-PL/noise/
+locale  noise  pt-BR jar:chrome/noise.jar!/locale/pt-BR/noise/
+locale  noise  tr-TR jar:chrome/noise.jar!/locale/tr-TR/noise/
+locale  noise  zh-CN jar:chrome/noise.jar!/locale/zh-CN/noise/
+locale  noise  zh-TW jar:chrome/noise.jar!/locale/zh-TW/noise/
+skin  noise classic/1.0	jar:chrome/noise.jar!/skin/classic/noise/
+overlay chrome://browser/content/browser.xul	chrome://noise/content/noiseOverlay.xul
+overlay chrome://global/content/viewSource.xul	chrome://noise/content/noiseOverlay.xul
+overlay chrome://global/content/viewPartialSource.xul	chrome://noise/content/noiseOverlay.xul
+overlay chrome://global/content/alerts/alert.xul	chrome://noise/content/noiseAlertOverlay.xul
+overlay	chrome://mozapps/content/extensions/extensions.xul 	chrome://noise/content/noiseExtensionsOverlay.xul

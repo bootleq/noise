@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<overlay id="noise-alert-overlay"
+         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+  <script type="application/x-javascript"><![CDATA[
+    window.addEventListener("load", function(){ 
+      var noiseObsSvc = Components.classes["@mozilla.org/observer-service;1"].getService(Components.interfaces.nsIObserverService);
+      noiseObsSvc.notifyObservers(null,"noise-alert-loaded",null);
+    }, false);
+	]]></script>
+</overlay>

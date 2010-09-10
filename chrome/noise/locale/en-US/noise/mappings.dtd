@@ -1,0 +1,46 @@
+<!ENTITY FIND_WRAPPED "Findbar wrapped">
+<!ENTITY toggleSidebar "Toggle sidebar">
+<!ENTITY alert-loaded "Alert notificationbox">
+<!ENTITY AlertActive "Information bar alert">
+<!ENTITY sessionstore-windows-restored "Session restored">
+<!ENTITY purge-session-history "Clear session history">
+<!ENTITY empty-cache "Clear cache">
+<!ENTITY WebProgress-start "Start navigation">
+<!ENTITY WebProgress-locationChange "Change location">
+<!ENTITY TabOpen "Open tab">
+<!ENTITY TabClose "Close tab">
+<!ENTITY toplevel-window-ready "Open window">
+<!ENTITY domwindowclosed "Close window">
+<!ENTITY DOMPopupBlocked "Popup Blocked">
+<!ENTITY fullscreen "Toggle fullscreen">
+<!ENTITY dl-start "Download started">
+<!ENTITY dl-failed "Download failed">
+<!ENTITY dl-cancel "Download canceled">
+<!ENTITY dl-done "Download done">
+<!ENTITY perm-changed "Site permission changed">
+<!ENTITY xpi-blocked "Xpinstall install blocked">
+<!ENTITY PluginNotFound "Plugin not found">
+<!ENTITY noise-log "Noise log">
+<!ENTITY about_FIND_WRAPPED "When using Findbar searching text, the search Wraps back to first result after it reachs the last one. This event fires with these Wraps.">
+<!ENTITY about_toggleSidebar "Open/Close sidebar. ex: open history sidebar.">
+<!ENTITY about_alert-loaded "Events such as All downloads finished, New update found, ..., which use alert boxs slide from the bottom-right area of browser, fire this event.">
+<!ENTITY about_AlertActive "Events such as Popup window blocked, Ask for store password, ..., which use information bar notifications from the top area of browser, fire this event.">
+<!ENTITY about_sessionstore-windows-restored "All initial windows opened. This event fires once when Firefox starting.">
+<!ENTITY about_purge-session-history "Clear Firefox session history.">
+<!ENTITY about_empty-cache "Clear Firefox cache.">
+<!ENTITY about_WebProgress-start "A navigation started. Much likely to happen when click a link.">
+<!ENTITY about_WebProgress-locationChange "Location changed. Much likely to happen when click a link, but also fires when select another tab, and when click a link like url.html#fragment-identifier.">
+<!ENTITY about_TabOpen "Open a new tab.">
+<!ENTITY about_TabClose "Close a tab.">
+<!ENTITY about_toplevel-window-ready "Open a new window. Include alert, option dialogs and so on.">
+<!ENTITY about_domwindowclosed "Close a new window. Include alert, option dialogs and so on.">
+<!ENTITY about_DOMPopupBlocked "A popup window blocked.">
+<!ENTITY about_fullscreen "Toggle fullscreen mode.">
+<!ENTITY about_dl-start "A download item started.">
+<!ENTITY about_dl-failed "A download item failed.">
+<!ENTITY about_dl-cancel "A download item canceled.">
+<!ENTITY about_dl-done "A download item finished.">
+<!ENTITY about_perm-changed "Change permission of a site. ex: reject a site from loading image.">
+<!ENTITY about_xpi-blocked "Xpi installation blocked. ex: unsupported Firefox verion.">
+<!ENTITY about_PluginNotFound "Can&apos;t find a plugin. ex: Flash plugin not found.">
+<!ENTITY about_noise-log "You can use &quot;some_event&amp;Noise.log(some_message)&quot; to log messages on Error Console. This event fires with every log.">

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RDF xmlns="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+     xmlns:em="http://www.mozilla.org/2004/em-rdf#">
+  <Description about="urn:mozilla:install-manifest">
+    <em:id>noise@bootleq</em:id>
+    <em:name>Noise</em:name>
+    <em:version>1.1.4</em:version>
+    <em:type>2</em:type>
+    <em:description>Make sound response while events happen.</em:description>
+    <em:creator>bootleq</em:creator>
+    <em:translator>AlleyKat (Finn S. Sørensen) (da-DK)</em:translator>
+    <em:translator>StefanS (de-DE)</em:translator>
+    <em:translator>ioreker (fr-FR)</em:translator>
+    <em:translator>drry (ja-JP)</em:translator>
+    <em:translator>Leszek(teo)Życzkowski (pl-PL)</em:translator>
+    <em:translator>Ghelman (pt-BR)</em:translator>
+    <em:translator>Ersen Yoldaç (tr-TR)</em:translator>
+    <em:translator>xmoke (zh-CN)</em:translator>
+    <em:contributor>Jose Enrique Bolaños (testing on Mac OSX, other fixes)</em:contributor>
+    <em:optionsURL>chrome://noise/content/prefs.xul</em:optionsURL>
+    <em:homepageURL>http://www.bootleq.com/noise/</em:homepageURL>
+    <em:iconURL>chrome://noise/skin/icon.png</em:iconURL>
+    <em:targetApplication>
+      <Description>
+        <em:id>{ec8030f7-c20a-464f-9b0e-13a3a9e97384}</em:id>
+        <em:minVersion>3.0</em:minVersion>
+        <em:maxVersion>3.7a1pre</em:maxVersion>
+      </Description>
+    </em:targetApplication>
+  </Description>
+</RDF>

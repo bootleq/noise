@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<?xml-stylesheet href="chrome://noise/skin/prefs.css" type="text/css"?>
+
+<!DOCTYPE prefwindow SYSTEM "chrome://noise/locale/prefs.dtd">
+
+<dialog id="noiseEventsGuide"
+        xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+        xmlns:html="http://www.w3.org/1999/xhtml"
+        title="&events.guide.title;"
+        persist="height width"
+        ondialogaccept="return Noise.NoiseEventsGuide.accept();">
+
+  <script type="application/x-javascript" src="chrome://noise/content/noise.js" />
+  <script type="application/x-javascript" src="chrome://noise/content/eventsGuide.js" />
+  
+  <description>&events.guide.intro;</description>
+  
+  <tree id="eventsTree" seltype="single" flex="1" style="min-height:240px;min-width:440px;"
+        onselect="Noise.NoiseEventsGuide.handleTreeEvent(event);" tabindex="1"
+        onkeypress="Noise.NoiseEventsGuide.handleTreeEvent(event);"
+        editable="true" enableColumnDrag="true"
+        persist="width height">
+    <treecols>
+      <treecol id="treecol-name" label="&events.guide.item.name;" primary="true" ignoreincolumnpicker="true" editable="false"
+               persist="width ordinal hidden" style="min-width:100px;" flex="1" />
+      <splitter class="tree-splitter" />
+      <treecol id="treecol-version" label="&events.guide.item.ver;" editable="false" persist="width ordinal hidden"
+               flex="0" style="min-width:40px;" tooltiptext="&events.guide.item.ver.tooltip;" />
+      <splitter class="tree-splitter" />
+      <treecol id="treecol-enabled" label="&events.guide.item.check;" ignoreincolumnpicker="true" type="checkbox" flex="0"
+               editable="true" style="min-width:40px;text-align:center;" persist="width ordinal hidden"/>
+    </treecols>
+    <treechildren context="treemenu"/>
+  </tree>
+  
+  <groupbox>
+    <caption label="&events.guide.description.label;" />
+    <description style="margin:0;padding:0;"><html:div id="event-description">&events.guide.description;</html:div></description>
+  </groupbox>
+
+</dialog>

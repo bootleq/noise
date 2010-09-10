@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<?xml-stylesheet href="chrome://global/skin/findBar.css" type="text/css"?>
+<?xml-stylesheet href="chrome://noise/skin/prefs.css" type="text/css"?>
+
+<!DOCTYPE prefwindow [
+<!ENTITY % prefsDTD SYSTEM "chrome://noise/locale/prefs.dtd">
+%prefsDTD;
+<!ENTITY % findBarDTD SYSTEM "chrome://global/locale/findbar.dtd" >
+%findBarDTD;
+<!ENTITY % globalDTD SYSTEM "chrome://global/locale/global.dtd">
+%globalDTD;
+]>
+
+<prefwindow id="NoisePrefserences" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" title="&prefwindow.title;"
+            buttons="accept,cancel,extra1"
+            persist="height width screenX screenY"
+            ondialogaccept="return Noise.NoisePrefs.accept();"
+            ondialogcancel="if(document.documentElement.instantApply) Noise.NoisePrefs.accept();">
+
+  <prefpane id="mappingsPane" label="&pane-general.title;" flex="1">
+
+    <commandset id="mappingsCommandSet" oncommand="Noise.NoisePrefs.doCommand(event.target.id);">
+			<command id="cmd_add_sound" />
+			<command id="cmd_add_separator" label="&new_separator.label;" />
+			<command id="cmd_duplicate_sound" label="&cmd_duplicate_sound.label;" />
+			<command id="cmd_edit_sound" disabled="true" label="&cmd_edit_sound.label;" />
+			<command id="cmd_play_sound" disabled="true" label="&cmd_play_sound.label;" />
+			<command id="cmd_remove_sound" disabled="true" label="&cmd_remove_sound.label;" />
+			<command id="cmd_toggle_enabled" disabled="true" label="&cmd_toggle_enabled.true.label;" />
+		</commandset>
+
+    <keyset id="noiseKeyset">
+  		<key id="key_findbar" key="&cmd_findbar.commandkey;" modifiers="accel" oncommand="Noise.NoisePrefs.findbar.doCommand('cmd_findbar');"/>
+  		<key id="key_find_next" keycode="VK_F3" oncommand="Noise.NoisePrefs.findbar.doCommand('cmd_find_next');"/>
+  		<key id="key_find_previous" keycode="VK_F3" modifiers="shift" oncommand="Noise.NoisePrefs.findbar.doCommand('cmd_find_previous');"/>
+  	</keyset>
+
+    <preferences>
+      <preference id="prefs-enabled" name="extensions.noise.enabled" type="bool"/>
+    </preferences>
+
+    <hbox align="baseline">
+      <checkbox id="check-prefs-enabled" preference="prefs-enabled"
+        label="&check-prefs-enabled.label;"
+        accesskey="&check-prefs-enabled.accesskey;"/>
+      <spacer flex="1" />
+      <label id="events-guide-link" value="&events.guide;" class="text-link" tooltiptext="&events.guide.tooltip;"
+        onclick="Noise.NoisePrefs.eventsGuide();" />
+    </hbox>
+
+    <tree id="mappingsTree" seltype="single" flex="1" style="min-height:390px;"
+          ondblclick="Noise.NoisePrefs.handleTreeEvent(event);"
+          onkeypress="Noise.NoisePrefs.handleTreeEvent(event);"
+          onselect="Noise.NoisePrefs.handleTreeEvent(event);"
+          editable="true"
+          enableColumnDrag="true">
+      <treecols>
+        <treecol id="treecol-name" label="&item.name;" primary="true" editable="false" persist="width ordinal hidden"
+                 style="min-width:100px;width:&treecol.name.width;;" />
+        <splitter class="tree-splitter" />
+        <treecol id="treecol-event" label="&item.event;" hidden="true" flex="1" editable="false" persist="width ordinal hidden" style="min-width:100px;" />
+        <splitter class="tree-splitter" />
+        <treecol id="treecol-file" label="&item.file;" flex="1" editable="false" persist="width ordinal hidden"
+                 style="min-width:100px;width:&treecol.file.width;;"/>
+        <splitter class="tree-splitter" />
+        <treecol id="treecol-enabled" label="&item.enabled;" type="checkbox" flex="0" editable="true" persist="width ordinal hidden"/>
+      </treecols>
+      <treechildren ondraggesture="nsDragAndDrop.startDrag(event, Noise.NoisePrefs.dragDropObserver);" context="treemenu"/>
+    </tree>
+    
+    <hbox id="noise-prefs-findbar" align="center" hidden="true">
+      <toolbarbutton class="findbar-closebutton" tooltiptext="&findCloseButton.tooltip;" oncommand="Noise.NoisePrefs.findbar.doCommand('cmd_findbar');"/>
+      <label class="findbar-find-fast" control="noise-prefs-findbar-textbox" value="&findbar.label;"/>
+      <hbox class="find-field-container">
+        <textbox id="noise-prefs-findbar-textbox" class="noise-findbar-textbox"
+                 oninput="Noise.NoisePrefs.findbar.doCommand('cmd_find_input');"
+                 onkeypress="Noise.NoisePrefs.findbar.handleKeyEvent(event);"/>
+      </hbox>
+      <hbox class="find-buttons-container">
+        <toolbarbutton id="noise-prefs-findbar-next" class="findbar-find-next tabbable"
+                       label="&next.label;"
+                       tooltiptext="&next.tooltip;"
+                       oncommand="Noise.NoisePrefs.findbar.doCommand('cmd_find_next');"
+                       disabled="true"
+                       chromedir="&locale.dir;"/>
+        <toolbarbutton id="noise-prefs-findbar-previous" class="findbar-find-previous tabbable"
+                       label="&previous.label;"
+                       tooltiptext="&previous.tooltip;"
+                       oncommand="Noise.NoisePrefs.findbar.doCommand('cmd_find_previous');"
+                       disabled="true"
+                       chromedir="&locale.dir;"/>
+        <image id="noise-prefs-findbar-status-icon" class="findbar-find-fast find-status-icon"/>
+      </hbox>
+      <spacer flex="1" />
+      <image class="findbar-find-fast find-status-icon"/>
+    </hbox>
+    
+    <hbox pack="center" style="margin-top:10px;">
+      <button command="cmd_add_sound" label="&cmd_add_sound.label;"/>
+			<button command="cmd_edit_sound"/>
+			<button command="cmd_play_sound"/>
+			<button command="cmd_toggle_enabled"/>
+			<button command="cmd_remove_sound"/>
+		</hbox>
+
+    <popupset>
+      <menupopup id="treemenu">
+        <menu id="new-menu" label="&cmd_add_sound.label;">
+          <menupopup id="new-popup">
+            <menuitem label="&new_sound.label;" command="cmd_add_sound"/>
+            <menuitem command="cmd_add_separator"/>
+            <menuitem command="cmd_duplicate_sound"/>
+          </menupopup>
+        </menu>
+        <menuitem command="cmd_edit_sound"/>
+        <menuitem command="cmd_play_sound"/>
+        <menuitem command="cmd_toggle_enabled"/>
+        <menuitem command="cmd_remove_sound"/>
+      </menupopup>
+    </popupset>
+    
+    <popupset>
+      <menupopup id="noise-settings" position="before_start">
+        <menuitem id="noise-export" label="&settings.export;" oncommand="Noise.NoisePrefs.exportSetting();"/>
+        <menuitem id="noise-import" label="&settings.import;" oncommand="Noise.NoisePrefs.importSetting();"/>
+        <menuitem id="noise-defaults" label="&settings.defaults;" oncommand="Noise.NoisePrefs.defaultSetting();"/>
+      </menupopup>
+    </popupset>
+    
+    <separator class="groove" />
+    
+    <hbox id="noise-prefs-main-buttonset">
+      <button dlgtype="extra1" id="setting" label="&settings.label;" popup="noise-settings" dir="reverse" image="chrome://noise/skin/arrow.png"/>
+      <spacer flex="1" />
+      <label>
+        <image id="icon-not-apply" src="chrome://noise/skin/info.png" width="24" height="24" maxheight="24" hidden="true" tooltiptext="&pref.notApply.tooltip;" />
+      </label>
+      <button dlgtype="accept" />
+      <button dlgtype="cancel" />
+    </hbox>
+
+  </prefpane>
+  
+  <script type="application/x-javascript" src="chrome://noise/content/noise.js" />
+  <script type="application/x-javascript" src="chrome://global/content/nsDragAndDrop.js" />
+  <script type="application/x-javascript" src="chrome://noise/content/prefs.js" />
+  <stringbundleset id="noise-stringbundleset">
+    <stringbundle id="noise-string-bundle" src="chrome://noise/locale/noise.properties"/>
+  </stringbundleset>
+
+</prefwindow>

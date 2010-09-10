@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE overlay SYSTEM "chrome://noise/locale/noise.dtd">
+<overlay id="noise-extensions-overlay"
+         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+	<script type="application/x-javascript"><![CDATA[
+		// Make Noise prefwindow resizable.
+    // overwrite cmd_options, see chrome/tookit/content/mozapps/extensions/extensions.js
+    window.addEventListener("load", function(){
+      eval("gExtensionsViewController.commands.cmd_options ="+gExtensionsViewController.commands.cmd_options.toString().replace(
+      'openDialog(optionsURL, "", features);',
+      'openDialog(optionsURL, "", features + (optionsURL=="chrome://noise/content/prefs.xul"?",resizable=yes":"") );'
+      ));
+      return;
+    }, false);
+	]]></script>
+</overlay>

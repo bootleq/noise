@@ -1,0 +1,46 @@
+<!ENTITY prefwindow.title "Noise Tercihleri">
+<!ENTITY treecol.name.width "220px">
+<!ENTITY treecol.file.width "220px">
+<!ENTITY pane-general.title "Genel">
+<!ENTITY check-prefs-enabled.label "Seslere izin ver">
+<!ENTITY check-prefs-enabled.accesskey "N">
+<!ENTITY events.guide "Aktivite rehberi">
+<!ENTITY events.guide.tooltip "Uygun aktiviteleri almak için bir rehber penceresi aç">
+<!ENTITY events.guide.title "Noise Aktivite Rehberi">
+<!ENTITY events.guide.intro "Lütfen aşağıdaki varsayılan aktiviteler arasından tercihler penceresine eklemek için maddeler seçin.">
+<!ENTITY events.guide.item.name "Aktivite adı">
+<!ENTITY events.guide.item.ver "sürüm.">
+<!ENTITY events.guide.item.ver.tooltip "Hangi sürümden sonra varsayılan oldu">
+<!ENTITY events.guide.item.check "Al">
+<!ENTITY events.guide.description.label "Özet">
+<!ENTITY events.guide.description "Tanımını görüntülemek için bir madde seçin.">
+<!ENTITY item.name "Adı">
+<!ENTITY item.event "Aktivite">
+<!ENTITY item.type "Aktivite türü">
+<!ENTITY item.file "Ses dosyası">
+<!ENTITY item.enabled "İzin verildi">
+<!ENTITY cmd_add_sound.label "Ekle">
+<!ENTITY new_sound.label "Ses">
+<!ENTITY new_separator.label "Ayırıcı">
+<!ENTITY cmd_duplicate_sound.label "İkile">
+<!ENTITY cmd_edit_sound.label "Düzenle">
+<!ENTITY cmd_play_sound.label "Oynat">
+<!ENTITY cmd_toggle_enabled.true.label "İzin ver">
+<!ENTITY cmd_toggle_enabled.false.label "Engelle">
+<!ENTITY cmd_remove_sound.label "Kaldır">
+<!ENTITY cmd_findbar.commandkey "F">
+<!ENTITY findbar.label "Bul:">
+<!ENTITY settings.label "Ayarlar">
+<!ENTITY settings.export "Dışa aktar">
+<!ENTITY settings.import "İçe aktar">
+<!ENTITY settings.defaults "Varsayılan">
+<!ENTITY pref.notApply.tooltip "Ses eşleştirmesi bu pencereyi kapattıktan sonra uygulanacak">
+<!ENTITY editdialog.title "Noise Düzenleme">
+<!ENTITY filepicker.browser "Seç...">
+<!ENTITY relative.enabled "Ses Dizinini Kullan:">
+<!ENTITY relative.changebase "Dizini değiştir">
+<!ENTITY relative.openbase "Dizini Aç">
+<!ENTITY item.type.observer "Aktivite Konusu (addObserver yoluyla)">
+<!ENTITY item.type.browser "Tarayıcı Aktivitesi (gBrowser. addEventListener yoluyla)">
+<!ENTITY item.type.window "Pencere Aktivitesi (window.addEventListener)">
+<!ENTITY error.loadsound "Hata: Dosyayı yükleyemedi">

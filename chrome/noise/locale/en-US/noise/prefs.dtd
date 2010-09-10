@@ -1,0 +1,46 @@
+<!ENTITY prefwindow.title "Noise Preference">
+<!ENTITY treecol.name.width "220px">
+<!ENTITY treecol.file.width "220px">
+<!ENTITY pane-general.title "General">
+<!ENTITY check-prefs-enabled.label "Enable sounds">
+<!ENTITY check-prefs-enabled.accesskey "N">
+<!ENTITY events.guide "Events guide">
+<!ENTITY events.guide.tooltip "Open a guide window to pick available events">
+<!ENTITY events.guide.title "Noise Events Guide">
+<!ENTITY events.guide.intro "Please select items from default events below, to add to preference window.">
+<!ENTITY events.guide.item.name "Event name">
+<!ENTITY events.guide.item.ver "ver.">
+<!ENTITY events.guide.item.ver.tooltip "Became default since which version">
+<!ENTITY events.guide.item.check "Pick">
+<!ENTITY events.guide.description.label "Summary">
+<!ENTITY events.guide.description "Select an item to view description.">
+<!ENTITY item.name "Name">
+<!ENTITY item.event "Event">
+<!ENTITY item.type "Event type">
+<!ENTITY item.file "Sound file">
+<!ENTITY item.enabled "Enabled">
+<!ENTITY cmd_add_sound.label "Add">
+<!ENTITY new_sound.label "Sound">
+<!ENTITY new_separator.label "Separator">
+<!ENTITY cmd_duplicate_sound.label "Duplicate">
+<!ENTITY cmd_edit_sound.label "Edit">
+<!ENTITY cmd_play_sound.label "Play">
+<!ENTITY cmd_toggle_enabled.true.label "Enable">
+<!ENTITY cmd_toggle_enabled.false.label "Disable">
+<!ENTITY cmd_remove_sound.label "Remove">
+<!ENTITY cmd_findbar.commandkey "F">
+<!ENTITY findbar.label "Find:">
+<!ENTITY settings.label "Settings">
+<!ENTITY settings.export "Export">
+<!ENTITY settings.import "Import">
+<!ENTITY settings.defaults "Default">
+<!ENTITY pref.notApply.tooltip "Sound mappings will be applied after closing this window.">
+<!ENTITY editdialog.title "Noise Edit">
+<!ENTITY filepicker.browser "Choose...">
+<!ENTITY relative.enabled "Use sound directory:">
+<!ENTITY relative.changebase "Change directory">
+<!ENTITY relative.openbase "Open directory">
+<!ENTITY item.type.observer "Event topic (via addObserver)">
+<!ENTITY item.type.browser "Browser event (via gBrowser.addEventListener)">
+<!ENTITY item.type.window "Window event (via window.addEventListener)">
+<!ENTITY error.loadsound "Error: Can&apos;t load file">

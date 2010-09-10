@@ -1,0 +1,46 @@
+<!ENTITY FIND_WRAPPED "Find-bjælke ombrydning">
+<!ENTITY toggleSidebar "Aktiver/deaktiver sidebjælke">
+<!ENTITY alert-loaded "Alarm notifikationsboks">
+<!ENTITY AlertActive "Information bar alert">
+<!ENTITY sessionstore-windows-restored "Session genetableret">
+<!ENTITY purge-session-history "Ryd sessionshistorik">
+<!ENTITY empty-cache "Ryd mellemlager">
+<!ENTITY WebProgress-start "Start navigation">
+<!ENTITY WebProgress-locationChange "Ændre placering">
+<!ENTITY TabOpen "Åbn faneblad">
+<!ENTITY TabClose "Luk faneblad">
+<!ENTITY toplevel-window-ready "Åbn vindue">
+<!ENTITY domwindowclosed "Luk vindue">
+<!ENTITY DOMPopupBlocked "Popop blokeret">
+<!ENTITY fullscreen "Skift fuldskærms">
+<!ENTITY dl-start "Hentning startet">
+<!ENTITY dl-failed "Hentning slog fejl">
+<!ENTITY dl-cancel "Hentning blev annulleret">
+<!ENTITY dl-done "Hentning gennemført">
+<!ENTITY perm-changed "Tilladelse for sitet ændret">
+<!ENTITY xpi-blocked "Xpinstall-installation blokeret">
+<!ENTITY PluginNotFound "Plugin ikke fundet">
+<!ENTITY noise-log "Noise log">
+<!ENTITY about_FIND_WRAPPED "Ved brug af Findbjælke til søgning af tekst, returnerer søgningen tilbage til første resultat efter at have nået det sidste. Denne begivenhed træder i kraft ved disse returneringer.">
+<!ENTITY about_toggleSidebar "Åbn/luk sidebjælke. Eks.: åbn historik sidebjælke.">
+<!ENTITY about_alert-loaded "Begivenheder så som Alle filer hentet, Ny opdatering fundet, ..., som bruger alarm-bokse der glider op i nederste højre hjørne af browseren, udløser denne begivenhed.">
+<!ENTITY about_AlertActive "Events such as Popup window blocked, Ask for store password, ..., which use information bar notifications from the top area of browser, fire this event.">
+<!ENTITY about_sessionstore-windows-restored "Alle indledende vinduer åbnet. Denne begivenhed sker én gang når Firefox startes.">
+<!ENTITY about_purge-session-history "Ryd Firefox sessionshistorik.">
+<!ENTITY about_empty-cache "Ryd Firefox cache (mellemlager).">
+<!ENTITY about_WebProgress-start "En navigation er startet. Højst sandsynligt sker denne begivenhed når der klikkes på et link.">
+<!ENTITY about_WebProgress-locationChange "Placering ændret. Sker oftest ved klik på et link, men aktiveres også ved valg af et andet faneblad, og ved klik på et link som f.eks. url.html#fragment-identifier.">
+<!ENTITY about_TabOpen "Åbn et nyt faneblad.">
+<!ENTITY about_TabClose "Luk et faneblad.">
+<!ENTITY about_toplevel-window-ready "Åbn et nyt vindue. Inkluderer alarm, indstillingsdialogbokse og så videre.">
+<!ENTITY about_domwindowclosed "Luk et nyt vindue. Inkluderer alarm, indstillingsdialogbokse og så videre.">
+<!ENTITY about_DOMPopupBlocked "Et popop-vindue er blevet blokeret.">
+<!ENTITY about_fullscreen "Fuldskærmstilstand til/fra.">
+<!ENTITY about_dl-start "Hentning af en fil startet.">
+<!ENTITY about_dl-failed "Hentning af en fil slog fejl.">
+<!ENTITY about_dl-cancel "Hentning af en fil blev annulleret.">
+<!ENTITY about_dl-done "Hentning af en fil blev fuldført.">
+<!ENTITY about_perm-changed "Ændring af tilladelse for en side. F.eks.: nægt at en side indlæser et billede.">
+<!ENTITY about_xpi-blocked "XPI-installation blokeret. F.eks.: Ikke-understøttet version af Firefox.">
+<!ENTITY about_PluginNotFound "Kan ikke finde en plugin. F.eks.: Flash-plugin ikke fundet.">
+<!ENTITY about_noise-log "You can use &quot;some_event&amp;Noise.log(some_message)&quot; to log messages on Error Console. This event fires with every log.">

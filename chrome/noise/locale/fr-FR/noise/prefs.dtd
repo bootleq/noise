@@ -1,0 +1,46 @@
+<!ENTITY prefwindow.title "Préférences de Noise">
+<!ENTITY treecol.name.width "220px">
+<!ENTITY treecol.file.width "220px">
+<!ENTITY pane-general.title "Général">
+<!ENTITY check-prefs-enabled.label "Activer les sons">
+<!ENTITY check-prefs-enabled.accesskey "A">
+<!ENTITY events.guide "Guide des évènements">
+<!ENTITY events.guide.tooltip "Ouvre une fenêtre d'aide pour choisir des évènements parmi ceux disponibles">
+<!ENTITY events.guide.title "Guide des évènements de Noise">
+<!ENTITY events.guide.intro "Sélectionnez les évènements à importer dans la fenêtre des préférences parmi ceux ci-dessous.">
+<!ENTITY events.guide.item.name "Nom de l'évènement">
+<!ENTITY events.guide.item.ver "Version">
+<!ENTITY events.guide.item.ver.tooltip "Inclus par défaut depuis cette version">
+<!ENTITY events.guide.item.check "Importer">
+<!ENTITY events.guide.description.label "Description">
+<!ENTITY events.guide.description "Sélectionnez un évènement pour voir sa description.">
+<!ENTITY item.name "Nom ">
+<!ENTITY item.event "Évènement ">
+<!ENTITY item.type "Type d'évènement ">
+<!ENTITY item.file "Fichier audio ">
+<!ENTITY item.enabled "Activé">
+<!ENTITY cmd_add_sound.label "Ajouter">
+<!ENTITY new_sound.label "Son">
+<!ENTITY new_separator.label "Séparateur">
+<!ENTITY cmd_duplicate_sound.label "Dupliquer">
+<!ENTITY cmd_edit_sound.label "Modifier">
+<!ENTITY cmd_play_sound.label "Jouer">
+<!ENTITY cmd_toggle_enabled.true.label "Activer">
+<!ENTITY cmd_toggle_enabled.false.label "Désactiver">
+<!ENTITY cmd_remove_sound.label "Supprimer">
+<!ENTITY cmd_findbar.commandkey "F">
+<!ENTITY findbar.label "Rechercher :">
+<!ENTITY settings.label "Paramètres">
+<!ENTITY settings.export "Exporter…">
+<!ENTITY settings.import "Importer…">
+<!ENTITY settings.defaults "Par défaut">
+<!ENTITY pref.notApply.tooltip "Le mappage audio sera appliqué après la fermeture de cette fenêtre.">
+<!ENTITY editdialog.title "Modification de Noise">
+<!ENTITY filepicker.browser "Parcourir…">
+<!ENTITY relative.enabled "Utiliser un répertoire audio :">
+<!ENTITY relative.changebase "Changer de répertoire…">
+<!ENTITY relative.openbase "Ouvrir le répertoire">
+<!ENTITY item.type.observer "Sujet d'évènement (via addObserver)">
+<!ENTITY item.type.browser "Évènement de navigateur (via gBrowser.addEventListener)">
+<!ENTITY item.type.window "Évènement de fenêtre (via window.addEventListener)">
+<!ENTITY error.loadsound "Erreur : Impossible de charger le fichier">

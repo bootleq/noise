@@ -1,0 +1,46 @@
+<!ENTITY prefwindow.title "Noise indstillinger">
+<!ENTITY treecol.name.width "220px">
+<!ENTITY treecol.file.width "220px">
+<!ENTITY pane-general.title "Generelt">
+<!ENTITY check-prefs-enabled.label "Aktiver lyde">
+<!ENTITY check-prefs-enabled.accesskey "l">
+<!ENTITY events.guide "Begivenheder-guide">
+<!ENTITY events.guide.tooltip "Åbn et guide-vindue for at vælge tilgængelige begivenheder">
+<!ENTITY events.guide.title "Noise begivenheder-guide">
+<!ENTITY events.guide.intro "Vælg venligst elementer fra standardbegivenhederne herunder, der skal tilføjes i indstillinger-vinduet.">
+<!ENTITY events.guide.item.name "Begivenhedsnavn">
+<!ENTITY events.guide.item.ver "ver.">
+<!ENTITY events.guide.item.ver.tooltip "Blev standard siden hvilken version">
+<!ENTITY events.guide.item.check "Vælg">
+<!ENTITY events.guide.description.label "Sammenfatning">
+<!ENTITY events.guide.description "Vælg et element for at læse beskrivelse.">
+<!ENTITY item.name "Navn">
+<!ENTITY item.event "Begivenhed">
+<!ENTITY item.type "Begivenhedstype">
+<!ENTITY item.file "Lydfil">
+<!ENTITY item.enabled "Aktiveret">
+<!ENTITY cmd_add_sound.label "Tilføj">
+<!ENTITY new_sound.label "Lyd">
+<!ENTITY new_separator.label "Adskiller">
+<!ENTITY cmd_duplicate_sound.label "Duplikér">
+<!ENTITY cmd_edit_sound.label "Rediger">
+<!ENTITY cmd_play_sound.label "Afspil">
+<!ENTITY cmd_toggle_enabled.true.label "Aktiver">
+<!ENTITY cmd_toggle_enabled.false.label "Deaktiver">
+<!ENTITY cmd_remove_sound.label "Fjern">
+<!ENTITY cmd_findbar.commandkey "F">
+<!ENTITY findbar.label "Find:">
+<!ENTITY settings.label "Indstilligner">
+<!ENTITY settings.export "Eksporter">
+<!ENTITY settings.import "Importer">
+<!ENTITY settings.defaults "Standard">
+<!ENTITY pref.notApply.tooltip "Lyd-mapping vil blive anvendt efter lukning af dette vindue.">
+<!ENTITY editdialog.title "Noise redigering">
+<!ENTITY filepicker.browser "Vælg...">
+<!ENTITY relative.enabled "Brug lyd-mappe:">
+<!ENTITY relative.changebase "Ændre mappe">
+<!ENTITY relative.openbase "Åbn mappe">
+<!ENTITY item.type.observer "Begivenheds-emne (via addObserver)">
+<!ENTITY item.type.browser "Browser-begivenhed (via gBrowser.addEventListener)">
+<!ENTITY item.type.window "Windows-begivenhed (via window.addEventListener)">
+<!ENTITY error.loadsound "Fejl: Kan ikke indlæse fil">

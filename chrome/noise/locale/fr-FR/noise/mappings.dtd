@@ -1,0 +1,46 @@
+<!ENTITY FIND_WRAPPED "Retour en haut de la page pendant une recherche">
+<!ENTITY toggleSidebar "Affichage/masquage du panneau latéral">
+<!ENTITY alert-loaded "Fenêtre de notification">
+<!ENTITY AlertActive "Barre d'information">
+<!ENTITY sessionstore-windows-restored "Restauration de la session">
+<!ENTITY purge-session-history "Suppression de l'historique de navigation">
+<!ENTITY empty-cache "Suppression du cache">
+<!ENTITY WebProgress-start "Chargement d'une page">
+<!ENTITY WebProgress-locationChange "Modification de l'URL dans la barre d'adresse">
+<!ENTITY TabOpen "Ouverture d'un onglet">
+<!ENTITY TabClose "Fermeture d'un onglet">
+<!ENTITY toplevel-window-ready "Ouverture d'une fenêtre">
+<!ENTITY domwindowclosed "Fermeture d'une fenêtre">
+<!ENTITY DOMPopupBlocked "Blocage d'une popup">
+<!ENTITY fullscreen "Bascule du mode plein écran">
+<!ENTITY dl-start "Démarrage d'un téléchargement">
+<!ENTITY dl-failed "Échec d'un téléchargement">
+<!ENTITY dl-cancel "Annulation d'un téléchargement">
+<!ENTITY dl-done "Réussite d'un téléchargement">
+<!ENTITY perm-changed "Modification des permissions accordées à un site">
+<!ENTITY xpi-blocked "Blocage de l'installation d'une extension">
+<!ENTITY PluginNotFound "Absence d'un plugin">
+<!ENTITY noise-log "Journal de Noise">
+<!ENTITY about_FIND_WRAPPED "Lors de l'utilisation de la barre de recherche, le retour en haut de la page après avoir atteint le dernier résultat provoque cet évènement.">
+<!ENTITY about_toggleSidebar "Affichage/masquage du panneau latéral. Exemple : ouvrir l'historique dans le panneau latéral.">
+<!ENTITY about_alert-loaded "Les évènements tels que « Téléchargements terminés », « Mise à jour disponible »… , qui font apparaître des alertes de notification en bas à droite du navigateur, provoquent cet évènement.">
+<!ENTITY about_AlertActive "Les évènements qui font apparaître la barre d'information dans la partie haute du navigateur provoquent cet évènement. Il s'agit par exemple du blocage d'une popup, de la confirmation d'enregistrement d'un mot de passe…">
+<!ENTITY about_sessionstore-windows-restored "Ouverture initiale de toutes les fenêtres. Cet évènement se produit une seule fois, quand Firefox démarre.">
+<!ENTITY about_purge-session-history "Suppression de l'historique de navigation.">
+<!ENTITY about_empty-cache "Suppression du cache.">
+<!ENTITY about_WebProgress-start "Chargement d'une page. Se produit le plus souvent lors du clic sur un lien.">
+<!ENTITY about_WebProgress-locationChange "Modification de l'URL dans la barre d'adresse. Se produit le plus souvent lors du clic sur un lien, mais aussi lors de la sélection d'un autre onglet ou encore lors du clic d'un lien tel que url.html#identifiant-de-fragment.">
+<!ENTITY about_TabOpen "Ouverture d'un nouvel onglet.">
+<!ENTITY about_TabClose "Fermeture d'un onglet.">
+<!ENTITY about_toplevel-window-ready "Ouverture d'une nouvelle fenêtre. Inclut les fenêtres d'alerte, d'options, etc.">
+<!ENTITY about_domwindowclosed "Fermeture d'une fenêtre. Inclut les fenêtres d'alerte, d'options, etc.">
+<!ENTITY about_DOMPopupBlocked "Blocage d'une fenêtre popup.">
+<!ENTITY about_fullscreen "Bascule du mode d'affichage normal au mode plein écran et vice versa.">
+<!ENTITY about_dl-start "Démarrage d'un téléchargement.">
+<!ENTITY about_dl-failed "Échec d'un téléchargement.">
+<!ENTITY about_dl-cancel "Annulation d'un téléchargement.">
+<!ENTITY about_dl-done "Réussite d'un téléchargement.">
+<!ENTITY about_perm-changed "Modification des permissions accordées à un site. Exemple : interdire à un site de charger ses images.">
+<!ENTITY about_xpi-blocked "Blocage de l'installation d'une extension. Exemple : version de Firefox non supportée.">
+<!ENTITY about_PluginNotFound "Absence d'un plugin. Exemple : plugin Flash introuvable.">
+<!ENTITY about_noise-log "Vous pouvez utiliser «&nbsp;un_évènement&amp;Noise.log(un_message)&nbsp;» pour noter des messages dans la Console d'erreurs. Cet évènement se produit pour chaque entrée dans le journal.">

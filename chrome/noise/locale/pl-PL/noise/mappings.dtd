@@ -1,0 +1,46 @@
+<!ENTITY FIND_WRAPPED "Brak wyniku szukania">
+<!ENTITY toggleSidebar "Włączenie/wyłączenie panelu bocznego">
+<!ENTITY alert-loaded "Powiadomienia">
+<!ENTITY AlertActive "Powiadomienia paska informacji">
+<!ENTITY sessionstore-windows-restored "Sesja została odtworzona">
+<!ENTITY purge-session-history "Wyczyszczenie historii sesji">
+<!ENTITY empty-cache "Wyczyszczenie bufora">
+<!ENTITY WebProgress-start "Rozpoczęcie przeglądania">
+<!ENTITY WebProgress-locationChange "Zmiana lokalizacji">
+<!ENTITY TabOpen "Otwarcie karty">
+<!ENTITY TabClose "Zamknięcie karty">
+<!ENTITY toplevel-window-ready "Otwarcie okna">
+<!ENTITY domwindowclosed "Zamknięcie okna">
+<!ENTITY DOMPopupBlocked "Zablokowanie wyskakującego okienka">
+<!ENTITY fullscreen "Włączenie/wyłączenie pełnego ekranu">
+<!ENTITY dl-start "Rozpoczęcie pobierania">
+<!ENTITY dl-failed "Przerwanie pobierania">
+<!ENTITY dl-cancel "Anulowanie pobierania">
+<!ENTITY dl-done "Zakończenie pobierania">
+<!ENTITY perm-changed "Zmiana zezwolenia strony">
+<!ENTITY xpi-blocked "Zablokowanie instalacji dodatków">
+<!ENTITY PluginNotFound "Brak wtyczki">
+<!ENTITY noise-log "Dziennik zdarzeń">
+<!ENTITY about_FIND_WRAPPED "Rozpoczęcie wyszukiwania od początku podczas korzystania z paska wyszukiwania.">
+<!ENTITY about_toggleSidebar "Otwarcie/zamknięcie panelu bocznego np. otwarcie panelu historii">
+<!ENTITY about_alert-loaded "Zdarzenia takie jak zakończenie pobierania, dostępność aktualizacji, które wyświetlają się w wysuwanym okienku powiadomień.">
+<!ENTITY about_AlertActive "Zdarzenia takie jak zablokowanie wyskakującego okienka, pytania o zapisanie hasła itp., które wyświetlają się w górnym pasku powiadomień.">
+<!ENTITY about_sessionstore-windows-restored "Otwarcie strony startowej. Zazwyczaj dzieje się to, gdy jest uruchamiany Firefox.">
+<!ENTITY about_purge-session-history "Wyczyszczenie historii sesji Firefoksa">
+<!ENTITY about_empty-cache "Wyczyszczenie bufora Firefoksa">
+<!ENTITY about_WebProgress-start "Rozpoczęcie przeglądania. Zazwyczaj dzieje się to  po kliknięciu odnośnika.">
+<!ENTITY about_WebProgress-locationChange "Zmiana lokalizacji. Zazwyczaj dzieje się to po kliknięciu odnośnika, ale także po wybraniu nowej karty, czy kliknięciu odnośnika typu url.html#fragment-identifier.">
+<!ENTITY about_TabOpen "Otwarcie nowej karty">
+<!ENTITY about_TabClose "Zamknięcie karty">
+<!ENTITY about_toplevel-window-ready "Otwarcie nowego okna">
+<!ENTITY about_domwindowclosed "Zamknięcie nowego okna">
+<!ENTITY about_DOMPopupBlocked "Zablokowanie wyskakującego okienka">
+<!ENTITY about_fullscreen "Zmiana trybu przeglądania (pełnoekranowy/normalny)">
+<!ENTITY about_dl-start "Rozpoczęcie pobierania">
+<!ENTITY about_dl-failed "Niepowodzenie pobierania">
+<!ENTITY about_dl-cancel "Anulowanie pobierania">
+<!ENTITY about_dl-done "Zakończenie pobierania">
+<!ENTITY about_perm-changed "Zmiana zezwoleń strony">
+<!ENTITY about_xpi-blocked "Dodatek nie został zainstalowany np.z powodu nieobsługiwanej wersji Firefoksa">
+<!ENTITY about_PluginNotFound "Nie można znaleźć wtyczki np. nie znaleziono wtyczki flasha">
+<!ENTITY about_noise-log "Można użyć funkcji dziennika zdarzeń, aby śledzić wiadomości w konsoli błędów.">

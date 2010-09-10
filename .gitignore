@@ -1,0 +1,6 @@
+*.svn
+*.xpi
+*.bat
+*.sh
+Thumbs.db
+Desktop.ini

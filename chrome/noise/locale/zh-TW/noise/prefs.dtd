@@ -1,0 +1,46 @@
+<!ENTITY prefwindow.title "Noise 選項">
+<!ENTITY treecol.name.width "200px">
+<!ENTITY treecol.file.width "240px">
+<!ENTITY pane-general.title "一般">
+<!ENTITY check-prefs-enabled.label "啟用聲音">
+<!ENTITY check-prefs-enabled.accesskey "N">
+<!ENTITY events.guide "事件導覽">
+<!ENTITY events.guide.tooltip "開啟導覽視窗，介紹可用的事件">
+<!ENTITY events.guide.title "Noise 事件導覽">
+<!ENTITY events.guide.intro "請由以下預設事件中，挑選想加入選項視窗的項目：">
+<!ENTITY events.guide.item.name "事件名稱">
+<!ENTITY events.guide.item.ver "ver.">
+<!ENTITY events.guide.item.ver.tooltip "從第幾個版本開始成為預設選項">
+<!ENTITY events.guide.item.check "選取">
+<!ENTITY events.guide.description.label "事件說明">
+<!ENTITY events.guide.description "選擇一個項目以檢視說明。">
+<!ENTITY item.name "名稱">
+<!ENTITY item.event "事件">
+<!ENTITY item.type "事件類型">
+<!ENTITY item.file "聲音檔案">
+<!ENTITY item.enabled "啟用">
+<!ENTITY cmd_add_sound.label "新增">
+<!ENTITY new_sound.label "聲音">
+<!ENTITY new_separator.label "分隔線">
+<!ENTITY cmd_duplicate_sound.label "副本">
+<!ENTITY cmd_edit_sound.label "編輯">
+<!ENTITY cmd_play_sound.label "試聽">
+<!ENTITY cmd_toggle_enabled.true.label "啟用">
+<!ENTITY cmd_toggle_enabled.false.label "停用">
+<!ENTITY cmd_remove_sound.label "移除">
+<!ENTITY cmd_findbar.commandkey "F">
+<!ENTITY findbar.label "尋找:">
+<!ENTITY settings.label "設定值">
+<!ENTITY settings.export "匯出設定">
+<!ENTITY settings.import "匯入設定">
+<!ENTITY settings.defaults "預設值">
+<!ENTITY pref.notApply.tooltip "聲音對應在關閉這個視窗後才會套用">
+<!ENTITY editdialog.title "Noise 編輯">
+<!ENTITY filepicker.browser "瀏覽...">
+<!ENTITY relative.enabled "使用聲音目錄：">
+<!ENTITY relative.changebase "變更目錄">
+<!ENTITY relative.openbase "開啟目錄">
+<!ENTITY item.type.observer "事件主題（由 addObserver）">
+<!ENTITY item.type.browser "瀏覽器事件（由 gBrowser.addEventListener）">
+<!ENTITY item.type.window "視窗事件（由 window.addEventListener）">
+<!ENTITY error.loadsound "錯誤：無法讀取聲音檔案。">

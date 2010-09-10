@@ -1,0 +1,46 @@
+<!ENTITY prefwindow.title "Noise Voreinstellungen">
+<!ENTITY treecol.name.width "220px">
+<!ENTITY treecol.file.width "220px">
+<!ENTITY pane-general.title "Allgemein">
+<!ENTITY check-prefs-enabled.label "Klänge einschalten">
+<!ENTITY check-prefs-enabled.accesskey "K">
+<!ENTITY events.guide "Ereignisübersicht">
+<!ENTITY events.guide.tooltip "Öffnet ein Fenster mit einer Auswahl verfügbarer Ereignisse">
+<!ENTITY events.guide.title "Ereignisauswahl">
+<!ENTITY events.guide.intro "Hier ausgewählte Ereignisse werden im Voreinstellungsfenster angezeigt.">
+<!ENTITY events.guide.item.name "Name des Ereignisses">
+<!ENTITY events.guide.item.ver "Ver.">
+<!ENTITY events.guide.item.ver.tooltip "Standardeinstellung seit Version">
+<!ENTITY events.guide.item.check "Auwahl">
+<!ENTITY events.guide.description.label "Zusammenfassung">
+<!ENTITY events.guide.description "Eintrag markieren um eine zugehörige Beschreibung zu bekommen">
+<!ENTITY item.name "Name">
+<!ENTITY item.event "Ereignis">
+<!ENTITY item.type "Ereignistyp">
+<!ENTITY item.file "Klangdatei">
+<!ENTITY item.enabled "Eingeschaltet">
+<!ENTITY cmd_add_sound.label "Hinzufügen">
+<!ENTITY new_sound.label "Klang">
+<!ENTITY new_separator.label "Separator">
+<!ENTITY cmd_duplicate_sound.label "Duplizieren">
+<!ENTITY cmd_edit_sound.label "Bearbeiten">
+<!ENTITY cmd_play_sound.label "Abspielen">
+<!ENTITY cmd_toggle_enabled.true.label "Einschalten">
+<!ENTITY cmd_toggle_enabled.false.label "Abschalten">
+<!ENTITY cmd_remove_sound.label "Entfernen">
+<!ENTITY cmd_findbar.commandkey "F">
+<!ENTITY findbar.label "Finde:">
+<!ENTITY settings.label "Einstellungen">
+<!ENTITY settings.export "Exportieren">
+<!ENTITY settings.import "Importieren">
+<!ENTITY settings.defaults "Standard">
+<!ENTITY pref.notApply.tooltip "Die Klangzuordnungen werden nach dem schließen des Fensers übernommen.">
+<!ENTITY editdialog.title "Noise bearbeiten">
+<!ENTITY filepicker.browser "Auswählen ...">
+<!ENTITY relative.enabled "Verzeichnis mit den Klängen:">
+<!ENTITY relative.changebase "Verzeichnis wechseln">
+<!ENTITY relative.openbase "Verzeichnis öffnen">
+<!ENTITY item.type.observer "Event topic (via addObserver)">
+<!ENTITY item.type.browser "Browser event (via gBrowser.addEventListener)">
+<!ENTITY item.type.window "Window event (via window.addEventListener)">
+<!ENTITY error.loadsound "Fehler: Datei konnte nicht geladen werden">
