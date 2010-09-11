@@ -1,0 +1,11 @@
+Noise is a Firefox extension which
+playing sound (a .wav file you chose) while specific browser event happens.
+
+add-on page:
+  https://addons.mozilla.org/firefox/addon/8438/
+
+homepage:
+  http://www.bootleq.com/noise/
+
+git repository:
+  http://github.com/bootleq/Noise
