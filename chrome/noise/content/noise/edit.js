@@ -108,12 +108,15 @@
 
     testSoundExist: function()
     {
-      if( elemSe.value=="" ) { elemTest.disabled = true; Noise.play('beep'); return false; }
-      if( elemSe.value=='beep' ) { elemTest.disabled = false; document.getElementById("se-error").hidden = true; return true; }
+      var uri = elemSe.value;
+      if ( uri == '' ) { elemTest.disabled = true; Noise.play('beep'); return false; }
+      if ( uri == 'beep' ) { elemTest.disabled = false; document.getElementById("se-error").hidden = true; return true; }
+      if ( uri.indexOf(':') > -1) { elemTest.disabled = false; document.getElementById("se-error").hidden = true; return true; }
+
       try {
-        if(elemSe.value.indexOf("chrome")==0){ Noise.play(elemSe.value); }
-        else if(Noise.getSound(elemSe.value, basePath)==null) {
-          elemTest.disabled=true;
+        if (uri.indexOf("chrome") == 0) { Noise.play(uri); }
+        else if (Noise.getSound(uri, basePath) == null) {
+          elemTest.disabled = true;
           elemSe.select();
           Noise.play('beep');
           document.getElementById("se-error").hidden = false;
@@ -134,19 +137,9 @@
 
     testSound: function()
     {
-      if(elemSe.value=='beep') Noise.player.beep();
-      else {
-        var path = elemSe.value;
-
-        if( path.search(/:\\|^\//) == -1 ) {  // relative path
-          if(basePath.path.indexOf('/')>=0) { path = path.replace('\\','/'); }
-          else { path = path.replace('/','\\'); }
-        }
-
-        Noise.player.play( Noise.getSound(path, basePath) );
-      }
+      var uri = elemSe.value;
+      Noise.play( uri, basePath, true );
     },
-
 
     toggleRelativePath: function()
     {

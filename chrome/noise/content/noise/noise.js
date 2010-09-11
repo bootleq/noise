@@ -238,14 +238,15 @@ Noise = {
     },this);
   },
 
-  getSound: function(url) { // accepts arguments[1]: an alternative base to parse relative path
-    if( url=='beep' ) { return 'beep'; }
+  getSound: function(url, base) {
+    if( url == 'beep' || url.indexOf(':') > 2 ) {
+      return url;
+    }
 
     var ios = Components.classes['@mozilla.org/network/io-service;1'].getService(Components.interfaces.nsIIOService);
     var file = null;
 
     if( url.search(/:\\|^\//) == -1 ) {  // relative path
-      var base = arguments.length > 1 ? arguments[1] : this.base;
       if(base.path.indexOf('/')>=0) { url = '/'+ url.replace('\\','/'); }
       else { url = '\\' + url.replace('/','\\'); }
       url = base.path + url;
@@ -268,9 +269,21 @@ Noise = {
   },
 
   play: function(url) {
-    if(Noise.enabled) {
-      if(url=='beep') Noise.player.beep();
-      else Noise.player.play( Noise.getSound(url) );
+    var base  = arguments.length > 1 ? arguments[1] : this.base;
+    var force = arguments.length > 2 ? arguments[2] : false;
+
+    if (force || Noise.enabled) {
+      if (url=='beep') {
+        Noise.player.beep();
+      } else if (url.indexOf(':') > 2) {
+        if (url.indexOf('event:') == 0) {
+          Noise.player.playEventSound( Noise.player[url.substr(6)] );
+        } else if (url.indexOf('sys:') == 0) {
+          Noise.player.playSystemSound( url.substr(4) );
+        }
+      } else {
+        Noise.player.play( Noise.getSound(url, base) );
+      }
     }
   },
 

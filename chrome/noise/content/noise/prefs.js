@@ -179,8 +179,7 @@
           var file = this.mappingsTree.view.getCellText(idx, this.mappingsTree.columns[2]);
           try {
             if( isNoiseEnabled.checked ) {
-              if(file=='beep') Noise.player.beep();
-              else Noise.player.play( Noise.getSound(file, basePath) );
+              Noise.play( file, basePath, true );
             }
             document.getElementById('cmd_play_sound').setAttribute('disabled',false);
           } catch(e) {
