@@ -13,9 +13,9 @@
 
   <script type="application/x-javascript" src="chrome://noise/content/noise.js" />
   <script type="application/x-javascript" src="chrome://noise/content/eventsGuide.js" />
-  
+
   <description>&events.guide.intro;</description>
-  
+
   <tree id="eventsTree" seltype="single" flex="1" style="min-height:240px;min-width:440px;"
         onselect="Noise.NoiseEventsGuide.handleTreeEvent(event);" tabindex="1"
         onkeypress="Noise.NoiseEventsGuide.handleTreeEvent(event);"
@@ -33,7 +33,7 @@
     </treecols>
     <treechildren context="treemenu"/>
   </tree>
-  
+
   <groupbox>
     <caption label="&events.guide.description.label;" />
     <description style="margin:0;padding:0;"><html:div id="event-description">&events.guide.description;</html:div></description>

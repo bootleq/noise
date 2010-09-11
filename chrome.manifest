@@ -9,9 +9,9 @@ locale  noise  pt-BR jar:chrome/noise.jar!/locale/pt-BR/noise/
 locale  noise  tr-TR jar:chrome/noise.jar!/locale/tr-TR/noise/
 locale  noise  zh-CN jar:chrome/noise.jar!/locale/zh-CN/noise/
 locale  noise  zh-TW jar:chrome/noise.jar!/locale/zh-TW/noise/
-skin  noise classic/1.0	jar:chrome/noise.jar!/skin/classic/noise/
-overlay chrome://browser/content/browser.xul	chrome://noise/content/noiseOverlay.xul
-overlay chrome://global/content/viewSource.xul	chrome://noise/content/noiseOverlay.xul
-overlay chrome://global/content/viewPartialSource.xul	chrome://noise/content/noiseOverlay.xul
-overlay chrome://global/content/alerts/alert.xul	chrome://noise/content/noiseAlertOverlay.xul
-overlay	chrome://mozapps/content/extensions/extensions.xul 	chrome://noise/content/noiseExtensionsOverlay.xul
+skin  noise classic/1.0    jar:chrome/noise.jar!/skin/classic/noise/
+overlay chrome://browser/content/browser.xul               chrome://noise/content/noiseOverlay.xul
+overlay chrome://global/content/viewSource.xul             chrome://noise/content/noiseOverlay.xul
+overlay chrome://global/content/viewPartialSource.xul      chrome://noise/content/noiseOverlay.xul
+overlay chrome://global/content/alerts/alert.xul           chrome://noise/content/noiseAlertOverlay.xul
+overlay chrome://mozapps/content/extensions/extensions.xul chrome://noise/content/noiseExtensionsOverlay.xul

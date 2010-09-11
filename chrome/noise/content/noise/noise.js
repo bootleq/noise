@@ -1,14 +1,14 @@
 if (!Noise) {var Noise = {};}
 
 Noise = {
-  
+
   obsSvc: null,
   player: null,
   mappings: [],
   observers: [],
   listeners: [],
   enabled: false,
-  
+
   init: function() {
     this.player = Components.classes["@mozilla.org/sound;1"].createInstance(Components.interfaces.nsISound);
     this.player.init();
@@ -21,10 +21,10 @@ Noise = {
 
     this.addNotifiers();
     this.addObservers();
-    
+
     this.prefs2.addObserver("extensions.noise.", this.prefObserver, false);
   },
-  
+
   prefObserver: {
     observe: function(aSubject, aTopic, aData) {
       if( aTopic=='nsPref:changed' && aData == 'extensions.noise.enabled' ) {
@@ -32,7 +32,7 @@ Noise = {
       }
     }
   },
-  
+
   uninit: function() {
     this.player = null;
     this.removeProgressListener();
@@ -42,7 +42,7 @@ Noise = {
     this.listeners = null;
     this.prefs2.removeObserver("extensions.noise.", this.prefObserver);
   },
-  
+
   reset: function() {
     this.removeProgressListener();
     this.removeObservers();
@@ -54,19 +54,18 @@ Noise = {
     this.addProgressListener();
     this.addObservers();
   },
-  
+
   toggle: function() {
     this.enabled = !this.enabled;
     this.prefs.setBoolPref("extensions.noise.enabled", this.enabled);
   },
-  
 
-/* start of overwrite code */
+/* start of overwrite code {{{ */
 
   addNotifiers: function() {
 
     if(typeof gBrowser == "undefined") return;
-    
+
     // overwrite "toggleSidebar", see chrome/browser/content/browser/browser.js
     // notify with topic "noise-toggleSidebar"
     if(typeof toggleSidebar != "undefined") {
@@ -77,7 +76,7 @@ Noise = {
         return toggleSidebarCopyByNoise(commandID, forceOpen);
       };
     }
-    
+
     // overwrite _updateStatusUI, see chrome/tookit/content/global/content/bindings/findbar.xml
     // notify with topic "noise-TypeAheadFind.FIND_WRAPPED"
     if(typeof gFindBar == "undefined" ) gFindBar = document.getElementById('FindToolbar');
@@ -100,7 +99,7 @@ Noise = {
     }
     //gBrowser.addProgressListener(this.progListener, Components.interfaces.nsIWebProgress.NOTIFY_STATE_DOCUMENT);
     this.addProgressListener();
-  
+
   },
   addProgressListener: function() {
     if(typeof gBrowser!="undefined") gBrowser.addProgressListener(this.progListener, Components.interfaces.nsIWebProgress.NOTIFY_STATE_DOCUMENT);
@@ -108,7 +107,7 @@ Noise = {
   removeProgressListener: function() {
     if(typeof gBrowser!="undefined") gBrowser.removeProgressListener(this.progListener);
   },
-  
+
   onTabOpen: function(event) {
     //event.target.linkedBrowser.addProgressListener(Noise.progListener2);
     event.target.linkedBrowser.webProgress.addProgressListener(Noise.progListener2, Components.interfaces.nsIWebProgress.NOTIFY_STATE_NETWORK);
@@ -116,7 +115,7 @@ Noise = {
   onTabClose: function(event) {
     event.target.linkedBrowser.removeProgressListener(Noise.progListener2);
   },
-  
+
   progListener: {
     obsSvc: Components.classes["@mozilla.org/observer-service;1"].getService(Components.interfaces.nsIObserverService),
     nsiWPL: Components.interfaces.nsIWebProgressListener,
@@ -162,19 +161,18 @@ Noise = {
     }
   },
 
-/* end of overwrite code */
-
+/* }}} end of overwrite code */
 
 
   addObservers: function() {
     this.mappings.forEach(function(i){
       if( !i['enable'] || i['cmd']=='' ) return;
-      
+
       // split i['cmd'] from cmd&filter into cmd, filter
       var cmd = i['cmd'].indexOf('&')<0 ? i['cmd'] : i['cmd'].substr( 0, i['cmd'].indexOf('&') );
       var filter = i['cmd'].indexOf('&')<0 ? false : i['cmd'].substr( i['cmd'].indexOf('&')+1 );
       var filtertFx = new Function('return true;');
-      
+
       switch( parseInt(i['type']) ) {
         case 0:
           return;
@@ -210,10 +208,10 @@ Noise = {
           }
           window.addEventListener(cmd, this.listeners[i['urn']], false);
         break;
-      }      
+      }
     },this);
   },
-  
+
   removeObservers: function() {
     this.mappings.forEach(function(i){
       if( !i['enable'] || i['cmd']=='' ) return;
@@ -239,20 +237,20 @@ Noise = {
       }
     },this);
   },
-  
+
   getSound: function(url) { // accepts arguments[1]: an alternative base to parse relative path
     if( url=='beep' ) { return 'beep'; }
-    
+
     var ios = Components.classes['@mozilla.org/network/io-service;1'].getService(Components.interfaces.nsIIOService);
     var file = null;
-    
+
     if( url.search(/:\\|^\//) == -1 ) {  // relative path
       var base = arguments.length > 1 ? arguments[1] : this.base;
       if(base.path.indexOf('/')>=0) { url = '/'+ url.replace('\\','/'); }
       else { url = '\\' + url.replace('/','\\'); }
       url = base.path + url;
     }
-    
+
     try {   // absolute path
       var file = Components.classes["@mozilla.org/file/local;1"].createInstance(Components.interfaces.nsILocalFile);
       file.initWithPath(url);
@@ -268,13 +266,14 @@ Noise = {
       }
     }
   },
+
   play: function(url) {
     if(Noise.enabled) {
       if(url=='beep') Noise.player.beep();
       else Noise.player.play( Noise.getSound(url) );
     }
   },
-  
+
   log: function(aMessage) {
     Components.classes["@mozilla.org/consoleservice;1"].getService(Components.interfaces.nsIConsoleService).logStringMessage("Noise: " + aMessage);
     Components.classes["@mozilla.org/observer-service;1"].getService(Components.interfaces.nsIObserverService).notifyObservers(null,"noise-log",aMessage);
@@ -285,7 +284,7 @@ Noise = {
 
     var rdfFile = profD.clone();
     rdfFile.append("noise-mappings.rdf");
-    
+
     if( !rdfFile.exists() || type=='default' ) {
       var defaultFile = profD.clone();
       defaultFile.append("extensions");
@@ -295,20 +294,20 @@ Noise = {
       if( type=='default' ) { return defaultFile; }
       defaultFile.copyTo(profD,null);
     }
-    
+
     if(!rdfFile.isWritable()) {
       if(rdfFile.permissions==256) rdfFile.permissions = 384;   // 384 for ubuntu readable/writable
     }
-    
+
     return rdfFile;
   },
-  
+
   initRdf: function(rdfFile) {
     const RDFC = Components.classes['@mozilla.org/rdf/container;1'].createInstance(Components.interfaces.nsIRDFContainer);
     const RDFCUtils = Components.classes['@mozilla.org/rdf/container-utils;1'].getService(Components.interfaces.nsIRDFContainerUtils);
     const RDF = Components.classes['@mozilla.org/rdf/rdf-service;1'].getService(Components.interfaces.nsIRDFService);
     if(!rdfFile) rdfFile = this.getRdfFile();
-    
+
     var fileURI = Components.classes['@mozilla.org/network/protocol;1?name=file']
                     .getService(Components.interfaces.nsIFileProtocolHandler).getURLSpecFromFile(rdfFile);
 
@@ -342,24 +341,24 @@ Noise = {
     }
     function _getPropertyValue(aRes, aProp) {
       aProp = RDF.GetResource("http://www.bootleq.com/noise-mappings#" + aProp);
-		  try {
+          try {
         var target = dsource.GetTarget(aRes, aProp, true);
-			 return target ? target.QueryInterface(Components.interfaces.nsIRDFLiteral).Value : null;
-		  }
-		  catch(ex) {
-			 return null;
-		  }
+             return target ? target.QueryInterface(Components.interfaces.nsIRDFLiteral).Value : null;
+          }
+          catch(ex) {
+             return null;
+          }
     }
     return mappingsArray;
   },
-  
+
   getRdfArray: function()
   {
     return this.mappings;
-	},
-	
-	getBase: function()
-	{
+  },
+
+  getBase: function()
+  {
     var file = null;
     try {
       file = this.prefs.getComplexValue("extensions.noise.base", Components.interfaces.nsILocalFile);

@@ -1,10 +1,10 @@
 (function(){
-  
+
   const TYPE_SEPARATOR = 0;
   const TYPE_OBSERVER = 1;
   const TYPE_BROWSER = 2;
   const TYPE_WINDOW = 3;
-  
+
   var
     ret = window.arguments[0],
     elemName,
@@ -18,9 +18,9 @@
     elemTest,
     stringBundle = null,
     basePath = null;
-  
+
   var NoiseEdit = {
-  
+
     init: function()
     {
       elemName = document.getElementById("noiseName");
@@ -34,7 +34,7 @@
       elemPick = document.getElementById("noisePick");
       stringBundle = document.getElementById("noise-string-bundle");
       basePath = ret.base;
-      
+
       if( ret.type == TYPE_SEPARATOR ) {
         elemName.value = ret.name;
         elemCmd.disabled = true;
@@ -52,13 +52,13 @@
         if(ret.se=="") {elemSe.value = "beep";}
         else {elemSe.value = ret.se; this.testSoundExist();}
       }
-      
+
       if( elemSe.value!='beep' && ( elemSe.value.search(/:\\|^\//) == -1 ) ) { // relative path
         seBackupRel = elemSe.value;
         elemUseRel.click();
       }
     },
-    
+
     accept: function()
     {
       if( ret.type != TYPE_SEPARATOR && !this.testSoundExist() ) {
@@ -72,7 +72,7 @@
       ret.base = basePath;
       return true;
     },
-    
+
     pickFile: function()
     {
       var nsIFilePicker = Components.interfaces.nsIFilePicker;
@@ -84,7 +84,7 @@
       var rv = fp.show();
       if (rv == nsIFilePicker.returnOK || rv == nsIFilePicker.returnReplace) {
         var path = fp.file.path;
-        
+
         if(elemUseRel.checked) { // relative path
           if(path.indexOf(base.path)!=0) {   // path out of base
             var newBase = fp.file.parent || fp.file;
@@ -100,12 +100,12 @@
           }
           path = path.replace(base.path,'').substr(1);
         }
-        
+
         elemSe.value = seBackupRel = path;
         this.testSoundExist();
       }
     },
-    
+
     testSoundExist: function()
     {
       if( elemSe.value=="" ) { elemTest.disabled = true; Noise.play('beep'); return false; }
@@ -131,29 +131,28 @@
         return false;
       }
     },
-    
+
     testSound: function()
     {
       if(elemSe.value=='beep') Noise.player.beep();
       else {
         var path = elemSe.value;
-        
+
         if( path.search(/:\\|^\//) == -1 ) {  // relative path
           if(basePath.path.indexOf('/')>=0) { path = path.replace('\\','/'); }
           else { path = path.replace('/','\\'); }
         }
-        
+
         Noise.player.play( Noise.getSound(path, basePath) );
       }
     },
-    
-    
+
+
     toggleRelativePath: function()
     {
       if( elemUseRel.checked ) {
         elemChangeBase.disabled = elemOpenBase.disabled = false;
         seBackup = elemSe.value;
-        
         if( seBackupRel=='' || seBackupRel==seBackup ) {
           if(elemSe.value.indexOf(basePath.path)==0)
           elemSe.value = seBackupRel = elemSe.value.replace(basePath.path,'').substr(1);
@@ -169,6 +168,7 @@
       }
       this.testSoundExist();
     },
+
     changeBaseDir: function()
     {
       var nsIFilePicker = Components.interfaces.nsIFilePicker;
@@ -181,23 +181,23 @@
       }
       this.testSoundExist();
     },
+
     openBaseDir: function()
     {
-  		var dir = basePath;
-  		try{
+      var dir = basePath;
+      try{
         dir.reveal();
-  		} catch(ex) {
+      } catch(ex) {
         var ios = Components.classes['@mozilla.org/network/io-service;1'].getService(Components.interfaces.nsIIOService);
-  		  var dirURI = ios.newFileURI( dir );
-  		  var protocolService = Components.classes["@mozilla.org/uriloader/external-protocol-service;1"]
-      					.getService(Components.interfaces.nsIExternalProtocolService);
-  			protocolService.loadUrl(dirURI);
-  		}
-  	}
-  
+        var dirURI = ios.newFileURI( dir );
+        var protocolService = Components.classes["@mozilla.org/uriloader/external-protocol-service;1"]
+              .getService(Components.interfaces.nsIExternalProtocolService);
+        protocolService.loadUrl(dirURI);
+      }
+    }
+
   };
-  
+
   Noise.NoiseEdit = NoiseEdit;
   window.addEventListener("load", function(){ Noise.NoiseEdit.init(); }, false);
-
 })();

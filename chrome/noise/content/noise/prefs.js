@@ -12,31 +12,30 @@
     isInstantApply = false,
     notApplyIcon;
 
-
   var NoisePrefs = {
 
     init: function()
     {
       this.mappingsTree = document.getElementById("mappingsTree");
       this.findbar = treeFindbar;
-  
+
       isNoiseEnabled = document.getElementById("check-prefs-enabled");
       stringBundle = document.getElementById("noise-string-bundle");
-      
+
       treeData = Noise.mappings;
       treeView =  new CustomTreeView();
       this.mappingsTree.view = treeView;
       this.dragDropObserver = treeDragDropObserver;
-      
+
       basePath = Noise.base;
       isInstantApply = document.documentElement.instantApply;
       notApplyIcon = document.getElementById("icon-not-apply");
     },
-  
+
     accept: function()
     {
       this.saveToRdf();
-      
+
       var wm = Cc["@mozilla.org/appshell/window-mediator;1"].getService(Ci.nsIWindowMediator);
       var enumerator = wm.getEnumerator("navigator:browser");
       while(enumerator.hasMoreElements()) {
@@ -45,7 +44,7 @@
         win.Noise.reset();
       }
     },
-    
+
     exportSetting: function()
     {
       var fp = Cc["@mozilla.org/filepicker;1"].createInstance(Ci.nsIFilePicker);
@@ -69,7 +68,7 @@
         }
       }
     },
-  
+
     importSetting: function()
     {
       var fp = Cc["@mozilla.org/filepicker;1"].createInstance(Ci.nsIFilePicker);
@@ -95,7 +94,7 @@
         }
       }
     },
-    
+
     defaultSetting: function()
     {
       var prompts = Cc["@mozilla.org/embedcomp/prompt-service;1"].getService(Ci.nsIPromptService);
@@ -114,7 +113,7 @@
         dump('Noise import: ' + e);
       }
     },
-    
+
     doCommand: function(aCommand)
     {
       switch (aCommand) {
@@ -132,6 +131,7 @@
             basePath = ret.base;
           }
         break;
+
         case "cmd_add_separator":
           var idx = this.mappingsTree.currentIndex;
           if(idx<0) idx=treeData.length;
@@ -144,6 +144,7 @@
             basePath = ret.base;
           }
         break;
+
         case "cmd_duplicate_sound":
           var idx = this.mappingsTree.currentIndex;
           if(idx<0) idx=treeData.length;
@@ -151,6 +152,7 @@
           treeView.insertItemAt(newItem, idx);
           treeView.update();
         break;
+
         case "cmd_edit_sound":
           var idx = this.mappingsTree.currentIndex;
           if(idx<0)return;
@@ -170,6 +172,7 @@
           treeView.update();
           basePath = ret.base;
         break;
+
         case "cmd_play_sound":
           var idx = this.mappingsTree.currentIndex;
           if(idx<0)return;
@@ -184,6 +187,7 @@
             document.getElementById('cmd_play_sound').setAttribute('disabled',true);
           }
         break;
+
         case "cmd_toggle_enabled":
           var idx = this.mappingsTree.currentIndex;
           if(idx<0)return;
@@ -195,36 +199,43 @@
           );
           treeView.update();
         break;
+
         case "cmd_remove_sound":
           var idx = this.mappingsTree.currentIndex;
-          if(idx<0)return;
+          if (idx<0) {
+            return;
+          }
           treeView.removeItemAt(idx);
         break;
+
         default: return;
       }
     },
-  
+
     handleTreeEvent: function(event)
-  	{
-  		if (event.type == "dblclick") {
-  			if (event.target.localName == "treechildren")
-  			this.doCommand("cmd_edit_sound");
-  		}
-  		else if (event.type == "keypress") {
-  			switch (event.which) {
-  				case event.DOM_VK_RETURN:
+    {
+      if (event.type == "dblclick") {
+        if (event.target.localName == "treechildren") {
+          this.doCommand("cmd_edit_sound");
+        }
+      } else if (event.type == "keypress") {
+        switch (event.which) {
+          case event.DOM_VK_RETURN:
             this.doCommand("cmd_edit_sound");
-  					break;
-          case event.DOM_VK_SPACE: 
-  					this.doCommand("cmd_toggle_enabled");
-  					break;
-  				default: return;
-  			}
-  			event.preventDefault();
-  		}
-  		else if (event.type == "select") {
-  		  var idx = this.mappingsTree.currentIndex;
-  		  if(idx<0)return;
+            break;
+
+          case event.DOM_VK_SPACE:
+            this.doCommand("cmd_toggle_enabled");
+            break;
+
+          default: return;
+        }
+        event.preventDefault();
+      } else if (event.type == "select") {
+        var idx = this.mappingsTree.currentIndex;
+        if (idx<0) {
+          return;
+        }
         document.getElementById('cmd_toggle_enabled').setAttribute(
           'label', treeData[idx]['enable']==true ? stringBundle.getString("item_disabled") : stringBundle.getString("item_enabled")
         );
@@ -233,13 +244,13 @@
         document.getElementById('cmd_toggle_enabled').setAttribute('disabled',isSeparator);
         document.getElementById('cmd_edit_sound').setAttribute('disabled',isSeparator);
         document.getElementById('cmd_remove_sound').setAttribute('disabled',false);
-  		}
-  	},
-  	
-  	saveToRdf: function()
+      }
+    },
+
+    saveToRdf: function()
     {
       var [ RDFC, RDFCUtils, RDF, dsource ] = Noise.initRdf();
-  
+
       // 清空 Seq
       var elems = RDFC.GetElements();
       while(elems.hasMoreElements()) {
@@ -271,12 +282,12 @@
       dsource.QueryInterface(Components.interfaces.nsIRDFRemoteDataSource).Flush();
       dsource.QueryInterface(Components.interfaces.nsIRDFRemoteDataSource).Refresh(true);
       RDF.UnregisterDataSource(dsource);
-  	},
-  	
-  	eventsGuide: function() {
+    },
+
+    eventsGuide: function() {
       var ret = {
-            pickedTree: {}
-          };
+        pickedTree: {}
+      };
       document.documentElement.openSubDialog("eventsGuide.xul", "resizable=yes", ret);
       if(ret.pickedTree.length > 0) {
         ret.pickedTree.forEach(function(row){
@@ -288,155 +299,150 @@
         },this);
       }
     }
-  
-  };
 
+  };
 
   function CustomTreeView() {};
   CustomTreeView.prototype = {
     update: function()
-  	{
-  		this._treeBoxObject.invalidate();
-  		if(isInstantApply) notApplyIcon.hidden = false;
-  	},
-  	insertItemAt: function(aItem, aIndex)
+    {
+      this._treeBoxObject.invalidate();
+      if(isInstantApply) notApplyIcon.hidden = false;
+    },
+    insertItemAt: function(aItem, aIndex)
     {
       if(aIndex<0) aIndex=treeData.length;
-  		treeData.splice(aIndex, 0, aItem);
-  		this._treeBoxObject.rowCountChanged(aIndex, 1);
-  		this.selection.select(aIndex);
-  		this._treeBoxObject.ensureRowIsVisible(aIndex);
-  		this._treeBoxObject.treeBody.focus();
-  		return aIndex;
-  	},
-  	removeItemAt: function(aIndex)
-  	{
-  		treeData.splice(aIndex, 1);
-  		this._treeBoxObject.rowCountChanged(aIndex, -1);
-  		var nextIdx = (aIndex >= treeData.length) ? treeData.length-1 : aIndex;
-  		this.selection.select(nextIdx);
-  		this._treeBoxObject.ensureRowIsVisible(nextIdx);
-  		this._treeBoxObject.treeBody.focus();
-  		this.update();
-  	},
-  	moveItem: function(aSourceIndex, aTargetIndex)
-  	{
+      treeData.splice(aIndex, 0, aItem);
+      this._treeBoxObject.rowCountChanged(aIndex, 1);
+      this.selection.select(aIndex);
+      this._treeBoxObject.ensureRowIsVisible(aIndex);
+      this._treeBoxObject.treeBody.focus();
+      return aIndex;
+    },
+    removeItemAt: function(aIndex)
+    {
+      treeData.splice(aIndex, 1);
+      this._treeBoxObject.rowCountChanged(aIndex, -1);
+      var nextIdx = (aIndex >= treeData.length) ? treeData.length-1 : aIndex;
+      this.selection.select(nextIdx);
+      this._treeBoxObject.ensureRowIsVisible(nextIdx);
+      this._treeBoxObject.treeBody.focus();
+      this.update();
+    },
+    moveItem: function(aSourceIndex, aTargetIndex)
+    {
       var removedItem = treeData.splice(aSourceIndex, 1);
-  		treeData.splice(aTargetIndex, 0, removedItem[0]);
-  	},
-  	canDrop: function(targetIndex, orientation)
-  	{
-  		var sourceIndex = this.selection.currentIndex;
-  		return (
-  			sourceIndex != -1 && 
-  			sourceIndex != targetIndex && 
-  			sourceIndex != (targetIndex + orientation)
-  		);
-  	},
-  	drop: function(targetIndex, orientation)
-  	{
-  		var sourceIndex = this.selection.currentIndex;
-  		if (sourceIndex < targetIndex) {
-  			if (orientation == Ci.nsITreeView.DROP_BEFORE) targetIndex--;
-  		}
-  		else {
-  			if (orientation == Ci.nsITreeView.DROP_AFTER) targetIndex++;
-  		}
-  		this.moveItem(sourceIndex, targetIndex);
-  		this.update();
-  		this.selection.select(targetIndex);
-  	},
+      treeData.splice(aTargetIndex, 0, removedItem[0]);
+    },
+    canDrop: function(targetIndex, orientation)
+    {
+      var sourceIndex = this.selection.currentIndex;
+      return (
+              sourceIndex != -1 &&
+              sourceIndex != targetIndex &&
+              sourceIndex != (targetIndex + orientation)
+             );
+    },
+    drop: function(targetIndex, orientation)
+    {
+      var sourceIndex = this.selection.currentIndex;
+      if (sourceIndex < targetIndex) {
+        if (orientation == Ci.nsITreeView.DROP_BEFORE) targetIndex--;
+      }
+      else {
+        if (orientation == Ci.nsITreeView.DROP_AFTER) targetIndex++;
+      }
+      this.moveItem(sourceIndex, targetIndex);
+      this.update();
+      this.selection.select(targetIndex);
+    },
     get ATOM()
-  	{
-  		if (!this._atom)
-  			this._atom = Cc["@mozilla.org/atom-service;1"].getService(Ci.nsIAtomService);
-  		return this._atom;
-  	},
-  	_atom: null,
+    {
+      if (!this._atom)
+        this._atom = Cc["@mozilla.org/atom-service;1"].getService(Ci.nsIAtomService);
+      return this._atom;
+    },
+    _atom: null,
     _treeBoxObject: null,
     get rowCount() { return treeData.length; },
-  	isContainer: function(row){ return false; },
+    isContainer: function(row){ return false; },
     isSeparator: function(row){ return treeData[row]['type'] == 0 ? true : false; },
     isSorted: function(){ return false; },
     isEditable: function(row, col) { return (col.index == 3 && !this.isSeparator(row)); },
     getCellText: function(row, col) {
       switch (col.index) {
-  			case 0: return treeData[row]['name']; break;
-  			case 1: return treeData[row]['cmd']; break;
-  			case 2: return treeData[row]['se']; break;
-  		}
-  	},
-    getCellValue: function(row,col) {
-      switch (col.index) {
-  			case 3: return treeData[row]['enable']; break;
-  		}
+        case 0: return treeData[row]['name']; break;
+        case 1: return treeData[row]['cmd']; break;
+        case 2: return treeData[row]['se']; break;
+      }
     },
+    getCellValue: function(row,col) {
+                    switch (col.index) {
+                      case 3: return treeData[row]['enable']; break;
+                    }
+                  },
     getLevel: function(row){ return 0; },
     getImageSrc: function(row,col){ return null; },
     getParentIndex: function(row) { return -1; },
-  	hasNextSibling: function(row, afterIndex) { return false; },
+    hasNextSibling: function(row, afterIndex) { return false; },
     getRowProperties: function(row,props){},
-    getCellProperties: function(row, col, properties)
-  	{
-  		if (col.index==0 && this.isSeparator(row)) properties.AppendElement(this.ATOM.getAtom("separator"));
-  		if (col.index==3) properties.AppendElement(this.ATOM.getAtom("checkbox-hover"));
-  	},
+    getCellProperties: function(row, col, properties) {
+      if (col.index==0 && this.isSeparator(row)) properties.AppendElement(this.ATOM.getAtom("separator"));
+      if (col.index==3) properties.AppendElement(this.ATOM.getAtom("checkbox-hover"));
+    },
     getColumnProperties: function(colid,col,props){},
     setCellText: function(row,col,value)
-  	{
-  		switch (col.index) {
-  			case 0: treeData[row]['name'] = value; break;
-  			case 1: treeData[row]['cmd'] = value; break;
-  			case 2: treeData[row]['se'] = value; break;
-  		}
-  	},
-  	setCellValue: function(row, col, value) {
-      treeData[row]['enable'] == false
-        ? treeData[row]['enable'] = true
-        : treeData[row]['enable'] = false;
-      document.getElementById('cmd_toggle_enabled').setAttribute(
-        'label', treeData[row]['enable']==true ? stringBundle.getString("item_disabled") : stringBundle.getString("item_enabled")
-      );
-      treeView.update();
+    {
+      switch (col.index) {
+        case 0: treeData[row]['name'] = value; break;
+        case 1: treeData[row]['cmd'] = value; break;
+        case 2: treeData[row]['se'] = value; break;
+      }
     },
-  	setTree: function(treebox) { this._treeBoxObject = treebox; },
-  	cycleHeader: function(col) {},
-  	cycleCell: function(row, col) {},
-  	performAction: function(action) {},
-  	performActionOnRow: function(action, row) {},
-  	performActionOnCell: function(action, row, col) {}
+    setCellValue: function(row, col, value) {
+                    treeData[row]['enable'] == false
+                      ? treeData[row]['enable'] = true
+                      : treeData[row]['enable'] = false;
+                    document.getElementById('cmd_toggle_enabled').setAttribute(
+                      'label', treeData[row]['enable']==true ? stringBundle.getString("item_disabled") : stringBundle.getString("item_enabled")
+                    );
+                    treeView.update();
+                  },
+    setTree: function(treebox) { this._treeBoxObject = treebox; },
+    cycleHeader: function(col) {},
+    cycleCell: function(row, col) {},
+    performAction: function(action) {},
+    performActionOnRow: function(action, row) {},
+    performActionOnCell: function(action, row, col) {}
   };
 
   var treeDragDropObserver = {
     _flavourSet: null,
     onDragStart: function (event, transferData, action) {
       var idx = treeView.selection.currentIndex;
-  		transferData.data = new TransferData();
-  		transferData.data.addDataForFlavour("text/x-moz-tree-index", idx);
-  		transferData.action = Ci.nsIDragService.DRAGDROP_ACTION_MOVE;
+          transferData.data = new TransferData();
+          transferData.data.addDataForFlavour("text/x-moz-tree-index", idx);
+          transferData.action = Ci.nsIDragService.DRAGDROP_ACTION_MOVE;
     },
-    
-    getSupportedFlavours: function()
-  	{
-  		if (!this._flavourSet) {
-  			this._flavourSet = new FlavourSet();
-  		}
-  		return this._flavourSet;
-  	},
+    getSupportedFlavours: function() {
+      if (!this._flavourSet) {
+        this._flavourSet = new FlavourSet();
+      }
+      return this._flavourSet;
+    },
     onDrop: function (event, transferData, session) {},
     onDragExit: function (event, session) {},
     onDragOver: function (event, flavour, session) {}
-  
   };
-  
+
   var treeFindbar = {
-  	_lastFoundIdx: -1,
-  	findbar: document.getElementById("noise-prefs-findbar"),
-  	textbox: document.getElementById('noise-prefs-findbar-textbox'),
-  	findStatusIcon: document.getElementById("noise-prefs-findbar-status-icon"),
-  	stringsBundle: Cc["@mozilla.org/intl/stringbundle;1"].getService(Ci.nsIStringBundleService).createBundle("chrome://global/locale/findbar.properties"),
-  	_obsSvc: Cc["@mozilla.org/observer-service;1"].getService(Ci.nsIObserverService),
-  	_playNotFoundSound: function(){
+    _lastFoundIdx: -1,
+    findbar: document.getElementById("noise-prefs-findbar"),
+    textbox: document.getElementById('noise-prefs-findbar-textbox'),
+    findStatusIcon: document.getElementById("noise-prefs-findbar-status-icon"),
+    stringsBundle: Cc["@mozilla.org/intl/stringbundle;1"].getService(Ci.nsIStringBundleService).createBundle("chrome://global/locale/findbar.properties"),
+    _obsSvc: Cc["@mozilla.org/observer-service;1"].getService(Ci.nsIObserverService),
+    _playNotFoundSound: function() {
       if(Cc["@mozilla.org/preferences-service;1"].getService(Ci.nsIPrefBranch).getBoolPref("accessibility.typeaheadfind.enablesound")) {
         var nsISupportsString = Ci.nsISupportsString;
         var soundURL = Cc["@mozilla.org/preferences-service;1"].getService(Ci.nsIPrefBranch).getComplexValue("accessibility.typeaheadfind.soundURL",nsISupportsString).data;
@@ -461,6 +467,7 @@
           this.findStatusIcon.setAttribute("status", aStatus);
           this._playNotFoundSound();
           break;
+
         case "wrapped":
           if(!aFindPrevious) { this.findStatusIcon.setAttribute("tooltiptext", this.stringsBundle.GetStringFromName("WrappedToTop")); }
           else { this.findStatusIcon.setAttribute("tooltiptext", this.stringsBundle.GetStringFromName("WrappedToBottom")); }
@@ -468,6 +475,7 @@
           this.textbox.setAttribute("status", aStatus);
           this.findStatusIcon.setAttribute("status", aStatus);
           break;
+
         default:
           this.textbox.removeAttribute("status");
           this.findStatusIcon.removeAttribute("status");
@@ -546,7 +554,7 @@
         this._updateStatusUI("notfound");
       }
     },
-  	doCommand: function(aCommand)
+    doCommand: function(aCommand)
     {
       switch (aCommand) {
         case "cmd_findbar":
@@ -559,34 +567,38 @@
             this.findbar.hidden = true;
           }
         break;
+
         case "cmd_find_input":
           if(this._ensureTextNotEmpty()) this.find(this.textbox.value);
         break;
+
         case "cmd_find_next":
           if(this._ensureTextNotEmpty()) this.findAgain(this.textbox.value);
         break;
+
         case "cmd_find_previous":
           if(this._ensureTextNotEmpty()) this.findAgain(this.textbox.value, true);
         break;
       }
     },
-    handleKeyEvent: function(event)
-  	{
+    handleKeyEvent: function(event) {
       if (event.type == "keypress") {
-  			switch (event.keyCode) {
-  				case event.DOM_VK_RETURN:
+        switch (event.keyCode) {
+          case event.DOM_VK_RETURN:
             this.doCommand("cmd_find_next");
-  					break;
-  				case event.DOM_VK_ESCAPE:
+            break;
+
+          case event.DOM_VK_ESCAPE:
             this.doCommand("cmd_findbar");
-  					break;
-  				default: return;
-  			}
-  			event.preventDefault();
-  		}
-  	}
+            break;
+
+          default: return;
+        }
+        event.preventDefault();
+      }
+    }
   };
-  
+
   Noise.NoisePrefs = NoisePrefs;
   window.addEventListener("load", function(){ Noise.NoisePrefs.init(); }, false);
 

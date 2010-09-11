@@ -8,8 +8,8 @@
   </commandset>
   <keyset id="mainKeyset">
     <key id="key_toggleNoise"
-      modifiers="accel alt shift"
-      key="N" command="cmd_toggleNoise"/>
+         modifiers="accel alt shift"
+         key="N" command="cmd_toggleNoise"/>
   </keyset>
   <script type="application/x-javascript" src="chrome://noise/content/noise.js" />
 </overlay>

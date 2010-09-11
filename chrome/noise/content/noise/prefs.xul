@@ -21,20 +21,20 @@
   <prefpane id="mappingsPane" label="&pane-general.title;" flex="1">
 
     <commandset id="mappingsCommandSet" oncommand="Noise.NoisePrefs.doCommand(event.target.id);">
-			<command id="cmd_add_sound" />
-			<command id="cmd_add_separator" label="&new_separator.label;" />
-			<command id="cmd_duplicate_sound" label="&cmd_duplicate_sound.label;" />
-			<command id="cmd_edit_sound" disabled="true" label="&cmd_edit_sound.label;" />
-			<command id="cmd_play_sound" disabled="true" label="&cmd_play_sound.label;" />
-			<command id="cmd_remove_sound" disabled="true" label="&cmd_remove_sound.label;" />
-			<command id="cmd_toggle_enabled" disabled="true" label="&cmd_toggle_enabled.true.label;" />
-		</commandset>
+      <command id="cmd_add_sound" />
+      <command id="cmd_add_separator" label="&new_separator.label;" />
+      <command id="cmd_duplicate_sound" label="&cmd_duplicate_sound.label;" />
+      <command id="cmd_edit_sound" disabled="true" label="&cmd_edit_sound.label;" />
+      <command id="cmd_play_sound" disabled="true" label="&cmd_play_sound.label;" />
+      <command id="cmd_remove_sound" disabled="true" label="&cmd_remove_sound.label;" />
+      <command id="cmd_toggle_enabled" disabled="true" label="&cmd_toggle_enabled.true.label;" />
+    </commandset>
 
     <keyset id="noiseKeyset">
-  		<key id="key_findbar" key="&cmd_findbar.commandkey;" modifiers="accel" oncommand="Noise.NoisePrefs.findbar.doCommand('cmd_findbar');"/>
-  		<key id="key_find_next" keycode="VK_F3" oncommand="Noise.NoisePrefs.findbar.doCommand('cmd_find_next');"/>
-  		<key id="key_find_previous" keycode="VK_F3" modifiers="shift" oncommand="Noise.NoisePrefs.findbar.doCommand('cmd_find_previous');"/>
-  	</keyset>
+      <key id="key_findbar" key="&cmd_findbar.commandkey;" modifiers="accel" oncommand="Noise.NoisePrefs.findbar.doCommand('cmd_findbar');"/>
+      <key id="key_find_next" keycode="VK_F3" oncommand="Noise.NoisePrefs.findbar.doCommand('cmd_find_next');"/>
+      <key id="key_find_previous" keycode="VK_F3" modifiers="shift" oncommand="Noise.NoisePrefs.findbar.doCommand('cmd_find_previous');"/>
+    </keyset>
 
     <preferences>
       <preference id="prefs-enabled" name="extensions.noise.enabled" type="bool"/>
@@ -42,11 +42,11 @@
 
     <hbox align="baseline">
       <checkbox id="check-prefs-enabled" preference="prefs-enabled"
-        label="&check-prefs-enabled.label;"
-        accesskey="&check-prefs-enabled.accesskey;"/>
+                label="&check-prefs-enabled.label;"
+                accesskey="&check-prefs-enabled.accesskey;"/>
       <spacer flex="1" />
       <label id="events-guide-link" value="&events.guide;" class="text-link" tooltiptext="&events.guide.tooltip;"
-        onclick="Noise.NoisePrefs.eventsGuide();" />
+             onclick="Noise.NoisePrefs.eventsGuide();" />
     </hbox>
 
     <tree id="mappingsTree" seltype="single" flex="1" style="min-height:390px;"
@@ -68,7 +68,7 @@
       </treecols>
       <treechildren ondraggesture="nsDragAndDrop.startDrag(event, Noise.NoisePrefs.dragDropObserver);" context="treemenu"/>
     </tree>
-    
+
     <hbox id="noise-prefs-findbar" align="center" hidden="true">
       <toolbarbutton class="findbar-closebutton" tooltiptext="&findCloseButton.tooltip;" oncommand="Noise.NoisePrefs.findbar.doCommand('cmd_findbar');"/>
       <label class="findbar-find-fast" control="noise-prefs-findbar-textbox" value="&findbar.label;"/>
@@ -95,14 +95,14 @@
       <spacer flex="1" />
       <image class="findbar-find-fast find-status-icon"/>
     </hbox>
-    
+
     <hbox pack="center" style="margin-top:10px;">
       <button command="cmd_add_sound" label="&cmd_add_sound.label;"/>
-			<button command="cmd_edit_sound"/>
-			<button command="cmd_play_sound"/>
-			<button command="cmd_toggle_enabled"/>
-			<button command="cmd_remove_sound"/>
-		</hbox>
+      <button command="cmd_edit_sound"/>
+      <button command="cmd_play_sound"/>
+      <button command="cmd_toggle_enabled"/>
+      <button command="cmd_remove_sound"/>
+    </hbox>
 
     <popupset>
       <menupopup id="treemenu">
@@ -119,7 +119,7 @@
         <menuitem command="cmd_remove_sound"/>
       </menupopup>
     </popupset>
-    
+
     <popupset>
       <menupopup id="noise-settings" position="before_start">
         <menuitem id="noise-export" label="&settings.export;" oncommand="Noise.NoisePrefs.exportSetting();"/>
@@ -127,9 +127,9 @@
         <menuitem id="noise-defaults" label="&settings.defaults;" oncommand="Noise.NoisePrefs.defaultSetting();"/>
       </menupopup>
     </popupset>
-    
+
     <separator class="groove" />
-    
+
     <hbox id="noise-prefs-main-buttonset">
       <button dlgtype="extra1" id="setting" label="&settings.label;" popup="noise-settings" dir="reverse" image="chrome://noise/skin/arrow.png"/>
       <spacer flex="1" />
@@ -141,7 +141,7 @@
     </hbox>
 
   </prefpane>
-  
+
   <script type="application/x-javascript" src="chrome://noise/content/noise.js" />
   <script type="application/x-javascript" src="chrome://global/content/nsDragAndDrop.js" />
   <script type="application/x-javascript" src="chrome://noise/content/prefs.js" />
