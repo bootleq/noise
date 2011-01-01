@@ -14,4 +14,4 @@ overlay chrome://browser/content/browser.xul               chrome://noise/conten
 overlay chrome://global/content/viewSource.xul             chrome://noise/content/noiseOverlay.xul
 overlay chrome://global/content/viewPartialSource.xul      chrome://noise/content/noiseOverlay.xul
 overlay chrome://global/content/alerts/alert.xul           chrome://noise/content/noiseAlertOverlay.xul
-overlay chrome://mozapps/content/extensions/extensions.xul chrome://noise/content/noiseExtensionsOverlay.xul
+overlay chrome://mozapps/content/extensions/extensions.xul chrome://noise/content/noiseExtensionsOverlay.xul appversion<4.0.*
