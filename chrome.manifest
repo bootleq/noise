@@ -3,6 +3,7 @@ locale  noise  da-DK jar:chrome/noise.jar!/locale/da-DK/noise/
 locale  noise  de-DE jar:chrome/noise.jar!/locale/de-DE/noise/
 locale  noise  en-US jar:chrome/noise.jar!/locale/en-US/noise/
 locale  noise  fr-FR jar:chrome/noise.jar!/locale/fr-FR/noise/
+locale  noise  he-IL jar:chrome/noise.jar!/locale/he-IL/noise/
 locale  noise  ja-JP jar:chrome/noise.jar!/locale/ja-JP/noise/
 locale  noise  pl-PL jar:chrome/noise.jar!/locale/pl-PL/noise/
 locale  noise  pt-BR jar:chrome/noise.jar!/locale/pt-BR/noise/

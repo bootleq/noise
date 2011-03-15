@@ -4,13 +4,14 @@
   <Description about="urn:mozilla:install-manifest">
     <em:id>noise@bootleq</em:id>
     <em:name>Noise</em:name>
-    <em:version>1.2.2</em:version>
+    <em:version>1.2.3</em:version>
     <em:type>2</em:type>
     <em:description>Make sound response while events happen.</em:description>
     <em:creator>bootleq</em:creator>
     <em:translator>AlleyKat (Finn S. Sørensen) (da-DK)</em:translator>
     <em:translator>StefanS (de-DE)</em:translator>
     <em:translator>ioreker (fr-FR)</em:translator>
+    <em:translator>barryoni (he-IL)</em:translator>
     <em:translator>drry (ja-JP)</em:translator>
     <em:translator>Leszek(teo)Życzkowski (pl-PL)</em:translator>
     <em:translator>Ghelman (pt-BR)</em:translator>

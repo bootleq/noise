@@ -1,0 +1,46 @@
+<!ENTITY FIND_WRAPPED "סוף מציאת מילה בסרגל החיפוש">
+<!ENTITY toggleSidebar "הצג/הסתר את סרגל הצד">
+<!ENTITY alert-loaded "התראת תיבת הודעה">
+<!ENTITY AlertActive "התראת סרגל מידע">
+<!ENTITY sessionstore-windows-restored "דפים אחרונים שוחזרו">
+<!ENTITY purge-session-history "ניקוי היסטוריה אחרונה">
+<!ENTITY empty-cache "ניקוי מטמון">
+<!ENTITY WebProgress-start "התחלת גלישה">
+<!ENTITY WebProgress-locationChange "שינוי מיקום">
+<!ENTITY TabOpen "פתיחת טאב">
+<!ENTITY TabClose "סגירת טאב">
+<!ENTITY toplevel-window-ready "פתיחת חלון">
+<!ENTITY domwindowclosed "סגירת חלון">
+<!ENTITY DOMPopupBlocked "חלון קופץ נחסם">
+<!ENTITY fullscreen "שינוי מצב מסך מלא">
+<!ENTITY dl-start "הורדה החלה">
+<!ENTITY dl-failed "הורדה נכשלה">
+<!ENTITY dl-cancel "הורדה בוטלה">
+<!ENTITY dl-done "הורדה הושלמה">
+<!ENTITY perm-changed "הרשאות אתר שונו">
+<!ENTITY xpi-blocked "התקנת הרחבה נחסמה">
+<!ENTITY PluginNotFound "לא נמצא תוסף">
+<!ENTITY noise-log "Noise יומן רישום של">
+<!ENTITY about_FIND_WRAPPED "אירוע זה מתרחש כאשר משתמשים בסרגל החיפוש למציאת מילה והחיפוש הבא חוזר לתוצאה הראשונה, במידה ולא קיימת מילה נוספת תואמת בדף.">
+<!ENTITY about_toggleSidebar "פתיחה/סגירה של סרגל הצד. למעט: פתיחת דפי היסטוריה בסרגל הצד">
+<!ENTITY about_alert-loaded "אירוע זה מתרחש במקרים מסויימים כגון כל ההורדות הסתיימו, עדכון חדש נמצא וכו' המציגים הודעות למשתמש בפינה הימנית התחתונה של הדפדפן">
+<!ENTITY about_AlertActive "אירוע זה מתרחש במצבים כגון חלון קופץ נחסם, בקשת סיסמה שמורה וכו' המציג סרגל הודעות מידע למשתמש בחלק העליון של הדפדפן">
+<!ENTITY about_sessionstore-windows-restored "אירוע זה מתרחש באופן חד פעמי בהתחלת הגלישה בפיירפוקס">
+<!ENTITY about_purge-session-history "ניקוי היסטוריה אחרונה של פיירפוקס">
+<!ENTITY about_empty-cache "ניקוי מטמון של פיירפוקס">
+<!ENTITY about_WebProgress-start "גלישה באינטרנט החלה. מתרחש כאשר לוחצים על קישור">
+<!ENTITY about_WebProgress-locationChange "שינוי מיקום - אירוע זה מתרחש כשלוחצים על קישור, בוחרים טאב אחר או לוחצים על קישור מסוג מסויים">
+<!ENTITY about_TabOpen "פתח טאב חדש">
+<!ENTITY about_TabClose "סגור טאב">
+<!ENTITY about_toplevel-window-ready "פתיחת חלון חדש - כולל הודעת התראה וכו'">
+<!ENTITY about_domwindowclosed "סגירת חלון חדש - כולל הודעת התראה וכו'">
+<!ENTITY about_DOMPopupBlocked "חלון קופץ נחסם">
+<!ENTITY about_fullscreen "שנה מצב מסך מלא">
+<!ENTITY about_dl-start "פריט הורדה החל">
+<!ENTITY about_dl-failed "פריט הורדה נכשל">
+<!ENTITY about_dl-cancel "פריט הורדה בוטל">
+<!ENTITY about_dl-done "פריט הורדה הסתיים">
+<!ENTITY about_perm-changed "שינוי הרשאות של אתר. למעט: מניעת אתר מטעינת תמונה">
+<!ENTITY about_xpi-blocked "התקנת הרחבה נחסמה. למעט: גרסת הרחבה שלא נתמכת בפיירפוקס">
+<!ENTITY about_PluginNotFound "לא ניתן למצוא תוסף. למעט: תוסף פלאש שלא נמצא">
+<!ENTITY about_noise-log "לתיעוד הודעות במסוף השגיאות. תרחיש זה תקף לגבי כל תיעוד רישום &quot;some_event &amp; Noise.log (some_message)&quot; באפשרותך להשתמש ב">
