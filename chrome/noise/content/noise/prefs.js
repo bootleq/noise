@@ -230,7 +230,7 @@
         if (idx < 0) {
           return;
         }
-        treeData[idx].enable = treeData[idx] === false;
+        treeData[idx].enable = treeData[idx].enable === false;
         document.getElementById('cmd_toggle_enabled').setAttribute(
           'label', treeData[idx].enable === true ? stringBundle.getString("item_disabled") : stringBundle.getString("item_enabled")
         );
