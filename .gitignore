@@ -1,7 +1,6 @@
 *.svn
 *.xpi
 *.bat
-*.sh
 *.lnk
 Thumbs.db
 Desktop.ini
