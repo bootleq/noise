@@ -68,57 +68,54 @@ Noise = {
 
   addNotifiers: function () {
 
-    if (typeof gBrowser === "undefined") {
+    if (!('toggleSidebar' in window)) {
       return;
     }
 
-    var
-      toggleSidebarCopyByNoise,
-      tabContainer;
-
     // overwrite "toggleSidebar", see chrome/browser/content/browser/browser.js
     // notify with topic "noise-toggleSidebar"
-    if (typeof toggleSidebar !== "undefined") {
-      toggleSidebarCopyByNoise = toggleSidebar;
-      toggleSidebar = function (commandID, forceOpen) {
+    if ('toggleSidebar' in window) {
+      Noise.toggleSidebarWithoutNoise = window.toggleSidebar;
+      Noise.toggleSidebarWithNoise = function (commandID, forceOpen) {
         var obsSvc = Components.classes["@mozilla.org/observer-service;1"].getService(Components.interfaces.nsIObserverService);
         obsSvc.notifyObservers(null, "noise-toggleSidebar", commandID);
-        return toggleSidebarCopyByNoise(commandID, forceOpen);
+        return Noise.toggleSidebarWithoutNoise.call(window, commandID, forceOpen);
       };
+      window.toggleSidebar = Noise.toggleSidebarWithNoise;
     }
 
     // overwrite _updateStatusUI, see chrome/tookit/content/global/content/bindings/findbar.xml
     // notify with topic "noise-TypeAheadFind.FIND_WRAPPED"
-    if (typeof gFindBar === "undefined") {
-      var gFindBar = document.getElementById('FindToolbar');
+    if (!('gFindBar' in window)) {
+      gFindBar = document.getElementById('FindToolbar');
     }
-    if (gFindBar && gFindBar._updateStatusUI) {
-      gFindBar._updateStatusUICopyByNoise = gFindBar._updateStatusUI;
-      gFindBar._updateStatusUI = function (res, aFindPrevious) {
+    if (gFindBar && '_updateStatusUI' in gFindBar) {
+      gFindBar._updateStatusUIWithoutNoise = gFindBar._updateStatusUI;
+      gFindBar._updateStatusUIWithNoise = function (res, aFindPrevious) {
         if (res === gFindBar.nsITypeAheadFind.FIND_WRAPPED) {
           var obsSvc = Components.classes["@mozilla.org/observer-service;1"].getService(Components.interfaces.nsIObserverService);
           obsSvc.notifyObservers(null, "noise-TypeAheadFind.FIND_WRAPPED", aFindPrevious);
         }
-        return gFindBar._updateStatusUICopyByNoise(res, aFindPrevious);
+        return gFindBar._updateStatusUIWithoutNoise(res, aFindPrevious);
       };
+      gFindBar._updateStatusUI = gFindBar._updateStatusUIWithNoise;
     }
 
     // notify with topic "noise-WebProgress-start", "noise-WebProgress-stop", "noise-WebProgress-locationChange"
-    tabContainer = gBrowser.tabContainer;
-    if (typeof tabContainer !== "undefined") {
-      tabContainer.addEventListener("TabOpen", this.onTabOpen, false);
-      tabContainer.removeEventListener("TabClose", this.onTabClose, false);
+    if ('tabContainer' in gBrowser) {
+      gBrowser.tabContainer.addEventListener("TabOpen", this.onTabOpen, false);
+      gBrowser.tabContainer.removeEventListener("TabClose", this.onTabClose, false);
     }
     this.addProgressListener();
 
   },
   addProgressListener: function () {
-    if (typeof gBrowser !== "undefined") {
+    if ('gBrowser' in window) {
       gBrowser.addProgressListener(this.progListener, Components.interfaces.nsIWebProgress.NOTIFY_STATE_DOCUMENT);
     }
   },
   removeProgressListener: function () {
-    if (typeof gBrowser !== "undefined") {
+    if ('gBrowser' in window) {
       gBrowser.removeProgressListener(this.progListener);
     }
   },
