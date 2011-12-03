@@ -96,7 +96,7 @@ Noise = {
           var obsSvc = Components.classes["@mozilla.org/observer-service;1"].getService(Components.interfaces.nsIObserverService);
           obsSvc.notifyObservers(null, "noise-TypeAheadFind.FIND_WRAPPED", aFindPrevious);
         }
-        return gFindBar._updateStatusUIWithoutNoise(res, aFindPrevious);
+        return gFindBar._updateStatusUIWithoutNoise.call(gFindBar, res, aFindPrevious);
       };
       gFindBar._updateStatusUI = gFindBar._updateStatusUIWithNoise;
     }
