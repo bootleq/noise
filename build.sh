@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ADDON="noise"
-ignore="'*.bat' '*.sh' '*.xpi' '*.lnk' '.*' Thumbs.db Desktop.ini build"
+ignore="'*.txt' '*.bat' '*.sh' '*.xpi' '*.lnk' '.*' Thumbs.db Desktop.ini build"
 eval rsync -rt . build/ `echo --exclude "${ignore// / --exclude }"`
 cd build/chrome/$ADDON
 zip -r $ADDON.jar .
