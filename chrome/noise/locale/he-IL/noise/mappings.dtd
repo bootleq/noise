@@ -20,11 +20,11 @@
 <!ENTITY perm-changed "הרשאות אתר שונו">
 <!ENTITY xpi-blocked "התקנת הרחבה נחסמה">
 <!ENTITY PluginNotFound "לא נמצא תוסף">
-<!ENTITY noise-log "Noise יומן רישום של">
+<!ENTITY noise-log "יומן רישום של Noise">
 <!ENTITY about_FIND_WRAPPED "אירוע זה מתרחש כאשר משתמשים בסרגל החיפוש למציאת מילה והחיפוש הבא חוזר לתוצאה הראשונה, במידה ולא קיימת מילה נוספת תואמת בדף.">
 <!ENTITY about_toggleSidebar "פתיחה/סגירה של סרגל הצד. למעט: פתיחת דפי היסטוריה בסרגל הצד">
-<!ENTITY about_alert-loaded "אירוע זה מתרחש במקרים מסויימים כגון כל ההורדות הסתיימו, עדכון חדש נמצא וכו' המציגים הודעות למשתמש בפינה הימנית התחתונה של הדפדפן">
-<!ENTITY about_AlertActive "אירוע זה מתרחש במצבים כגון חלון קופץ נחסם, בקשת סיסמה שמורה וכו' המציג סרגל הודעות מידע למשתמש בחלק העליון של הדפדפן">
+<!ENTITY about_alert-loaded "אירוע זה מתרחש במקרים מסויימים כגון כל ההורדות הסתיימו, עדכון חדש נמצא וכו\' המציגים הודעות למשתמש בפינה הימנית התחתונה של הדפדפן">
+<!ENTITY about_AlertActive "אירוע זה מתרחש במצבים כגון חלון קופץ נחסם, בקשת סיסמה שמורה וכו\' המציג סרגל הודעות מידע למשתמש בחלק העליון של הדפדפן">
 <!ENTITY about_sessionstore-windows-restored "אירוע זה מתרחש באופן חד פעמי בהתחלת הגלישה בפיירפוקס">
 <!ENTITY about_purge-session-history "ניקוי היסטוריה אחרונה של פיירפוקס">
 <!ENTITY about_empty-cache "ניקוי מטמון של פיירפוקס">
@@ -32,8 +32,8 @@
 <!ENTITY about_WebProgress-locationChange "שינוי מיקום - אירוע זה מתרחש כשלוחצים על קישור, בוחרים טאב אחר או לוחצים על קישור מסוג מסויים">
 <!ENTITY about_TabOpen "פתח טאב חדש">
 <!ENTITY about_TabClose "סגור טאב">
-<!ENTITY about_toplevel-window-ready "פתיחת חלון חדש - כולל הודעת התראה וכו'">
-<!ENTITY about_domwindowclosed "סגירת חלון חדש - כולל הודעת התראה וכו'">
+<!ENTITY about_toplevel-window-ready "פתיחת חלון חדש - כולל הודעת התראה וכו\'">
+<!ENTITY about_domwindowclosed "סגירת חלון חדש - כולל הודעת התראה וכו\'">
 <!ENTITY about_DOMPopupBlocked "חלון קופץ נחסם">
 <!ENTITY about_fullscreen "שנה מצב מסך מלא">
 <!ENTITY about_dl-start "פריט הורדה החל">
@@ -43,4 +43,4 @@
 <!ENTITY about_perm-changed "שינוי הרשאות של אתר. למעט: מניעת אתר מטעינת תמונה">
 <!ENTITY about_xpi-blocked "התקנת הרחבה נחסמה. למעט: גרסת הרחבה שלא נתמכת בפיירפוקס">
 <!ENTITY about_PluginNotFound "לא ניתן למצוא תוסף. למעט: תוסף פלאש שלא נמצא">
-<!ENTITY about_noise-log "לתיעוד הודעות במסוף השגיאות. תרחיש זה תקף לגבי כל תיעוד רישום &quot;some_event &amp; Noise.log (some_message)&quot; באפשרותך להשתמש ב">
+<!ENTITY about_noise-log "לתיעוד הודעות במסוף השגיאות. תרחיש זה תקף לגבי כל תיעוד רישום \&quot;some_event &amp; Noise.log (some_message)\&quot; באפשרותך להשתמש ב">
