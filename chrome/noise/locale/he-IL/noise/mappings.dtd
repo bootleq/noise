@@ -1,46 +1,46 @@
-<!ENTITY FIND_WRAPPED "סוף מציאת מילה בסרגל החיפוש">
-<!ENTITY toggleSidebar "הצג/הסתר את סרגל הצד">
+<!ENTITY FIND_WRAPPED "סוף תוצאות החיפוש בדף">
+<!ENTITY toggleSidebar "הצגה או הסתרה של סרגל הצד">
 <!ENTITY alert-loaded "התראת תיבת הודעה">
 <!ENTITY AlertActive "התראת סרגל מידע">
-<!ENTITY sessionstore-windows-restored "דפים אחרונים שוחזרו">
+<!ENTITY sessionstore-windows-restored "גלישה אחרונה באינטרנט שוחזרה">
 <!ENTITY purge-session-history "ניקוי היסטוריה אחרונה">
 <!ENTITY empty-cache "ניקוי מטמון">
 <!ENTITY WebProgress-start "התחלת גלישה">
 <!ENTITY WebProgress-locationChange "שינוי מיקום">
-<!ENTITY TabOpen "פתיחת טאב">
-<!ENTITY TabClose "סגירת טאב">
+<!ENTITY TabOpen "פתיחת לשונית">
+<!ENTITY TabClose "סגירת לשונית">
 <!ENTITY toplevel-window-ready "פתיחת חלון">
 <!ENTITY domwindowclosed "סגירת חלון">
 <!ENTITY DOMPopupBlocked "חלון קופץ נחסם">
 <!ENTITY fullscreen "שינוי מצב מסך מלא">
-<!ENTITY dl-start "הורדה החלה">
+<!ENTITY dl-start "הורדה התחילה">
 <!ENTITY dl-failed "הורדה נכשלה">
 <!ENTITY dl-cancel "הורדה בוטלה">
 <!ENTITY dl-done "הורדה הושלמה">
 <!ENTITY perm-changed "הרשאות אתר שונו">
 <!ENTITY xpi-blocked "התקנת הרחבה נחסמה">
 <!ENTITY PluginNotFound "לא נמצא תוסף">
-<!ENTITY noise-log "יומן רישום של Noise">
-<!ENTITY about_FIND_WRAPPED "אירוע זה מתרחש כאשר משתמשים בסרגל החיפוש למציאת מילה והחיפוש הבא חוזר לתוצאה הראשונה, במידה ולא קיימת מילה נוספת תואמת בדף.">
-<!ENTITY about_toggleSidebar "פתיחה/סגירה של סרגל הצד. למעט: פתיחת דפי היסטוריה בסרגל הצד">
-<!ENTITY about_alert-loaded "אירוע זה מתרחש במקרים מסויימים כגון כל ההורדות הסתיימו, עדכון חדש נמצא וכו\' המציגים הודעות למשתמש בפינה הימנית התחתונה של הדפדפן">
-<!ENTITY about_AlertActive "אירוע זה מתרחש במצבים כגון חלון קופץ נחסם, בקשת סיסמה שמורה וכו\' המציג סרגל הודעות מידע למשתמש בחלק העליון של הדפדפן">
-<!ENTITY about_sessionstore-windows-restored "אירוע זה מתרחש באופן חד פעמי בהתחלת הגלישה בפיירפוקס">
-<!ENTITY about_purge-session-history "ניקוי היסטוריה אחרונה של פיירפוקס">
-<!ENTITY about_empty-cache "ניקוי מטמון של פיירפוקס">
-<!ENTITY about_WebProgress-start "גלישה באינטרנט החלה. מתרחש כאשר לוחצים על קישור">
-<!ENTITY about_WebProgress-locationChange "שינוי מיקום - אירוע זה מתרחש כשלוחצים על קישור, בוחרים טאב אחר או לוחצים על קישור מסוג מסויים">
-<!ENTITY about_TabOpen "פתח טאב חדש">
-<!ENTITY about_TabClose "סגור טאב">
-<!ENTITY about_toplevel-window-ready "פתיחת חלון חדש - כולל הודעת התראה וכו\'">
-<!ENTITY about_domwindowclosed "סגירת חלון חדש - כולל הודעת התראה וכו\'">
-<!ENTITY about_DOMPopupBlocked "חלון קופץ נחסם">
-<!ENTITY about_fullscreen "שנה מצב מסך מלא">
-<!ENTITY about_dl-start "פריט הורדה החל">
-<!ENTITY about_dl-failed "פריט הורדה נכשל">
-<!ENTITY about_dl-cancel "פריט הורדה בוטל">
-<!ENTITY about_dl-done "פריט הורדה הסתיים">
-<!ENTITY about_perm-changed "שינוי הרשאות של אתר. למעט: מניעת אתר מטעינת תמונה">
-<!ENTITY about_xpi-blocked "התקנת הרחבה נחסמה. למעט: גרסת הרחבה שלא נתמכת בפיירפוקס">
-<!ENTITY about_PluginNotFound "לא ניתן למצוא תוסף. למעט: תוסף פלאש שלא נמצא">
-<!ENTITY about_noise-log "לתיעוד הודעות במסוף השגיאות. תרחיש זה תקף לגבי כל תיעוד רישום \&quot;some_event &amp; Noise.log (some_message)\&quot; באפשרותך להשתמש ב">
+<!ENTITY noise-log "Noise יומן רישום של">
+<!ENTITY about_FIND_WRAPPED "בעת שימוש בסרגל החיפוש למציאת מילה, החיפוש הבא חוזר לתוצאה הראשונה במידה ולא קיימת מילה נוספת תואמת בדף.">
+<!ENTITY about_toggleSidebar "פתיחה או סגירה של סרגל הצד. למעט: פתיחת סרגל הצד של היסטוריה.">
+<!ENTITY about_alert-loaded "מאורעות כמו כל ההורדות הסתיימו, עדכון חדש נמצא וכו\' המציגים תיבות התראה שגולשות מהפינה הימנית התחתונה של הדפדפן, הפעל אירוע זה.">
+<!ENTITY about_AlertActive "מאורעות כמו חלון קופץ נחסם, בקשת סיסמה שמורה וכו\' המשתמשים בהודעות סרגל המידע באיזור העליון של הדפדפן, הפעל אירוע זה.">
+<!ENTITY about_sessionstore-windows-restored "כל החלונות הראשונים נפתחו. אירוע זה מתרחש ברגע ש־Firefox מופעל.">
+<!ENTITY about_purge-session-history "ניקוי היסטוריה אחרונה של Firefox.">
+<!ENTITY about_empty-cache "ניקוי מטמון של Firefox.">
+<!ENTITY about_WebProgress-start "גלישה באינטרנט החלה. סביר להניח שיקרה הרבה פעמים כשלוחצים על קישור.">
+<!ENTITY about_WebProgress-locationChange "מיקום השתנה. סביר להניח שיקרה הרבה פעמים כשלוחצים על קישור, אך גם מופעל כשבוחרים לשונית אחרת וכשלוחצים על קישור מסוג מסויים כמו url.html#fragment-identifier">
+<!ENTITY about_TabOpen "פתיחת לשונית חדשה.">
+<!ENTITY about_TabClose "סגירת לשונית נוכחית.">
+<!ENTITY about_toplevel-window-ready "פתיחת חלון חדש. כולל הודעת התראה, תיבות דו-שיח של אפשרויות וכד'.">
+<!ENTITY about_domwindowclosed "סגירת חלון חדש. כולל הודעת התראה, תיבות דו-שיח של אפשרויות וכד'.">
+<!ENTITY about_DOMPopupBlocked "חלון מוקפץ נחסם (כגון פרסומות).">
+<!ENTITY about_fullscreen "שינוי מצב חלון רגיל על כל המסך.">
+<!ENTITY about_dl-start "פריט הורדה החל.">
+<!ENTITY about_dl-failed "פריט הורדה נכשל.">
+<!ENTITY about_dl-cancel "פריט הורדה בוטל.">
+<!ENTITY about_dl-done "פריט הורדה הסתיים.">
+<!ENTITY about_perm-changed "שינוי הרשאות של אתר. למעט: מניעת אתר מטעינת תמונה.">
+<!ENTITY about_xpi-blocked "התקנת הרחבה נחסמה. למעט: גירסת הרחבה שאינה נתמכת ב־Firefox">
+<!ENTITY about_PluginNotFound "לא ניתן למצוא תוסף. למעט: תוסף Flash שלא נמצא">
+<!ENTITY about_noise-log "באפשרותך להשתמש ב־&quot;some_event&amp;Noise.log(some_message)&quot; לתיעוד הודעות במסוף השגיאות. מאורע זה מתרחש בכל פעולת רישום בקובץ התיעוד.">

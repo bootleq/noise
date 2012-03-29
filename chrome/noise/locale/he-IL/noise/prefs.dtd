@@ -1,19 +1,19 @@
-<!ENTITY prefwindow.title "הגדרות של Noise">
+<!ENTITY prefwindow.title "הגדרות Noise">
 <!ENTITY treecol.name.width "220px">
 <!ENTITY treecol.file.width "220px">
 <!ENTITY pane-general.title "כללי">
-<!ENTITY check-prefs-enabled.label "הפעל צלילים">
-<!ENTITY check-prefs-enabled.accesskey "ל">
+<!ENTITY check-prefs-enabled.label "הפוך צלילים לזמינים">
+<!ENTITY check-prefs-enabled.accesskey "מ">
 <!ENTITY events.guide "מדריך אירועים">
 <!ENTITY events.guide.tooltip "פתח חלון הדרכה לבחירת אירועים זמינים">
 <!ENTITY events.guide.title "מדריך אירועים של Noise">
-<!ENTITY events.guide.intro "נא לבחור פריטים המופיעים למטה מתוך אירועי ברירת מחדל, על מנת להוסיפו אל חלון ההעדפות">
+<!ENTITY events.guide.intro "אנא בחר פריטים מתוך הרשימה שלהלן, כדי לצרפם אל חלון ההעדפות.">
 <!ENTITY events.guide.item.name "שם אירוע">
 <!ENTITY events.guide.item.ver "גירסה">
 <!ENTITY events.guide.item.ver.tooltip "הפך לברירת מחדל מגירסת">
 <!ENTITY events.guide.item.check "בחר">
-<!ENTITY events.guide.description.label "סיכום">
-<!ENTITY events.guide.description "בחר פריט כדי להציג תיאור.">
+<!ENTITY events.guide.description.label "תיאור">
+<!ENTITY events.guide.description "בחר פריט להצגת פרטים.">
 <!ENTITY item.name "שם">
 <!ENTITY item.event "אירוע">
 <!ENTITY item.type "סוג אירוע">
@@ -21,12 +21,12 @@
 <!ENTITY item.enabled "מופעל">
 <!ENTITY cmd_add_sound.label "הוסף">
 <!ENTITY new_sound.label "צליל">
-<!ENTITY new_separator.label "קו הפרדה">
+<!ENTITY new_separator.label "קו מפריד">
 <!ENTITY cmd_duplicate_sound.label "שכפל">
 <!ENTITY cmd_edit_sound.label "ערוך">
 <!ENTITY cmd_play_sound.label "נגן">
-<!ENTITY cmd_toggle_enabled.true.label "אפשר">
-<!ENTITY cmd_toggle_enabled.false.label "בטל">
+<!ENTITY cmd_toggle_enabled.true.label "הפוך לזמין">
+<!ENTITY cmd_toggle_enabled.false.label "הפוך ללא זמין">
 <!ENTITY cmd_remove_sound.label "הסר">
 <!ENTITY cmd_findbar.commandkey "ח">
 <!ENTITY findbar.label "מצא:">
@@ -34,13 +34,13 @@
 <!ENTITY settings.export "יצוא">
 <!ENTITY settings.import "יבוא">
 <!ENTITY settings.defaults "ברירת מחדל">
-<!ENTITY pref.notApply.tooltip "מיפוי צלילים ייכנסו לתוקף לאחר סגירת חלון זה">
+<!ENTITY pref.notApply.tooltip "מיפוי צלילים ייכנסו לתוקף לאחר סגירת חלון זה.">
 <!ENTITY editdialog.title "עריכת Noise">
-<!ENTITY filepicker.browser "בחר ...">
-<!ENTITY relative.enabled "השתמש בתיקיית צלילים">
-<!ENTITY relative.changebase "שינוי מיקום">
-<!ENTITY relative.openbase "פתיחת מיקום">
-<!ENTITY item.type.observer "(addObserver נושא אירוע (באמצעות">
-<!ENTITY item.type.browser "(gBrowser.addEventListener אירוע דפדפן (באמצעות">
-<!ENTITY item.type.window "(window.addEventListener אירוע חלון (באמצעות">
+<!ENTITY filepicker.browser "בחר...">
+<!ENTITY relative.enabled "השתמש בתיקית צלילים">
+<!ENTITY relative.changebase "שנה תיקיה">
+<!ENTITY relative.openbase "פתח תיקיה">
+<!ENTITY item.type.observer "נושא אירוע (ע&quot;י addObserver)">
+<!ENTITY item.type.browser "אירוע דפדפן (ע&quot;י gBrowser.addEventListener)">
+<!ENTITY item.type.window "אירוע חלון (ע&quot;י window.addEventListener)">
 <!ENTITY error.loadsound "שגיאה: לא ניתן לטעון קובץ">
