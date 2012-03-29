@@ -15,10 +15,10 @@
     <em:translator>drry (ja-JP)</em:translator>
     <em:translator>Leszek(teo)Życzkowski (pl-PL)</em:translator>
     <em:translator>Ghelman (pt-BR)</em:translator>
-    <em:translator>Mikael Hiort af Ornäs (sv-SE)</em:translator>
     <em:translator>Ersen Yoldaç (tr-TR)</em:translator>
     <em:translator>xmoke (zh-CN)</em:translator>
     <em:contributor>Jose Enrique Bolaños (testing on Mac OSX, other fixes)</em:contributor>
+    <em:contributor>Mikael Hiort af Ornäs (sv-SE translator till v1.2.7)</em:contributor>
     <em:optionsURL>chrome://noise/content/prefs.xul</em:optionsURL>
     <em:homepageURL>http://www.bootleq.com/noise/</em:homepageURL>
     <em:iconURL>chrome://noise/skin/icon.png</em:iconURL>
