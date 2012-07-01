@@ -2,7 +2,7 @@
 <!ENTITY toggleSidebar "Włączenie/wyłączenie panelu bocznego">
 <!ENTITY alert-loaded "Powiadomienia">
 <!ENTITY AlertActive "Powiadomienia paska informacji">
-<!ENTITY sessionstore-windows-restored "Sesja została odtworzona">
+<!ENTITY sessionstore-windows-restored "Odtworzenie sesji">
 <!ENTITY purge-session-history "Wyczyszczenie historii sesji">
 <!ENTITY empty-cache "Wyczyszczenie bufora">
 <!ENTITY WebProgress-start "Rozpoczęcie przeglądania">
@@ -11,7 +11,7 @@
 <!ENTITY TabClose "Zamknięcie karty">
 <!ENTITY toplevel-window-ready "Otwarcie okna">
 <!ENTITY domwindowclosed "Zamknięcie okna">
-<!ENTITY DOMPopupBlocked "Zablokowanie wyskakującego okienka">
+<!ENTITY DOMPopupBlocked "Zablokowanie wyskakującego okna">
 <!ENTITY fullscreen "Włączenie/wyłączenie pełnego ekranu">
 <!ENTITY dl-start "Rozpoczęcie pobierania">
 <!ENTITY dl-failed "Przerwanie pobierania">
@@ -22,19 +22,19 @@
 <!ENTITY PluginNotFound "Brak wtyczki">
 <!ENTITY noise-log "Dziennik zdarzeń">
 <!ENTITY about_FIND_WRAPPED "Rozpoczęcie wyszukiwania od początku podczas korzystania z paska wyszukiwania.">
-<!ENTITY about_toggleSidebar "Otwarcie/zamknięcie panelu bocznego np. otwarcie panelu historii">
-<!ENTITY about_alert-loaded "Zdarzenia takie jak zakończenie pobierania, dostępność aktualizacji, które wyświetlają się w wysuwanym okienku powiadomień.">
-<!ENTITY about_AlertActive "Zdarzenia takie jak zablokowanie wyskakującego okienka, pytania o zapisanie hasła itp., które wyświetlają się w górnym pasku powiadomień.">
-<!ENTITY about_sessionstore-windows-restored "Otwarcie strony startowej. Zazwyczaj dzieje się to, gdy jest uruchamiany Firefox.">
+<!ENTITY about_toggleSidebar "Otwarcie/zamknięcie panelu bocznego">
+<!ENTITY about_alert-loaded "Zdarzenia, takie jak zakończenie pobierania, dostępność aktualizacji wyświetlane w wysuwanym okienku powiadomień.">
+<!ENTITY about_AlertActive "Zdarzenia, takie jak zablokowanie wyskakującego okienka, pytania o zapisanie hasła itp. wyświetlane w górnym pasku powiadomień.">
+<!ENTITY about_sessionstore-windows-restored "Otwarcie strony startowej; występuje raz podczas uruchamiania Firefoksa.">
 <!ENTITY about_purge-session-history "Wyczyszczenie historii sesji Firefoksa">
 <!ENTITY about_empty-cache "Wyczyszczenie bufora Firefoksa">
-<!ENTITY about_WebProgress-start "Rozpoczęcie przeglądania. Zazwyczaj dzieje się to  po kliknięciu odnośnika.">
-<!ENTITY about_WebProgress-locationChange "Zmiana lokalizacji. Zazwyczaj dzieje się to po kliknięciu odnośnika, ale także po wybraniu nowej karty, czy kliknięciu odnośnika typu url.html#fragment-identifier.">
+<!ENTITY about_WebProgress-start "Rozpoczęcie przeglądania – zazwyczaj po kliknięciu odnośnika.">
+<!ENTITY about_WebProgress-locationChange "Zmiana lokalizacji. Zazwyczaj po kliknięciu odnośnika, ale także po wybraniu nowej karty, czy kliknięciu odnośnika typu url.html#fragment-identifier.">
 <!ENTITY about_TabOpen "Otwarcie nowej karty">
 <!ENTITY about_TabClose "Zamknięcie karty">
 <!ENTITY about_toplevel-window-ready "Otwarcie nowego okna">
 <!ENTITY about_domwindowclosed "Zamknięcie nowego okna">
-<!ENTITY about_DOMPopupBlocked "Zablokowanie wyskakującego okienka">
+<!ENTITY about_DOMPopupBlocked "Zablokowanie wyskakującego okna">
 <!ENTITY about_fullscreen "Zmiana trybu przeglądania (pełnoekranowy/normalny)">
 <!ENTITY about_dl-start "Rozpoczęcie pobierania">
 <!ENTITY about_dl-failed "Niepowodzenie pobierania">

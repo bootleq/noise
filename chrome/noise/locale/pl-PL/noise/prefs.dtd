@@ -1,4 +1,4 @@
-<!ENTITY prefwindow.title "Noise - ustawienia">
+<!ENTITY prefwindow.title "Noise – ustawienia">
 <!ENTITY treecol.name.width "150px">
 <!ENTITY treecol.file.width "100px">
 <!ENTITY pane-general.title "Ogólne">
@@ -7,11 +7,11 @@
 <!ENTITY events.guide "Przewodnik">
 <!ENTITY events.guide.tooltip "Otwiera okno przewodnika">
 <!ENTITY events.guide.title "Przewodnik po zdarzeniach">
-<!ENTITY events.guide.intro "Proszę z poniższej listy wybrać zdarzenia do dodania do okna ustawień">
+<!ENTITY events.guide.intro "Z poniższej listy wybierz zdarzenia do dodania do okna ustawień">
 <!ENTITY events.guide.item.name "Nazwa zdarzenia">
 <!ENTITY events.guide.item.ver "wer.">
-<!ENTITY events.guide.item.ver.tooltip "Został domyślnym zdarzeniem od wersji">
-<!ENTITY events.guide.item.check "Wskaż">
+<!ENTITY events.guide.item.ver.tooltip "Zostało domyślnym zdarzeniem od wersji">
+<!ENTITY events.guide.item.check "Wybierz">
 <!ENTITY events.guide.description.label "Podsumowanie">
 <!ENTITY events.guide.description "Wybierz element, aby zobaczyć jego opis">
 <!ENTITY item.name "Nazwa">
@@ -34,13 +34,13 @@
 <!ENTITY settings.export "Eksportuj">
 <!ENTITY settings.import "Importuj">
 <!ENTITY settings.defaults "Domyślne">
-<!ENTITY pref.notApply.tooltip "Ustawienia dźwięku zostaną zastosowane po zamknięciu tego okna">
+<!ENTITY pref.notApply.tooltip "Ustawienia dźwięku zostaną zastosowane po zamknięciu tego okna.">
 <!ENTITY editdialog.title "Edycja dźwięków">
 <!ENTITY filepicker.browser "Przeglądaj…">
 <!ENTITY relative.enabled "Używaj katalogu:">
 <!ENTITY relative.changebase "Zmień katalog">
 <!ENTITY relative.openbase "Otwórz katalog">
-<!ENTITY item.type.observer "Zdarzenie tematyczne (poprzez addObserver)">
-<!ENTITY item.type.browser "Zdarzenie przeglądania (poprzez gBrowser.addEventListener)">
-<!ENTITY item.type.window "Zdarzenie okna (poprzez window.addEventListener)">
+<!ENTITY item.type.observer "Zdarzenie tematyczne">
+<!ENTITY item.type.browser "Zdarzenie przeglądania">
+<!ENTITY item.type.window "Zdarzenie okna">
 <!ENTITY error.loadsound "Błąd: Nie można wczytać pliku">
