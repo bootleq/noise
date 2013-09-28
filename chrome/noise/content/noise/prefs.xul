@@ -79,17 +79,17 @@
       </hbox>
       <hbox class="find-buttons-container">
         <toolbarbutton id="noise-prefs-findbar-next" class="findbar-find-next tabbable"
-                       label="&next.label;"
-                       tooltiptext="&next.tooltip;"
+                       label="&findbar-next.label;"
+                       tooltiptext="&findbar-next.tooltip;"
                        oncommand="Noise.NoisePrefs.findbar.doCommand('cmd_find_next');"
                        disabled="true"
-                       chromedir="&locale.dir;"/>
+                       chromedir="&findbar-locale.dir;"/>
         <toolbarbutton id="noise-prefs-findbar-previous" class="findbar-find-previous tabbable"
-                       label="&previous.label;"
-                       tooltiptext="&previous.tooltip;"
+                       label="&findbar-previous.label;"
+                       tooltiptext="&findbar-previous.tooltip;"
                        oncommand="Noise.NoisePrefs.findbar.doCommand('cmd_find_previous');"
                        disabled="true"
-                       chromedir="&locale.dir;"/>
+                       chromedir="&findbar-locale.dir;"/>
         <image id="noise-prefs-findbar-status-icon" class="findbar-find-fast find-status-icon"/>
       </hbox>
       <spacer flex="1" />
