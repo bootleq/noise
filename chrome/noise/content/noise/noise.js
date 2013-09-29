@@ -75,13 +75,16 @@ Noise = {
     // overwrite "toggleSidebar", see chrome/browser/content/browser/browser.js
     // notify with topic "noise-toggleSidebar"
     if ('toggleSidebar' in window) {
-      Noise.toggleSidebarWithoutNoise = window.toggleSidebar;
-      Noise.toggleSidebarWithNoise = function (commandID, forceOpen) {
-        var obsSvc = Components.classes["@mozilla.org/observer-service;1"].getService(Components.interfaces.nsIObserverService);
-        obsSvc.notifyObservers(null, "noise-toggleSidebar", commandID);
-        return Noise.toggleSidebarWithoutNoise.call(window, commandID, forceOpen);
+      let (_toggleSidebarWithoutNoise = window.toggleSidebar) {
+        window.toggleSidebar = function _toggleSidebarWithNoise(commandID, forceOpen) {
+          try {
+            Noise.obsSvc.notifyObservers(null, "noise-toggleSidebar", commandID);
+          } catch (e) {
+            dump('Noise: ' + e);
+          }
+          return _toggleSidebarWithoutNoise.apply(window, arguments);
+        };
       };
-      window.toggleSidebar = Noise.toggleSidebarWithNoise;
     }
 
     // overwrite _updateStatusUI, see chrome/tookit/content/global/content/bindings/findbar.xml
@@ -90,15 +93,18 @@ Noise = {
       gFindBar = document.getElementById('FindToolbar');
     }
     if (gFindBar && '_updateStatusUI' in gFindBar) {
-      gFindBar._updateStatusUIWithoutNoise = gFindBar._updateStatusUI;
-      gFindBar._updateStatusUIWithNoise = function (res, aFindPrevious) {
-        if (res === gFindBar.nsITypeAheadFind.FIND_WRAPPED) {
-          var obsSvc = Components.classes["@mozilla.org/observer-service;1"].getService(Components.interfaces.nsIObserverService);
-          obsSvc.notifyObservers(null, "noise-TypeAheadFind.FIND_WRAPPED", aFindPrevious);
-        }
-        return gFindBar._updateStatusUIWithoutNoise.call(gFindBar, res, aFindPrevious);
+      let (_updateStatusUIWithoutNoise = gFindBar._updateStatusUI) {
+        gFindBar._updateStatusUI = function _updateStatusUIWithNoise(res, aFindPrevious) {
+          if (res === gFindBar.nsITypeAheadFind.FIND_WRAPPED) {
+            try {
+              Noise.obsSvc.notifyObservers(null, "noise-TypeAheadFind.FIND_WRAPPED", aFindPrevious);
+            } catch (e) {
+              dump('Noise: ' + e);
+            }
+          }
+          return _updateStatusUIWithoutNoise.apply(gFindBar, arguments);
+        };
       };
-      gFindBar._updateStatusUI = gFindBar._updateStatusUIWithNoise;
     }
 
     // notify with topic "noise-WebProgress-start", "noise-WebProgress-stop", "noise-WebProgress-locationChange"
