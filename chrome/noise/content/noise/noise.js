@@ -100,7 +100,7 @@ Noise = {
     // notify with topic "noise-WebProgress-start", "noise-WebProgress-stop", "noise-WebProgress-locationChange"
     if ('tabContainer' in gBrowser) {
       gBrowser.tabContainer.addEventListener("TabOpen", this.onTabOpen, false);
-      gBrowser.tabContainer.removeEventListener("TabClose", this.onTabClose, false);
+      gBrowser.tabContainer.addEventListener("TabClose", this.onTabClose, false);
     }
     this.addProgressListener();
 
