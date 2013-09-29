@@ -107,7 +107,7 @@ Noise = {
   },
   addProgressListener: function () {
     if ('gBrowser' in window) {
-      gBrowser.addProgressListener(this.progListener, Components.interfaces.nsIWebProgress.NOTIFY_STATE_DOCUMENT);
+      gBrowser.addProgressListener(this.progListener);
     }
   },
   removeProgressListener: function () {
