@@ -30,6 +30,11 @@
 <!ENTITY cmd_remove_sound.label "Remove">
 <!ENTITY cmd_findbar.commandkey "F">
 <!ENTITY findbar.label "Find:">
+<!ENTITY findbar-next.label "Next">
+<!ENTITY findbar-next.tooltip "Find the next occurrence of the phrase">
+<!ENTITY findbar-previous.label "Previous">
+<!ENTITY findbar-previous.tooltip "Find the previous occurrence of the phrase">
+<!ENTITY findbar-locale.dir "ltr">
 <!ENTITY settings.label "Settings">
 <!ENTITY settings.export "Export">
 <!ENTITY settings.import "Import">

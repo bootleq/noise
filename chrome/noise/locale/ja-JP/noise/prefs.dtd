@@ -30,6 +30,11 @@
 <!ENTITY cmd_remove_sound.label "除去">
 <!ENTITY cmd_findbar.commandkey "F">
 <!ENTITY findbar.label "検索:">
+<!ENTITY findbar-next.label "">
+<!ENTITY findbar-next.tooltip "">
+<!ENTITY findbar-previous.label "">
+<!ENTITY findbar-previous.tooltip "">
+<!ENTITY findbar-locale.dir "">
 <!ENTITY settings.label "設定">
 <!ENTITY settings.export "書き出し">
 <!ENTITY settings.import "取り込み">

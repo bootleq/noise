@@ -30,6 +30,11 @@
 <!ENTITY cmd_remove_sound.label "Supprimer">
 <!ENTITY cmd_findbar.commandkey "F">
 <!ENTITY findbar.label "Rechercher :">
+<!ENTITY findbar-next.label "">
+<!ENTITY findbar-next.tooltip "">
+<!ENTITY findbar-previous.label "">
+<!ENTITY findbar-previous.tooltip "">
+<!ENTITY findbar-locale.dir "">
 <!ENTITY settings.label "Paramètres">
 <!ENTITY settings.export "Exporter…">
 <!ENTITY settings.import "Importer…">

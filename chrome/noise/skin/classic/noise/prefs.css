@@ -15,6 +15,23 @@ treechildren::-moz-tree-checkbox(checked) {list-style-image:url(chrome://noise/s
 #noise-prefs-findbar-textbox {-moz-appearance:none; border:none; margin:0;}
 #noise-prefs-findbar-textbox[status="notfound"] {background-color:#FF6666;}
 
+.find-status-icon {
+  margin-left: 12px;
+}
+.find-buttons-container toolbarbutton:active {
+  background: rgba(23,50,76,.2);
+  box-shadow: 0 1px 2px rgba(10,31,51,.2) inset;
+}
+.findbar-find-previous {
+  border-right: 1px solid ThreeDShadow;
+}
+.find-status-icon[status="notfound"] {
+  list-style-image: url("chrome://global/skin/icons/information-16.png");
+}
+.find-status-icon[status="wrapped"] {
+  list-style-image: url("chrome://global/skin/icons/wrap.png");
+}
+
 prefwindow, prefpane {padding-top:0; padding-bottom:0;}
 #events-guide-link {margin-right:8px;}
 #noise-prefs-main-buttonset {margin-bottom:0;}

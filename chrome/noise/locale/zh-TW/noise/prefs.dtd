@@ -30,6 +30,11 @@
 <!ENTITY cmd_remove_sound.label "移除">
 <!ENTITY cmd_findbar.commandkey "F">
 <!ENTITY findbar.label "尋找:">
+<!ENTITY findbar-next.label "下一個">
+<!ENTITY findbar-next.tooltip "尋找文字下次出現的位置">
+<!ENTITY findbar-previous.label "上一個">
+<!ENTITY findbar-previous.tooltip "尋找文字前次出現的位置">
+<!ENTITY findbar-locale.dir "ltr">
 <!ENTITY settings.label "設定值">
 <!ENTITY settings.export "匯出設定">
 <!ENTITY settings.import "匯入設定">
