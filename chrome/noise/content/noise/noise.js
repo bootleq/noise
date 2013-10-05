@@ -70,7 +70,7 @@ Noise = {
 
   addNotifiers: function () {
 
-    if (!('toggleSidebar' in window)) {
+    if (this._getWindowType() !== 'navigator:browser') {
       return;
     }
 
@@ -111,7 +111,7 @@ Noise = {
     }
   },
   removeProgressListener: function () {
-    if ('gBrowser' in window) {
+    if (this._getWindowType() === 'navigator:browser') {
       gBrowser.removeProgressListener(this.progListener);
     }
   },
@@ -477,6 +477,10 @@ Noise = {
   setBase: function (file) {
     this.prefs.setComplexValue("extensions.noise.base", Components.interfaces.nsILocalFile, file);
     this.base = file;
+  },
+
+  _getWindowType: function () {
+    return document.documentElement.getAttribute('windowtype');
   }
 
 };
