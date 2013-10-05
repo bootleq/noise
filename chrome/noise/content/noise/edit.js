@@ -1,10 +1,10 @@
 /*global Noise: false, Components: false*/
 (function () {
 
-  const TYPE_SEPARATOR = 0;
-  const TYPE_OBSERVER = 1;
-  const TYPE_BROWSER = 2;
-  const TYPE_WINDOW = 3;
+  const TYPE_SEPARATOR = '0';
+  const TYPE_OBSERVER = '1';
+  const TYPE_BROWSER = '2';
+  const TYPE_WINDOW = '3';
 
   var
     ret = window.arguments[0],

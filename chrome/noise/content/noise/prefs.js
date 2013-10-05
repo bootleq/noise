@@ -291,10 +291,12 @@
           'label', treeData[idx].enable === true ? stringBundle.getString("item_disabled") : stringBundle.getString("item_enabled")
         );
         isSeparator = (treeData[idx].type === '0');
-        ['play_sound', 'toggle_enabled', 'edit_sound'].forEach(function (cmd_name) {
+        ['play_sound', 'toggle_enabled'].forEach(function (cmd_name) {
           this.$commands['cmd_' + cmd_name].setAttribute('disabled', isSeparator);
         }, this);
-        this.$commands.cmd_remove_sound.setAttribute('disabled', false);
+        ['edit_sound', 'remove_sound'].forEach(function (cmd_name) {
+          this.$commands['cmd_' + cmd_name].setAttribute('disabled', false);
+        }, this);
       }
     },
 
