@@ -11,7 +11,7 @@
 <!ENTITY TabClose "Fechar aba">
 <!ENTITY toplevel-window-ready "Abrir janela">
 <!ENTITY domwindowclosed "Fechar janela">
-<!ENTITY DOMPopupBlocked "Popup Bloqueado">
+<!ENTITY DOMPopupBlocked "Popup bloqueado">
 <!ENTITY fullscreen "Ativar/Desativar tela inteira">
 <!ENTITY dl-start "Download iniciado">
 <!ENTITY dl-failed "Download falhou">

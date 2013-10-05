@@ -30,11 +30,11 @@
 <!ENTITY cmd_remove_sound.label "移除">
 <!ENTITY cmd_findbar.commandkey "F">
 <!ENTITY findbar.label "查找：">
-<!ENTITY findbar-next.label "">
-<!ENTITY findbar-next.tooltip "">
-<!ENTITY findbar-previous.label "">
-<!ENTITY findbar-previous.tooltip "">
-<!ENTITY findbar-locale.dir "">
+<!ENTITY findbar-next.label "Next">
+<!ENTITY findbar-next.tooltip "Find the next occurrence of the phrase">
+<!ENTITY findbar-previous.label "Previous">
+<!ENTITY findbar-previous.tooltip "Find the previous occurrence of the phrase">
+<!ENTITY findbar-locale.dir "ltr">
 <!ENTITY settings.label "设置">
 <!ENTITY settings.export "导出">
 <!ENTITY settings.import "导入">

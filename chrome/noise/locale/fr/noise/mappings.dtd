@@ -43,4 +43,4 @@
 <!ENTITY about_perm-changed "Modification des permissions accordées à un site. Exemple : interdire à un site de charger ses images.">
 <!ENTITY about_xpi-blocked "Blocage de l'installation d'une extension. Exemple : version de Firefox non supportée.">
 <!ENTITY about_PluginNotFound "Absence d'un plugin. Exemple : plugin Flash introuvable.">
-<!ENTITY about_noise-log "Vous pouvez utiliser «&nbsp;un_évènement&amp;Noise.log(un_message)&nbsp;» pour noter des messages dans la Console d'erreurs. Cet évènement se produit pour chaque entrée dans le journal.">
+<!ENTITY about_noise-log "Vous pouvez utiliser «�un_évènement&amp;Noise.log(un_message)�» pour noter des messages dans la Console d'erreurs. Cet évènement se produit pour chaque entrée dans le journal.">

@@ -30,11 +30,11 @@
 <!ENTITY cmd_remove_sound.label "Usuń">
 <!ENTITY cmd_findbar.commandkey "Z">
 <!ENTITY findbar.label "Znajdź:">
-<!ENTITY findbar-next.label "">
-<!ENTITY findbar-next.tooltip "">
-<!ENTITY findbar-previous.label "">
-<!ENTITY findbar-previous.tooltip "">
-<!ENTITY findbar-locale.dir "">
+<!ENTITY findbar-next.label "Następne">
+<!ENTITY findbar-next.tooltip "Znajdź następne wystąpienie ostatnio szukanej frazy">
+<!ENTITY findbar-previous.label "Poprzednie">
+<!ENTITY findbar-previous.tooltip "Znajdź poprzednie wystąpienie ostatnio szukanej frazy">
+<!ENTITY findbar-locale.dir "ltr">
 <!ENTITY settings.label "Ustawienia">
 <!ENTITY settings.export "Eksportuj">
 <!ENTITY settings.import "Importuj">
