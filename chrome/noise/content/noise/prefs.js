@@ -279,7 +279,7 @@
         document.getElementById('cmd_toggle_enabled').setAttribute(
           'label', treeData[idx].enable === true ? stringBundle.getString("item_disabled") : stringBundle.getString("item_enabled")
         );
-        isSeparator = (treeData[idx].type === 0);
+        isSeparator = (treeData[idx].type === '0');
         document.getElementById('cmd_play_sound').setAttribute('disabled', isSeparator);
         document.getElementById('cmd_toggle_enabled').setAttribute('disabled', isSeparator);
         document.getElementById('cmd_edit_sound').setAttribute('disabled', isSeparator);
@@ -418,7 +418,7 @@
       return false;
     },
     isSeparator: function (row) {
-      return treeData[row].type === 0;
+      return treeData[row].type === '0';
     },
     isSorted: function () {
       return false;
@@ -456,10 +456,18 @@
     getRowProperties: function (row, props) {},
     getCellProperties: function (row, col, properties) {
       if (col.index === 0 && this.isSeparator(row)) {
-        properties.AppendElement(this.ATOM.getAtom("separator"));
+        if (properties) {
+          properties.AppendElement(this.ATOM.getAtom("separator"));
+        } else {
+          return "separator";
+        }
       }
       if (col.index === 3) {
-        properties.AppendElement(this.ATOM.getAtom("checkbox-hover"));
+        if (properties) {
+          properties.AppendElement(this.ATOM.getAtom("checkbox-hover"));
+        } else {
+          return "checkbox-hover";
+        } 
       }
     },
     getColumnProperties: function (colid, col, props) {},

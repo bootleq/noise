@@ -69,8 +69,19 @@ Noise = {
 /* start of overwrite code {{{ */
 
   addNotifiers: function () {
+    var windowType = this._getWindowType();
 
-    if (!('toggleSidebar' in window)) {
+    if (['navigator:browser', 'navigator:view-source'].indexOf(windowType) > -1) {
+      // overwrite _updateStatusUI, see chrome/tookit/content/global/content/bindings/findbar.xml
+      // notify with topic "noise-TypeAheadFind.FIND_WRAPPED"
+      if (!('gFindBar' in window)) {
+        gFindBar = document.getElementById('FindToolbar');
+      }
+      this.patchFindBar(gFindBar);
+      window.addEventListener("TabFindInitialized", this.onTabFindInitialized, false);
+    }
+
+    if (windowType !== 'navigator:browser') {
       return;
     }
 
@@ -89,29 +100,21 @@ Noise = {
       };
     }
 
-    // overwrite _updateStatusUI, see chrome/tookit/content/global/content/bindings/findbar.xml
-    // notify with topic "noise-TypeAheadFind.FIND_WRAPPED"
-    if (!('gFindBar' in window)) {
-      gFindBar = document.getElementById('FindToolbar');
-    }
-    this.patchFindBar(gFindBar);
-    window.addEventListener("TabFindInitialized", this.onTabFindInitialized, false);
-
     // notify with topic "noise-WebProgress-start", "noise-WebProgress-stop", "noise-WebProgress-locationChange"
     if ('tabContainer' in gBrowser) {
       gBrowser.tabContainer.addEventListener("TabOpen", this.onTabOpen, false);
-      gBrowser.tabContainer.removeEventListener("TabClose", this.onTabClose, false);
+      gBrowser.tabContainer.addEventListener("TabClose", this.onTabClose, false);
     }
     this.addProgressListener();
 
   },
   addProgressListener: function () {
     if ('gBrowser' in window) {
-      gBrowser.addProgressListener(this.progListener, Components.interfaces.nsIWebProgress.NOTIFY_STATE_DOCUMENT);
+      gBrowser.addProgressListener(this.progListener);
     }
   },
   removeProgressListener: function () {
-    if ('gBrowser' in window) {
+    if (this._getWindowType() === 'navigator:browser') {
       gBrowser.removeProgressListener(this.progListener);
     }
   },
@@ -289,7 +292,9 @@ Noise = {
   },
 
   removeNotifiers: function () {
-    window.removeEventListener("TabFindInitialized", this.onTabFindInitialized);
+    if (['navigator:browser', 'navigator:view-source'].indexOf(this._getWindowType()) > -1) {
+      window.removeEventListener("TabFindInitialized", this.onTabFindInitialized);
+    }
   },
 
   getSound: function (url, base) {
@@ -477,6 +482,10 @@ Noise = {
   setBase: function (file) {
     this.prefs.setComplexValue("extensions.noise.base", Components.interfaces.nsILocalFile, file);
     this.base = file;
+  },
+
+  _getWindowType: function () {
+    return document.documentElement.getAttribute('windowtype');
   }
 
 };
