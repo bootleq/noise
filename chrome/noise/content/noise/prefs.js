@@ -24,6 +24,12 @@
     {
       this.mappingsTree = document.getElementById("mappingsTree");
       this.findbar = treeFindbar;
+      this.$commands = Array.prototype.slice.call(
+        document.getElementById("mappingsCommandSet").getElementsByTagName('command')
+      ).reduce(function (hash, $command) {
+        hash[$command.getAttribute('id')] = $command;
+        return hash;
+      }, {});
 
       isNoiseEnabled = document.getElementById("check-prefs-enabled");
       stringBundle = document.getElementById("noise-string-bundle");
@@ -144,6 +150,11 @@
         ret,
         newItem,
         file;
+
+      if (!this.$commands[aCommand] || (this.$commands[aCommand].getAttribute('disabled') === 'true')) {
+        return;
+      }
+
       switch (aCommand) {
       case "cmd_add_sound":
         idx = this.mappingsTree.currentIndex;
@@ -219,9 +230,9 @@
           if (isNoiseEnabled.checked) {
             Noise.play(file, basePath, true);
           }
-          document.getElementById('cmd_play_sound').setAttribute('disabled', false);
+          this.$commands[aCommand].setAttribute('disabled', false);
         } catch (e) {
-          document.getElementById('cmd_play_sound').setAttribute('disabled', true);
+          this.$commands[aCommand].setAttribute('disabled', true);
         }
         break;
 
@@ -231,7 +242,7 @@
           return;
         }
         treeData[idx].enable = treeData[idx].enable === false;
-        document.getElementById('cmd_toggle_enabled').setAttribute(
+        this.$commands[aCommand].setAttribute(
           'label', treeData[idx].enable === true ? stringBundle.getString("item_disabled") : stringBundle.getString("item_enabled")
         );
         treeView.update();
@@ -276,14 +287,14 @@
         if (idx < 0) {
           return;
         }
-        document.getElementById('cmd_toggle_enabled').setAttribute(
+        this.$commands.cmd_toggle_enabled.setAttribute(
           'label', treeData[idx].enable === true ? stringBundle.getString("item_disabled") : stringBundle.getString("item_enabled")
         );
         isSeparator = (treeData[idx].type === '0');
-        document.getElementById('cmd_play_sound').setAttribute('disabled', isSeparator);
-        document.getElementById('cmd_toggle_enabled').setAttribute('disabled', isSeparator);
-        document.getElementById('cmd_edit_sound').setAttribute('disabled', isSeparator);
-        document.getElementById('cmd_remove_sound').setAttribute('disabled', false);
+        ['play_sound', 'toggle_enabled', 'edit_sound'].forEach(function (cmd_name) {
+          this.$commands['cmd_' + cmd_name].setAttribute('disabled', isSeparator);
+        }, this);
+        this.$commands.cmd_remove_sound.setAttribute('disabled', false);
       }
     },
 
@@ -487,7 +498,8 @@
     setCellValue: function (row, col, value) {
       treeData[row].enable = treeData[row].enable === false;
       document.getElementById('cmd_toggle_enabled').setAttribute(
-        'label', treeData[row].enable === true ? stringBundle.getString("item_disabled") : stringBundle.getString("item_enabled")
+        'label',
+        treeData[row].enable === true ? stringBundle.getString("item_disabled") : stringBundle.getString("item_enabled")
       );
       treeView.update();
     },
