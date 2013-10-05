@@ -3,7 +3,11 @@ treechildren::-moz-tree-cell(current-version) {background-color:InfoBackground; 
 treechildren::-moz-tree-cell-text(current-version) {color:InfoText;}
 treechildren::-moz-tree-cell(checkbox-hover, hover) {cursor:pointer;}
 treechildren::-moz-tree-cell(checkbox-hover-guide, hover) {border:1px inset #444; cursor:pointer;}
-treechildren::-moz-tree-cell-text(separator) {color:GrayText; margin-left:8px; margin-right:6px;}
+treechildren::-moz-tree-cell-text(separator) {
+  color: GrayText;
+  -moz-padding-start: 8px;
+  -moz-padding-end: 8px;
+}
 treechildren::-moz-tree-checkbox(checked) {list-style-image:url(chrome://noise/skin/check.png);}
 
 #noise-prefs-findbar {
