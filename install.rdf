@@ -8,14 +8,14 @@
     <em:type>2</em:type>
     <em:description>Make sound response while events happen.</em:description>
     <em:creator>bootleq</em:creator>
-    <em:translator>AlleyKat (Finn S. Sørensen) (da-DK)</em:translator>
-    <em:translator>StefanS (de-DE)</em:translator>
-    <em:translator>ioreker (fr-FR)</em:translator>
+    <em:translator>AlleyKat (Finn S. Sørensen) (da)</em:translator>
+    <em:translator>StefanS (de)</em:translator>
+    <em:translator>ioreker (fr)</em:translator>
     <em:translator>barryoni (he-IL)</em:translator>
     <em:translator>drry (ja-JP)</em:translator>
-    <em:translator>Leszek(teo)Życzkowski (pl-PL)</em:translator>
+    <em:translator>Leszek(teo)Życzkowski (pl)</em:translator>
     <em:translator>Ghelman (pt-BR)</em:translator>
-    <em:translator>Ersen Yoldaç (tr-TR)</em:translator>
+    <em:translator>Ersen Yoldaç (tr)</em:translator>
     <em:translator>xmoke (zh-CN)</em:translator>
     <em:contributor>Jose Enrique Bolaños (testing on Mac OSX, other fixes)</em:contributor>
     <em:contributor>Mikael Hiort af Ornäs (sv-SE translator till v1.2.7)</em:contributor>
