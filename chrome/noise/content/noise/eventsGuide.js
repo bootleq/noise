@@ -96,11 +96,13 @@
       case 'treecol-version':
         return treeData[row].version;
       }
+      return '';
     },
     getCellValue: function (row, col) {
       if (col.id === 'treecol-enabled') {
         return treeData[row].enable;
       }
+      return false;
     },
     getLevel: function (row) {
       return 0;

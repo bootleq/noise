@@ -447,12 +447,15 @@
         return treeData[row].cmd;
       case 2:
         return treeData[row].se;
+      default:
+        return '';
       }
     },
     getCellValue: function (row, col) {
       if (col.index) {
         return treeData[row].enable;
       }
+      return false;
     },
     getLevel: function (row) {
       return 0;
@@ -482,8 +485,11 @@
           return "checkbox-hover";
         } 
       }
+      return '';
     },
-    getColumnProperties: function (colid, col, props) {},
+    getColumnProperties: function (colid, col, props) {
+      return '';
+    },
     setCellText: function (row, col, value) {
       switch (col.index) {
       case 0:
@@ -496,6 +502,7 @@
         treeData[row].se = value;
         break;
       }
+      return '';
     },
     setCellValue: function (row, col, value) {
       treeData[row].enable = treeData[row].enable === false;
@@ -712,6 +719,7 @@
         }
         break;
       }
+      return;
     },
     handleKeyEvent: function (event) {
       if (event.type === "keypress") {

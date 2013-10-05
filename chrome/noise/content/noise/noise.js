@@ -75,9 +75,9 @@ Noise = {
       // overwrite _updateStatusUI, see chrome/tookit/content/global/content/bindings/findbar.xml
       // notify with topic "noise-TypeAheadFind.FIND_WRAPPED"
       if (!('gFindBar' in window)) {
-        gFindBar = document.getElementById('FindToolbar');
+        window.gFindBar = document.getElementById('FindToolbar');
       }
-      this.patchFindBar(gFindBar);
+      this.patchFindBar(window.gFindBar);
       window.addEventListener("TabFindInitialized", this.onTabFindInitialized, false);
     }
 
