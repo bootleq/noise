@@ -30,11 +30,11 @@
 <!ENTITY cmd_remove_sound.label "除去">
 <!ENTITY cmd_findbar.commandkey "F">
 <!ENTITY findbar.label "検索:">
-<!ENTITY findbar-next.label "">
-<!ENTITY findbar-next.tooltip "">
-<!ENTITY findbar-previous.label "">
-<!ENTITY findbar-previous.tooltip "">
-<!ENTITY findbar-locale.dir "">
+<!ENTITY findbar-next.label "Next">
+<!ENTITY findbar-next.tooltip "Find the next occurrence of the phrase">
+<!ENTITY findbar-previous.label "Previous">
+<!ENTITY findbar-previous.tooltip "Find the previous occurrence of the phrase">
+<!ENTITY findbar-locale.dir "ltr">
 <!ENTITY settings.label "設定">
 <!ENTITY settings.export "書き出し">
 <!ENTITY settings.import "取り込み">

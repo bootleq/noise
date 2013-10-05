@@ -30,11 +30,11 @@
 <!ENTITY cmd_remove_sound.label "Ta bort">
 <!ENTITY cmd_findbar.commandkey "F">
 <!ENTITY findbar.label "Sök:">
-<!ENTITY findbar-next.label "">
-<!ENTITY findbar-next.tooltip "">
-<!ENTITY findbar-previous.label "">
-<!ENTITY findbar-previous.tooltip "">
-<!ENTITY findbar-locale.dir "">
+<!ENTITY findbar-next.label "Next">
+<!ENTITY findbar-next.tooltip "Find the next occurrence of the phrase">
+<!ENTITY findbar-previous.label "Previous">
+<!ENTITY findbar-previous.tooltip "Find the previous occurrence of the phrase">
+<!ENTITY findbar-locale.dir "ltr">
 <!ENTITY settings.label "Inställningar">
 <!ENTITY settings.export "Exportera">
 <!ENTITY settings.import "Importera">
