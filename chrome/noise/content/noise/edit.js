@@ -1,6 +1,5 @@
 /*global Noise: false, Components: false*/
 (function () {
-
   const TYPE_SEPARATOR = '0';
   const TYPE_OBSERVER = '1';
   const TYPE_BROWSER = '2';
@@ -23,9 +22,7 @@
     stringBundle = null,
     basePath = null,
     NoiseEdit = {
-
-      init: function ()
-      {
+      init: function () {
         elemName = document.getElementById("noiseName");
         elemCmd = document.getElementById("noiseCommand");
         gType = document.getElementById("noiseType");
@@ -47,15 +44,13 @@
           elemTest.disabled = true;
           elemPick.disabled = true;
           document.getElementById("se-error").hidden = true;
-        }
-        else {
+        } else {
           elemName.value = ret.name === "" ? stringBundle.getString("item_unnamed") : ret.name;
           elemCmd.value = ret.cmd;
           gType.selectedIndex = ret.type - 1;
           if (ret.se === "") {
             elemSe.value = "beep";
-          }
-          else {
+          } else {
             elemSe.value = ret.se;
             this.testSoundExist();
           }
@@ -67,8 +62,7 @@
         }
       },
 
-      accept: function ()
-      {
+      accept: function () {
         if (ret.type !== TYPE_SEPARATOR && !this.testSoundExist()) {
           return false;
         }
@@ -81,8 +75,7 @@
         return true;
       },
 
-      pickFile: function ()
-      {
+      pickFile: function () {
         var
           nsIFilePicker = Components.interfaces.nsIFilePicker,
           fp = Components.classes["@mozilla.org/filepicker;1"].createInstance(nsIFilePicker),
@@ -111,7 +104,7 @@
                 stringBundle.getString("edit_base_change_confirm_from"), ': ', base.path, '\n',
                 stringBundle.getString("edit_base_change_confirm_to"), ': ', newBase.path
               ].join('');
-              if (! prompts.confirm(null, stringBundle.getString("edit_base_title"), confirmTxt)) {
+              if (!prompts.confirm(null, stringBundle.getString("edit_base_title"), confirmTxt)) {
                 return;
               }
               base = basePath = newBase;
@@ -124,8 +117,7 @@
         }
       },
 
-      testSoundExist: function ()
-      {
+      testSoundExist: function () {
         var uri = elemSe.value;
         if (uri === '') {
           elemTest.disabled = true;
@@ -146,8 +138,7 @@
         try {
           if (uri.indexOf("chrome") === 0) {
             Noise.play(uri);
-          }
-          else if (Noise.getSound(uri, basePath) === null) {
+          } else if (Noise.getSound(uri, basePath) === null) {
             elemTest.disabled = true;
             elemSe.select();
             Noise.play('beep');
@@ -167,14 +158,12 @@
         }
       },
 
-      testSound: function ()
-      {
+      testSound: function () {
         var uri = elemSe.value;
         Noise.play(uri, basePath, true);
       },
 
-      toggleRelativePath: function ()
-      {
+      toggleRelativePath: function () {
         if (elemUseRel.checked) {
           elemChangeBase.disabled = elemOpenBase.disabled = false;
           seBackup = elemSe.value;
@@ -182,25 +171,21 @@
             if (elemSe.value.indexOf(basePath.path) === 0) {
               elemSe.value = seBackupRel = elemSe.value.replace(basePath.path, '').substr(1);
             }
-          }
-          else {
+          } else {
             elemSe.value = seBackupRel;
           }
-        }
-        else {
+        } else {
           elemChangeBase.disabled = elemOpenBase.disabled = true;
           if ((seBackup.search(/:\\|^\//) === -1) && seBackup !== 'beep') {
             elemSe.value = seBackup = basePath.path + (basePath.path.indexOf('/') >= 0 ? '/' : '\\') + seBackup;
-          }
-          else {
+          } else {
             elemSe.value = seBackup;
           }
         }
         this.testSoundExist();
       },
 
-      changeBaseDir: function ()
-      {
+      changeBaseDir: function () {
         var
           nsIFilePicker = Components.interfaces.nsIFilePicker,
           fp = Components.classes["@mozilla.org/filepicker;1"].createInstance(nsIFilePicker),
@@ -214,8 +199,7 @@
         this.testSoundExist();
       },
 
-      openBaseDir: function ()
-      {
+      openBaseDir: function () {
         var
           dir = basePath,
           ios,
@@ -232,10 +216,10 @@
           protocolService.loadUrl(dirURI);
         }
       }
-
     };
 
   Noise.NoiseEdit = NoiseEdit;
+
   window.addEventListener("load", function () {
     Noise.NoiseEdit.init();
   }, false);

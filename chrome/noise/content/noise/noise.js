@@ -5,7 +5,6 @@ if (!Noise) {
 }
 
 Noise = {
-
   obsSvc: null,
   player: null,
   mappings: [],
@@ -66,7 +65,7 @@ Noise = {
     this.prefs.setBoolPref("extensions.noise.enabled", this.enabled);
   },
 
-/* start of overwrite code {{{ */
+  /* start of overwrite code {{{ */
 
   addNotifiers: function () {
     var windowType = this._getWindowType();
@@ -106,13 +105,14 @@ Noise = {
       gBrowser.tabContainer.addEventListener("TabClose", this.onTabClose, false);
     }
     this.addProgressListener();
-
   },
+
   addProgressListener: function () {
     if ('gBrowser' in window) {
       gBrowser.addProgressListener(this.progListener);
     }
   },
+
   removeProgressListener: function () {
     if (this._getWindowType() === 'navigator:browser') {
       gBrowser.removeProgressListener(this.progListener);
@@ -122,9 +122,11 @@ Noise = {
   onTabFindInitialized: function (event) {
     Noise.patchFindBar(event.target._findBar);
   },
+
   onTabOpen: function (event) {
     event.target.linkedBrowser.webProgress.addProgressListener(Noise.progListener2, Components.interfaces.nsIWebProgress.NOTIFY_STATE_NETWORK);
   },
+
   onTabClose: function (event) {
     event.target.linkedBrowser.removeProgressListener(Noise.progListener2);
   },
@@ -153,6 +155,7 @@ Noise = {
       throw Components.results.NS_NOINTERFACE;
     }
   },
+
   progListener2: {
     obsSvc: Components.classes["@mozilla.org/observer-service;1"].getService(Components.interfaces.nsIObserverService),
     nsiWPL: Components.interfaces.nsIWebProgressListener,
@@ -189,12 +192,11 @@ Noise = {
     }
   },
 
-/* }}} end of overwrite code */
-
+  /* }}} end of overwrite code */
 
   addObservers: function () {
     this.mappings.forEach(function (i) {
-      if (! i.enable || i.cmd === '') {
+      if (!i.enable || i.cmd === '') {
         return;
       }
 
@@ -272,7 +274,7 @@ Noise = {
       case 0:
         return;
       case 1:
-        if (typeof this.observers[i.urn] === "undefined" || ! this.observers[i.urn]) {
+        if (typeof this.observers[i.urn] === "undefined" || !this.observers[i.urn]) {
           return;
         }
         this.obsSvc.removeObserver(this.observers[i.urn], cmd);
@@ -319,7 +321,7 @@ Noise = {
     try {   // absolute path
       file = Components.classes["@mozilla.org/file/local;1"].createInstance(Components.interfaces.nsILocalFile);
       file.initWithPath(url);
-      if (! file.exists()) {
+      if (!file.exists()) {
         return null;
       }
       return ios.newFileURI(file);
@@ -368,7 +370,7 @@ Noise = {
       defaultFile;
 
     rdfFile.append("noise-mappings.rdf");
-    if (! rdfFile.exists() || type === 'default') {
+    if (!rdfFile.exists() || type === 'default') {
       defaultFile = profD.clone();
       defaultFile.append("extensions");
       defaultFile.append("noise@bootleq");
@@ -382,7 +384,7 @@ Noise = {
       }
     }
 
-    if (rdfFile.exists() && ! rdfFile.isWritable()) {
+    if (rdfFile.exists() && !rdfFile.isWritable()) {
       if (rdfFile.permissions === 256) {
         rdfFile.permissions = 384;   // 384 for ubuntu readable/writable
       }
@@ -453,13 +455,11 @@ Noise = {
     }
   },
 
-  getRdfArray: function ()
-  {
+  getRdfArray: function () {
     return this.mappings;
   },
 
-  getBase: function ()
-  {
+  getBase: function () {
     var
       file = null,
       defaultFile;
@@ -473,12 +473,13 @@ Noise = {
     // use default base path
     defaultFile = Components.classes["@mozilla.org/file/directory_service;1"].getService(Components.interfaces.nsIProperties).get("ProfD", Components.interfaces.nsIFile);
     defaultFile.append("noise");
-    if (! defaultFile.exists() || ! defaultFile.isDirectory()) {
+    if (!defaultFile.exists() || !defaultFile.isDirectory()) {
       defaultFile.create(Components.interfaces.nsIFile.DIRECTORY_TYPE, 0777);
     }
     this.prefs.setComplexValue("extensions.noise.base", Components.interfaces.nsILocalFile, defaultFile);
     return defaultFile;
   },
+
   setBase: function (file) {
     this.prefs.setComplexValue("extensions.noise.base", Components.interfaces.nsILocalFile, file);
     this.base = file;
@@ -493,6 +494,7 @@ Noise = {
 window.addEventListener("load", function () {
   Noise.init();
 }, false);
+
 window.addEventListener("unload", function () {
   Noise.uninit();
 }, false);

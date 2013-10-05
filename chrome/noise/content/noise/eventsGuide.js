@@ -1,7 +1,6 @@
 /*jslint es5: true*/
 /*global Noise: true, Components: false */
 (function () {
-
   const Cc = Components.classes;
   const Ci = Components.interfaces;
   const RDF = Cc['@mozilla.org/rdf/rdf-service;1'].getService(Ci.nsIRDFService);
@@ -18,8 +17,7 @@
 
   NoiseEventsGuide = {
 
-    init: function ()
-    {
+    init: function () {
       currentVersion = Cc["@mozilla.org/preferences-service;1"].getService(Ci.nsIPrefBranch).getCharPref("extensions.noise.version");
 
       elemDescription = document.getElementById("event-description");
@@ -34,16 +32,14 @@
       this.eventsTree.view = treeView;
     },
 
-    accept: function ()
-    {
+    accept: function () {
       ret.pickedTree = treeData.filter(function (row) {
         return row.enable;
       });
       return true;
     },
 
-    handleTreeEvent: function (event)
-    {
+    handleTreeEvent: function (event) {
       var idx;
       if (event.type === "select") {
         idx = this.eventsTree.currentIndex;
@@ -71,7 +67,6 @@
     }
 
   };
-
 
   CustomTreeView.prototype = {
     update: function () {
@@ -117,8 +112,7 @@
       return false;
     },
     getRowProperties: function (row, props) {},
-    getCellProperties: function (row, col, properties)
-    {
+    getCellProperties: function (row, col, properties) {
       if (col.id === 'treecol-version' && this.getCellText(row, col) === currentVersion) {
         properties.AppendElement(this.ATOM.getAtom("current-version"));
       }
@@ -127,8 +121,7 @@
       }
     },
     getColumnProperties: function (colid, col, props) {},
-    setCellText: function (row, col, value)
-    {
+    setCellText: function (row, col, value) {
       switch (col.id) {
       case 'treecol-name':
         treeData[row].name = value;
@@ -153,8 +146,7 @@
 
     _atom: null,
     _treeBoxObject: null,
-    get ATOM()
-    {
+    get ATOM() {
       if (! this._atom) {
         this._atom = Cc["@mozilla.org/atom-service;1"].getService(Ci.nsIAtomService);
       }

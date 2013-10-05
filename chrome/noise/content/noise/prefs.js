@@ -1,7 +1,6 @@
 /*jslint es5: true*/
 /*global Noise: true, Components: false, TransferData: false, FlavourSet: false, dump: false */
 (function () {
-
   const Cc = Components.classes;
   const Ci = Components.interfaces;
 
@@ -20,8 +19,7 @@
 
   NoisePrefs = {
 
-    init: function ()
-    {
+    init: function () {
       this.mappingsTree = document.getElementById("mappingsTree");
       this.findbar = treeFindbar;
       this.$commands = Array.prototype.slice.call(
@@ -44,10 +42,8 @@
       notApplyIcon = document.getElementById("icon-not-apply");
     },
 
-    accept: function ()
-    {
+    accept: function () {
       this.saveToRdf();
-
       var
         wm = Cc["@mozilla.org/appshell/window-mediator;1"].getService(Ci.nsIWindowMediator),
         enumerator = wm.getEnumerator("navigator:browser"),
@@ -59,14 +55,13 @@
       }
     },
 
-    exportSetting: function ()
-    {
+    exportSetting: function () {
       var
         fp = Cc["@mozilla.org/filepicker;1"].createInstance(Ci.nsIFilePicker),
         prompts = Cc["@mozilla.org/embedcomp/prompt-service;1"].getService(Ci.nsIPromptService),
         rv,
         oldFile;
-      if (! prompts.confirm(null, stringBundle.getString("settings_title"), stringBundle.getString("settings_export_confirm"))) {
+      if (!prompts.confirm(null, stringBundle.getString("settings_title"), stringBundle.getString("settings_export_confirm"))) {
         return;
       }
       fp.init(window, null, fp.modeSave);
@@ -82,16 +77,14 @@
         try {
           oldFile.copyTo(fp.file.parent, fp.file.leafName);
           prompts.alert(null, stringBundle.getString("settings_title"), stringBundle.getString("settings_export_done"));
-        }
-        catch (e) {
+        } catch (e) {
           prompts.alert(null, stringBundle.getString("settings_title"), stringBundle.getString("settings_export_failed"));
           dump('Noise export: ' + e);
         }
       }
     },
 
-    importSetting: function ()
-    {
+    importSetting: function () {
       var
         fp = Cc["@mozilla.org/filepicker;1"].createInstance(Ci.nsIFilePicker),
         prompts = Cc["@mozilla.org/embedcomp/prompt-service;1"].getService(Ci.nsIPromptService),
@@ -112,16 +105,14 @@
           if (isInstantApply) {
             notApplyIcon.hidden = false;
           }
-        }
-        catch (e) {
+        } catch (e) {
           prompts.alert(null, stringBundle.getString("settings_title"), stringBundle.getString("settings_import_failed"));
           dump('Noise import: ' + e);
         }
       }
     },
 
-    defaultSetting: function ()
-    {
+    defaultSetting: function () {
       var prompts = Cc["@mozilla.org/embedcomp/prompt-service;1"].getService(Ci.nsIPromptService);
       if (!prompts.confirm(null, stringBundle.getString("settings_title"), stringBundle.getString("settings_default_confirm"))) {
         return;
@@ -136,15 +127,13 @@
         if (isInstantApply) {
           notApplyIcon.hidden = false;
         }
-      }
-      catch (e) {
+      } catch (e) {
         prompts.alert(null, stringBundle.getString("settings_title"), stringBundle.getString("settings_default_failed"));
         dump('Noise import: ' + e);
       }
     },
 
-    doCommand: function (aCommand)
-    {
+    doCommand: function (aCommand) {
       var
         idx,
         ret,
@@ -261,8 +250,7 @@
       }
     },
 
-    handleTreeEvent: function (event)
-    {
+    handleTreeEvent: function (event) {
       var
         idx,
         isSeparator;
@@ -300,8 +288,7 @@
       }
     },
 
-    saveToRdf: function ()
-    {
+    saveToRdf: function () {
       var
         [ RDFC, RDFCUtils, RDF, dsource ] = Noise.initRdf(),
         elems, elem, arcs, arc, targets, target, newNode, labelProp, newValue;
@@ -366,15 +353,13 @@
   };
 
   CustomTreeView.prototype = {
-    update: function ()
-    {
+    update: function () {
       this._treeBoxObject.invalidate();
       if (isInstantApply) {
         notApplyIcon.hidden = false;
       }
     },
-    insertItemAt: function (aItem, aIndex)
-    {
+    insertItemAt: function (aItem, aIndex) {
       if (aIndex < 0) {
         aIndex = treeData.length;
       }
@@ -385,8 +370,7 @@
       this._treeBoxObject.treeBody.focus();
       return aIndex;
     },
-    removeItemAt: function (aIndex)
-    {
+    removeItemAt: function (aIndex) {
       var nextIdx;
       treeData.splice(aIndex, 1);
       this._treeBoxObject.rowCountChanged(aIndex, -1);
@@ -396,13 +380,11 @@
       this._treeBoxObject.treeBody.focus();
       this.update();
     },
-    moveItem: function (aSourceIndex, aTargetIndex)
-    {
+    moveItem: function (aSourceIndex, aTargetIndex) {
       var removedItem = treeData.splice(aSourceIndex, 1);
       treeData.splice(aTargetIndex, 0, removedItem[0]);
     },
-    canDrop: function (targetIndex, orientation)
-    {
+    canDrop: function (targetIndex, orientation) {
       var sourceIndex = this.selection.currentIndex;
       return (
               sourceIndex !== -1 &&
@@ -410,15 +392,13 @@
               sourceIndex !== (targetIndex + orientation)
              );
     },
-    drop: function (targetIndex, orientation)
-    {
+    drop: function (targetIndex, orientation) {
       var sourceIndex = this.selection.currentIndex;
       if (sourceIndex < targetIndex) {
         if (orientation === Ci.nsITreeView.DROP_BEFORE) {
           targetIndex -= 1;
         }
-      }
-      else {
+      } else {
         if (orientation === Ci.nsITreeView.DROP_AFTER) {
           targetIndex += 1;
         }
@@ -437,7 +417,7 @@
       return false;
     },
     isEditable: function (row, col) {
-      return (col.index === 3 && ! this.isSeparator(row));
+      return (col.index === 3 && !this.isSeparator(row));
     },
     getCellText: function (row, col) {
       switch (col.index) {
@@ -522,9 +502,8 @@
     performActionOnCell: function (action, row, col) {},
     _atom: null,
     _treeBoxObject: null,
-    get ATOM()
-    {
-      if (! this._atom) {
+    get ATOM() {
+      if (!this._atom) {
         this._atom = Cc["@mozilla.org/atom-service;1"].getService(Ci.nsIAtomService);
       }
       return this._atom;
@@ -561,7 +540,7 @@
     stringsBundle: Cc["@mozilla.org/intl/stringbundle;1"].getService(Ci.nsIStringBundleService).createBundle("chrome://global/locale/findbar.properties"),
     _obsSvc: Cc["@mozilla.org/observer-service;1"].getService(Ci.nsIObserverService),
     _playNotFoundSound: function () {
-    var
+      var
         nsISupportsString = Ci.nsISupportsString,
         soundURL;
       if (Cc["@mozilla.org/preferences-service;1"].getService(Ci.nsIPrefBranch).getBoolPref("accessibility.typeaheadfind.enablesound")) {
@@ -569,14 +548,14 @@
           .getComplexValue("accessibility.typeaheadfind.soundURL", nsISupportsString).data;
         if (soundURL === 'beep') {
           Noise.player.beep();
-        }
-        else {
+        } else {
           Noise.player.play(Cc['@mozilla.org/network/io-service;1'].getService(Ci.nsIIOService).newURI(soundURL, null, null));
         }
       }
     },
+
     _ensureTextNotEmpty: function () {
-        var isEmpty;
+      var isEmpty;
       this._updateStatusUI();
       isEmpty = this.textbox.value === '';
       document.getElementById('noise-prefs-findbar-next').setAttribute('disabled', isEmpty);
@@ -585,6 +564,7 @@
       document.getElementById('key_find_previous').setAttribute('disabled', isEmpty);
       return ! isEmpty;
     },
+
     _updateStatusUI: function (aStatus, aFindPrevious) {
       switch (aStatus) {
       case "notfound":
@@ -596,8 +576,7 @@
       case "wrapped":
         if (! aFindPrevious) {
           this.findStatusIcon.setAttribute("tooltiptext", this.stringsBundle.GetStringFromName("WrappedToTop"));
-        }
-        else {
+        } else {
           this.findStatusIcon.setAttribute("tooltiptext", this.stringsBundle.GetStringFromName("WrappedToBottom"));
         }
         this._obsSvc.notifyObservers(null, "noise-TypeAheadFind.FIND_WRAPPED", aFindPrevious);
@@ -610,6 +589,7 @@
         this.findStatusIcon.removeAttribute("tooltiptext");
       }
     },
+
     _findInRange: function (aValue, startIdx, endIdx) {
       var foundIdx = -1;
       startIdx = startIdx >= 0 ? startIdx : 0;
@@ -622,6 +602,7 @@
       }
       return -1;
     },
+
     _findPreviousInRange: function (aValue, startIdx, endIdx) {
       var foundIdx = -1;
       startIdx = startIdx < treeData.length ? startIdx : (treeData.length - 1);
@@ -634,6 +615,7 @@
       }
       return -1;
     },
+
     _anyPropMatch: function (aValue, aIdx) {
       var found = false;
       ["name", "cmd", "se"].forEach(function (prop) {
@@ -643,6 +625,7 @@
       }, this);
       return found ? aIdx : -1;
     },
+
     find: function (aValue) {  // find first match
       var foundIdx;
       this._lastFoundIdx = -1;
@@ -651,17 +634,17 @@
         this._lastFoundIdx = foundIdx;
         treeView.selection.select(foundIdx);
         treeView._treeBoxObject.ensureRowIsVisible(foundIdx);
-      }
-      else {
+      } else {
         this._updateStatusUI("notfound");
       }
     },
+
     findAgain: function (aValue, aFindPrevious) {
       var
         foundIdx = -1,
         startIndex;
       this.textbox.removeAttribute("status");
-      if (! aFindPrevious) {  // find next
+      if (!aFindPrevious) {  // find next
         startIndex = treeView.selection.currentIndex || this._lastFoundIdx || 0;
         foundIdx = this._findInRange(aValue, startIndex + 1);
         if (foundIdx < 0 && startIndex > 0) {
@@ -670,8 +653,7 @@
             this._updateStatusUI("wrapped", aFindPrevious);
           }
         }
-      }
-      else {  // find previous
+      } else {  // find previous
         startIndex = treeView.selection.currentIndex || this._lastFoundIdx || (treeData.length - 1);
         foundIdx = this._findPreviousInRange(aValue, startIndex - 1);
         if (foundIdx < 0 && treeView.selection.currentIndex < (treeData.length - 1)) {
@@ -685,21 +667,19 @@
         this._lastFoundIdx = foundIdx;
         treeView.selection.select(foundIdx);
         treeView._treeBoxObject.ensureRowIsVisible(foundIdx);
-      }
-      else {
+      } else {
         this._updateStatusUI("notfound");
       }
     },
-    doCommand: function (aCommand)
-    {
+
+    doCommand: function (aCommand) {
       switch (aCommand) {
       case "cmd_findbar":
         if (this.findbar.hidden) {
           this.findbar.hidden = false;
           this.textbox.select();
           this.textbox.focus();
-        }
-        else {
+        } else {
           this.findbar.hidden = true;
         }
         break;
@@ -721,6 +701,7 @@
       }
       return;
     },
+
     handleKeyEvent: function (event) {
       if (event.type === "keypress") {
         switch (event.keyCode) {
