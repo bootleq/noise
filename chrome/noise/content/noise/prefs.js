@@ -456,10 +456,18 @@
     getRowProperties: function (row, props) {},
     getCellProperties: function (row, col, properties) {
       if (col.index === 0 && this.isSeparator(row)) {
-        properties.AppendElement(this.ATOM.getAtom("separator"));
+        if (properties) {
+          properties.AppendElement(this.ATOM.getAtom("separator"));
+        } else {
+          return "separator";
+        }
       }
       if (col.index === 3) {
-        properties.AppendElement(this.ATOM.getAtom("checkbox-hover"));
+        if (properties) {
+          properties.AppendElement(this.ATOM.getAtom("checkbox-hover"));
+        } else {
+          return "checkbox-hover";
+        } 
       }
     },
     getColumnProperties: function (colid, col, props) {},
