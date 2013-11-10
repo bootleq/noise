@@ -19,32 +19,32 @@
 <!ENTITY item.type "סוג אירוע">
 <!ENTITY item.file "קובץ צליל">
 <!ENTITY item.enabled "מופעל">
-<!ENTITY cmd_add_sound.label "הוסף">
+<!ENTITY cmd_add_sound.label "הוספה">
 <!ENTITY new_sound.label "צליל">
 <!ENTITY new_separator.label "קו מפריד">
-<!ENTITY cmd_duplicate_sound.label "שכפל">
-<!ENTITY cmd_edit_sound.label "ערוך">
-<!ENTITY cmd_play_sound.label "נגן">
-<!ENTITY cmd_toggle_enabled.true.label "הפוך לזמין">
-<!ENTITY cmd_toggle_enabled.false.label "הפוך ללא זמין">
-<!ENTITY cmd_remove_sound.label "הסר">
+<!ENTITY cmd_duplicate_sound.label "שכפול">
+<!ENTITY cmd_edit_sound.label "עריכה">
+<!ENTITY cmd_play_sound.label "השמעה">
+<!ENTITY cmd_toggle_enabled.true.label "הפעלה">
+<!ENTITY cmd_toggle_enabled.false.label "ביטול">
+<!ENTITY cmd_remove_sound.label "הסרה">
 <!ENTITY cmd_findbar.commandkey "ח">
-<!ENTITY findbar.label "מצא:">
-<!ENTITY findbar-next.label "Next">
-<!ENTITY findbar-next.tooltip "Find the next occurrence of the phrase">
-<!ENTITY findbar-previous.label "Previous">
-<!ENTITY findbar-previous.tooltip "Find the previous occurrence of the phrase">
-<!ENTITY findbar-locale.dir "ltr">
+<!ENTITY findbar.label "חיפוש:">
+<!ENTITY findbar-next.label "הבא">
+<!ENTITY findbar-next.tooltip "איתור המופע הבא של הביטוי">
+<!ENTITY findbar-previous.label "הקודם">
+<!ENTITY findbar-previous.tooltip "איתור המופע הקודם של הביטוי">
+<!ENTITY findbar-locale.dir "משמאל לימין">
 <!ENTITY settings.label "הגדרות">
 <!ENTITY settings.export "יצוא">
 <!ENTITY settings.import "יבוא">
 <!ENTITY settings.defaults "ברירת מחדל">
-<!ENTITY pref.notApply.tooltip "מיפוי צלילים ייכנסו לתוקף לאחר סגירת חלון זה.">
+<!ENTITY pref.notApply.tooltip "מיפוי הצלילים יכנסו לתוקף לאחר סגירת חלון זה.">
 <!ENTITY editdialog.title "עריכת Noise">
-<!ENTITY filepicker.browser "בחר...">
-<!ENTITY relative.enabled "השתמש בתיקית צלילים">
-<!ENTITY relative.changebase "שנה תיקיה">
-<!ENTITY relative.openbase "פתח תיקיה">
+<!ENTITY filepicker.browser "עיון...">
+<!ENTITY relative.enabled "קביעה כתיקית קבצי צליל באופן קבוע">
+<!ENTITY relative.changebase "שינוי תיקיא">
+<!ENTITY relative.openbase "פתיחת תיקיא">
 <!ENTITY item.type.observer "נושא אירוע (ע&quot;י addObserver)">
 <!ENTITY item.type.browser "אירוע דפדפן (ע&quot;י gBrowser.addEventListener)">
 <!ENTITY item.type.window "אירוע חלון (ע&quot;י window.addEventListener)">
