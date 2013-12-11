@@ -1,4 +1,6 @@
 content noise jar:chrome/noise.jar!/content/noise/
+resource noise resource/modules/
+
 locale noise da    jar:chrome/noise.jar!/locale/da/noise/
 locale noise de    jar:chrome/noise.jar!/locale/de/noise/
 locale noise en-US jar:chrome/noise.jar!/locale/en-US/noise/

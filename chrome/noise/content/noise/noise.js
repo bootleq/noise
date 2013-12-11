@@ -3,6 +3,7 @@
 if (!Noise) {
   var Noise = {};
 }
+Components.utils.import("resource://noise/noise.jsm");
 
 Noise = {
   obsSvc: null,
@@ -13,8 +14,7 @@ Noise = {
   enabled: false,
 
   init: function () {
-    this.player = Components.classes["@mozilla.org/sound;1"].createInstance(Components.interfaces.nsISound);
-    this.player.init();
+    this.player = NoiseJSM.player;
     this.mappings = this.loadRdf();
     this.obsSvc = Components.classes["@mozilla.org/observer-service;1"].getService(Components.interfaces.nsIObserverService);
     this.prefs = Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefBranch);
