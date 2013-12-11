@@ -17,23 +17,12 @@ Noise = {
     this.player = NoiseJSM.player;
     this.mappings = this.loadRdf();
     this.obsSvc = Components.classes["@mozilla.org/observer-service;1"].getService(Components.interfaces.nsIObserverService);
-    this.prefs = Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefBranch);
-    this.prefs2 = Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefBranch2);
-    this.enabled = this.prefs.getBoolPref("extensions.noise.enabled");
+    this.prefs = NoiseJSM.prefs;
+    this.enabled = NoiseJSM.enabled;
     this.base = this.getBase();
 
     this.addNotifiers();
     this.addObservers();
-
-    this.prefs2.addObserver("extensions.noise.", this.prefObserver, false);
-  },
-
-  prefObserver: {
-    observe: function (aSubject, aTopic, aData) {
-      if (aTopic === 'nsPref:changed' && aData === 'extensions.noise.enabled') {
-        Noise.enabled = Noise.prefs.getBoolPref("extensions.noise.enabled");
-      }
-    }
   },
 
   uninit: function () {
@@ -44,7 +33,6 @@ Noise = {
     this.mappings = null;
     this.observers = null;
     this.listeners = null;
-    this.prefs2.removeObserver("extensions.noise.", this.prefObserver);
   },
 
   reset: function () {
@@ -61,8 +49,7 @@ Noise = {
   },
 
   toggle: function () {
-    this.enabled = !this.enabled;
-    this.prefs.setBoolPref("extensions.noise.enabled", this.enabled);
+    NoiseJSM.toggle();
   },
 
   /* start of overwrite code {{{ */
