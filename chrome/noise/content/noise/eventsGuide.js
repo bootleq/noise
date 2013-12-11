@@ -22,7 +22,7 @@
 
       elemDescription = document.getElementById("event-description");
       this.eventsTree = document.getElementById("eventsTree");
-      treeData = Noise.loadRdf(Noise.getRdfFile('default')).filter(function (row) {
+      treeData = NoiseJSM.loadRdf(NoiseJSM.getRdfFile('default')).filter(function (row) {
         return (row.type > 0);
       });
       treeData.forEach(function (row) {

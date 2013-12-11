@@ -15,11 +15,10 @@ Noise = {
 
   init: function () {
     this.player = NoiseJSM.player;
-    this.mappings = this.loadRdf();
+    this.mappings = NoiseJSM.loadRdf();
     this.obsSvc = Components.classes["@mozilla.org/observer-service;1"].getService(Components.interfaces.nsIObserverService);
     this.prefs = NoiseJSM.prefs;
     this.enabled = NoiseJSM.enabled;
-    this.base = this.getBase();
 
     this.addNotifiers();
     this.addObservers();
@@ -43,7 +42,7 @@ Noise = {
     this.mappings = [];
     this.observers = [];
     this.listeners = [];
-    this.mappings = this.loadRdf();
+    this.mappings = NoiseJSM.loadRdf();
     this.addProgressListener();
     this.addObservers();
   },
@@ -286,190 +285,12 @@ Noise = {
     }
   },
 
-  getSound: function (url, base) {
-    if (url === 'beep' || url.indexOf(':') > 2) {
-      return url;
-    }
-
-    var
-      ios = Components.classes['@mozilla.org/network/io-service;1'].getService(Components.interfaces.nsIIOService),
-      file = null;
-
-    if (url.search(/:\\|^\//) === -1) {  // relative path
-      if (base.path.indexOf('/') >= 0) {
-        url = '/' + url.replace('\\', '/');
-      }
-      else {
-        url = '\\' + url.replace('/', '\\');
-      }
-      url = base.path + url;
-    }
-
-    try {   // absolute path
-      file = Components.classes["@mozilla.org/file/local;1"].createInstance(Components.interfaces.nsILocalFile);
-      file.initWithPath(url);
-      if (!file.exists()) {
-        return null;
-      }
-      return ios.newFileURI(file);
-    } catch (e) {  // chrome url
-      try {
-        if (url === "") {
-          return null;
-        }
-        return ios.newURI(url, null, null);   // currently, without existence testing
-      } catch (e2) {
-        dump("\nNoise:" + e2);
-        return null;
-      }
-    }
-  },
-
-  play: function (url) {
-    var
-      base  = arguments.length > 1 ? arguments[1] : this.base,
-      force = arguments.length > 2 ? arguments[2] : false;
-
-    if (force || Noise.enabled) {
-      if (url === 'beep') {
-        Noise.player.beep();
-      } else if (url.indexOf(':') > 2) {
-        if (url.indexOf('event:') === 0) {
-          Noise.player.playEventSound(Noise.player[url.substr(6)]);
-        } else if (url.indexOf('sys:') === 0) {
-          Noise.player.playSystemSound(url.substr(4));
-        }
-      } else {
-        Noise.player.play(Noise.getSound(url, base));
-      }
-    }
+  play: function () {
+    NoiseJSM.play.apply(NoiseJSM, arguments);
   },
 
   log: function (aMessage) {
-    Components.classes["@mozilla.org/consoleservice;1"].getService(Components.interfaces.nsIConsoleService).logStringMessage("Noise: " + aMessage);
-    Components.classes["@mozilla.org/observer-service;1"].getService(Components.interfaces.nsIObserverService).notifyObservers(null, "noise-log", aMessage);
-  },
-
-  getRdfFile: function (type) {
-    var
-      profD = Components.classes["@mozilla.org/file/directory_service;1"].getService(Components.interfaces.nsIProperties).get("ProfD", Components.interfaces.nsIFile),
-      rdfFile = profD.clone(),
-      defaultFile;
-
-    rdfFile.append("noise-mappings.rdf");
-    if (!rdfFile.exists() || type === 'default') {
-      defaultFile = profD.clone();
-      defaultFile.append("extensions");
-      defaultFile.append("noise@bootleq");
-      defaultFile.append("defaults");
-      defaultFile.append("noise-mappings.rdf");
-      if (type === 'default') {
-        return defaultFile;
-      }
-      if (defaultFile.exists()) {
-        defaultFile.copyTo(profD, null);
-      }
-    }
-
-    if (rdfFile.exists() && !rdfFile.isWritable()) {
-      if (rdfFile.permissions === 256) {
-        rdfFile.permissions = 384;   // 384 for ubuntu readable/writable
-      }
-    }
-
-    return rdfFile;
-  },
-
-  initRdf: function (rdfFile) {
-    const RDFC = Components.classes['@mozilla.org/rdf/container;1'].createInstance(Components.interfaces.nsIRDFContainer);
-    const RDFCUtils = Components.classes['@mozilla.org/rdf/container-utils;1'].getService(Components.interfaces.nsIRDFContainerUtils);
-    const RDF = Components.classes['@mozilla.org/rdf/rdf-service;1'].getService(Components.interfaces.nsIRDFService);
-    var
-      fileURI,
-      dsource,
-      rootnode;
-    if (!rdfFile) {
-      rdfFile = this.getRdfFile();
-    }
-
-    fileURI = Components.classes['@mozilla.org/network/protocol;1?name=file']
-                .getService(Components.interfaces.nsIFileProtocolHandler).getURLSpecFromFile(rdfFile);
-    dsource = RDF.GetDataSourceBlocking(fileURI);
-    rootnode = RDF.GetResource("urn:mappings:root");
-    try {
-      RDFC.Init(dsource, rootnode);
-    } catch (e) {
-      RDFCUtils.MakeSeq(dsource, rootnode);
-      RDFC.Init(dsource, rootnode);
-    }
-    return [ RDFC, RDFCUtils, RDF, dsource ];
-  },
-
-  loadRdf: function (rdfFile) {
-    var
-      initRdf       = this.initRdf(rdfFile),
-      RDFC          = initRdf[0],
-      RDFCUtils     = initRdf[1],
-      RDF           = initRdf[2],
-      dsource       = initRdf[3],
-      resEnum       = RDFC.GetElements(),
-      res,
-      mappingsArray = [];
-    while (resEnum.hasMoreElements()) {
-      res = resEnum.getNext().QueryInterface(Components.interfaces.nsIRDFResource);
-      mappingsArray.push({
-        urn:         res.Value,
-        type:        this._getRdfPropertyValue(res, "type", RDF, dsource),
-        name:        this._getRdfPropertyValue(res, "name", RDF, dsource),
-        cmd:         this._getRdfPropertyValue(res, "cmd", RDF, dsource),
-        se:          this._getRdfPropertyValue(res, "se", RDF, dsource),
-        enable:      this._getRdfPropertyValue(res, "enable", RDF, dsource) === 'true',
-        description: this._getRdfPropertyValue(res, "description", RDF, dsource),
-        version:     this._getRdfPropertyValue(res, "version", RDF, dsource)
-      });
-    }
-    return mappingsArray;
-  },
-
-  _getRdfPropertyValue: function (aRes, aProp, aRDF, aDsource) {
-    aProp = aRDF.GetResource("http://www.bootleq.com/noise-mappings#" + aProp);
-    try {
-      var target = aDsource.GetTarget(aRes, aProp, true);
-      return target ? target.QueryInterface(Components.interfaces.nsIRDFLiteral).Value : null;
-    }
-    catch (ex) {
-      return null;
-    }
-  },
-
-  getRdfArray: function () {
-    return this.mappings;
-  },
-
-  getBase: function () {
-    var
-      file = null,
-      defaultFile;
-    try {
-      file = this.prefs.getComplexValue("extensions.noise.base", Components.interfaces.nsILocalFile);
-      if (file.isDirectory()) {
-        return file;
-      }
-    } catch (e) {}
-
-    // use default base path
-    defaultFile = Components.classes["@mozilla.org/file/directory_service;1"].getService(Components.interfaces.nsIProperties).get("ProfD", Components.interfaces.nsIFile);
-    defaultFile.append("noise");
-    if (!defaultFile.exists() || !defaultFile.isDirectory()) {
-      defaultFile.create(Components.interfaces.nsIFile.DIRECTORY_TYPE, 0777);
-    }
-    this.prefs.setComplexValue("extensions.noise.base", Components.interfaces.nsILocalFile, defaultFile);
-    return defaultFile;
-  },
-
-  setBase: function (file) {
-    this.prefs.setComplexValue("extensions.noise.base", Components.interfaces.nsILocalFile, file);
-    this.base = file;
+    NoiseJSM.log(aMessage);
   },
 
   _getWindowType: function () {
