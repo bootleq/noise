@@ -32,6 +32,7 @@ this.NoiseJSM = {
     this.prefs = Cc["@mozilla.org/preferences-service;1"].getService(Ci.nsIPrefBranch);
     this.prefs2 = Cc["@mozilla.org/preferences-service;1"].getService(Ci.nsIPrefBranch2);
     this.prefs2.addObserver("extensions.noise.", prefObserver, false);
+    this.observerService = Cc["@mozilla.org/observer-service;1"].getService(Ci.nsIObserverService);
 
     this.mappings = this.loadRdf();
 
@@ -46,6 +47,18 @@ this.NoiseJSM = {
   toggle: function () {
     this.enabled = !this.enabled;
     this.prefs.setBoolPref("extensions.noise.enabled", this.enabled);
+  },
+
+  notifyObservers: function (aSubject, aTopic, aData) {
+    this.observerService.notifyObservers.apply(null, arguments);
+  },
+
+  addObserver: function (aObserver, aTopic, aOwnsWeak) {
+    this.observerService.addObserver.apply(null, arguments);
+  },
+
+  removeObserver: function (aObserver, aTopic) {
+    this.observerService.removeObserver.apply(null, arguments);
   },
 
   getBase: function () {
@@ -134,7 +147,7 @@ this.NoiseJSM = {
 
   log: function (aMessage) {
     Cc["@mozilla.org/consoleservice;1"].getService(Ci.nsIConsoleService).logStringMessage("Noise: " + aMessage);
-    Cc["@mozilla.org/observer-service;1"].getService(Ci.nsIObserverService).notifyObservers(null, "noise-log", aMessage);
+    this.notifyObservers(null, "noise-log", aMessage);
   },
 
   // RDF functions {{{

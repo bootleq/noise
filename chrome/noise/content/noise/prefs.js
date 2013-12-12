@@ -538,7 +538,6 @@
     textbox: document.getElementById('noise-prefs-findbar-textbox'),
     findStatusIcon: document.getElementById("noise-prefs-findbar-status-icon"),
     stringsBundle: Cc["@mozilla.org/intl/stringbundle;1"].getService(Ci.nsIStringBundleService).createBundle("chrome://global/locale/findbar.properties"),
-    _obsSvc: Cc["@mozilla.org/observer-service;1"].getService(Ci.nsIObserverService),
     _playNotFoundSound: function () {
       var
         nsISupportsString = Ci.nsISupportsString,
@@ -579,7 +578,7 @@
         } else {
           this.findStatusIcon.setAttribute("tooltiptext", this.stringsBundle.GetStringFromName("WrappedToBottom"));
         }
-        this._obsSvc.notifyObservers(null, "noise-TypeAheadFind.FIND_WRAPPED", aFindPrevious);
+        NoiseJSM.notifyObservers(null, "noise-TypeAheadFind.FIND_WRAPPED", aFindPrevious);
         this.textbox.setAttribute("status", aStatus);
         this.findStatusIcon.setAttribute("status", aStatus);
         break;

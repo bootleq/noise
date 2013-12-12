@@ -6,7 +6,6 @@ if (!Noise) {
 Components.utils.import("resource://noise/noise.jsm");
 
 Noise = {
-  obsSvc: null,
   player: null,
   mappings: [],
   observers: [],
@@ -16,7 +15,6 @@ Noise = {
   init: function () {
     this.player = NoiseJSM.player;
     this.mappings = NoiseJSM.loadRdf();
-    this.obsSvc = Components.classes["@mozilla.org/observer-service;1"].getService(Components.interfaces.nsIObserverService);
     this.prefs = NoiseJSM.prefs;
     this.enabled = NoiseJSM.enabled;
 
@@ -76,7 +74,7 @@ Noise = {
       let (_toggleSidebarWithoutNoise = window.toggleSidebar) {
         window.toggleSidebar = function _toggleSidebarWithNoise(commandID, forceOpen) {
           try {
-            Noise.obsSvc.notifyObservers(null, "noise-toggleSidebar", commandID);
+            NoiseJSM.notifyObservers(null, "noise-toggleSidebar", commandID);
           } catch (e) {
             dump('Noise: ' + e);
           }
@@ -118,16 +116,15 @@ Noise = {
   },
 
   progListener: {
-    obsSvc: Components.classes["@mozilla.org/observer-service;1"].getService(Components.interfaces.nsIObserverService),
     nsiWPL: Components.interfaces.nsIWebProgressListener,
     onStateChange: function (aProg, aReq, aState, aStatus) {
       if (aState & this.nsiWPL.STATE_START && aState & this.nsiWPL.STATE_IS_DOCUMENT) {
-        this.obsSvc.notifyObservers(aReq, "noise-WebProgress-start", aStatus);
+        NoiseJSM.notifyObservers(aReq, "noise-WebProgress-start", aStatus);
       }
     },
     onProgressChange: function (aProg, aReq, aCurSelf, aMaxSelf, aCurTotal, aMaxTotal) {},
     onLocationChange: function (aProg, aReq, aLocation) {
-      this.obsSvc.notifyObservers(aLocation, "noise-WebProgress-locationChange", aLocation ? aLocation.spec : null);
+      NoiseJSM.notifyObservers(aLocation, "noise-WebProgress-locationChange", aLocation ? aLocation.spec : null);
     },
     onSecurityChange: function (aProg, aReq, aState) {},
     onStatusChange: function (aProg, aReq, aStatus, aMsg) {},
@@ -143,11 +140,10 @@ Noise = {
   },
 
   progListener2: {
-    obsSvc: Components.classes["@mozilla.org/observer-service;1"].getService(Components.interfaces.nsIObserverService),
     nsiWPL: Components.interfaces.nsIWebProgressListener,
     onStateChange: function (aProg, aReq, aState, aStatus) {
       if (aState & this.nsiWPL.STATE_STOP && aState & this.nsiWPL.STATE_IS_NETWORK) {
-        this.obsSvc.notifyObservers(aReq, "noise-WebProgress-stop", aStatus);
+        NoiseJSM.notifyObservers(aReq, "noise-WebProgress-stop", aStatus);
       }
     },
     onProgressChange: function (aProg, aReq, aCurSelf, aMaxSelf, aCurTotal, aMaxTotal) {},
@@ -170,7 +166,7 @@ Noise = {
       let (_updateStatusUIWithoutNoise = findbar._updateStatusUI) {
         findbar._updateStatusUI = function _updateStatusUIWithNoise(res, aFindPrevious) {
           if (res === findbar.nsITypeAheadFind.FIND_WRAPPED) {
-            Noise.obsSvc.notifyObservers(null, "noise-TypeAheadFind.FIND_WRAPPED", aFindPrevious);
+            NoiseJSM.notifyObservers(null, "noise-TypeAheadFind.FIND_WRAPPED", aFindPrevious);
           }
           return _updateStatusUIWithoutNoise.apply(findbar, arguments);
         };
@@ -212,7 +208,7 @@ Noise = {
             }
           }
         };
-        this.obsSvc.addObserver(this.observers[i.urn], cmd, false);
+        NoiseJSM.addObserver(this.observers[i.urn], cmd, false);
         break;
       case 2:
         if (filter) {
@@ -263,7 +259,7 @@ Noise = {
         if (typeof this.observers[i.urn] === "undefined" || !this.observers[i.urn]) {
           return;
         }
-        this.obsSvc.removeObserver(this.observers[i.urn], cmd);
+        NoiseJSM.removeObserver(this.observers[i.urn], cmd);
         this.observers[i.urn].observe = null;
         this.observers[i.urn] = null;
         break;
