@@ -2,6 +2,8 @@ var EXPORTED_SYMBOLS = ["NoiseJSM"];
 
 const {classes: Cc, interfaces: Ci, utils: Cu, manager: Cm} = Components;
 
+Cu.import("resource://gre/modules/Services.jsm");
+
 prefObserver = {
   observe: function (aSubject, aTopic, aData) {
     if (aTopic === 'nsPref:changed' && aData === 'extensions.noise.enabled') {
@@ -232,3 +234,46 @@ this.NoiseJSM = {
 };
 
 this.NoiseJSM.init();
+
+
+// 'dl' (download) related topics for Firefox 26 up {{{
+if (Services.vc.compare(Services.appinfo.platformVersion, "26.0a") >= 0) {
+  Cu.import("resource://gre/modules/Downloads.jsm");
+
+  this.NoiseJSM.dlView = {
+    onDownloadAdded: function (dl) {
+      NoiseJSM.notifyObservers(dl, "noise-dl.add", null);
+    },
+    onDownloadChanged: function (dl) {
+      var
+        type = 'stop',
+        data = 'stopped';
+      if (!dl.stopped) {
+        return;
+      }
+      if (dl.succeeded) {
+        data = 'succeeded';
+      } else if (dl.canceled) {
+        data = 'canceled';
+      } else if (dl.error) {
+        type = 'error';
+        data = dl.error.result;
+      }
+      NoiseJSM.notifyObservers(dl, "noise-dl." + type, data);
+    },
+    onDownloadRemoved: function (dl) {
+      NoiseJSM.notifyObservers(dl, "noise-dl.remove", null);
+    }
+  };
+
+  this.NoiseJSM.observeDownloads = function () {
+    Downloads.getList(Downloads.PUBLIC).then(
+      function onFulfill (list) {
+        list.addView(NoiseJSM.dlView);
+      }
+    ).then(null, Components.utils.reportError);
+  };
+
+  this.NoiseJSM.observeDownloads();
+};
+// }}} 'dl' (download) related topics for Firefox 26 up
