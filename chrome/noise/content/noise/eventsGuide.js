@@ -114,10 +114,18 @@
     getRowProperties: function (row, props) {},
     getCellProperties: function (row, col, properties) {
       if (col.id === 'treecol-version' && this.getCellText(row, col) === currentVersion) {
-        properties.AppendElement(this.ATOM.getAtom("current-version"));
+        if (properties) {
+          properties.AppendElement(this.ATOM.getAtom("current-version"));
+        } else {
+          return "current-version";
+        }
       }
       if (col.id === 'treecol-enabled') {
-        properties.AppendElement(this.ATOM.getAtom("checkbox-hover-guide"));
+        if (properties) {
+          properties.AppendElement(this.ATOM.getAtom("checkbox-hover-guide"));
+        } else {
+          return "checkbox-hover-guide";
+        }
       }
     },
     getColumnProperties: function (colid, col, props) {},
