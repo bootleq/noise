@@ -1,9 +1,10 @@
 /*jslint es5: true*/
 /*global Noise: true, Components: false */
 (function () {
-  const Cc = Components.classes;
-  const Ci = Components.interfaces;
+  const {classes: Cc, interfaces: Ci, utils: Cu, manager: Cm} = Components;
   const RDF = Cc['@mozilla.org/rdf/rdf-service;1'].getService(Ci.nsIRDFService);
+  const TYPE_SEPARATOR = 0;
+  Cu.import("resource://gre/modules/Services.jsm");
 
   var
     ret = window.arguments[0],
@@ -23,7 +24,12 @@
       elemDescription = document.getElementById("event-description");
       this.eventsTree = document.getElementById("eventsTree");
       treeData = NoiseJSM.loadRdf(NoiseJSM.getRdfFile('default')).filter(function (row) {
-        return (row.type > 0);
+        if (row.type <= TYPE_SEPARATOR) {
+          return false;
+        } else if (row.expired && (Services.vc.compare(Services.appinfo.platformVersion, parseInt(row.expired, 10)) >= 0)) {
+          return false;
+        }
+        return true;
       });
       treeData.forEach(function (row) {
         row.enable = false;

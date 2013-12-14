@@ -21,6 +21,12 @@
 <!ENTITY xpi-blocked "拒絕安裝套件">
 <!ENTITY PluginNotFound "找不到可用的外掛程式">
 <!ENTITY noise-log "Noise 記錄">
+<!ENTITY noise-dl-add "開始下載">
+<!ENTITY noise-dl-remove "移除下載">
+<!ENTITY noise-dl-cancel "取消下載">
+<!ENTITY noise-dl-error "下載失敗">
+<!ENTITY noise-dl-success "下載成功">
+
 <!ENTITY about_FIND_WRAPPED "使用「尋找」功能時，如果搜尋已達頁尾／頁首，再次搜尋就會返回第一個結果；返回同時便會啟動此事件。">
 <!ENTITY about_toggleSidebar "開啟／關閉各種側邊欄，包括書籤、歷史等。">
 <!ENTITY about_alert-loaded "檔案下載完成、發現更新檔、……等通知會在瀏覽器右下角出現提示框；出現同時就會啟動此事件。">
@@ -44,3 +50,8 @@
 <!ENTITY about_xpi-blocked "安裝套件被拒絕。例如：套件與 Firefox 版本不相容。">
 <!ENTITY about_PluginNotFound "找不到可用的外掛程式。例如：找不到 Flash 外掛程式。">
 <!ENTITY about_noise-log "你可以使用 &quot;某個事件&amp;Noise.log(訊息)&quot; 在錯誤主控台記錄訊息；記錄同時就會啟動此事件。">
+<!ENTITY about_noise-dl-add "新增一個項目到下載清單。">
+<!ENTITY about_noise-dl-remove "從下載清單移除一個項目。">
+<!ENTITY about_noise-dl-cancel "取消（或暫停）一個下載項目。">
+<!ENTITY about_noise-dl-error "下載失敗。">
+<!ENTITY about_noise-dl-success "下載成功。">

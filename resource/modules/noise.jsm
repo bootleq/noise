@@ -225,7 +225,8 @@ this.NoiseJSM = {
         se:          _getRdfPropertyValue(res, "se", RDF, dsource),
         enable:      _getRdfPropertyValue(res, "enable", RDF, dsource) === 'true',
         description: _getRdfPropertyValue(res, "description", RDF, dsource),
-        version:     _getRdfPropertyValue(res, "version", RDF, dsource)
+        version:     _getRdfPropertyValue(res, "version", RDF, dsource),
+        expired:     _getRdfPropertyValue(res, "expired", RDF, dsource)
       });
     }
     return mappingsArray;

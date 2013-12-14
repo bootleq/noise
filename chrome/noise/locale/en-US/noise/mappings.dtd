@@ -21,6 +21,12 @@
 <!ENTITY xpi-blocked "Xpinstall install blocked">
 <!ENTITY PluginNotFound "Plugin not found">
 <!ENTITY noise-log "Noise log">
+<!ENTITY noise-dl-add "Download started">
+<!ENTITY noise-dl-remove "Download removed">
+<!ENTITY noise-dl-cancel "Download canceled">
+<!ENTITY noise-dl-error "Download failed">
+<!ENTITY noise-dl-success "Download succeeded">
+
 <!ENTITY about_FIND_WRAPPED "When using Findbar searching text, the search Wraps back to first result after it reachs the last one. This event fires with these Wraps.">
 <!ENTITY about_toggleSidebar "Open/Close sidebar. ex: open history sidebar.">
 <!ENTITY about_alert-loaded "Events such as All downloads finished, New update found, ..., which use alert boxs slide from the bottom-right area of browser, fire this event.">
@@ -44,3 +50,8 @@
 <!ENTITY about_xpi-blocked "Xpi installation blocked. ex: unsupported Firefox verion.">
 <!ENTITY about_PluginNotFound "Can&apos;t find a plugin. ex: Flash plugin not found.">
 <!ENTITY about_noise-log "You can use &quot;some_event&amp;Noise.log(some_message)&quot; to log messages on Error Console. This event fires with every log.">
+<!ENTITY about_noise-dl-add "Add an item to Downloads list.">
+<!ENTITY about_noise-dl-remove "Remove an item from Downloads list.">
+<!ENTITY about_noise-dl-cancel "A download item has been canceled.">
+<!ENTITY about_noise-dl-error "A download item got error, thus failed.">
+<!ENTITY about_noise-dl-success "A download item finished successfully.">
