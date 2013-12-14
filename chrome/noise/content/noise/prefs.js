@@ -37,7 +37,7 @@
       this.mappingsTree.view = treeView;
       this.dragDropObserver = treeDragDropObserver;
 
-      basePath = Noise.base;
+      basePath = NoiseJSM.base;
       isInstantApply = document.documentElement.instantApply;
       notApplyIcon = document.getElementById("icon-not-apply");
     },
@@ -48,9 +48,9 @@
         wm = Cc["@mozilla.org/appshell/window-mediator;1"].getService(Ci.nsIWindowMediator),
         enumerator = wm.getEnumerator("navigator:browser"),
         win;
+      NoiseJSM.setBase(basePath);
       while (enumerator.hasMoreElements()) {
         win = enumerator.getNext();
-        win.Noise.setBase(basePath);
         win.Noise.reset();
       }
     },
@@ -73,7 +73,7 @@
         if (fp.file.exists()) {
           fp.file.remove(true);
         }
-        oldFile = Noise.getRdfFile();
+        oldFile = NoiseJSM.getRdfFile();
         try {
           oldFile.copyTo(fp.file.parent, fp.file.leafName);
           prompts.alert(null, stringBundle.getString("settings_title"), stringBundle.getString("settings_export_done"));
@@ -98,7 +98,7 @@
         try {
           this.mappingsTree.view = null;
           treeView = null;
-          treeData = Noise.loadRdf(fp.file);
+          treeData = NoiseJSM.loadRdf(fp.file);
           treeView =  new CustomTreeView();
           this.mappingsTree.view = treeView;
           prompts.alert(null, stringBundle.getString("settings_title"), stringBundle.getString("settings_import_done"));
@@ -120,7 +120,7 @@
       try {
         this.mappingsTree.view = null;
         treeView = null;
-        treeData = Noise.loadRdf(Noise.getRdfFile('default'));
+        treeData = NoiseJSM.loadRdf(NoiseJSM.getRdfFile('default'));
         treeView =  new CustomTreeView();
         this.mappingsTree.view = treeView;
         prompts.alert(null, stringBundle.getString("settings_title"), stringBundle.getString("settings_default_done"));
@@ -290,7 +290,7 @@
 
     saveToRdf: function () {
       var
-        [ RDFC, RDFCUtils, RDF, dsource ] = Noise.initRdf(),
+        [RDFC, RDFCUtils, RDF, dsource] = NoiseJSM.initRdf(),
         elems, elem, arcs, arc, targets, target, newNode, labelProp, newValue;
 
       // clear Seq
@@ -538,7 +538,6 @@
     textbox: document.getElementById('noise-prefs-findbar-textbox'),
     findStatusIcon: document.getElementById("noise-prefs-findbar-status-icon"),
     stringsBundle: Cc["@mozilla.org/intl/stringbundle;1"].getService(Ci.nsIStringBundleService).createBundle("chrome://global/locale/findbar.properties"),
-    _obsSvc: Cc["@mozilla.org/observer-service;1"].getService(Ci.nsIObserverService),
     _playNotFoundSound: function () {
       var
         nsISupportsString = Ci.nsISupportsString,
@@ -579,7 +578,7 @@
         } else {
           this.findStatusIcon.setAttribute("tooltiptext", this.stringsBundle.GetStringFromName("WrappedToBottom"));
         }
-        this._obsSvc.notifyObservers(null, "noise-TypeAheadFind.FIND_WRAPPED", aFindPrevious);
+        NoiseJSM.notifyObservers(null, "noise-TypeAheadFind.FIND_WRAPPED", aFindPrevious);
         this.textbox.setAttribute("status", aStatus);
         this.findStatusIcon.setAttribute("status", aStatus);
         break;
