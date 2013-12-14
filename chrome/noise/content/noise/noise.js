@@ -50,37 +50,11 @@ Noise = {
   },
 
   /* start of overwrite code {{{ */
-
   addNotifiers: function () {
-    var windowType = this._getWindowType();
+    NoiseJSM.patchWindow(window);
 
-    if (['navigator:browser', 'navigator:view-source'].indexOf(windowType) > -1) {
-      // overwrite _updateStatusUI, see chrome/tookit/content/global/content/bindings/findbar.xml
-      // notify with topic "noise-TypeAheadFind.FIND_WRAPPED"
-      if (!('gFindBar' in window)) {
-        window.gFindBar = document.getElementById('FindToolbar');
-      }
-      this.patchFindBar(window.gFindBar);
-      window.addEventListener("TabFindInitialized", this.onTabFindInitialized, false);
-    }
-
-    if (windowType !== 'navigator:browser') {
+    if (NoiseJSM.getWindowType(window) !== 'navigator:browser') {
       return;
-    }
-
-    // overwrite "toggleSidebar", see chrome/browser/content/browser/browser.js
-    // notify with topic "noise-toggleSidebar"
-    if ('toggleSidebar' in window) {
-      let (_toggleSidebarWithoutNoise = window.toggleSidebar) {
-        window.toggleSidebar = function _toggleSidebarWithNoise(commandID, forceOpen) {
-          try {
-            NoiseJSM.notifyObservers(null, "noise-toggleSidebar", commandID);
-          } catch (e) {
-            dump('Noise: ' + e);
-          }
-          return _toggleSidebarWithoutNoise.apply(window, arguments);
-        };
-      };
     }
 
     // notify with topic "noise-WebProgress-start", "noise-WebProgress-stop", "noise-WebProgress-locationChange"
@@ -98,13 +72,9 @@ Noise = {
   },
 
   removeProgressListener: function () {
-    if (this._getWindowType() === 'navigator:browser') {
+    if (NoiseJSM.getWindowType(window) === 'navigator:browser') {
       gBrowser.removeProgressListener(this.progListener);
     }
-  },
-
-  onTabFindInitialized: function (event) {
-    Noise.patchFindBar(event.target._findBar);
   },
 
   onTabOpen: function (event) {
@@ -160,20 +130,6 @@ Noise = {
       throw Components.results.NS_NOINTERFACE;
     }
   },
-
-  patchFindBar: function (findbar) {
-    if (findbar && '_updateStatusUI' in findbar) {
-      let (_updateStatusUIWithoutNoise = findbar._updateStatusUI) {
-        findbar._updateStatusUI = function _updateStatusUIWithNoise(res, aFindPrevious) {
-          if (res === findbar.nsITypeAheadFind.FIND_WRAPPED) {
-            NoiseJSM.notifyObservers(null, "noise-TypeAheadFind.FIND_WRAPPED", aFindPrevious);
-          }
-          return _updateStatusUIWithoutNoise.apply(findbar, arguments);
-        };
-      };
-    }
-  },
-
   /* }}} end of overwrite code */
 
   addObservers: function () {
@@ -276,9 +232,7 @@ Noise = {
   },
 
   removeNotifiers: function () {
-    if (['navigator:browser', 'navigator:view-source'].indexOf(this._getWindowType()) > -1) {
-      window.removeEventListener("TabFindInitialized", this.onTabFindInitialized);
-    }
+    NoiseJSM.undoPatchWindow(window);
   },
 
   play: function () {
@@ -287,12 +241,7 @@ Noise = {
 
   log: function (aMessage) {
     NoiseJSM.log(aMessage);
-  },
-
-  _getWindowType: function () {
-    return document.documentElement.getAttribute('windowtype');
   }
-
 };
 
 window.addEventListener("load", function () {

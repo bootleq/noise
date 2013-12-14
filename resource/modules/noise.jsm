@@ -51,6 +51,26 @@ this.NoiseJSM = {
     this.prefs.setBoolPref("extensions.noise.enabled", this.enabled);
   },
 
+  patchWindow: function (win) {
+    var windowType = this.getWindowType(win);
+
+    if (['navigator:browser', 'navigator:view-source'].indexOf(windowType) > -1) {
+      this.patchFindBar(win);
+    }
+
+    if (windowType === 'navigator:browser') {
+      this.patchToggleSidebar(win);
+    }
+  },
+
+  // NOTE: this can not revert all patches
+  undoPatchWindow: function (win) {
+    var windowType = this.getWindowType(win);
+    if (['navigator:browser', 'navigator:view-source'].indexOf(windowType) > -1) {
+      this.undoPatchFindBar(win);
+    }
+  },
+
   notifyObservers: function (aSubject, aTopic, aData) {
     this.observerService.notifyObservers.apply(null, arguments);
   },
@@ -62,6 +82,7 @@ this.NoiseJSM = {
   removeObserver: function (aObserver, aTopic) {
     this.observerService.removeObserver.apply(null, arguments);
   },
+
 
   getBase: function () {
     var
@@ -151,6 +172,64 @@ this.NoiseJSM = {
     Cc["@mozilla.org/consoleservice;1"].getService(Ci.nsIConsoleService).logStringMessage("Noise: " + aMessage);
     this.notifyObservers(null, "noise-log", aMessage);
   },
+
+  getWindowType: function (win) {
+    return win.document.documentElement.getAttribute('windowtype');
+  },
+
+
+  // Noise-specified events implementation {{{
+  patchFindBar: function (win) {
+    var findbar;
+    if ('_findBar' in win) {
+      findbar = win._findBar;
+    } else if ('gFindBar' in win) {
+      findbar = win.gFindBar;
+    } else {
+      findbar = win.document.getElementById('FindToolbar');
+    }
+
+    if (findbar && '_updateStatusUI' in findbar) {
+      // overwrite _updateStatusUI, see chrome/tookit/content/global/content/bindings/findbar.xml
+      // notify with topic "noise-TypeAheadFind.FIND_WRAPPED"
+      let (_updateStatusUIWithoutNoise = findbar._updateStatusUI) {
+        findbar._updateStatusUI = function _updateStatusUIWithNoise(res, aFindPrevious) {
+          if (res === findbar.nsITypeAheadFind.FIND_WRAPPED) {
+            NoiseJSM.notifyObservers(null, "noise-TypeAheadFind.FIND_WRAPPED", aFindPrevious);
+          }
+          return _updateStatusUIWithoutNoise.apply(findbar, arguments);
+        };
+      };
+    }
+    win.addEventListener("TabFindInitialized", this.onTabFindInitialized, false);
+  },
+
+  undoPatchFindBar: function (win) {
+    win.removeEventListener("TabFindInitialized", this.onTabFindInitialized);
+  },
+
+  onTabFindInitialized: function (event) {
+    NoiseJSM.patchFindBar(event.target);
+  },
+
+  patchToggleSidebar: function (win) {
+    // overwrite "toggleSidebar", see chrome/browser/content/browser/browser.js
+    // notify with topic "noise-toggleSidebar"
+    if ('toggleSidebar' in win) {
+      let (_toggleSidebarWithoutNoise = win.toggleSidebar) {
+        win.toggleSidebar = function _toggleSidebarWithNoise(commandID, forceOpen) {
+          try {
+            NoiseJSM.notifyObservers(null, "noise-toggleSidebar", commandID);
+          } catch (e) {
+            dump('Noise: ' + e);
+          }
+          return _toggleSidebarWithoutNoise.apply(win, arguments);
+        };
+      };
+    }
+  },
+  /// }}} Noise-specified events implementation
+
 
   // RDF functions {{{
   getRdfFile: function (type) {
