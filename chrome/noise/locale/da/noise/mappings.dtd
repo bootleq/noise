@@ -21,6 +21,12 @@
 <!ENTITY xpi-blocked "Xpinstall-installation blokeret">
 <!ENTITY PluginNotFound "Plugin ikke fundet">
 <!ENTITY noise-log "Noise log">
+<!ENTITY noise-dl-add "Download started">
+<!ENTITY noise-dl-remove "Download removed">
+<!ENTITY noise-dl-cancel "Download canceled">
+<!ENTITY noise-dl-error "Download failed">
+<!ENTITY noise-dl-success "Download succeeded">
+
 <!ENTITY about_FIND_WRAPPED "Ved brug af Findbjælke til søgning af tekst, returnerer søgningen tilbage til første resultat efter at have nået det sidste. Denne begivenhed træder i kraft ved disse returneringer.">
 <!ENTITY about_toggleSidebar "Åbn/luk sidebjælke. Eks.: åbn historik sidebjælke.">
 <!ENTITY about_alert-loaded "Begivenheder så som Alle filer hentet, Ny opdatering fundet, ..., som bruger alarm-bokse der glider op i nederste højre hjørne af browseren, udløser denne begivenhed.">
@@ -44,3 +50,8 @@
 <!ENTITY about_xpi-blocked "XPI-installation blokeret. F.eks.: Ikke-understøttet version af Firefox.">
 <!ENTITY about_PluginNotFound "Kan ikke finde en plugin. F.eks.: Flash-plugin ikke fundet.">
 <!ENTITY about_noise-log "You can use &quot;some_event&amp;Noise.log(some_message)&quot; to log messages on Error Console. This event fires with every log.">
+<!ENTITY about_noise-dl-add "Add an item to Downloads list.">
+<!ENTITY about_noise-dl-remove "Remove an item from Downloads list.">
+<!ENTITY about_noise-dl-cancel "A download item has been canceled.">
+<!ENTITY about_noise-dl-error "A download item got error, thus failed.">
+<!ENTITY about_noise-dl-success "A download item finished successfully.">

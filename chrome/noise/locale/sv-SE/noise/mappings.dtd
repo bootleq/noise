@@ -21,6 +21,12 @@
 <!ENTITY xpi-blocked "XPInstall-installation blockerades">
 <!ENTITY PluginNotFound "Insticksmodulen hittades inte">
 <!ENTITY noise-log "Ljudlogg">
+<!ENTITY noise-dl-add "Download started">
+<!ENTITY noise-dl-remove "Download removed">
+<!ENTITY noise-dl-cancel "Download canceled">
+<!ENTITY noise-dl-error "Download failed">
+<!ENTITY noise-dl-success "Download succeeded">
+
 <!ENTITY about_FIND_WRAPPED "Vid användning av söklisten för textsökning, går sökningen tillbaka till det första resultatet efter att den har nått det sista. Denna händelse utlöses i.o.m. sådana varvningar.">
 <!ENTITY about_toggleSidebar "Öppna/Stäng sidopanel. Ex.: Öppna historiksidopanelen.">
 <!ENTITY about_alert-loaded "Händelser såsom &quot;Alla nerladdningar slutförda&quot;, &quot;Ny uppdatering hittad&quot; o.s.v., som visas i varningsrutor som glider fram i det nedre högra hörnet av webbläsaren, utlöser denna händelse.">
@@ -44,3 +50,8 @@
 <!ENTITY about_xpi-blocked "XPI-installation blockerades. Ex.: Firefox-version som inte stöds.">
 <!ENTITY about_PluginNotFound "Kan inte hitta en insticksmodul. Ex.: Flash-insticksmodulen hittas inte.">
 <!ENTITY about_noise-log "Du kan använda &quot;en_händelse&amp;Noise.log(ett_meddelande)&quot; för att logga meddelanden till Felkonsolen. Denna händelse utlöses vid varje loggning.">
+<!ENTITY about_noise-dl-add "Add an item to Downloads list.">
+<!ENTITY about_noise-dl-remove "Remove an item from Downloads list.">
+<!ENTITY about_noise-dl-cancel "A download item has been canceled.">
+<!ENTITY about_noise-dl-error "A download item got error, thus failed.">
+<!ENTITY about_noise-dl-success "A download item finished successfully.">

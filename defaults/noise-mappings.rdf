@@ -28,12 +28,18 @@
     <RDF:li RDF:resource="urn:app:dl-failed" />
     <RDF:li RDF:resource="urn:app:dl-cancel" />
     <RDF:li RDF:resource="urn:app:dl-done" />
+    <RDF:li RDF:resource="urn:ext:dl-add" />
+    <RDF:li RDF:resource="urn:ext:dl-remove" />
+    <RDF:li RDF:resource="urn:ext:dl-cancel" />
+    <RDF:li RDF:resource="urn:ext:dl-error" />
+    <RDF:li RDF:resource="urn:ext:dl-success" />
     <RDF:li RDF:resource="urn:separator:_4" />
     <RDF:li RDF:resource="urn:app:perm-changed" />
     <RDF:li RDF:resource="urn:app:xpinstall-install-blocked" />
     <RDF:li RDF:resource="urn:browser:PluginNotFound" />
     <RDF:li RDF:resource="urn:ext:noise-log" />
   </RDF:Seq>
+
   <RDF:Description RDF:about="urn:ext:TypeAheadFind-FIND_WRAPPED"
                    NOISE:type="1"
                    NOISE:name="&FIND_WRAPPED;"
@@ -170,6 +176,7 @@
                    NOISE:cmd="dl-start"
                    NOISE:enable="false"
                    NOISE:version="1.0b1"
+                   NOISE:expired="26.0a"
                    NOISE:se="beep" />
   <RDF:Description RDF:about="urn:app:dl-failed"
                    NOISE:type="1"
@@ -178,6 +185,7 @@
                    NOISE:cmd="dl-failed"
                    NOISE:enable="false"
                    NOISE:version="1.0b1"
+                   NOISE:expired="26.0a"
                    NOISE:se="beep" />
   <RDF:Description RDF:about="urn:app:dl-cancel"
                    NOISE:type="1"
@@ -186,6 +194,7 @@
                    NOISE:cmd="dl-cancel"
                    NOISE:enable="false"
                    NOISE:version="1.0b1"
+                   NOISE:expired="26.0a"
                    NOISE:se="beep" />
   <RDF:Description RDF:about="urn:app:dl-done"
                    NOISE:type="1"
@@ -194,7 +203,50 @@
                    NOISE:cmd="dl-done"
                    NOISE:enable="false"
                    NOISE:version="1.0b1"
+                   NOISE:expired="26.0a"
                    NOISE:se="beep" />
+
+  <RDF:Description RDF:about="urn:ext:dl-add"
+                   NOISE:type="1"
+                   NOISE:name="&noise-dl-add;"
+                   NOISE:description="&about_noise-dl-add;"
+                   NOISE:cmd="noise-dl.add"
+                   NOISE:enable="false"
+                   NOISE:version="1.3"
+                   NOISE:se="beep" />
+  <RDF:Description RDF:about="urn:ext:dl-remove"
+                   NOISE:type="1"
+                   NOISE:name="&noise-dl-remove;"
+                   NOISE:description="&about_noise-dl-remove;"
+                   NOISE:cmd="noise-dl.remove"
+                   NOISE:enable="false"
+                   NOISE:version="1.3"
+                   NOISE:se="beep" />
+  <RDF:Description RDF:about="urn:ext:dl-cancel"
+                   NOISE:type="1"
+                   NOISE:name="&noise-dl-cancel;"
+                   NOISE:description="&about_noise-dl-cancel;"
+                   NOISE:cmd="noise-dl.stop&amp;data===&apos;canceled&apos;"
+                   NOISE:enable="false"
+                   NOISE:version="1.3"
+                   NOISE:se="beep" />
+  <RDF:Description RDF:about="urn:ext:dl-error"
+                  NOISE:type="1"
+                  NOISE:name="&noise-dl-error;"
+                  NOISE:description="&about_noise-dl-error;"
+                  NOISE:cmd="noise-dl.error"
+                  NOISE:enable="false"
+                  NOISE:version="1.3"
+                  NOISE:se="beep" />
+  <RDF:Description RDF:about="urn:ext:dl-success"
+                  NOISE:type="1"
+                  NOISE:name="&noise-dl-success;"
+                  NOISE:description="&about_noise-dl-success;"
+                  NOISE:cmd="noise-dl.stop&amp;data===&apos;succeeded&apos;"
+                  NOISE:enable="false"
+                  NOISE:version="1.3"
+                  NOISE:se="beep" />
+
   <RDF:Description RDF:about="urn:separator:_4"
                    NOISE:type="0"
                    NOISE:name=""/>

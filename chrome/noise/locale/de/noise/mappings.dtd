@@ -21,6 +21,12 @@
 <!ENTITY xpi-blocked "Erweiterungsinstallation blockiert">
 <!ENTITY PluginNotFound "Erweiterung nicht gefunden">
 <!ENTITY noise-log "Logging">
+<!ENTITY noise-dl-add "Download started">
+<!ENTITY noise-dl-remove "Download removed">
+<!ENTITY noise-dl-cancel "Download canceled">
+<!ENTITY noise-dl-error "Download failed">
+<!ENTITY noise-dl-success "Download succeeded">
+
 <!ENTITY about_FIND_WRAPPED "Die Suche innerhalb eines Dokumentes hat das Dokumentenende erreicht und beginnt wieder am Dokumentenanfang.">
 <!ENTITY about_toggleSidebar "Die Sidebar wurde auf- oder zugeklappt.">
 <!ENTITY about_alert-loaded "In der rechten unteren Ecke des Browserfensters wurde ein Hinweisbereich eingeblendet. Dieser Hinweisbereich wird unter anderem dann eingeblendet, wenn alle Downloads abgeschlossen sind oder Softwareaktualisierungen zur Installation bereitstehen.">
@@ -44,3 +50,8 @@
 <!ENTITY about_xpi-blocked "Die Installation eines Add-Ons wurde blockiert, z.B. wegen falscher Firefox-Version.">
 <!ENTITY about_PluginNotFound "Ein benötigtes Plugin wurde nicht gefunden.">
 <!ENTITY about_noise-log "Die Syntax &quot;some_event&amp;Noise.log(some_message)&quot; kann verwendet werden um Nachrichten in der Javascript-Console erscheinen zu lassen">
+<!ENTITY about_noise-dl-add "Add an item to Downloads list.">
+<!ENTITY about_noise-dl-remove "Remove an item from Downloads list.">
+<!ENTITY about_noise-dl-cancel "A download item has been canceled.">
+<!ENTITY about_noise-dl-error "A download item got error, thus failed.">
+<!ENTITY about_noise-dl-success "A download item finished successfully.">

@@ -21,6 +21,12 @@
 <!ENTITY xpi-blocked "Instalação do Xpinstall bloqueada">
 <!ENTITY PluginNotFound "Plugin não encontrado">
 <!ENTITY noise-log "Log do Noise">
+<!ENTITY noise-dl-add "Download started">
+<!ENTITY noise-dl-remove "Download removed">
+<!ENTITY noise-dl-cancel "Download canceled">
+<!ENTITY noise-dl-error "Download failed">
+<!ENTITY noise-dl-success "Download succeeded">
+
 <!ENTITY about_FIND_WRAPPED "Ao procurar textos na barra de busca, a pesquisa Volta ao primeiro resultado após alcançar o último. Este evento é disparado com esta Volta.">
 <!ENTITY about_toggleSidebar "Abrir/Fechar sidebar. Ex.: abrir histórico no sidebar.">
 <!ENTITY about_alert-loaded "Eventos tais como &quot;Todos os downloads terminados&quot; ou &quot;Nova atualização encontrada&quot;, que fazem aparecer caixas de alerta no canto inferior direito do navegador, disparam este evento.">
@@ -44,3 +50,8 @@
 <!ENTITY about_xpi-blocked "Instalação xpi bloqueada. Ex.: versão do Firefox não suportada.">
 <!ENTITY about_PluginNotFound "Não consigo encontrar um plugin. Ex.: Plugin Flash não encontrado.">
 <!ENTITY about_noise-log "Você pode usar &quot;some_event&amp;Noise.log(some_message)&quot; para logar mensagens no Console de Erros. Este evento é disparado com cada registro de log.">
+<!ENTITY about_noise-dl-add "Add an item to Downloads list.">
+<!ENTITY about_noise-dl-remove "Remove an item from Downloads list.">
+<!ENTITY about_noise-dl-cancel "A download item has been canceled.">
+<!ENTITY about_noise-dl-error "A download item got error, thus failed.">
+<!ENTITY about_noise-dl-success "A download item finished successfully.">

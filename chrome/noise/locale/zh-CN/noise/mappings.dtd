@@ -21,6 +21,12 @@
 <!ENTITY xpi-blocked "阻止安装扩展">
 <!ENTITY PluginNotFound "找不到插件">
 <!ENTITY noise-log "Noise 日志">
+<!ENTITY noise-dl-add "Download started">
+<!ENTITY noise-dl-remove "Download removed">
+<!ENTITY noise-dl-cancel "Download canceled">
+<!ENTITY noise-dl-error "Download failed">
+<!ENTITY noise-dl-success "Download succeeded">
+
 <!ENTITY about_FIND_WRAPPED "使用查找栏查找文字时，到达最尾结果时便会转回首个结果。该过程属于本事件。">
 <!ENTITY about_toggleSidebar "打开/关闭 侧栏">
 <!ENTITY about_alert-loaded "在右下角弹出警告的，例如完成了所有下载项目、找到更新等，就属于本事件。">
@@ -44,3 +50,8 @@
 <!ENTITY about_xpi-blocked "已阻止安装扩展，例如:不支持的 Firefox 版本。">
 <!ENTITY about_PluginNotFound "找不到插件，例如:找不到 Flash 插件。">
 <!ENTITY about_noise-log "你可以使用&quot;某类事件 Noise.log (信息)&quot;在错误控制台中记录信息,该事件将激活所有事件记录.">
+<!ENTITY about_noise-dl-add "Add an item to Downloads list.">
+<!ENTITY about_noise-dl-remove "Remove an item from Downloads list.">
+<!ENTITY about_noise-dl-cancel "A download item has been canceled.">
+<!ENTITY about_noise-dl-error "A download item got error, thus failed.">
+<!ENTITY about_noise-dl-success "A download item finished successfully.">
