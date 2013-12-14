@@ -21,6 +21,12 @@
 <!ENTITY xpi-blocked "Xpinstall kurulumu engellendi">
 <!ENTITY PluginNotFound "Eklenti bulunamadı">
 <!ENTITY noise-log "Noise günlüğü">
+<!ENTITY noise-dl-add "Download started">
+<!ENTITY noise-dl-remove "Download removed">
+<!ENTITY noise-dl-cancel "Download canceled">
+<!ENTITY noise-dl-error "Download failed">
+<!ENTITY noise-dl-success "Download succeeded">
+
 <!ENTITY about_FIND_WRAPPED "Arama çubuğuyla metin ararken, en son sonuca ulaştığında arama ilk sonuca doğru Ktlanır. Bu etkinlik, bu Katlamalarla harekete geçer.">
 <!ENTITY about_toggleSidebar "Kenar çubuğunu aç/kapat. örn: geçmiş kenar çubuğunu aç">
 <!ENTITY about_alert-loaded "Uyarı kutularının tarayıcının sağ alt bölgesinden kaymasını sağlayan Tüm İndirmelerin Bitmesi, Yeni Güncelleştirme Bulunması,... gibi etkinlikler, bu etkinliği karekete geçirir.">
@@ -44,3 +50,8 @@
 <!ENTITY about_xpi-blocked "Xpi kurulumu engellendi. örn: desteklenmeyen Firefox sürümü.">
 <!ENTITY about_PluginNotFound "Eklenti bulunamadı. örn: Flash eklentisi bulunamadı.">
 <!ENTITY about_noise-log "Mesajları günlüğe kaydetmek için Noise.log kullanırken.">
+<!ENTITY about_noise-dl-add "Add an item to Downloads list.">
+<!ENTITY about_noise-dl-remove "Remove an item from Downloads list.">
+<!ENTITY about_noise-dl-cancel "A download item has been canceled.">
+<!ENTITY about_noise-dl-error "A download item got error, thus failed.">
+<!ENTITY about_noise-dl-success "A download item finished successfully.">

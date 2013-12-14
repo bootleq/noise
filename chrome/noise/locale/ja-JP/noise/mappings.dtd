@@ -21,6 +21,12 @@
 <!ENTITY xpi-blocked "Xpinstall インストールのブロック">
 <!ENTITY PluginNotFound "プラグインが見つかりませんでした">
 <!ENTITY noise-log "Noise ログ">
+<!ENTITY noise-dl-add "Download started">
+<!ENTITY noise-dl-remove "Download removed">
+<!ENTITY noise-dl-cancel "Download canceled">
+<!ENTITY noise-dl-error "Download failed">
+<!ENTITY noise-dl-success "Download succeeded">
+
 <!ENTITY about_FIND_WRAPPED "検索バーを利用してテキストを検索する際、検索が最後に到達した後に最初の結果に戻ります。このイベントはこれらのラップと共に発動します。">
 <!ENTITY about_toggleSidebar "サイドバーの開閉。例: 履歴サイドバーを開く。">
 <!ENTITY about_alert-loaded "すべてのダウンロード完了や新しい更新が見つかるなどの、ブラウザ右下の領域からスライドする警告ボックスを利用したイベントで発動します。">
@@ -44,3 +50,8 @@
 <!ENTITY about_xpi-blocked "Xpi インストールがブロックされた。例: Firefox のバージョンが未対応でした。">
 <!ENTITY about_PluginNotFound "プラグインを見つけることができない。例: Flash プラグインが見つかりませんでした。">
 <!ENTITY about_noise-log "「some_event&amp;Noise.log(some_message)」を利用してエラーコンソールでメッセージのログを取ることができます。このイベントはすべてのログごとに発動します。">
+<!ENTITY about_noise-dl-add "Add an item to Downloads list.">
+<!ENTITY about_noise-dl-remove "Remove an item from Downloads list.">
+<!ENTITY about_noise-dl-cancel "A download item has been canceled.">
+<!ENTITY about_noise-dl-error "A download item got error, thus failed.">
+<!ENTITY about_noise-dl-success "A download item finished successfully.">

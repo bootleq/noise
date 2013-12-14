@@ -21,6 +21,12 @@
 <!ENTITY xpi-blocked "התקנת הרחבה נחסמה">
 <!ENTITY PluginNotFound "לא נמצא תוסף">
 <!ENTITY noise-log "יומן רישום של Noise">
+<!ENTITY noise-dl-add "Download started">
+<!ENTITY noise-dl-remove "Download removed">
+<!ENTITY noise-dl-cancel "Download canceled">
+<!ENTITY noise-dl-error "Download failed">
+<!ENTITY noise-dl-success "Download succeeded">
+
 <!ENTITY about_FIND_WRAPPED "בעת שימוש בסרגל החיפוש למציאת מילה, החיפוש הבא חוזר לתוצאה הראשונה במידה ולא קיימת מילה נוספת תואמת בדף.">
 <!ENTITY about_toggleSidebar "פתיחה או סגירה של סרגל הצד, למעט פתיחת סרגל צד של תיעוד גלישה.">
 <!ENTITY about_alert-loaded "מאורעות כמו כל ההורדות הסתיימו, עדכון חדש נמצא וכו\' המציגים תיבות התראה שגולשות מהפינה הימנית התחתונה של הדפדפן, הפעל אירוע זה.">
@@ -44,3 +50,8 @@
 <!ENTITY about_xpi-blocked "התקנת הרחבה נחסמה (למעט גירסת הרחבה שאינה נתמכת ב־Firefox).">
 <!ENTITY about_PluginNotFound "לא ניתן למצוא תוסף (למעט תוסף flash שלא נמצא)">
 <!ENTITY about_noise-log "באפשרותך להשתמש ב־&quot;some_event&amp;Noise.log(some_message)&quot; לתיעוד הודעות במסוף השגיאות. מאורע זה מתרחש בכל פעולת רישום בקובץ התיעוד.">
+<!ENTITY about_noise-dl-add "Add an item to Downloads list.">
+<!ENTITY about_noise-dl-remove "Remove an item from Downloads list.">
+<!ENTITY about_noise-dl-cancel "A download item has been canceled.">
+<!ENTITY about_noise-dl-error "A download item got error, thus failed.">
+<!ENTITY about_noise-dl-success "A download item finished successfully.">

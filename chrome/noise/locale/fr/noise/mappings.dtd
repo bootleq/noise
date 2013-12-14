@@ -21,6 +21,12 @@
 <!ENTITY xpi-blocked "Blocage de l'installation d'une extension">
 <!ENTITY PluginNotFound "Absence d'un plugin">
 <!ENTITY noise-log "Journal de Noise">
+<!ENTITY noise-dl-add "Download started">
+<!ENTITY noise-dl-remove "Download removed">
+<!ENTITY noise-dl-cancel "Download canceled">
+<!ENTITY noise-dl-error "Download failed">
+<!ENTITY noise-dl-success "Download succeeded">
+
 <!ENTITY about_FIND_WRAPPED "Lors de l'utilisation de la barre de recherche, le retour en haut de la page après avoir atteint le dernier résultat provoque cet évènement.">
 <!ENTITY about_toggleSidebar "Affichage/masquage du panneau latéral. Exemple : ouvrir l'historique dans le panneau latéral.">
 <!ENTITY about_alert-loaded "Les évènements tels que « Téléchargements terminés », « Mise à jour disponible »… , qui font apparaître des alertes de notification en bas à droite du navigateur, provoquent cet évènement.">
@@ -44,3 +50,8 @@
 <!ENTITY about_xpi-blocked "Blocage de l'installation d'une extension. Exemple : version de Firefox non supportée.">
 <!ENTITY about_PluginNotFound "Absence d'un plugin. Exemple : plugin Flash introuvable.">
 <!ENTITY about_noise-log "Vous pouvez utiliser « un_évènement&amp;Noise.log(un_message) » pour noter des messages dans la Console d'erreurs. Cet évènement se produit pour chaque entrée dans le journal.">
+<!ENTITY about_noise-dl-add "Add an item to Downloads list.">
+<!ENTITY about_noise-dl-remove "Remove an item from Downloads list.">
+<!ENTITY about_noise-dl-cancel "A download item has been canceled.">
+<!ENTITY about_noise-dl-error "A download item got error, thus failed.">
+<!ENTITY about_noise-dl-success "A download item finished successfully.">
