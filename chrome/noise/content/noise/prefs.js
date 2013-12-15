@@ -32,7 +32,7 @@
       isNoiseEnabled = document.getElementById("check-prefs-enabled");
       stringBundle = document.getElementById("noise-string-bundle");
 
-      treeData = Noise.mappings;
+      treeData = NoiseJSM.loadRdf();
       treeView =  new CustomTreeView();
       this.mappingsTree.view = treeView;
       this.dragDropObserver = treeDragDropObserver;
@@ -47,12 +47,18 @@
       var
         wm = Cc["@mozilla.org/appshell/window-mediator;1"].getService(Ci.nsIWindowMediator),
         enumerator = wm.getEnumerator("navigator:browser"),
-        win;
+        win,
+        newMappings;
+
+      newMappings = NoiseJSM.loadRdf();
       NoiseJSM.setBase(basePath);
       while (enumerator.hasMoreElements()) {
         win = enumerator.getNext();
-        win.Noise.reset();
+        win.Noise.reset(newMappings);
       }
+      NoiseJSM.removeGlobalEventHandlers();
+      NoiseJSM.addGlobalEventHandlers(newMappings);
+      NoiseJSM.mappings = newMappings;
     },
 
     exportSetting: function () {

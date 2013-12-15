@@ -36,13 +36,20 @@ this.NoiseJSM = {
     this.prefs2.addObserver("extensions.noise.", prefObserver, false);
     this.observerService = Cc["@mozilla.org/observer-service;1"].getService(Ci.nsIObserverService);
 
+    this.observers = [];
+    this.listeners = [];
     this.mappings = this.loadRdf();
 
     this.enabled = this.prefs.getBoolPref("extensions.noise.enabled");
     this.base = this.getBase();
+    this.addGlobalEventHandlers();
   },
 
   uninit: function () {
+    this.removeGlobalEventHandlers();
+    this.observers = null;
+    this.listeners = null;
+    this.mappings = null;
     this.prefs2.removeObserver("extensions.noise.", prefObserver);
   },
 
@@ -180,6 +187,129 @@ this.NoiseJSM = {
   getWindowType: function (win) {
     return win.document.documentElement.getAttribute('windowtype');
   },
+
+
+  // Apply set event observers / listeners {{{
+  addGlobalEventHandlers: function (newMappings) {
+    var mappings = newMappings || this.mappings;
+    mappings.filter(function (i) {
+      return i.enable && i.cmd !== '' && parseInt(i.type, 10) === 1;
+    }).forEach(function (i) {
+      // split i.cmd from cmd&filter into cmd, filter
+      var
+        cmd = i.cmd.indexOf('&') < 0 ? i.cmd : i.cmd.substr(0, i.cmd.indexOf('&')),
+        filter = i.cmd.indexOf('&') < 0 ? false : i.cmd.substr(i.cmd.indexOf('&') + 1),
+        filtertFx = function () {
+          return true;
+        };
+
+      if (filter) {
+        filtertFx = new Function('subject, data', 'return ' + filter + ';');
+      }
+      this.observers[i.urn] = {
+        observe: function (subject, topic, data) {
+          try {
+            if (filtertFx(subject, data)) {
+              NoiseJSM.play(i.se);
+            }
+          } catch (e) {
+            dump('Noise: ' + e);
+          }
+        }
+      };
+      this.addObserver(this.observers[i.urn], cmd, false);
+    }, this);
+  },
+
+  removeGlobalEventHandlers: function () {
+    this.mappings.filter(function (i) {
+      return i.enable && i.cmd !== '' && parseInt(i.type, 10) === 1;
+    }).forEach(function (i) {
+      if (typeof this.observers[i.urn] === "undefined" || !this.observers[i.urn]) {
+        return;
+      }
+      var cmd = i.cmd.indexOf('&') < 0 ? i.cmd : i.cmd.substr(0, i.cmd.indexOf('&'));
+      this.removeObserver(this.observers[i.urn], cmd);
+      this.observers[i.urn].observe = null;
+      this.observers[i.urn] = null;
+    }, this);
+  },
+
+  addEventHandlers: function (win, newMappings) {
+    var mappings = newMappings || this.mappings;
+    mappings.filter(function (i) {
+      return i.enable && i.cmd !== '';
+    }).forEach(function (i) {
+      // split i.cmd from cmd&filter into cmd, filter
+      var
+        cmd = i.cmd.indexOf('&') < 0 ? i.cmd : i.cmd.substr(0, i.cmd.indexOf('&')),
+        filter = i.cmd.indexOf('&') < 0 ? false : i.cmd.substr(i.cmd.indexOf('&') + 1),
+        filtertFx = function () {
+          return true;
+        };
+
+      switch (parseInt(i.type, 10)) {
+      case 0:
+      case 1:
+        return;
+      case 2:
+        if (filter) {
+          filtertFx = new Function('event', 'return ' + filter + ';');
+        }
+        this.listeners[i.urn] = function (event) {
+          try {
+            if (filtertFx(event)) {
+              NoiseJSM.play(i.se);
+            }
+          } catch (e) {
+            dump('Noise: ' + e);
+          }
+        };
+        if ('gBrowser' in win) {
+          win.gBrowser.addEventListener(cmd, this.listeners[i.urn], false);
+        }
+        break;
+      case 3:
+        if (filter) {
+          filtertFx = new Function('event', 'return ' + filter + ';');
+        }
+        this.listeners[i.urn] = function (event) {
+          try {
+            if (filtertFx(event)) {
+              NoiseJSM.play(i.se);
+            }
+          } catch (e) {
+            dump('Noise: ' + e);
+          }
+        };
+        win.addEventListener(cmd, this.listeners[i.urn], false);
+        break;
+      }
+    }, this);
+  },
+
+  removeEventHandlers: function (win) {
+    this.mappings.filter(function (i) {
+      return i.enable && i.cmd !== '';
+    }).forEach(function (i) {
+      var cmd = i.cmd.indexOf('&') < 0 ? i.cmd : i.cmd.substr(0, i.cmd.indexOf('&'));
+      switch (parseInt(i.type, 10)) {
+      case 0:
+      case 1:
+        return;
+        break;
+      case 2:
+        if ('gBrowser' in win) {
+          win.gBrowser.removeEventListener(cmd, this.listeners[i.urn], false);
+        }
+        break;
+      case 3:
+        win.removeEventListener(cmd, this.listeners[i.urn], false);
+        break;
+      }
+    }, this);
+  },
+  // }}} Apply set event observers / listeners
 
 
   // Noise-specified events implementation {{{
