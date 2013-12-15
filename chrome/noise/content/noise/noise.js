@@ -58,10 +58,6 @@ Noise = {
     }
 
     // notify with topic "noise-WebProgress-start", "noise-WebProgress-stop", "noise-WebProgress-locationChange"
-    if ('tabContainer' in gBrowser) {
-      gBrowser.tabContainer.addEventListener("TabOpen", this.onTabOpen, false);
-      gBrowser.tabContainer.addEventListener("TabClose", this.onTabClose, false);
-    }
     this.addProgressListener();
   },
 
@@ -77,14 +73,6 @@ Noise = {
     }
   },
 
-  onTabOpen: function (event) {
-    event.target.linkedBrowser.webProgress.addProgressListener(Noise.progListener2, Components.interfaces.nsIWebProgress.NOTIFY_STATE_NETWORK);
-  },
-
-  onTabClose: function (event) {
-    event.target.linkedBrowser.removeProgressListener(Noise.progListener2);
-  },
-
   progListener: {
     nsiWPL: Components.interfaces.nsIWebProgressListener,
     onStateChange: function (aProg, aReq, aState, aStatus) {
@@ -96,28 +84,6 @@ Noise = {
     onLocationChange: function (aProg, aReq, aLocation) {
       NoiseJSM.notifyObservers(aLocation, "noise-WebProgress-locationChange", aLocation ? aLocation.spec : null);
     },
-    onSecurityChange: function (aProg, aReq, aState) {},
-    onStatusChange: function (aProg, aReq, aStatus, aMsg) {},
-    onLinkIconAvailable: function (aProg, aReq) {},
-    QueryInterface: function (id) {
-      if (id.equals(Components.interfaces.nsIWebProgressListener) ||
-          id.equals(Components.interfaces.nsISupportsWeakReference) ||
-          id.equals(Components.interfaces.nsISupports)) {
-        return this;
-      }
-      throw Components.results.NS_NOINTERFACE;
-    }
-  },
-
-  progListener2: {
-    nsiWPL: Components.interfaces.nsIWebProgressListener,
-    onStateChange: function (aProg, aReq, aState, aStatus) {
-      if (aState & this.nsiWPL.STATE_STOP && aState & this.nsiWPL.STATE_IS_NETWORK) {
-        NoiseJSM.notifyObservers(aReq, "noise-WebProgress-stop", aStatus);
-      }
-    },
-    onProgressChange: function (aProg, aReq, aCurSelf, aMaxSelf, aCurTotal, aMaxTotal) {},
-    onLocationChange: function (aProg, aReq, aLocation) {},
     onSecurityChange: function (aProg, aReq, aState) {},
     onStatusChange: function (aProg, aReq, aStatus, aMsg) {},
     onLinkIconAvailable: function (aProg, aReq) {},

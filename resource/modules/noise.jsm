@@ -1,6 +1,6 @@
 var EXPORTED_SYMBOLS = ["NoiseJSM"];
 
-const {classes: Cc, interfaces: Ci, utils: Cu, manager: Cm} = Components;
+const {classes: Cc, interfaces: Ci, utils: Cu, results: Cr} = Components;
 
 Cu.import("resource://gre/modules/Services.jsm");
 
@@ -60,6 +60,7 @@ this.NoiseJSM = {
 
     if (windowType === 'navigator:browser') {
       this.patchToggleSidebar(win);
+      this.addProgressListeners(win);
     }
   },
 
@@ -226,6 +227,51 @@ this.NoiseJSM = {
           return _toggleSidebarWithoutNoise.apply(win, arguments);
         };
       };
+    }
+  },
+
+  addProgressListeners: function (win) {
+    // notify with topic "noise-WebProgress-start", "noise-WebProgress-stop", "noise-WebProgress-locationChange"
+    var gBrowser = win.gBrowser;
+    if ('tabContainer' in gBrowser) {
+      gBrowser.tabContainer.addEventListener("TabOpen", this.onTabOpen, false);
+      gBrowser.tabContainer.addEventListener("TabClose", this.onTabClose, false);
+    }
+  },
+
+  onTabOpen: function (event) {
+    event.target.linkedBrowser.webProgress.addProgressListener(
+      NoiseJSM.progressListeners.browser,
+      Ci.nsIWebProgress.NOTIFY_STATE_NETWORK
+    );
+  },
+
+  onTabClose: function (event) {
+    event.target.linkedBrowser.removeProgressListener(
+      NoiseJSM.progressListeners.browser
+    );
+  },
+
+  progressListeners: {
+    browser: {
+      onStateChange: function (aProg, aReq, aState, aStatus) {
+        if (aState & Ci.nsIWebProgressListener.STATE_STOP) {
+          NoiseJSM.notifyObservers(aReq, "noise-WebProgress-stop", aStatus);
+        }
+      },
+      onProgressChange: function (aProg, aReq, aCurSelf, aMaxSelf, aCurTotal, aMaxTotal) {},
+      onLocationChange: function (aProg, aReq, aLocation) {},
+      onSecurityChange: function (aProg, aReq, aState) {},
+      onStatusChange: function (aProg, aReq, aStatus, aMsg) {},
+      onLinkIconAvailable: function (aProg, aReq) {},
+      QueryInterface: function (id) {
+        if (id.equals(Ci.nsIWebProgressListener) ||
+            id.equals(Ci.nsISupportsWeakReference) ||
+            id.equals(Ci.nsISupports)) {
+          return this;
+        }
+        throw Cr.NS_NOINTERFACE;
+      }
     }
   },
   /// }}} Noise-specified events implementation
