@@ -9,7 +9,7 @@
         xmlns:html="http://www.w3.org/1999/xhtml"
         title="&events.guide.title;"
         persist="height width"
-        ondialogaccept="return Noise.NoiseEventsGuide.accept();">
+        ondialogaccept="return NoiseOverlay.NoiseEventsGuide.accept();">
 
   <script type="application/x-javascript" src="chrome://noise/content/noise.js" />
   <script type="application/x-javascript" src="chrome://noise/content/eventsGuide.js" />
@@ -17,8 +17,8 @@
   <description>&events.guide.intro;</description>
 
   <tree id="eventsTree" seltype="single" flex="1" style="min-height:240px;min-width:440px;"
-        onselect="Noise.NoiseEventsGuide.handleTreeEvent(event);" tabindex="1"
-        onkeypress="Noise.NoiseEventsGuide.handleTreeEvent(event);"
+        onselect="NoiseOverlay.NoiseEventsGuide.handleTreeEvent(event);" tabindex="1"
+        onkeypress="NoiseOverlay.NoiseEventsGuide.handleTreeEvent(event);"
         editable="true" enableColumnDrag="true"
         persist="width height">
     <treecols>

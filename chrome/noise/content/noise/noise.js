@@ -1,51 +1,51 @@
 /*jslint bitwise: false, evil: true*/
-/*global Noise: true, Components: false, dump: false, gBrowser: false, toggleSidebar: true, gFindBar: true*/
-if (!Noise) {
-  var Noise = {};
+/*global NoiseOverlay: true, Components: false, dump: false, gBrowser: false, toggleSidebar: true, gFindBar: true*/
+if (!NoiseOverlay) {
+  var NoiseOverlay = {};
 }
 Components.utils.import("resource://noise/noise.jsm");
 
-Noise = {
+NoiseOverlay = {
   player: null,
   enabled: false,
 
   init: function () {
-    NoiseJSM.patchWindow(window);
-    this.player = NoiseJSM.player;
-    this.prefs = NoiseJSM.prefs;
-    this.enabled = NoiseJSM.enabled;
-    NoiseJSM.addEventHandlers(window);
+    Noise.patchWindow(window);
+    this.player = Noise.player;
+    this.prefs = Noise.prefs;
+    this.enabled = Noise.enabled;
+    Noise.addEventHandlers(window);
   },
 
   uninit: function () {
-    NoiseJSM.undoPatchWindow(window);
-    NoiseJSM.removeEventHandlers(window);
+    Noise.undoPatchWindow(window);
+    Noise.removeEventHandlers(window);
     this.player = null;
   },
 
   reset: function (newMappings) {
     this.enabled = this.prefs.getBoolPref("extensions.noise.enabled");
-    NoiseJSM.removeEventHandlers(window);
-    NoiseJSM.addEventHandlers(window, newMappings);
+    Noise.removeEventHandlers(window);
+    Noise.addEventHandlers(window, newMappings);
   },
 
   toggle: function () {
-    NoiseJSM.toggle();
+    Noise.toggle();
   },
 
   play: function () {
-    NoiseJSM.play.apply(NoiseJSM, arguments);
+    Noise.play.apply(Noise, arguments);
   },
 
   log: function (aMessage) {
-    NoiseJSM.log(aMessage);
+    Noise.log(aMessage);
   }
 };
 
 window.addEventListener("load", function () {
-  Noise.init();
+  NoiseOverlay.init();
 }, false);
 
 window.addEventListener("unload", function () {
-  Noise.uninit();
+  NoiseOverlay.uninit();
 }, false);

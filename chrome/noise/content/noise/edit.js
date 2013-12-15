@@ -1,4 +1,4 @@
-/*global Noise: false, Components: false*/
+/*global NoiseOverlay: false, Components: false*/
 (function () {
   const TYPE_SEPARATOR = '0';
   const TYPE_OBSERVER = '1';
@@ -138,7 +138,7 @@
         try {
           if (uri.indexOf("chrome") === 0) {
             Noise.play(uri);
-          } else if (NoiseJSM.getSound(uri, basePath) === null) {
+          } else if (Noise.getSound(uri, basePath) === null) {
             elemTest.disabled = true;
             elemSe.select();
             Noise.play('beep');
@@ -218,9 +218,9 @@
       }
     };
 
-  Noise.NoiseEdit = NoiseEdit;
+  NoiseOverlay.NoiseEdit = NoiseEdit;
 
   window.addEventListener("load", function () {
-    Noise.NoiseEdit.init();
+    NoiseOverlay.NoiseEdit.init();
   }, false);
 }());

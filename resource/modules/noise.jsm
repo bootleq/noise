@@ -1,4 +1,4 @@
-var EXPORTED_SYMBOLS = ["NoiseJSM"];
+var EXPORTED_SYMBOLS = ["Noise"];
 
 const {classes: Cc, interfaces: Ci, utils: Cu, results: Cr} = Components;
 
@@ -7,7 +7,7 @@ Cu.import("resource://gre/modules/Services.jsm");
 prefObserver = {
   observe: function (aSubject, aTopic, aData) {
     if (aTopic === 'nsPref:changed' && aData === 'extensions.noise.enabled') {
-      NoiseJSM.enabled = NoiseJSM.prefs.getBoolPref("extensions.noise.enabled");
+      Noise.enabled = Noise.prefs.getBoolPref("extensions.noise.enabled");
     }
   }
 };
@@ -23,7 +23,7 @@ _getRdfPropertyValue = function (aRes, aProp, aRDF, aDsource) {
 };
 
 
-this.NoiseJSM = {
+this.Noise = {
   player: null,
   enabled: false,
 
@@ -210,7 +210,7 @@ this.NoiseJSM = {
         observe: function (subject, topic, data) {
           try {
             if (filtertFx(subject, data)) {
-              NoiseJSM.play(i.se);
+              Noise.play(i.se);
             }
           } catch (e) {
             dump('Noise: ' + e);
@@ -259,7 +259,7 @@ this.NoiseJSM = {
         this.listeners[i.urn] = function (event) {
           try {
             if (filtertFx(event)) {
-              NoiseJSM.play(i.se);
+              Noise.play(i.se);
             }
           } catch (e) {
             dump('Noise: ' + e);
@@ -276,7 +276,7 @@ this.NoiseJSM = {
         this.listeners[i.urn] = function (event) {
           try {
             if (filtertFx(event)) {
-              NoiseJSM.play(i.se);
+              Noise.play(i.se);
             }
           } catch (e) {
             dump('Noise: ' + e);
@@ -329,7 +329,7 @@ this.NoiseJSM = {
       let (_updateStatusUIWithoutNoise = findbar._updateStatusUI) {
         findbar._updateStatusUI = function _updateStatusUIWithNoise(res, aFindPrevious) {
           if (res === findbar.nsITypeAheadFind.FIND_WRAPPED) {
-            NoiseJSM.notifyObservers(null, "noise-TypeAheadFind.FIND_WRAPPED", aFindPrevious);
+            Noise.notifyObservers(null, "noise-TypeAheadFind.FIND_WRAPPED", aFindPrevious);
           }
           return _updateStatusUIWithoutNoise.apply(findbar, arguments);
         };
@@ -343,7 +343,7 @@ this.NoiseJSM = {
   },
 
   onTabFindInitialized: function (event) {
-    NoiseJSM.patchFindBar(event.target);
+    Noise.patchFindBar(event.target);
   },
 
   patchToggleSidebar: function (win) {
@@ -353,7 +353,7 @@ this.NoiseJSM = {
       let (_toggleSidebarWithoutNoise = win.toggleSidebar) {
         win.toggleSidebar = function _toggleSidebarWithNoise(commandID, forceOpen) {
           try {
-            NoiseJSM.notifyObservers(null, "noise-toggleSidebar", commandID);
+            Noise.notifyObservers(null, "noise-toggleSidebar", commandID);
           } catch (e) {
             dump('Noise: ' + e);
           }
@@ -385,14 +385,14 @@ this.NoiseJSM = {
 
   onTabOpen: function (event) {
     event.target.linkedBrowser.webProgress.addProgressListener(
-      NoiseJSM.progressListeners.browser,
+      Noise.progressListeners.browser,
       Ci.nsIWebProgress.NOTIFY_STATE_NETWORK
     );
   },
 
   onTabClose: function (event) {
     event.target.linkedBrowser.removeProgressListener(
-      NoiseJSM.progressListeners.browser
+      Noise.progressListeners.browser
     );
   },
 
@@ -400,7 +400,7 @@ this.NoiseJSM = {
     browser: {
       onStateChange: function (aProg, aReq, aState, aStatus) {
         if (aState & Ci.nsIWebProgressListener.STATE_STOP) {
-          NoiseJSM.notifyObservers(aReq, "noise-WebProgress-stop", aStatus);
+          Noise.notifyObservers(aReq, "noise-WebProgress-stop", aStatus);
         }
       },
       onProgressChange: function (aProg, aReq, aCurSelf, aMaxSelf, aCurTotal, aMaxTotal) {},
@@ -421,12 +421,12 @@ this.NoiseJSM = {
       onStateChange: function (aProg, aReq, aState, aStatus) {
         if (aState & Ci.nsIWebProgressListener.STATE_START &&
             aState & Ci.nsIWebProgressListener.STATE_IS_DOCUMENT) {
-          NoiseJSM.notifyObservers(aReq, "noise-WebProgress-start", aStatus);
+          Noise.notifyObservers(aReq, "noise-WebProgress-start", aStatus);
         }
       },
       onProgressChange: function (aProg, aReq, aCurSelf, aMaxSelf, aCurTotal, aMaxTotal) {},
       onLocationChange: function (aProg, aReq, aLocation) {
-        NoiseJSM.notifyObservers(
+        Noise.notifyObservers(
           aLocation,
           "noise-WebProgress-locationChange",
           aLocation ? aLocation.spec : null
@@ -530,16 +530,16 @@ this.NoiseJSM = {
   // }}} RDF functions
 };
 
-this.NoiseJSM.init();
+this.Noise.init();
 
 
 // 'dl' (download) related topics for Firefox 26 up {{{
 if (Services.vc.compare(Services.appinfo.platformVersion, "26.0a") >= 0) {
   Cu.import("resource://gre/modules/Downloads.jsm");
 
-  this.NoiseJSM.dlView = {
+  this.Noise.dlView = {
     onDownloadAdded: function (dl) {
-      NoiseJSM.notifyObservers(dl, "noise-dl.add", null);
+      Noise.notifyObservers(dl, "noise-dl.add", null);
     },
     onDownloadChanged: function (dl) {
       var
@@ -556,21 +556,21 @@ if (Services.vc.compare(Services.appinfo.platformVersion, "26.0a") >= 0) {
         type = 'error';
         data = dl.error.result;
       }
-      NoiseJSM.notifyObservers(dl, "noise-dl." + type, data);
+      Noise.notifyObservers(dl, "noise-dl." + type, data);
     },
     onDownloadRemoved: function (dl) {
-      NoiseJSM.notifyObservers(dl, "noise-dl.remove", null);
+      Noise.notifyObservers(dl, "noise-dl.remove", null);
     }
   };
 
-  this.NoiseJSM.observeDownloads = function () {
+  this.Noise.observeDownloads = function () {
     Downloads.getList(Downloads.PUBLIC).then(
       function onFulfill (list) {
-        list.addView(NoiseJSM.dlView);
+        list.addView(Noise.dlView);
       }
     ).then(null, Components.utils.reportError);
   };
 
-  this.NoiseJSM.observeDownloads();
+  this.Noise.observeDownloads();
 };
 // }}} 'dl' (download) related topics for Firefox 26 up
