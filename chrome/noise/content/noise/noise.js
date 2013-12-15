@@ -24,7 +24,6 @@ Noise = {
 
   uninit: function () {
     this.player = null;
-    this.removeProgressListener();
     this.removeNotifiers();
     this.removeObservers();
     this.mappings = null;
@@ -33,15 +32,12 @@ Noise = {
   },
 
   reset: function () {
-    this.removeProgressListener();
-    this.removeNotifiers();
     this.removeObservers();
     this.enabled = this.prefs.getBoolPref("extensions.noise.enabled");
     this.mappings = [];
     this.observers = [];
     this.listeners = [];
     this.mappings = NoiseJSM.loadRdf();
-    this.addProgressListener();
     this.addObservers();
   },
 
@@ -52,49 +48,6 @@ Noise = {
   /* start of overwrite code {{{ */
   addNotifiers: function () {
     NoiseJSM.patchWindow(window);
-
-    if (NoiseJSM.getWindowType(window) !== 'navigator:browser') {
-      return;
-    }
-
-    // notify with topic "noise-WebProgress-start", "noise-WebProgress-stop", "noise-WebProgress-locationChange"
-    this.addProgressListener();
-  },
-
-  addProgressListener: function () {
-    if ('gBrowser' in window) {
-      gBrowser.addProgressListener(this.progListener);
-    }
-  },
-
-  removeProgressListener: function () {
-    if (NoiseJSM.getWindowType(window) === 'navigator:browser') {
-      gBrowser.removeProgressListener(this.progListener);
-    }
-  },
-
-  progListener: {
-    nsiWPL: Components.interfaces.nsIWebProgressListener,
-    onStateChange: function (aProg, aReq, aState, aStatus) {
-      if (aState & this.nsiWPL.STATE_START && aState & this.nsiWPL.STATE_IS_DOCUMENT) {
-        NoiseJSM.notifyObservers(aReq, "noise-WebProgress-start", aStatus);
-      }
-    },
-    onProgressChange: function (aProg, aReq, aCurSelf, aMaxSelf, aCurTotal, aMaxTotal) {},
-    onLocationChange: function (aProg, aReq, aLocation) {
-      NoiseJSM.notifyObservers(aLocation, "noise-WebProgress-locationChange", aLocation ? aLocation.spec : null);
-    },
-    onSecurityChange: function (aProg, aReq, aState) {},
-    onStatusChange: function (aProg, aReq, aStatus, aMsg) {},
-    onLinkIconAvailable: function (aProg, aReq) {},
-    QueryInterface: function (id) {
-      if (id.equals(Components.interfaces.nsIWebProgressListener) ||
-          id.equals(Components.interfaces.nsISupportsWeakReference) ||
-          id.equals(Components.interfaces.nsISupports)) {
-        return this;
-      }
-      throw Components.results.NS_NOINTERFACE;
-    }
   },
   /* }}} end of overwrite code */
 

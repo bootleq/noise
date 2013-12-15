@@ -70,6 +70,9 @@ this.NoiseJSM = {
     if (['navigator:browser', 'navigator:view-source'].indexOf(windowType) > -1) {
       this.undoPatchFindBar(win);
     }
+    if (windowType === 'navigator:browser') {
+      this.removeProgressListeners(win);
+    }
   },
 
   notifyObservers: function (aSubject, aTopic, aData) {
@@ -232,10 +235,21 @@ this.NoiseJSM = {
 
   addProgressListeners: function (win) {
     // notify with topic "noise-WebProgress-start", "noise-WebProgress-stop", "noise-WebProgress-locationChange"
-    var gBrowser = win.gBrowser;
-    if ('tabContainer' in gBrowser) {
-      gBrowser.tabContainer.addEventListener("TabOpen", this.onTabOpen, false);
-      gBrowser.tabContainer.addEventListener("TabClose", this.onTabClose, false);
+    if ('gBrowser' in win) {
+      var gBrowser = win.gBrowser;
+      gBrowser.addProgressListener(this.progressListeners.gBrowser);
+
+      if ('tabContainer' in gBrowser) {
+        gBrowser.tabContainer.addEventListener("TabOpen", this.onTabOpen, false);
+        gBrowser.tabContainer.addEventListener("TabClose", this.onTabClose, false);
+      }
+    }
+  },
+
+  removeProgressListeners: function (win) {
+    if ('gBrowser' in win) {
+      var gBrowser = win.gBrowser;
+      gBrowser.removeProgressListener(this.progressListeners.gBrowser);
     }
   },
 
@@ -272,7 +286,34 @@ this.NoiseJSM = {
         }
         throw Cr.NS_NOINTERFACE;
       }
-    }
+    },
+    gBrowser: {
+      onStateChange: function (aProg, aReq, aState, aStatus) {
+        if (aState & Ci.nsIWebProgressListener.STATE_START &&
+            aState & Ci.nsIWebProgressListener.STATE_IS_DOCUMENT) {
+          NoiseJSM.notifyObservers(aReq, "noise-WebProgress-start", aStatus);
+        }
+      },
+      onProgressChange: function (aProg, aReq, aCurSelf, aMaxSelf, aCurTotal, aMaxTotal) {},
+      onLocationChange: function (aProg, aReq, aLocation) {
+        NoiseJSM.notifyObservers(
+          aLocation,
+          "noise-WebProgress-locationChange",
+          aLocation ? aLocation.spec : null
+       );
+      },
+      onSecurityChange: function (aProg, aReq, aState) {},
+      onStatusChange: function (aProg, aReq, aStatus, aMsg) {},
+      onLinkIconAvailable: function (aProg, aReq) {},
+      QueryInterface: function (id) {
+        if (id.equals(Components.interfaces.nsIWebProgressListener) ||
+            id.equals(Components.interfaces.nsISupportsWeakReference) ||
+            id.equals(Components.interfaces.nsISupports)) {
+          return this;
+        }
+        throw Components.results.NS_NOINTERFACE;
+      }
+    },
   },
   /// }}} Noise-specified events implementation
 
