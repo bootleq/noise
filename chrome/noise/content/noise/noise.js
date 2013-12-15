@@ -13,18 +13,17 @@ Noise = {
   enabled: false,
 
   init: function () {
+    NoiseJSM.patchWindow(window);
     this.player = NoiseJSM.player;
     this.mappings = NoiseJSM.loadRdf();
     this.prefs = NoiseJSM.prefs;
     this.enabled = NoiseJSM.enabled;
-
-    this.addNotifiers();
     this.addObservers();
   },
 
   uninit: function () {
+    NoiseJSM.undoPatchWindow(window);
     this.player = null;
-    this.removeNotifiers();
     this.removeObservers();
     this.mappings = null;
     this.observers = null;
@@ -44,12 +43,6 @@ Noise = {
   toggle: function () {
     NoiseJSM.toggle();
   },
-
-  /* start of overwrite code {{{ */
-  addNotifiers: function () {
-    NoiseJSM.patchWindow(window);
-  },
-  /* }}} end of overwrite code */
 
   addObservers: function () {
     this.mappings.forEach(function (i) {
@@ -148,10 +141,6 @@ Noise = {
         break;
       }
     }, this);
-  },
-
-  removeNotifiers: function () {
-    NoiseJSM.undoPatchWindow(window);
   },
 
   play: function () {
