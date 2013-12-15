@@ -1,5 +1,5 @@
 /*jslint es5: true*/
-/*global Noise: true, Components: false */
+/*global NoiseOverlay: true, Components: false */
 (function () {
   const {classes: Cc, interfaces: Ci, utils: Cu, manager: Cm} = Components;
   const RDF = Cc['@mozilla.org/rdf/rdf-service;1'].getService(Ci.nsIRDFService);
@@ -23,7 +23,7 @@
 
       elemDescription = document.getElementById("event-description");
       this.eventsTree = document.getElementById("eventsTree");
-      treeData = NoiseJSM.loadRdf(NoiseJSM.getRdfFile('default')).filter(function (row) {
+      treeData = Noise.loadRdf(Noise.getRdfFile('default')).filter(function (row) {
         if (row.type <= TYPE_SEPARATOR) {
           return false;
         } else if (row.expired && (Services.vc.compare(Services.appinfo.platformVersion, parseInt(row.expired, 10)) >= 0)) {
@@ -171,9 +171,9 @@
     }
   };
 
-  Noise.NoiseEventsGuide = NoiseEventsGuide;
+  NoiseOverlay.NoiseEventsGuide = NoiseEventsGuide;
   window.addEventListener("load", function () {
-    Noise.NoiseEventsGuide.init();
+    NoiseOverlay.NoiseEventsGuide.init();
   }, false);
 
 }());

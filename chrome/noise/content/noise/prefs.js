@@ -1,5 +1,5 @@
 /*jslint es5: true*/
-/*global Noise: true, Components: false, TransferData: false, FlavourSet: false, dump: false */
+/*global NoiseOverlay: true, Components: false, TransferData: false, FlavourSet: false, dump: false */
 (function () {
   const Cc = Components.classes;
   const Ci = Components.interfaces;
@@ -32,12 +32,12 @@
       isNoiseEnabled = document.getElementById("check-prefs-enabled");
       stringBundle = document.getElementById("noise-string-bundle");
 
-      treeData = Noise.mappings;
+      treeData = Noise.loadRdf();
       treeView =  new CustomTreeView();
       this.mappingsTree.view = treeView;
       this.dragDropObserver = treeDragDropObserver;
 
-      basePath = NoiseJSM.base;
+      basePath = Noise.base;
       isInstantApply = document.documentElement.instantApply;
       notApplyIcon = document.getElementById("icon-not-apply");
     },
@@ -47,12 +47,18 @@
       var
         wm = Cc["@mozilla.org/appshell/window-mediator;1"].getService(Ci.nsIWindowMediator),
         enumerator = wm.getEnumerator("navigator:browser"),
-        win;
-      NoiseJSM.setBase(basePath);
+        win,
+        newMappings;
+
+      newMappings = Noise.loadRdf();
+      Noise.setBase(basePath);
       while (enumerator.hasMoreElements()) {
         win = enumerator.getNext();
-        win.Noise.reset();
+        win.NoiseOverlay.reset(newMappings);
       }
+      Noise.removeGlobalEventHandlers();
+      Noise.addGlobalEventHandlers(newMappings);
+      Noise.mappings = newMappings;
     },
 
     exportSetting: function () {
@@ -73,7 +79,7 @@
         if (fp.file.exists()) {
           fp.file.remove(true);
         }
-        oldFile = NoiseJSM.getRdfFile();
+        oldFile = Noise.getRdfFile();
         try {
           oldFile.copyTo(fp.file.parent, fp.file.leafName);
           prompts.alert(null, stringBundle.getString("settings_title"), stringBundle.getString("settings_export_done"));
@@ -98,7 +104,7 @@
         try {
           this.mappingsTree.view = null;
           treeView = null;
-          treeData = NoiseJSM.loadRdf(fp.file);
+          treeData = Noise.loadRdf(fp.file);
           treeView =  new CustomTreeView();
           this.mappingsTree.view = treeView;
           prompts.alert(null, stringBundle.getString("settings_title"), stringBundle.getString("settings_import_done"));
@@ -120,7 +126,7 @@
       try {
         this.mappingsTree.view = null;
         treeView = null;
-        treeData = NoiseJSM.loadRdf(NoiseJSM.getRdfFile('default'));
+        treeData = Noise.loadRdf(Noise.getRdfFile('default'));
         treeView =  new CustomTreeView();
         this.mappingsTree.view = treeView;
         prompts.alert(null, stringBundle.getString("settings_title"), stringBundle.getString("settings_default_done"));
@@ -290,7 +296,7 @@
 
     saveToRdf: function () {
       var
-        [RDFC, RDFCUtils, RDF, dsource] = NoiseJSM.initRdf(),
+        [RDFC, RDFCUtils, RDF, dsource] = Noise.initRdf(),
         elems, elem, arcs, arc, targets, target, newNode, labelProp, newValue;
 
       // clear Seq
@@ -578,7 +584,7 @@
         } else {
           this.findStatusIcon.setAttribute("tooltiptext", this.stringsBundle.GetStringFromName("WrappedToBottom"));
         }
-        NoiseJSM.notifyObservers(null, "noise-TypeAheadFind.FIND_WRAPPED", aFindPrevious);
+        Noise.notifyObservers(null, "noise-TypeAheadFind.FIND_WRAPPED", aFindPrevious);
         this.textbox.setAttribute("status", aStatus);
         this.findStatusIcon.setAttribute("status", aStatus);
         break;
@@ -718,9 +724,9 @@
     }
   };
 
-  Noise.NoisePrefs = NoisePrefs;
+  NoiseOverlay.NoisePrefs = NoisePrefs;
   window.addEventListener("load", function () {
-    Noise.NoisePrefs.init();
+    NoiseOverlay.NoisePrefs.init();
   }, false);
 
 }());
