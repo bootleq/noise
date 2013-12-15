@@ -1,8 +1,8 @@
 /*jslint es5: true*/
 /*global NoiseOverlay: true, Components: false, TransferData: false, FlavourSet: false, dump: false */
 (function () {
-  const Cc = Components.classes;
-  const Ci = Components.interfaces;
+  const {classes: Cc, interfaces: Ci, utils: Cu} = Components;
+  Cu.import("resource://gre/modules/Services.jsm");
 
   var
     treeData = [],
@@ -126,7 +126,9 @@
       try {
         this.mappingsTree.view = null;
         treeView = null;
-        treeData = Noise.loadRdf(Noise.getRdfFile('default'));
+        treeData = Noise.loadRdf(Noise.getRdfFile('default')).filter(function (row) {
+          return !(row.expired && (Services.vc.compare(Services.appinfo.platformVersion, parseInt(row.expired, 10)) >= 0));
+        });
         treeView =  new CustomTreeView();
         this.mappingsTree.view = treeView;
         prompts.alert(null, stringBundle.getString("settings_title"), stringBundle.getString("settings_default_done"));
