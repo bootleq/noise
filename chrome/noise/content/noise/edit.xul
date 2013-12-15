@@ -9,7 +9,7 @@
   title="&editdialog.title;"
   ondialogaccept="return NoiseOverlay.NoiseEdit.accept();">
 
-  <script type="application/x-javascript" src="chrome://noise/content/noise.js" />
+  <script type="application/x-javascript" src="chrome://noise/content/noiseOverlay.js" />
   <script type="application/x-javascript" src="chrome://noise/content/edit.js" />
 
   <stringbundleset id="noise-stringbundleset">

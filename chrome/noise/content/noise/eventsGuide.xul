@@ -11,7 +11,7 @@
         persist="height width"
         ondialogaccept="return NoiseOverlay.NoiseEventsGuide.accept();">
 
-  <script type="application/x-javascript" src="chrome://noise/content/noise.js" />
+  <script type="application/x-javascript" src="chrome://noise/content/noiseOverlay.js" />
   <script type="application/x-javascript" src="chrome://noise/content/eventsGuide.js" />
 
   <description>&events.guide.intro;</description>

@@ -142,7 +142,7 @@
 
   </prefpane>
 
-  <script type="application/x-javascript" src="chrome://noise/content/noise.js" />
+  <script type="application/x-javascript" src="chrome://noise/content/noiseOverlay.js" />
   <script type="application/x-javascript" src="chrome://global/content/nsDragAndDrop.js" />
   <script type="application/x-javascript" src="chrome://noise/content/prefs.js" />
   <stringbundleset id="noise-stringbundleset">
