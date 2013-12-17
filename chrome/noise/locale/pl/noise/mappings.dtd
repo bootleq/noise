@@ -21,12 +21,11 @@
 <!ENTITY xpi-blocked "Zablokowanie instalacji dodatków">
 <!ENTITY PluginNotFound "Brak wtyczki">
 <!ENTITY noise-log "Dziennik zdarzeń">
-<!ENTITY noise-dl-add "Download started">
-<!ENTITY noise-dl-remove "Download removed">
-<!ENTITY noise-dl-cancel "Download canceled">
-<!ENTITY noise-dl-error "Download failed">
-<!ENTITY noise-dl-success "Download succeeded">
-
+<!ENTITY noise-dl-add "Rozpoczęcie pobierania">
+<!ENTITY noise-dl-remove "Usunięcie pobierania">
+<!ENTITY noise-dl-cancel "Anulowanie pobierania">
+<!ENTITY noise-dl-error "Niepowodzenie pobierania">
+<!ENTITY noise-dl-success "Zakończenie pobierania">
 <!ENTITY about_FIND_WRAPPED "Rozpoczęcie wyszukiwania od początku podczas korzystania z paska wyszukiwania.">
 <!ENTITY about_toggleSidebar "Otwarcie/zamknięcie panelu bocznego">
 <!ENTITY about_alert-loaded "Zdarzenia, takie jak zakończenie pobierania, dostępność aktualizacji wyświetlane w wysuwanym okienku powiadomień.">
@@ -42,16 +41,16 @@
 <!ENTITY about_domwindowclosed "Zamknięcie nowego okna">
 <!ENTITY about_DOMPopupBlocked "Zablokowanie wyskakującego okna">
 <!ENTITY about_fullscreen "Zmiana trybu przeglądania (pełnoekranowy/normalny)">
-<!ENTITY about_dl-start "Rozpoczęcie pobierania">
-<!ENTITY about_dl-failed "Niepowodzenie pobierania">
-<!ENTITY about_dl-cancel "Anulowanie pobierania">
-<!ENTITY about_dl-done "Zakończenie pobierania">
+<!ENTITY about_dl-start "Rozpoczęcie pobierania elementu">
+<!ENTITY about_dl-failed "Niepowodzenie pobierania elementu">
+<!ENTITY about_dl-cancel "Anulowanie pobierania elementu">
+<!ENTITY about_dl-done "Zakończenie pobierania elementu">
 <!ENTITY about_perm-changed "Zmiana zezwoleń strony">
-<!ENTITY about_xpi-blocked "Dodatek nie został zainstalowany np.z powodu nieobsługiwanej wersji Firefoksa">
-<!ENTITY about_PluginNotFound "Nie można znaleźć wtyczki np. nie znaleziono wtyczki flasha">
+<!ENTITY about_xpi-blocked "Dodatek nie został zainstalowany, np. z powodu nieobsługiwanej wersji Firefoksa">
+<!ENTITY about_PluginNotFound "Nie można znaleźć wtyczki, np. nie znaleziono wtyczki flasha">
 <!ENTITY about_noise-log "Można użyć funkcji dziennika zdarzeń, aby śledzić wiadomości w konsoli błędów.">
-<!ENTITY about_noise-dl-add "Add an item to Downloads list.">
-<!ENTITY about_noise-dl-remove "Remove an item from Downloads list.">
-<!ENTITY about_noise-dl-cancel "A download item has been canceled.">
-<!ENTITY about_noise-dl-error "A download item got error, thus failed.">
-<!ENTITY about_noise-dl-success "A download item finished successfully.">
+<!ENTITY about_noise-dl-add "Dodaj element do listy pobierania">
+<!ENTITY about_noise-dl-remove "Usuń element z listy pobierania">
+<!ENTITY about_noise-dl-cancel "Anulowano pobieranie elementu">
+<!ENTITY about_noise-dl-error "Pobieranie elementu się nie powiodło">
+<!ENTITY about_noise-dl-success "Element został pobrany">

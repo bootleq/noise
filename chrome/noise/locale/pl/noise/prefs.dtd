@@ -1,5 +1,5 @@
 <!ENTITY prefwindow.title "Noise – ustawienia">
-<!ENTITY treecol.name.width "150px">
+<!ENTITY treecol.name.width "200px">
 <!ENTITY treecol.file.width "100px">
 <!ENTITY pane-general.title "Ogólne">
 <!ENTITY check-prefs-enabled.label "Włącz dźwięki">
