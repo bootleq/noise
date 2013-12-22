@@ -94,71 +94,6 @@ this.Noise = {
     this.observerService.removeObserver.apply(null, arguments);
   },
 
-
-  getBase: function () {
-    var
-      file = null,
-      defaultFile;
-    try {
-      file = this.prefs.getComplexValue("extensions.noise.base", Ci.nsILocalFile);
-      if (file.isDirectory()) {
-        return file;
-      }
-    } catch (e) {}
-
-    // use default base path
-    defaultFile = Cc["@mozilla.org/file/directory_service;1"].getService(Ci.nsIProperties).get("ProfD", Ci.nsIFile);
-    defaultFile.append("noise");
-    if (!defaultFile.exists() || !defaultFile.isDirectory()) {
-      defaultFile.create(Ci.nsIFile.DIRECTORY_TYPE, 0777);
-    }
-    this.prefs.setComplexValue("extensions.noise.base", Ci.nsILocalFile, defaultFile);
-    return defaultFile;
-  },
-
-  setBase: function (file) {
-    this.prefs.setComplexValue("extensions.noise.base", Ci.nsILocalFile, file);
-    this.base = file;
-  },
-
-  getSound: function (url, base) {
-    if (url === 'beep' || url.indexOf(':') > 2) {
-      return url;
-    }
-
-    var
-      ios = Cc['@mozilla.org/network/io-service;1'].getService(Ci.nsIIOService),
-      file = null;
-
-    if (url.search(/:\\|^\//) === -1) {  // relative path
-      if (base.path.indexOf('/') >= 0) {
-        url = '/' + url.replace('\\', '/');
-      } else {
-        url = '\\' + url.replace('/', '\\');
-      }
-      url = base.path + url;
-    }
-
-    try { // absolute path
-      file = Cc["@mozilla.org/file/local;1"].createInstance(Ci.nsILocalFile);
-      file.initWithPath(url);
-      if (!file.exists()) {
-        return null;
-      }
-      return ios.newFileURI(file);
-    } catch (e) { // chrome url
-      try {
-        if (url === "") {
-          return null;
-        }
-        return ios.newURI(url, null, null); // currently, without existence testing
-      } catch (e2) {
-        dump("\nNoise:" + e2);
-        return null;
-      }
-    }
-  },
-
   play: function (url, base, force) {
     var
       base  = arguments.length > 1 ? arguments[1] : this.base,
@@ -446,6 +381,73 @@ this.Noise = {
     },
   },
   /// }}} Noise-specified events implementation
+
+
+  // file/directory operations {{{
+  getBase: function () {
+    var
+      file = null,
+      defaultFile;
+    try {
+      file = this.prefs.getComplexValue("extensions.noise.base", Ci.nsILocalFile);
+      if (file.isDirectory()) {
+        return file;
+      }
+    } catch (e) {}
+
+    // use default base path
+    defaultFile = Cc["@mozilla.org/file/directory_service;1"].getService(Ci.nsIProperties).get("ProfD", Ci.nsIFile);
+    defaultFile.append("noise");
+    if (!defaultFile.exists() || !defaultFile.isDirectory()) {
+      defaultFile.create(Ci.nsIFile.DIRECTORY_TYPE, 0777);
+    }
+    this.prefs.setComplexValue("extensions.noise.base", Ci.nsILocalFile, defaultFile);
+    return defaultFile;
+  },
+
+  setBase: function (file) {
+    this.prefs.setComplexValue("extensions.noise.base", Ci.nsILocalFile, file);
+    this.base = file;
+  },
+
+  getSound: function (url, base) {
+    if (url === 'beep' || url.indexOf(':') > 2) {
+      return url;
+    }
+
+    var
+      ios = Cc['@mozilla.org/network/io-service;1'].getService(Ci.nsIIOService),
+      file = null;
+
+    if (url.search(/:\\|^\//) === -1) {  // relative path
+      if (base.path.indexOf('/') >= 0) {
+        url = '/' + url.replace('\\', '/');
+      } else {
+        url = '\\' + url.replace('/', '\\');
+      }
+      url = base.path + url;
+    }
+
+    try { // absolute path
+      file = Cc["@mozilla.org/file/local;1"].createInstance(Ci.nsILocalFile);
+      file.initWithPath(url);
+      if (!file.exists()) {
+        return null;
+      }
+      return ios.newFileURI(file);
+    } catch (e) { // chrome url
+      try {
+        if (url === "") {
+          return null;
+        }
+        return ios.newURI(url, null, null); // currently, without existence testing
+      } catch (e2) {
+        dump("\nNoise:" + e2);
+        return null;
+      }
+    }
+  },
+  // }}} file/directory operations
 
 
   // RDF functions {{{
