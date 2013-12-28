@@ -9,6 +9,7 @@ locale noise he-IL jar:chrome/noise.jar!/locale/he-IL/noise/
 locale noise ja-JP jar:chrome/noise.jar!/locale/ja-JP/noise/
 locale noise pl    jar:chrome/noise.jar!/locale/pl/noise/
 locale noise pt-BR jar:chrome/noise.jar!/locale/pt-BR/noise/
+locale noise ru    jar:chrome/noise.jar!/locale/ru/noise/
 locale noise sv-SE jar:chrome/noise.jar!/locale/sv-SE/noise/
 locale noise tr    jar:chrome/noise.jar!/locale/tr/noise/
 locale noise zh-CN jar:chrome/noise.jar!/locale/zh-CN/noise/
