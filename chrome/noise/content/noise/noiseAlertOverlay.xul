@@ -3,7 +3,12 @@
          xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
   <script type="application/x-javascript"><![CDATA[
     window.addEventListener("load", function(){
-      Noise.notifyObservers(null,"noise-alert-loaded",null);
+      Components.utils.import("resource://noise/noise.jsm");
+      Noise.notifyObservers(
+        null,
+        "noise-alert-loaded",
+        null
+      );
     }, false);
     ]]></script>
 </overlay>
