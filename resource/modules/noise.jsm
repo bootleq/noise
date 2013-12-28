@@ -123,6 +123,18 @@ this.Noise = {
     return win.document.documentElement.getAttribute('windowtype');
   },
 
+  wrap: function () {
+    Noise.log('wrapping methods not available');
+  },
+
+  unwrap: function () {
+    this.wrap();
+  },
+
+  O: function () {
+    return this.unwrap.apply(this, arguments);
+  },
+
 
   // Apply set event observers / listeners {{{
   addGlobalEventHandlers: function (newMappings) {
@@ -576,3 +588,24 @@ if (Services.vc.compare(Services.appinfo.platformVersion, "26.0a") >= 0) {
   this.Noise.observeDownloads();
 };
 // }}} 'dl' (download) related topics for Firefox 26 up
+
+
+// data wrap/unwrap {{{
+if (typeof JSON === 'object') {
+  Noise.wrap = function (obj, props) {
+    if (!props || !props.length) {
+      return null;
+    }
+    return JSON.stringify(
+      props.reduce(function (hash, prop) {
+        hash[prop] = obj[prop];
+        return hash;
+      }, {})
+    );
+  };
+
+  Noise.unwrap = function (json) {
+    return JSON.parse(json);
+  };
+}
+// }}} data wrap/unwrap
