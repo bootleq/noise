@@ -539,8 +539,6 @@ this.Noise = {
   // }}} RDF functions
 };
 
-this.Noise.init();
-
 
 // 'dl' (download) related topics for Firefox 26 up {{{
 if (Services.vc.compare(Services.appinfo.platformVersion, "26.0a") >= 0) {
@@ -627,3 +625,5 @@ if (consoleJSM.console) {
   };
 }
 // }}} logging utility
+
+this.Noise.init();
