@@ -591,10 +591,16 @@ if (Services.vc.compare(Services.appinfo.platformVersion, "26.0a") >= 0) {
 
 
 // data wrap/unwrap {{{
-if (typeof JSON === 'object') {
+if (typeof JSON === 'object' && Array.isArray) {
   Noise.wrap = function (obj, props) {
-    if (!props || !props.length) {
-      return null;
+    if (Array.isArray(obj)) {
+      obj = obj.reduce(function (hash, value, index) {
+        hash[index.toString()] = value;
+        return hash;
+      }, {});
+    }
+    if (!props) {
+      props = Object.keys(obj);
     }
     return JSON.stringify(
       props.reduce(function (hash, prop) {

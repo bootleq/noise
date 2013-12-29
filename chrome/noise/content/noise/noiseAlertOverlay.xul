@@ -4,14 +4,10 @@
   <script type="application/x-javascript"><![CDATA[
     window.addEventListener("load", function(){
       Components.utils.import("resource://noise/noise.jsm");
-      var args = window.arguments.reduce(function (hash, value, index) {
-        hash[index.toString()] = value;
-        return hash;
-      }, {});
       Noise.notifyObservers(
         null,
         "noise-alert-loaded",
-        Noise.wrap(args, Object.keys(args))
+        Noise.wrap(window.arguments)
       );
     }, false);
     ]]></script>
