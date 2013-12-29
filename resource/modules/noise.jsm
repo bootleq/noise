@@ -114,11 +114,6 @@ this.Noise = {
     }
   },
 
-  log: function (aMessage) {
-    Cc["@mozilla.org/consoleservice;1"].getService(Ci.nsIConsoleService).logStringMessage("Noise: " + aMessage);
-    this.notifyObservers(null, "noise-log", aMessage);
-  },
-
   getWindowType: function (win) {
     return win.document.documentElement.getAttribute('windowtype');
   },
@@ -615,3 +610,20 @@ if (typeof JSON === 'object' && Array.isArray) {
   };
 }
 // }}} data wrap/unwrap
+
+
+// logging utility {{{
+const consoleJSM = Cu.import("resource://gre/modules/devtools/Console.jsm", {});
+if (consoleJSM.console) {
+  Noise.console = consoleJSM.console;
+  Noise.log = function () {
+    this.console.log.apply(this, arguments);
+    this.notifyObservers(null, "noise-log", this.wrap(arguments));
+  };
+} else {
+  Noise.log = function (aMessage) {
+    Cc["@mozilla.org/consoleservice;1"].getService(Ci.nsIConsoleService).logStringMessage("Noise: " + aMessage);
+    this.notifyObservers(null, "noise-log", aMessage);
+  };
+}
+// }}} logging utility
