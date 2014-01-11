@@ -82,6 +82,31 @@ this.Noise = {
     }
   },
 
+  spawnAudio: function (win) {
+    if (!this.audio) {
+      try {
+        this.audio = win.NoiseOverlay.createAudio();
+        this.audio.preload = 'none';
+      } catch (e) {
+        this.log('No Audio support', e);
+      }
+    }
+  },
+
+  respawnAudio: function (win) {
+    var enumerator, nextWindow;
+    this.audio = null;
+
+    enumerator = Services.wm.getEnumerator(null);
+    while (!this.audio && enumerator.hasMoreElements()) {
+      nextWindow = enumerator.getNext();
+      if (nextWindow !== win && nextWindow.NoiseOverlay) {
+        this.spawnAudio(nextWindow);
+        break;
+      }
+    }
+  },
+
   notifyObservers: function (aSubject, aTopic, aData) {
     this.observerService.notifyObservers.apply(null, arguments);
   },
@@ -96,6 +121,7 @@ this.Noise = {
 
   play: function (url, base, force) {
     var
+      uri,
       base  = arguments.length > 1 ? arguments[1] : this.base,
       force = arguments.length > 2 ? arguments[2] : false;
 
@@ -109,7 +135,14 @@ this.Noise = {
           this.player.playSystemSound(url.substr(4));
         }
       } else {
-        this.player.play(this.getSound(url, base));
+        uri = this.getSound(url, base);
+        if (!uri.path.endsWith('.wav') && this.audio) {
+          this.audio.src = uri.spec;
+          this.audio.load();
+          this.audio.play();
+        } else {
+          this.player.play(uri);
+        }
       }
     }
   },

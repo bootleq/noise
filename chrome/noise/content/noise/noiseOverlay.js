@@ -9,16 +9,22 @@ NoiseOverlay = {
   init: function () {
     Noise.patchWindow(window);
     Noise.addEventHandlers(window);
+    Noise.spawnAudio(window);
   },
 
   uninit: function () {
     Noise.undoPatchWindow(window);
     Noise.removeEventHandlers(window);
+    Noise.respawnAudio(window);
   },
 
   reset: function (newMappings) {
     Noise.removeEventHandlers(window);
     Noise.addEventHandlers(window, newMappings);
+  },
+
+  createAudio: function () {
+    return new Audio();
   }
 };
 
