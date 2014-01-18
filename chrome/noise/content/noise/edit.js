@@ -90,7 +90,7 @@
           fp.displayDirectory = base;
         }
         fp.init(window, stringBundle.getString("edit_pickfile"), nsIFilePicker.modeOpen);
-        fp.appendFilter(".wav", "*.wav");
+        fp.appendFilters(nsIFilePicker.filterAudio);
         rv = fp.show();
         if (rv === nsIFilePicker.returnOK || rv === nsIFilePicker.returnReplace) {
           path = fp.file.path;

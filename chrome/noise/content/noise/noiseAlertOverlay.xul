@@ -7,7 +7,7 @@
       Noise.notifyObservers(
         null,
         "noise-alert-loaded",
-        null
+        Noise.wrap(window.arguments)
       );
     }, false);
     ]]></script>
