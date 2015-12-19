@@ -301,13 +301,12 @@ this.Noise = {
     if (findbar && '_updateStatusUI' in findbar) {
       // overwrite _updateStatusUI, see chrome/tookit/content/global/content/bindings/findbar.xml
       // notify with topic "noise-TypeAheadFind.FIND_WRAPPED"
-      let (_updateStatusUIWithoutNoise = findbar._updateStatusUI) {
-        findbar._updateStatusUI = function _updateStatusUIWithNoise(res, aFindPrevious) {
-          if (res === findbar.nsITypeAheadFind.FIND_WRAPPED) {
-            Noise.notifyObservers(null, "noise-TypeAheadFind.FIND_WRAPPED", aFindPrevious);
-          }
-          return _updateStatusUIWithoutNoise.apply(findbar, arguments);
-        };
+      let _updateStatusUIWithoutNoise = findbar._updateStatusUI;
+      findbar._updateStatusUI = function _updateStatusUIWithNoise(res, aFindPrevious) {
+        if (res === findbar.nsITypeAheadFind.FIND_WRAPPED) {
+          Noise.notifyObservers(null, "noise-TypeAheadFind.FIND_WRAPPED", aFindPrevious);
+        }
+        return _updateStatusUIWithoutNoise.apply(findbar, arguments);
       };
     }
     win.addEventListener("TabFindInitialized", this.onTabFindInitialized, false);
@@ -325,15 +324,14 @@ this.Noise = {
     // overwrite "toggleSidebar", see chrome/browser/content/browser/browser.js
     // notify with topic "noise-toggleSidebar"
     if ('toggleSidebar' in win) {
-      let (_toggleSidebarWithoutNoise = win.toggleSidebar) {
-        win.toggleSidebar = function _toggleSidebarWithNoise(commandID, forceOpen) {
-          try {
-            Noise.notifyObservers(null, "noise-toggleSidebar", commandID);
-          } catch (e) {
-            dump('Noise: ' + e);
-          }
-          return _toggleSidebarWithoutNoise.apply(win, arguments);
-        };
+      let _toggleSidebarWithoutNoise = win.toggleSidebar;
+      win.toggleSidebar = function _toggleSidebarWithNoise(commandID, forceOpen) {
+        try {
+          Noise.notifyObservers(null, "noise-toggleSidebar", commandID);
+        } catch (e) {
+          dump('Noise: ' + e);
+        }
+        return _toggleSidebarWithoutNoise.apply(win, arguments);
       };
     }
   },
