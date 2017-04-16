@@ -1,5 +1,5 @@
-*.svn
 *.xpi
+*.zsh
 *.bat
 *.lnk
 Thumbs.db
