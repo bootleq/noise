@@ -24,6 +24,7 @@
     <em:homepageURL>http://www.bootleq.com/noise/</em:homepageURL>
     <em:iconURL>chrome://noise/skin/icon.png</em:iconURL>
     <em:unpack>true</em:unpack>
+    <em:multiprocessCompatible>false</em:multiprocessCompatible>
     <em:targetApplication>
       <Description>
         <em:id>{ec8030f7-c20a-464f-9b0e-13a3a9e97384}</em:id>
