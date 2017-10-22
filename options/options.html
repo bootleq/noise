@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="options.css">
+  </head>
+
+  <body>
+    <fieldset id="sounds">
+      <legend>Sounds</legend>
+
+      <ul class="list">
+        <li class="add_sound"><button>Add Sound</button></li>
+      </ul>
+
+      <template>
+        <li>
+          <label class="name">
+            <span>Name</span>
+          </label>
+        </li>
+      </template>
+    </fieldset>
+
+    <fieldset id='sound_detail' disabled>
+      <label>
+        Name
+        <input type="text" class='name'/>
+      </label>
+
+      <div class='upload'>
+        <button class="cancel_upload hidden">✖ </button>
+        <label class='droppable'>
+          Click or drop new sound here.
+          <input type='file' accept='audio/*'>
+        </label>
+      </div>
+
+      <div class='player droppable'>
+        <div class='flex'>
+          <span class="filename"></span>
+          <button class="change">Change</button>
+        </div>
+        <audio controls></audio>
+        <div class='warning'></div>
+      </div>
+
+      <div class='ctrls'>
+        <button class="accept" disabled>✔ Accept</button>
+        <button class="cancel">Cancel</button>
+        <div class='non-edit'>
+          <button class="delete">✖</button>
+          <button class="move-back">◀</button>
+          <button class="move-next">▶</button>
+        </td>
+      </div>
+    </fieldset>
+
+    <fieldset id="events">
+      <legend>Events</legend>
+
+      <table>
+        <thead>
+          <tr>
+            <th><span class='hidden'>Enabled</span></th>
+            <th><span>Type</span></th>
+            <th><span>Options</span></th>
+            <th><span>Sound</span></th>
+            <th><span></span></th>
+            <th><span></span></th>
+          </tr>
+        </thead>
+
+        <tbody></tbody>
+
+        <template>
+          <tr>
+            <td class='e-ctrl e-toggle'><label title='enabled'><input type='checkbox'/></label></td>
+            <td class='e-type'></td>
+            <td class='e-options'></td>
+            <td class='e-sound'></td>
+            <td class='e-edit'>
+              <button class="edit">
+                <span class='on'>✏️ Edit</span>
+                <span class='off'>✔ Accept</span>
+              </button>
+              <button class="cancel">Cancel</button>
+              <button class="play">▸ Play</button>
+            </td>
+            <td class='e-ctrl e-non-edit'>
+              <button class="delete">✖</button>
+              <button class="move-up">▲</button>
+              <button class="move-down">▼</button>
+            </td>
+          </tr>
+        </template>
+      </table>
+
+      <button class='add_event'>➕ Add Event</button>
+    </fieldset>
+
+    <div id='menus'>
+      <ul class='types'></ul>
+      <ul class='sounds'></ul>
+    </div>
+
+    <div id='main-ctrls'>
+      <button id='save' disabled>Save</button>
+
+      <button id='import' disabled>Import</button>
+      <button id='export' disabled>Export</button>
+    </div>
+
+    <input id='import-file' type='file' accept='.json' class='hidden'>
+
+    <script src="utils.js"></script>
+    <script src="/common/utils.js"></script>
+    <script src="/common/sound.js"></script>
+    <script src="/common/event.js"></script>
+    <script src="options.js"></script>
+  </body>
+</html>

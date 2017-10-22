@@ -1,0 +1,394 @@
+:root {
+  --sounds-cell-height: 60px;
+  --color-ruby: #a01010;
+  --color-thead: #ebebeb;
+}
+
+body {
+  margin-top: 1em;
+}
+
+h1, ul {
+  padding: 0;
+  margin: 0;
+}
+
+fieldset {
+  border: none;
+  padding: 6px 0;
+}
+
+input, button {
+  font-size: inherit;
+}
+
+input[type="button"],
+button {
+  cursor: pointer;
+}
+
+input[type="file"] {
+  display: none;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.text-reminder {
+  padding: 8px;
+  opacity: 0.6;
+}
+
+#sounds {
+  margin-bottom: 1em;
+  width: 80%;
+  min-width: 550px;
+}
+#sounds ul.list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 120px);
+  grid-auto-rows: var(--sounds-cell-height);
+  grid-gap: 5px;
+  min-height: var(--sounds-cell-height);
+  overflow: auto;
+  resize: both;
+  list-style: none;
+}
+#sounds ul.list li {
+  color: #eee;
+  background-color: var(--color-ruby);
+  border-radius: 3px;
+  text-shadow: 1px 1px 1px black, -1px -1px 1px black;
+  overflow: auto;
+  word-break: break-all;
+}
+#sounds ul.list li:hover {
+  background-color: #800;
+  overflow: visible;
+}
+#sounds ul.list li:hover span {
+  background-color: #800;
+}
+#sounds ul.list li.add_sound {
+  background-color: inherit;
+}
+#sounds ul.list li.current {
+  color: var(--color-ruby);
+  background-color: white;
+  border: 1px solid var(--color-ruby);
+  text-shadow: none;
+  overflow: visible;
+}
+#sounds ul.list li.current span {
+  background-color: white;
+}
+#sounds ul.list li.dirty {
+  border-bottom: 3px solid maroon;
+}
+#sounds ul.list li > * {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+}
+#sounds ul.list label {
+  cursor: pointer;
+}
+#sounds ul.list label span {
+  padding: 1px 6px;
+}
+#sounds ul.list label span:empty::after {
+  content: 'new';
+  font-style: italic;
+  opacity: 0.5;
+}
+#sounds ul.list .add_sound button {
+  border: none;
+  background-color: inherit;
+  text-indent: 8px;
+  font-size: large;
+  justify-content: start;
+}
+#sounds ul.list .add_sound button:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+#sound_detail {
+  display: inline-block;
+  border-left: 8px solid var(--color-ruby);
+  margin-top: -10px;
+  margin-bottom: 1.5em;
+  padding: 5px 1.4em 18px;
+  min-width: 18em;
+  min-height: 4em;
+}
+#sound_detail:disabled {
+  display: none;
+}
+#sound_detail label {
+  display: flex;
+  align-items: baseline;
+  margin: 8px 0 1em;
+}
+#sound_detail label.dragover {
+  outline: 6px solid var(--color-ruby);
+  opacity: 0.8;
+}
+#sound_detail label input {
+  margin-left: 8px;
+  width: 100%;
+}
+#sound_detail .player .flex {
+  display: flex;
+  align-items: baseline;
+  margin-bottom: 4px;
+}
+#sound_detail .player .flex button {
+  margin-left: auto;
+}
+#sound_detail .player .warning {
+  padding: 4px 6px 6px;
+  line-height: 1.3;
+  background-color: rgba(217, 83, 79, 0.31);
+}
+#sound_detail .player .warning:empty {
+  display: none;
+}
+#sound_detail .player code {
+  opacity: 0.55;
+}
+#sound_detail .player.dragover {
+  outline: 6px solid var(--color-ruby);
+  opacity: 0.8;
+}
+#sound_detail .filename {
+  opacity: 0.55;
+  margin-right: 6px;
+}
+#sound_detail audio {
+  display: block;
+  width: 100%;
+}
+#sound_detail p:empty {
+  display: none;
+}
+#sound_detail .upload {
+  display: flex;
+  height: 3em;
+  margin: -5px 0 14px;
+}
+#sound_detail .upload label {
+  flex: auto;
+  opacity: 0.5;
+  background-color: rgba(0, 0, 0, 0.09);
+  margin: 0;
+  padding: 0 6px;
+  cursor: pointer;
+  line-height: 3em;
+}
+#sound_detail .upload button {
+  border: none;
+  background: none;
+  order: 1;
+}
+#sound_detail .ctrls {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20px;
+}
+#sound_detail .ctrls > * {
+  margin-right: 8px;
+}
+#sound_detail .ctrls .non-edit {
+  display: flex;
+  margin-left: auto;
+  margin-right: inherit;
+  position: relative;
+  left: 5px;
+}
+#sound_detail .ctrls .non-edit button {
+  padding: 0 3px;
+  border-color: transparent;
+  background-color: white;
+}
+
+#events {
+  width: 80%;
+  min-width: 550px;
+}
+#events table {
+  table-layout: fixed;
+  min-width: 100%;
+  font-size: 14px;
+  margin-bottom: 1em;
+  border: 1px solid #ddd;
+}
+#events th, #events td {
+  height: 30px;
+}
+#events th {
+  border: 4px solid var(--color-thead);
+  border-left: none;
+  border-right: none;
+  color: #777;
+  text-align: left;
+  font-weight: normal;
+}
+#events th span {
+  padding: 2px 4px 2px 10px;
+  border-left: 1px solid #c1c1c1;
+}
+#events th:first-child {
+  width: 36px;
+}
+#events th:last-child {
+  width: 72px;
+}
+#events td {
+  padding: 4px 10px;
+}
+#events td.e-ctrl, #events td.e-edit {
+  padding: 0;
+}
+#events td.e-ctrl {
+  text-align: center;
+}
+#events td.e-toggle label {
+  display: block;
+  text-align: center;
+  cursor: pointer;
+}
+#events td.e-options.unavailable {
+  opacity: 0.3 !important;
+}
+#events td.e-sound.not-set {
+  opacity: 0.4 !important;
+}
+#events thead {
+  background-color: var(--color-thead);
+}
+#events tbody tr.current {
+  background-color: #f4f7f8;
+  outline: 1px solid #999;
+}
+#events tbody tr:hover:not(.current) {
+  background-color: rgba(0, 149, 221, 0.25);
+}
+#events .e-ctrl button,
+#events .e-edit button {
+  padding: 1px 6px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background-color: inherit;
+}
+#events .e-ctrl button:hover,
+#events .e-edit button:hover {
+  background-color: white;
+}
+#events .e-ctrl button .off,
+#events .e-edit button .off {
+  display: none;
+}
+#events .e-ctrl button.cancel,
+#events .e-edit button.cancel {
+  display: none;
+}
+#events .e-non-edit {
+  display: flex;
+  justify-content: space-around;
+  align-items: last baseline;
+}
+#events .e-non-edit button {
+  padding: 0 3px;
+  border-color: transparent;
+}
+#events .e-non-edit button:first-child {
+  margin-left: auto;
+  margin-right: auto;
+}
+#events .e-non-edit button:last-child {
+  margin-right: auto;
+}
+#events button.add_event {
+  float: right;
+}
+#events tbody.editing tr.current {
+  background-color: white;
+  outline: 3px solid var(--color-ruby);
+  outline-offset: -1px;
+  box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
+}
+#events tbody.editing tr.current td.e-type:not(.unavailable):hover,
+#events tbody.editing tr.current td.e-options:not(.unavailable):hover,
+#events tbody.editing tr.current td.e-sound:not(.unavailable):hover {
+  background-color: rgba(0, 149, 221, 0.25);
+  cursor: pointer;
+}
+#events tbody.editing tr.current button:hover {
+  background-color: rgba(0, 149, 221, 0.25);
+}
+#events tbody.editing tr.current button.edit .off {
+  display: inline;
+}
+#events tbody.editing tr.current button.edit .on {
+  display: none;
+}
+#events tbody.editing tr.current button.cancel {
+  display: inline;
+}
+#events tbody.editing tr.current td.e-non-edit {
+  visibility: collapse;
+}
+#events tbody.editing tr:not(.current) {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+#events tbody.editing tr:not(.current) input, #events tbody.editing tr:not(.current) button {
+  pointer-events: none;
+}
+
+#menus ul {
+  position: absolute;
+  list-style: none;
+  display: none;
+  background-color: white;
+  border: 3px solid var(--color-ruby);
+  border-top: none;
+  box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
+}
+#menus li {
+  padding: 4px;
+  min-width: 140px;
+  min-height: 22px;
+  cursor: pointer;
+}
+#menus li:hover {
+  background-color: rgba(0, 149, 221, 0.25);
+}
+#menus li:first-child::before {
+  display: block;
+  position: absolute;
+  top: -3px;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  content: '';
+  background-color: white;
+}
+
+#main-ctrls button {
+  margin: 1em 0 2em;
+  padding: 2px 14px;
+}
+#main-ctrls #save {
+  margin-right: 3em;
+}
+
+/*# sourceMappingURL=options.css.map */

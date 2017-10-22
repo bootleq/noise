@@ -1,0 +1,26 @@
+{
+  "name": "Noise",
+  "description": "Make sound response when events happen",
+  "version": "1.4.4a",
+  "icons": {
+    "32": "icon.png"
+  },
+  "manifest_version": 2,
+
+  "permissions": [
+    "storage"
+  ],
+
+  "options_ui": {
+    "page": "options/options.html",
+    "open_in_tab": true,
+    "browser_style": true
+  },
+
+  "applications": {
+    "gecko": {
+      "id": "noise@bootleq",
+      "strict_min_version": "57.0b7"
+    }
+  }
+}
