@@ -54,3 +54,12 @@ function shrinkFont(el) {
     }
   }
 }
+
+function translateDOM() {
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    el.firstChild.textContent = browser.i18n.getMessage(`options${el.getAttribute('data-i18n')}`);
+  });
+  document.querySelectorAll('[data-i18n-title]').forEach(el => {
+    el.title = browser.i18n.getMessage(`options.title${el.getAttribute('data-i18n-title')}`);
+  });
+}

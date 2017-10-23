@@ -698,12 +698,7 @@ function onLoad() {
 
 async function init() {
   document.title = browser.i18n.getMessage('optionPageTitle');
-  document.querySelectorAll('[data-i18n]').forEach(el => {
-    el.firstChild.textContent = browser.i18n.getMessage(`options${el.getAttribute('data-i18n')}`);
-  });
-  document.querySelectorAll('[data-i18n-title]').forEach(el => {
-    el.title = browser.i18n.getMessage(`options.title${el.getAttribute('data-i18n-title')}`);
-  });
+  translateDOM();
 
   let sounds      = new Sounds(document.querySelector('#sounds'));
   let soundDetail = new SoundDetail(document.querySelector('#sound_detail'));
