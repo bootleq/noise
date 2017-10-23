@@ -710,6 +710,7 @@ async function init() {
   let events      = new Events(document.querySelector('#events'));
 
   let $importFile = document.querySelector('#import-file');
+  let $saved      = document.querySelector('#main-ctrls .info');
 
   sounds.addObserver('select', soundDetail.attach.bind(soundDetail));
 
@@ -723,11 +724,15 @@ async function init() {
 
   $save.addEventListener('click', () => {
     $save.disabled = true;
+    $saved.className = 'info';
+
     save().then(() => {
       $save.disabled = false;
+      $saved.classList.add('success');
     })
     .catch(e => {
       console.log('fail saving config', e);
+      $saved.classList.add('fail');
       $save.disabled = false;
     });
   });
@@ -750,6 +755,8 @@ async function init() {
       }
     });
   });
+
+  $saved.addEventListener('click', () => $saved.className = 'info');
 }
 
 window.addEventListener('DOMContentLoaded', init, {once: true});

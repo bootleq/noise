@@ -403,8 +403,26 @@ table {
 #main-ctrls button {
   padding: 2px 14px;
 }
-#main-ctrls #save {
-  margin-right: 3em;
+#main-ctrls .info {
+  display: inline-block;
+  min-width: 5em;
+  margin: 0 1em;
+  text-align: center;
+}
+#main-ctrls .info strong {
+  display: none;
+}
+#main-ctrls .info.success {
+  color: #006504;
+}
+#main-ctrls .info.success .success {
+  display: block;
+}
+#main-ctrls .info.fail {
+  color: #ff0039;
+}
+#main-ctrls .info.fail .fail {
+  display: block;
 }
 
 /*# sourceMappingURL=options.css.map */

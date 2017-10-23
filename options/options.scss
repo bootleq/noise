@@ -443,7 +443,28 @@ table {
   button {
     padding: 2px 14px;
   }
-  #save {
-    margin-right: 3em;
+
+  .info {
+    display: inline-block;
+    min-width: 5em;
+    margin: 0 1em;
+    text-align: center;
+
+    strong {
+      display: none;
+    }
+
+    &.success {
+      color: #006504;
+      .success {
+        display: block;
+      }
+    }
+    &.fail {
+      color: #ff0039;
+      .fail {
+        display: block;
+      }
+    }
   }
 }
