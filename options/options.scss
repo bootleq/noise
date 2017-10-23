@@ -414,9 +414,10 @@ table {
     list-style: none;
     display: none;
     background-color: white;
-    border: 3px solid var(--color-fx-red-70);
+    padding: 0 2px 2px;
     border-top: none;
-    box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
+    box-shadow: 1px 3px 4px rgba(0, 0, 0, 0.4);
+    font-size: small;
   }
   li {
     padding: 4px;
