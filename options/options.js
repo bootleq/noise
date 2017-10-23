@@ -148,6 +148,7 @@ class SoundDetail { // {{{
     this.$cancelUpload.addEventListener('click', () => this.toggleUploadUI());
 
     this.$name.addEventListener('input', this.validate.bind(this));
+    this.$name.addEventListener('keydown', this.onKey.bind(this));
     this.$ctrls.addEventListener('click', this.onCtrl.bind(this));
   }
 
@@ -244,16 +245,21 @@ class SoundDetail { // {{{
     this.$audio.play();
   }
 
+  onKey(e) {
+    switch (e.key) {
+    case 'Enter':
+      return this.accept();
+    case 'Escape':
+      return this.attach();
+    }
+  }
+
   onCtrl(e) {
     let $btn = e.target.closest('button');
 
     switch (true) {
       case $btn.matches('.accept'):
-        let sound = gSounds[this.$selected.dataset.soundId];
-        sound.name  = this.$name.value;
-        sound.src   = this.$audio.src;
-        sound.audio = null;
-        this.notifyObservers('accept');
+        this.accept();
         break;
 
       case $btn.matches('.cancel'):
@@ -273,6 +279,14 @@ class SoundDetail { // {{{
         this.notifyObservers('move', 'next');
         break;
     }
+  }
+
+  accept() {
+    let sound = gSounds[this.$selected.dataset.soundId];
+    sound.name  = this.$name.value;
+    sound.src   = this.$audio.src;
+    sound.audio = null;
+    this.notifyObservers('accept');
   }
 
   validate() {
