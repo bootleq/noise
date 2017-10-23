@@ -78,7 +78,7 @@
   "options.events.th.sound": {
     "message": "Sound"
   },
-  "options.checkbox.event.enabled": {
+  "options.title.checkbox.event.enabled": {
     "message": "Enabled"
   },
   "options.btn.event.edit": {
@@ -95,6 +95,9 @@
   },
   "options.btn.event.delete": {
     "message": "✖"
+  },
+  "options.title.btn.event.delete": {
+    "message": "Delete this event"
   },
   "options.btn.event.moveUp": {
     "message": "▲"

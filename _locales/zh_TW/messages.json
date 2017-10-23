@@ -48,7 +48,7 @@
     "message": "✖"
   },
   "options.title.btn.sound.delete": {
-    "message": "刪除"
+    "message": "刪除這個聲音"
   },
   "options.btn.sound.moveBack": {
     "message": "◀"
@@ -75,7 +75,7 @@
   "options.events.th.sound": {
     "message": "聲音"
   },
-  "options.checkbox.event.enabled": {
+  "options.title.checkbox.event.enabled": {
     "message": "啟用"
   },
   "options.btn.event.edit": {
@@ -92,6 +92,9 @@
   },
   "options.btn.event.delete": {
     "message": "✖"
+  },
+  "options.title.btn.event.delete": {
+    "message": "刪除這個事件"
   },
   "options.btn.event.moveUp": {
     "message": "▲"
