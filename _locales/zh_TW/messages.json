@@ -39,7 +39,7 @@
     }
   },
   "options.btn.sound.acceptEdit": {
-    "message": "確認"
+    "message": "✔ 確認"
   },
   "options.btn.sound.cancelEdit": {
     "message": "取消"

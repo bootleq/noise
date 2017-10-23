@@ -1,11 +1,13 @@
 :root {
   --sounds-cell-height: 60px;
-  --color-ruby: #a01010;
+  --color-fx-red-70: #a4000f;
+  --color-fx-red-80: #5a0002;
   --color-thead: #ebebeb;
 }
 
 body {
   margin-top: 1em;
+  display: block;
 }
 h1, ul {
   padding: 0;
@@ -13,12 +15,20 @@ h1, ul {
 }
 fieldset {
   border: none;
-  padding: 6px 0;
+}
+legend {
+  font-size: large;
 }
 input, button {
-  font-size: inherit;
+  font: caption;
+}
+label,
+input[type="button"],
+button {
+  font-size: larger;
 }
 input[type="button"],
+input[type="checkbox"],
 button {
   cursor: pointer;
 }
@@ -56,26 +66,27 @@ table {
     list-style: none;
 
     li {
+      font-size: 16px;
       color: #eee;
-      background-color: var(--color-ruby);
+      background-color: var(--color-fx-red-70);
       border-radius: 3px;
       text-shadow: 1px 1px 1px black, -1px -1px 1px black;
       overflow: auto;
       word-break: break-all;
       &:hover {
-        background-color: #800;
+        background-color: var(--color-fx-red-80);
         overflow: visible;
         span {
-          background-color: #800;
+          background-color: var(--color-fx-red-80);
         }
       }
       &.add_sound {
         background-color: inherit;
       }
       &.current {
-        color: var(--color-ruby);
+        color: var(--color-fx-red-70);
         background-color: white;
-        border: 1px solid var(--color-ruby);
+        border: 1px solid var(--color-fx-red-70);
         text-shadow: none;
         overflow: visible;
         span {
@@ -95,6 +106,7 @@ table {
     }
 
     label {
+      font-size: inherit;
       cursor: pointer;
       span {
         padding: 1px 6px;
@@ -121,11 +133,12 @@ table {
 
 #sound_detail {
   display: inline-block;
-  border-left: 8px solid var(--color-ruby);
-  margin-top: -10px;
+  border-left: 10px solid var(--color-fx-red-70);
+  margin-top: -9px;
   margin-bottom: 1.5em;
+  margin-left: 9px;
   padding: 5px 1.4em 18px;
-  min-width: 18em;
+  min-width: 26em;
   min-height: 4em;
 
   &:disabled {
@@ -136,9 +149,10 @@ table {
     display: flex;
     align-items: baseline;
     margin: 8px 0 1em;
+    word-break: keep-all;
 
     &.dragover {
-      outline: 6px solid var(--color-ruby);
+      outline: 6px solid var(--color-fx-red-70);
       opacity: 0.8;
     }
     input {
@@ -170,7 +184,7 @@ table {
     }
 
     &.dragover {
-      outline: 6px solid var(--color-ruby);
+      outline: 6px solid var(--color-fx-red-70);
       opacity: 0.8;
     }
   }
@@ -256,6 +270,8 @@ table {
     span {
       padding: 2px 4px 2px 10px;
       border-left: 1px solid #c1c1c1;
+      white-space: nowrap;
+      word-break: keep-all;
     }
     &:first-child {
       width: 36px;
@@ -298,17 +314,17 @@ table {
 
   tbody {
     tr.current {
-      background-color: #f4f7f8;
-      outline: 1px solid #999;
+      background-color: rgba(0,149,221,0.25);
     }
     tr:hover:not(.current) {
-      background-color: rgba(0,149,221,0.25);
+      background-color: rgba(0,149,221,0.4);
     }
   }
 
   .e-ctrl,
   .e-edit {
     button {
+      font-size: small;
       padding: 1px 6px;
       border: 1px solid #ddd;
       border-radius: 4px;
@@ -326,31 +342,29 @@ table {
   }
 
   .e-non-edit {
-    display: flex;
-    justify-content: space-around;
-    align-items: last baseline;
+    div {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      padding: 0 2px;
+    }
     button {
       padding: 0 3px;
       border-color: transparent;
       &:first-child {
-        margin-left: auto;
-        margin-right: auto;
-      }
-      &:last-child {
         margin-right: auto;
       }
     }
   }
 
   button.add_event {
+    padding: 2px 14px;
     float: right;
   }
 
   tbody.editing {
     tr.current {
       background-color: white;
-      outline: 3px solid var(--color-ruby);
-      outline-offset: -1px;
       box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
 
       td.e-type,
@@ -399,7 +413,7 @@ table {
     list-style: none;
     display: none;
     background-color: white;
-    border: 3px solid var(--color-ruby);
+    border: 3px solid var(--color-fx-red-70);
     border-top: none;
     box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
   }
@@ -425,8 +439,8 @@ table {
 }
 
 #main-ctrls {
+  margin: 1em 0 2em 9px;
   button {
-    margin: 1em 0 2em;
     padding: 2px 14px;
   }
   #save {

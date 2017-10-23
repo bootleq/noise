@@ -42,7 +42,7 @@
     }
   },
   "options.btn.sound.acceptEdit": {
-    "message": "Accept"
+    "message": "✔ Accept"
   },
   "options.btn.sound.cancelEdit": {
     "message": "Cancel"
