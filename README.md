@@ -20,10 +20,16 @@ Links
 WebExtension Compatibility
 --------------------------
 
-Not compatible.
+Compatible version is under development at `webext` branch.
 
-This is a XUL/XPCOM extension, and does access to low-level browser UI and
-content elements (to bind/watch events).
+Please understand that most functionalities will become unavailable.
 
-We can expect a completely re-writing, and many existing functionalities will
-no longer available.
+Noise still aims to provide a place to manage many events and sounds, while
+WebExtension has relatively more limitation, we can only gradually add new
+function step by step.
+
+
+Legacy Version (Firefox &lt; v57)
+---------------------------------
+
+Please use Noise v1.4.3.
