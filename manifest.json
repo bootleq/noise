@@ -8,9 +8,18 @@
   "manifest_version": 2,
 
   "permissions": [
-    "storage"
+    "storage",
+    "downloads"
   ],
 
+  "background": {
+    "scripts": [
+      "common/utils.js",
+      "common/sound.js",
+      "common/event.js",
+      "background.js"
+    ]
+  },
   "options_ui": {
     "page": "options/options.html",
     "open_in_tab": true,
