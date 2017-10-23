@@ -350,6 +350,7 @@ class Events { // {{{
     this.initMenus();
     this.$list.addEventListener('click', this.onSelect.bind(this));
     this.$addEvent.addEventListener('click', () => this.addEvent());
+    this.$el.addEventListener('click', this.onOuterSelect.bind(this));
     this.load();
   }
 
@@ -498,6 +499,14 @@ class Events { // {{{
     }
 
     this.$selected = $target.closest('tr');
+  }
+
+  onOuterSelect(e) {
+    let $target = e.target;
+    if (this.editing || $target.closest('#events tbody') || $target.tagName === 'BUTTON') {
+      return;
+    }
+    this.$selected = null;
   }
 
   set $selected(v) {
