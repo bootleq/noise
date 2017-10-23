@@ -115,6 +115,12 @@
   "options.btn.save": {
     "message": "儲存"
   },
+  "options.info.saveSuccess": {
+    "message": "已儲存"
+  },
+  "options.info.saveFail": {
+    "message": "儲存失敗"
+  },
   "options.btn.import": {
     "message": "匯入設定"
   },

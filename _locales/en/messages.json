@@ -119,6 +119,14 @@
   "options.btn.save": {
     "message": "Save"
   },
+  "options.info.saveSuccess": {
+    "message": "Saved!",
+    "description": "Little info text shown near Save button, when success"
+  },
+  "options.info.saveFail": {
+    "message": "Fail",
+    "description": "Little info text shown near Save button, when fail"
+  },
   "options.btn.import": {
     "message": "Import"
   },
