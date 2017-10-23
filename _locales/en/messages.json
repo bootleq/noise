@@ -1,0 +1,128 @@
+{
+  "extDescription": {
+    "message": "Make sound response when events happen"
+  },
+
+  "optionPageTitle": {
+    "message": "Noise - Options"
+  },
+
+  "options.header.sounds": {
+    "message": "Sounds"
+  },
+  "options.btn.addSound": {
+    "message": "➕"
+  },
+  "options.title.btn.addSound": {
+    "message": "Add Sound"
+  },
+
+  "options.sound.name": {
+    "message": "Name"
+  },
+  "options.title.btn.cancelUpload": {
+    "message": "Cancel Upload"
+  },
+  "options.sound.clickOrDropFile": {
+    "message": "Click or drop new sound here.",
+    "description": "Droppable zone for upload new sound file."
+  },
+  "options.btn.changeSound": {
+    "message": "Change",
+    "description": "When file already picked and player appear, user can click this button to switch to 'droppable' UI, to pick another file."
+  },
+  "options.warning.unsupportedMedia": {
+    "message": "This media type maybe unable to play.<br><code>$type$</code>",
+    "description": "When upload a file seems can't be played by <audio>, this warning is shown below the player.",
+    "placeholders": {
+      "type": {
+        "content": "$1",
+        "example": "audio/aiff"
+      }
+    }
+  },
+  "options.btn.sound.acceptEdit": {
+    "message": "Accept"
+  },
+  "options.btn.sound.cancelEdit": {
+    "message": "Cancel"
+  },
+  "options.btn.sound.delete": {
+    "message": "✖"
+  },
+  "options.title.btn.sound.delete": {
+    "message": "Delete this sound"
+  },
+  "options.btn.sound.moveBack": {
+    "message": "◀"
+  },
+  "options.title.btn.sound.moveBack": {
+    "message": "Move this sound backward from current position"
+  },
+  "options.btn.sound.moveNext": {
+    "message": "▶"
+  },
+  "options.title.btn.sound.moveNext": {
+    "message": "Move this sound afterward from current position"
+  },
+
+  "options.header.events": {
+    "message": "Events"
+  },
+  "options.events.th.type": {
+    "message": "Type"
+  },
+  "options.events.th.options": {
+    "message": "Options"
+  },
+  "options.events.th.sound": {
+    "message": "Sound"
+  },
+  "options.checkbox.event.enabled": {
+    "message": "Enabled"
+  },
+  "options.btn.event.edit": {
+    "message": "✏️ Edit"
+  },
+  "options.btn.event.accept": {
+    "message": "✔ Accept"
+  },
+  "options.btn.event.cancel": {
+    "message": "Cancel"
+  },
+  "options.btn.event.play": {
+    "message": "▸ Play"
+  },
+  "options.btn.event.delete": {
+    "message": "✖"
+  },
+  "options.btn.event.moveUp": {
+    "message": "▲"
+  },
+  "options.title.btn.event.moveUp": {
+    "message": "Move this event up from current position"
+  },
+  "options.btn.event.moveDown": {
+    "message": "▼"
+  },
+  "options.title.btn.event.moveDown": {
+    "message": "Move this event down from current position"
+  },
+  "options.btn.event.add": {
+    "message": "➕ Add Event"
+  },
+  "options.event.soundNotSet": {
+    "message": "Not set",
+    "description": "If user didn't select a sound, Event table show this text for 'Sound' column."
+  },
+
+  "options.btn.save": {
+    "message": "Save"
+  },
+  "options.btn.import": {
+    "message": "Import"
+  },
+  "options.btn.export": {
+    "message": "Export"
+  }
+}

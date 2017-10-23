@@ -222,7 +222,7 @@ class SoundDetail { // {{{
     }
 
     if (this.$audio.canPlayType(file.type) === '') {
-      msg = `This media type maybe unable to play.<br><code>${file.type}</code>`;
+      msg = browser.i18n.getMessage('options.warning.unsupportedMedia', file.type);
       this.$warning.innerHTML = msg;
     } else {
       this.$warning.textContent = '';
@@ -402,7 +402,7 @@ class Events { // {{{
     }
 
     $sound.classList.toggle('not-set', !!!sound);
-    $sound.textContent = sound ? sound.name : 'Not set';
+    $sound.textContent = sound ? sound.name : browser.i18n.getMessage('options.event.soundNotSet');
     $row.querySelector('button.play').disabled = !!!sound;
   }
 
@@ -672,6 +672,14 @@ function onLoad() {
 // }}}
 
 async function init() {
+  document.title = browser.i18n.getMessage('optionPageTitle');
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    el.firstChild.textContent = browser.i18n.getMessage(`options${el.getAttribute('data-i18n')}`);
+  });
+  document.querySelectorAll('[data-i18n-title]').forEach(el => {
+    el.title = browser.i18n.getMessage(`options.title${el.getAttribute('data-i18n-title')}`);
+  });
+
   let sounds      = new Sounds(document.querySelector('#sounds'));
   let soundDetail = new SoundDetail(document.querySelector('#sound_detail'));
   let events      = new Events(document.querySelector('#events'));

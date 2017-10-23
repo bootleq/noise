@@ -1,0 +1,124 @@
+{
+  "extDescription": {
+    "message": "事件發生的時候，製造一點聲響。"
+  },
+
+  "optionPageTitle": {
+    "message": "Noise 設定"
+  },
+
+  "options.header.sounds": {
+    "message": "聲音"
+  },
+  "options.btn.addSound": {
+    "message": "➕"
+  },
+  "options.title.btn.addSound": {
+    "message": "新增聲音"
+  },
+
+  "options.sound.name": {
+    "message": "名稱"
+  },
+  "options.title.btn.cancelUpload": {
+    "message": "取消上傳"
+  },
+  "options.sound.clickOrDropFile": {
+    "message": "點選以選擇，或拖曳檔案到這裡"
+  },
+  "options.btn.changeSound": {
+    "message": "更換"
+  },
+  "options.warning.unsupportedMedia": {
+    "message": "聲音格式可能無法播放。<br><code>$type$</code>",
+    "placeholders": {
+      "type": {
+        "content": "$1",
+        "example": "audio/aiff"
+      }
+    }
+  },
+  "options.btn.sound.acceptEdit": {
+    "message": "確認"
+  },
+  "options.btn.sound.cancelEdit": {
+    "message": "取消"
+  },
+  "options.btn.sound.delete": {
+    "message": "✖"
+  },
+  "options.title.btn.sound.delete": {
+    "message": "刪除"
+  },
+  "options.btn.sound.moveBack": {
+    "message": "◀"
+  },
+  "options.title.btn.sound.moveBack": {
+    "message": "往前移動順序"
+  },
+  "options.btn.sound.moveNext": {
+    "message": "▶"
+  },
+  "options.title.btn.sound.moveNext": {
+    "message": "往後移動順序"
+  },
+
+  "options.header.events": {
+    "message": "事件"
+  },
+  "options.events.th.type": {
+    "message": "類型"
+  },
+  "options.events.th.options": {
+    "message": "選項"
+  },
+  "options.events.th.sound": {
+    "message": "聲音"
+  },
+  "options.checkbox.event.enabled": {
+    "message": "啟用"
+  },
+  "options.btn.event.edit": {
+    "message": "✏️ 編輯"
+  },
+  "options.btn.event.accept": {
+    "message": "✔ 確認"
+  },
+  "options.btn.event.cancel": {
+    "message": "取消"
+  },
+  "options.btn.event.play": {
+    "message": "▸ 播放"
+  },
+  "options.btn.event.delete": {
+    "message": "✖"
+  },
+  "options.btn.event.moveUp": {
+    "message": "▲"
+  },
+  "options.title.btn.event.moveUp": {
+    "message": "往上移動順序"
+  },
+  "options.btn.event.moveDown": {
+    "message": "▼"
+  },
+  "options.title.btn.event.moveDown": {
+    "message": "往下移動順序"
+  },
+  "options.btn.event.add": {
+    "message": "➕ 新增事件"
+  },
+  "options.event.soundNotSet": {
+    "message": "未設定"
+  },
+
+  "options.btn.save": {
+    "message": "儲存"
+  },
+  "options.btn.import": {
+    "message": "匯入設定"
+  },
+  "options.btn.export": {
+    "message": "匯出設定"
+  }
+}

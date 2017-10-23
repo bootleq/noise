@@ -7,10 +7,10 @@
 
   <body>
     <fieldset id="sounds">
-      <legend>Sounds</legend>
+      <legend data-i18n='.header.sounds'>Sounds</legend>
 
       <ul class="list">
-        <li class="add_sound"><button>Add Sound</button></li>
+        <li class="add_sound"><button data-i18n='.btn.addSound' data-i18n-title='.btn.addSound'>Add Sound</button></li>
       </ul>
 
       <template>
@@ -23,14 +23,14 @@
     </fieldset>
 
     <fieldset id='sound_detail' disabled>
-      <label>
+      <label data-i18n='.sound.name'>
         Name
         <input type="text" class='name'/>
       </label>
 
       <div class='upload'>
-        <button class="cancel_upload hidden">✖ </button>
-        <label class='droppable'>
+        <button class="cancel_upload hidden" data-i18n-title='.btn.cancelUpload'>✖ </button>
+        <label class='droppable' data-i18n='.sound.clickOrDropFile'>
           Click or drop new sound here.
           <input type='file' accept='audio/*'>
         </label>
@@ -39,33 +39,33 @@
       <div class='player droppable'>
         <div class='flex'>
           <span class="filename"></span>
-          <button class="change">Change</button>
+          <button class="change" data-i18n='.btn.changeSound'>Change</button>
         </div>
         <audio controls></audio>
         <div class='warning'></div>
       </div>
 
       <div class='ctrls'>
-        <button class="accept" disabled>✔ Accept</button>
-        <button class="cancel">Cancel</button>
+        <button class="accept" disabled data-i18n='.btn.sound.acceptEdit'>✔ Accept</button>
+        <button class="cancel" data-i18n='.btn.sound.cancelEdit'>Cancel</button>
         <div class='non-edit'>
-          <button class="delete">✖</button>
-          <button class="move-back">◀</button>
-          <button class="move-next">▶</button>
+          <button class="delete" data-i18n='.btn.sound.delete' data-i18n-title='.btn.sound.delete'>✖</button>
+          <button class="move-back" data-i18n='.btn.sound.moveBack' data-i18n-title='.btn.sound.moveBack'>◀</button>
+          <button class="move-next" data-i18n='.btn.sound.moveNext' data-i18n-title='.btn.sound.moveNext'>▶</button>
         </td>
       </div>
     </fieldset>
 
     <fieldset id="events">
-      <legend>Events</legend>
+      <legend data-i18n='.header.events'>Events</legend>
 
       <table>
         <thead>
           <tr>
-            <th><span class='hidden'>Enabled</span></th>
-            <th><span>Type</span></th>
-            <th><span>Options</span></th>
-            <th><span>Sound</span></th>
+            <th></th>
+            <th><span data-i18n='.events.th.type'>Type</span></th>
+            <th><span data-i18n='.events.th.options'>Options</span></th>
+            <th><span data-i18n='.events.th.sound'>Sound</span></th>
             <th><span></span></th>
             <th><span></span></th>
           </tr>
@@ -75,28 +75,28 @@
 
         <template>
           <tr>
-            <td class='e-ctrl e-toggle'><label title='enabled'><input type='checkbox'/></label></td>
+            <td class='e-ctrl e-toggle'><label data-i18n-title='.checkbox.event.enabled'><input type='checkbox'/></label></td>
             <td class='e-type'></td>
             <td class='e-options'></td>
             <td class='e-sound'></td>
             <td class='e-edit'>
               <button class="edit">
-                <span class='on'>✏️ Edit</span>
-                <span class='off'>✔ Accept</span>
+                <span class='on' data-i18n='.btn.event.edit'>✏️ Edit</span>
+                <span class='off' data-i18n='.btn.event.accept'>✔ Accept</span>
               </button>
-              <button class="cancel">Cancel</button>
-              <button class="play">▸ Play</button>
+              <button class="cancel" data-i18n='.btn.event.cancel'>Cancel</button>
+              <button class="play" data-i18n='.btn.event.play'>▸ Play</button>
             </td>
             <td class='e-ctrl e-non-edit'>
-              <button class="delete">✖</button>
-              <button class="move-up">▲</button>
-              <button class="move-down">▼</button>
+              <button class="delete" data-i18n='.btn.event.delete' data-i18n-title='.btn.event.delete'>✖</button>
+              <button class="move-up" data-i18n='.btn.event.moveUp' data-i18n-title='.btn.event.moveUp'>▲</button>
+              <button class="move-down" data-i18n='.btn.event.moveDown' data-i18n-title='.btn.event.moveDown'>▼</button>
             </td>
           </tr>
         </template>
       </table>
 
-      <button class='add_event'>➕ Add Event</button>
+      <button class='add_event' data-i18n='.btn.event.add'>➕ Add Event</button>
     </fieldset>
 
     <div id='menus'>
@@ -105,10 +105,10 @@
     </div>
 
     <div id='main-ctrls'>
-      <button id='save' disabled>Save</button>
+      <button id='save' disabled data-i18n='.btn.save'>Save</button>
 
-      <button id='import' disabled>Import</button>
-      <button id='export' disabled>Export</button>
+      <button id='import' disabled data-i18n='.btn.import'>Import</button>
+      <button id='export' disabled data-i18n='.btn.export'>Export</button>
     </div>
 
     <input id='import-file' type='file' accept='.json' class='hidden'>

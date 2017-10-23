@@ -1,6 +1,6 @@
 {
   "name": "Noise",
-  "description": "Make sound response when events happen",
+  "description": "__MSG_extDescription__",
   "version": "1.4.4a",
   "icons": {
     "32": "icon.png"
@@ -26,6 +26,7 @@
     "browser_style": true
   },
 
+  "default_locale": "en",
   "applications": {
     "gecko": {
       "id": "noise@bootleq",
