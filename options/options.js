@@ -529,6 +529,7 @@ class Events { // {{{
       this.editing.options = JSON.parse(data.options);
       this.editing.soundId = data.soundId;
       this.editing = null;
+      Object.values(this.$menus).forEach(el => el.style.display = 'none');
     } else {
       this.editing = gEvents[$row.dataset.eventId];
       this._before = JSON.stringify(this.editing);
@@ -543,6 +544,7 @@ class Events { // {{{
     data.type = before.type;
     data.options = JSON.stringify(before.options);
     data.soundId = before.soundId;
+    Object.values(this.$menus).forEach(el => el.style.display = 'none');
     this.render($row);
   }
 
