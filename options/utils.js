@@ -62,7 +62,7 @@ function translateDOM() {
       el.firstChild.textContent = browser.i18n.getMessage(`options${el.getAttribute('data-i18n')}`);
     });
     node.querySelectorAll('[data-i18n-title]').forEach(el => {
-      el.title = browser.i18n.getMessage(`options.title${el.getAttribute('data-i18n-title')}`);
+      el.title = browser.i18n.getMessage(`options_title${el.getAttribute('data-i18n-title')}`);
     });
   });
 }

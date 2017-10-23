@@ -7,31 +7,31 @@
     "message": "Noise - Options"
   },
 
-  "options.header.sounds": {
+  "options_header_sounds": {
     "message": "Sounds"
   },
-  "options.btn.addSound": {
+  "options_btn_addSound": {
     "message": "➕"
   },
-  "options.title.btn.addSound": {
+  "options_title_btn_addSound": {
     "message": "Add Sound"
   },
 
-  "options.sound.name": {
+  "options_sound_name": {
     "message": "Name"
   },
-  "options.title.btn.cancelUpload": {
+  "options_title_btn_cancelUpload": {
     "message": "Cancel Upload"
   },
-  "options.sound.clickOrDropFile": {
+  "options_sound_clickOrDropFile": {
     "message": "Click or drop new sound here.",
     "description": "Droppable zone for upload new sound file."
   },
-  "options.btn.changeSound": {
+  "options_btn_changeSound": {
     "message": "Change",
     "description": "When file already picked and player appear, user can click this button to switch to 'droppable' UI, to pick another file."
   },
-  "options.warning.unsupportedMedia": {
+  "options_warning_unsupportedMedia": {
     "message": "This media type maybe unable to play.<br><code>$type$</code>",
     "description": "When upload a file seems can't be played by <audio>, this warning is shown below the player.",
     "placeholders": {
@@ -41,109 +41,109 @@
       }
     }
   },
-  "options.btn.sound.acceptEdit": {
+  "options_btn_sound_acceptEdit": {
     "message": "✔ Accept"
   },
-  "options.btn.sound.cancelEdit": {
+  "options_btn_sound_cancelEdit": {
     "message": "Cancel"
   },
-  "options.btn.sound.delete": {
+  "options_btn_sound_delete": {
     "message": "✖"
   },
-  "options.title.btn.sound.delete": {
+  "options_title_btn_sound_delete": {
     "message": "Delete this sound"
   },
-  "options.btn.sound.moveBack": {
+  "options_btn_sound_moveBack": {
     "message": "◀"
   },
-  "options.title.btn.sound.moveBack": {
+  "options_title_btn_sound_moveBack": {
     "message": "Move this sound backward from current position"
   },
-  "options.btn.sound.moveNext": {
+  "options_btn_sound_moveNext": {
     "message": "▶"
   },
-  "options.title.btn.sound.moveNext": {
+  "options_title_btn_sound_moveNext": {
     "message": "Move this sound afterward from current position"
   },
 
-  "options.header.events": {
+  "options_header_events": {
     "message": "Events"
   },
-  "options.events.th.type": {
+  "options_events_th_type": {
     "message": "Type"
   },
-  "options.events.th.options": {
+  "options_events_th_options": {
     "message": "Options"
   },
-  "options.events.th.sound": {
+  "options_events_th_sound": {
     "message": "Sound"
   },
-  "options.title.checkbox.event.enabled": {
+  "options_title_checkbox_event_enabled": {
     "message": "Enabled"
   },
-  "options.btn.event.edit": {
+  "options_btn_event_edit": {
     "message": "✏️ Edit"
   },
-  "options.btn.event.accept": {
+  "options_btn_event_accept": {
     "message": "✔ Accept"
   },
-  "options.btn.event.cancel": {
+  "options_btn_event_cancel": {
     "message": "Cancel"
   },
-  "options.btn.event.play": {
+  "options_btn_event_play": {
     "message": "▸ Play"
   },
-  "options.btn.event.delete": {
+  "options_btn_event_delete": {
     "message": "✖"
   },
-  "options.title.btn.event.delete": {
+  "options_title_btn_event_delete": {
     "message": "Delete this event"
   },
-  "options.btn.event.moveUp": {
+  "options_btn_event_moveUp": {
     "message": "▲"
   },
-  "options.title.btn.event.moveUp": {
+  "options_title_btn_event_moveUp": {
     "message": "Move this event up from current position"
   },
-  "options.btn.event.moveDown": {
+  "options_btn_event_moveDown": {
     "message": "▼"
   },
-  "options.title.btn.event.moveDown": {
+  "options_title_btn_event_moveDown": {
     "message": "Move this event down from current position"
   },
-  "options.btn.event.add": {
+  "options_btn_event_add": {
     "message": "➕ Add Event"
   },
-  "options.event.soundNotSet": {
+  "options_event_soundNotSet": {
     "message": "Not set",
     "description": "If user didn't select a sound, Event table show this text for 'Sound' column."
   },
 
-  "options.btn.save": {
+  "options_btn_save": {
     "message": "Save"
   },
-  "options.info.saveSuccess": {
+  "options_info_saveSuccess": {
     "message": "Saved!",
     "description": "Little info text shown near Save button, when success"
   },
-  "options.info.saveFail": {
+  "options_info_saveFail": {
     "message": "Fail",
     "description": "Little info text shown near Save button, when fail"
   },
-  "options.btn.import": {
+  "options_btn_import": {
     "message": "Import"
   },
-  "options.btn.export": {
+  "options_btn_export": {
     "message": "Export"
   },
 
-  "event.types.name.download.new": {
+  "event_types_name_downloadNew": {
     "message": "Download Started"
   },
-  "event.types.name.download.completed": {
+  "event_types_name_downloadCompleted": {
     "message": "Download Completed"
   },
-  "event.types.name.download.interrupted": {
+  "event_types_name_downloadInterrupted": {
     "message": "Download Interrupted"
   }
 }

@@ -223,7 +223,7 @@ class SoundDetail { // {{{
     }
 
     if (this.$audio.canPlayType(file.type) === '') {
-      msg = browser.i18n.getMessage('options.warning.unsupportedMedia', file.type);
+      msg = browser.i18n.getMessage('options_warning_unsupportedMedia', file.type);
       this.$warning.innerHTML = msg;
     } else {
       this.$warning.textContent = '';
@@ -417,7 +417,7 @@ class Events { // {{{
     }
 
     $sound.classList.toggle('not-set', !!!sound);
-    $sound.textContent = sound ? sound.name : browser.i18n.getMessage('options.event.soundNotSet');
+    $sound.textContent = sound ? sound.name : browser.i18n.getMessage('options_event_soundNotSet');
     $row.querySelector('button.play').disabled = !!!sound;
   }
 

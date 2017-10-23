@@ -7,29 +7,29 @@
     "message": "Noise 設定"
   },
 
-  "options.header.sounds": {
+  "options_header_sounds": {
     "message": "聲音"
   },
-  "options.btn.addSound": {
+  "options_btn_addSound": {
     "message": "➕"
   },
-  "options.title.btn.addSound": {
+  "options_title_btn_addSound": {
     "message": "新增聲音"
   },
 
-  "options.sound.name": {
+  "options_sound_name": {
     "message": "名稱"
   },
-  "options.title.btn.cancelUpload": {
+  "options_title_btn_cancelUpload": {
     "message": "取消上傳"
   },
-  "options.sound.clickOrDropFile": {
+  "options_sound_clickOrDropFile": {
     "message": "點選以選擇，或拖曳檔案到這裡"
   },
-  "options.btn.changeSound": {
+  "options_btn_changeSound": {
     "message": "更換"
   },
-  "options.warning.unsupportedMedia": {
+  "options_warning_unsupportedMedia": {
     "message": "聲音格式可能無法播放。<br><code>$type$</code>",
     "placeholders": {
       "type": {
@@ -38,106 +38,106 @@
       }
     }
   },
-  "options.btn.sound.acceptEdit": {
+  "options_btn_sound_acceptEdit": {
     "message": "✔ 確認"
   },
-  "options.btn.sound.cancelEdit": {
+  "options_btn_sound_cancelEdit": {
     "message": "取消"
   },
-  "options.btn.sound.delete": {
+  "options_btn_sound_delete": {
     "message": "✖"
   },
-  "options.title.btn.sound.delete": {
+  "options_title_btn_sound_delete": {
     "message": "刪除這個聲音"
   },
-  "options.btn.sound.moveBack": {
+  "options_btn_sound_moveBack": {
     "message": "◀"
   },
-  "options.title.btn.sound.moveBack": {
+  "options_title_btn_sound_moveBack": {
     "message": "往前移動順序"
   },
-  "options.btn.sound.moveNext": {
+  "options_btn_sound_moveNext": {
     "message": "▶"
   },
-  "options.title.btn.sound.moveNext": {
+  "options_title_btn_sound_moveNext": {
     "message": "往後移動順序"
   },
 
-  "options.header.events": {
+  "options_header_events": {
     "message": "事件"
   },
-  "options.events.th.type": {
+  "options_events_th_type": {
     "message": "類型"
   },
-  "options.events.th.options": {
+  "options_events_th_options": {
     "message": "選項"
   },
-  "options.events.th.sound": {
+  "options_events_th_sound": {
     "message": "聲音"
   },
-  "options.title.checkbox.event.enabled": {
+  "options_title_checkbox_event_enabled": {
     "message": "啟用"
   },
-  "options.btn.event.edit": {
+  "options_btn_event_edit": {
     "message": "✏️ 編輯"
   },
-  "options.btn.event.accept": {
+  "options_btn_event_accept": {
     "message": "✔ 確認"
   },
-  "options.btn.event.cancel": {
+  "options_btn_event_cancel": {
     "message": "取消"
   },
-  "options.btn.event.play": {
+  "options_btn_event_play": {
     "message": "▸ 播放"
   },
-  "options.btn.event.delete": {
+  "options_btn_event_delete": {
     "message": "✖"
   },
-  "options.title.btn.event.delete": {
+  "options_title_btn_event_delete": {
     "message": "刪除這個事件"
   },
-  "options.btn.event.moveUp": {
+  "options_btn_event_moveUp": {
     "message": "▲"
   },
-  "options.title.btn.event.moveUp": {
+  "options_title_btn_event_moveUp": {
     "message": "往上移動順序"
   },
-  "options.btn.event.moveDown": {
+  "options_btn_event_moveDown": {
     "message": "▼"
   },
-  "options.title.btn.event.moveDown": {
+  "options_title_btn_event_moveDown": {
     "message": "往下移動順序"
   },
-  "options.btn.event.add": {
+  "options_btn_event_add": {
     "message": "➕ 新增事件"
   },
-  "options.event.soundNotSet": {
+  "options_event_soundNotSet": {
     "message": "未設定"
   },
 
-  "options.btn.save": {
+  "options_btn_save": {
     "message": "儲存"
   },
-  "options.info.saveSuccess": {
+  "options_info_saveSuccess": {
     "message": "已儲存"
   },
-  "options.info.saveFail": {
+  "options_info_saveFail": {
     "message": "儲存失敗"
   },
-  "options.btn.import": {
+  "options_btn_import": {
     "message": "匯入設定"
   },
-  "options.btn.export": {
+  "options_btn_export": {
     "message": "匯出設定"
   },
 
-  "event.types.name.download.new": {
+  "event_types_name_downloadNew": {
     "message": "下載開始"
   },
-  "event.types.name.download.completed": {
+  "event_types_name_downloadCompleted": {
     "message": "下載完成"
   },
-  "event.types.name.download.interrupted": {
+  "event_types_name_downloadInterrupted": {
     "message": "下載失敗"
   }
 }
