@@ -132,5 +132,15 @@
   },
   "options.btn.export": {
     "message": "Export"
+  },
+
+  "event.types.name.download.new": {
+    "message": "Download Started"
+  },
+  "event.types.name.download.completed": {
+    "message": "Download Completed"
+  },
+  "event.types.name.download.interrupted": {
+    "message": "Download Interrupted"
   }
 }

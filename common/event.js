@@ -1,14 +1,16 @@
 'use strict';
 
+let scope = 'event.types.name.';
+
 const Types = {
   'download.new': {
-    name: 'Download started'
+    name: browser.i18n.getMessage(`${scope}download.new`)
   },
   'download.completed': {
-    name: 'Download completed'
+    name: browser.i18n.getMessage(`${scope}download.completed`)
   },
   'download.interrupted': {
-    name: 'Download interrupted'
+    name: browser.i18n.getMessage(`${scope}download.interrupted`)
   }
 };
 

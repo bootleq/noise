@@ -126,5 +126,15 @@
   },
   "options.btn.export": {
     "message": "匯出設定"
+  },
+
+  "event.types.name.download.new": {
+    "message": "下載開始"
+  },
+  "event.types.name.download.completed": {
+    "message": "下載完成"
+  },
+  "event.types.name.download.interrupted": {
+    "message": "下載失敗"
   }
 }
