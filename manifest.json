@@ -10,7 +10,9 @@
 
   "permissions": [
     "storage",
-    "downloads",
+    "downloads"
+  ],
+  "optional_permissions": [
     "webNavigation"
   ],
 

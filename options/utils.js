@@ -66,3 +66,8 @@ function translateDOM() {
     });
   });
 }
+
+function arrayDiff(a1, a2) {
+  let s2 = new Set(a2);
+  return [...a1].filter(item => !s2.has(item));
+}

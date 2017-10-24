@@ -69,6 +69,9 @@
   "options_events_th_type": {
     "message": "類型"
   },
+  "options_title_warning_eventForbidden": {
+    "message": "這個事件需要額外權限，點選「權限」按鈕以審查權限"
+  },
   "options_events_th_options": {
     "message": "選項"
   },
@@ -129,6 +132,9 @@
   },
   "options_btn_export": {
     "message": "匯出設定"
+  },
+  "options_btn_reviewPermission": {
+    "message": "權限"
   },
 
   "event_types_name_downloadNew": {

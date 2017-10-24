@@ -72,6 +72,10 @@
   "options_events_th_type": {
     "message": "Type"
   },
+  "options_title_warning_eventForbidden": {
+    "message": "This type requires additional permission, you can review permissions by click \"Permission\" button",
+    "description": "When selected event type has no sufficient permission, this title will be served as tooltip on event 'Type'."
+  },
   "options_events_th_options": {
     "message": "Options"
   },
@@ -135,6 +139,9 @@
   },
   "options_btn_export": {
     "message": "Export"
+  },
+  "options_btn_reviewPermission": {
+    "message": "Permissions"
   },
 
   "event_types_name_downloadNew": {
