@@ -690,19 +690,24 @@ class Permissions { // {{{
   }
 
   async request(names) {
-    browser.permissions.request({permissions: names}).then(yes => {
+    await browser.permissions.request({permissions: names}).then(yes => {
       if (yes) {
         gPermissions = Array.from(new Set([...gPermissions, ...names]));
+        browser.runtime.sendMessage({type: 'listeners'});
         this.update();
       }
     });
   }
 
   async revoke(names) {
-    browser.permissions.remove({permissions: names}).then(yes => {
+    browser.runtime.sendMessage({type: 'listeners', action: 'unbind'});
+    await browser.permissions.remove({permissions: names}).then(yes => {
       if (yes) {
         gPermissions = arrayDiff(gPermissions, names);
+        browser.runtime.sendMessage({type: 'listeners'});
         this.update();
+      } else {
+        browser.runtime.sendMessage({type: 'listeners'});
       }
     });
   }

@@ -7,11 +7,13 @@ async function init() {
   window.addEventListener('unload', destroy, {once: true});
   await loadConfig();
   browser.storage.onChanged.addListener(onStorageChange);
+  browser.runtime.onMessage.addListener(onMessage);
   addListeners();
 }
 
 function destroy() {
   browser.storage.onChanged.removeListener(onStorageChange);
+  browser.runtime.onMessage.removeListener(onMessage);
   removeListeners();
 }
 
@@ -24,6 +26,26 @@ function onStorageChange(changes, _area) {
     resetEvents(changes.events.newValue);
     removeListeners();
     addListeners();
+  }
+}
+
+function onMessage(msg, sender, respond) {
+  if (typeof msg.type !== 'string') {
+    return;
+  }
+
+  switch (msg.type) {
+  case 'listeners':
+    if ('action' in msg) {
+      if (msg.action === 'bind') {
+        addListeners();
+      } else {
+        removeListeners();
+      }
+    } else {
+      removeListeners();
+      addListeners();
+    }
   }
 }
 
@@ -55,6 +77,11 @@ function addListeners() {
 function removeListeners() {
   browser.downloads.onCreated.removeListener(onDownloadCreated);
   browser.downloads.onChanged.removeListener(onDownloadChanged);
+  if (typeof browser.webNavigation === 'object') {
+    ['onCommitted', 'onHistoryStateUpdated', 'onReferenceFragmentUpdated'].forEach(event => {
+      browser.webNavigation[event].removeListener(onBackForward);
+    });
+  }
 }
 
 function resetSounds(configs) {
