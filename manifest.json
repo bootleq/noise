@@ -10,7 +10,8 @@
 
   "permissions": [
     "storage",
-    "downloads"
+    "downloads",
+    "webNavigation"
   ],
 
   "background": {

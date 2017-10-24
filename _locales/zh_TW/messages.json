@@ -139,5 +139,8 @@
   },
   "event_types_name_downloadInterrupted": {
     "message": "下載失敗"
+  },
+  "event_types_name_navigationBackForward": {
+    "message": "上一頁／下一頁"
   }
 }

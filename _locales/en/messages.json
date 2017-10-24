@@ -145,5 +145,8 @@
   },
   "event_types_name_downloadInterrupted": {
     "message": "Download Interrupted"
+  },
+  "event_types_name_navigationBackForward": {
+    "message": "Back / Forward"
   }
 }

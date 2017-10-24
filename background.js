@@ -44,6 +44,10 @@ function addListeners() {
   let types = Object.keys(gEvents);
   toggleListener(browser.downloads.onCreated, onDownloadCreated, types.includes('download.new'));
   toggleListener(browser.downloads.onChanged, onDownloadChanged, hasAny(['download.completed', 'download.interrupted'], types));
+
+  ['onCommitted', 'onHistoryStateUpdated', 'onReferenceFragmentUpdated'].forEach(event => {
+    toggleListener(browser.webNavigation[event], onBackForward, types.includes('navigation.backForward'));
+  });
 }
 
 function removeListeners() {
@@ -107,6 +111,11 @@ function onDownloadChanged(delta) { // https://developer.mozilla.org/en-US/Add-o
   }
 }
 
+function onBackForward(details) { // webNavigation: onHistoryStateUpdated, onReferenceFragmentUpdated, onCommitted
+  if (details.transitionQualifiers.includes('forward_back')) {
+    gEvents['navigation.backForward'].forEach(e => play(e.soundId));
+  }
+}
 // }}}
 
 // Utils {{{

@@ -11,6 +11,9 @@ const Types = {
   },
   'download.interrupted': {
     name: browser.i18n.getMessage(`${scope}downloadInterrupted`)
+  },
+  'navigation.backForward': {
+    name: browser.i18n.getMessage(`${scope}navigationBackForward`)
   }
 };
 
