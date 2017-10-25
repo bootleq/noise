@@ -386,7 +386,7 @@ class Events { // {{{
 
   initMenus() {
     let html = Object.entries(EventSetting.Types).reduce((s, kv) => {
-      let perms = EventSetting.t('permissions', kv[0]);
+      let perms = EventSetting.getTypeDef(kv[0], 'permissions');
       let permProp = perms.length ? `data-permissions='${JSON.stringify(perms)}'` : '';
       return s + `<li data-value="${kv[0]}" ${permProp}>${kv[1].name}</li>`;
     }, '');
@@ -436,7 +436,7 @@ class Events { // {{{
     let $sound   = $row.querySelector('.e-sound');
     let $options = $row.querySelector('.e-options');
 
-    $row.querySelector('.e-type').textContent = EventSetting.t('type', data.type);
+    $row.querySelector('.e-type').textContent = EventSetting.getTypeDef(data.type, 'name');
     $options.classList.toggle('unavailable', Object.keys(options).length === 0);
     if (Object.keys(options).length === 0) {
       $options.textContent = ' - - ';
@@ -614,7 +614,7 @@ class Events { // {{{
 
     let tmpl = document.importNode(this.tmpl, true);
     let data = tmpl.querySelector('tr').dataset;
-    let perms = EventSetting.t('permissions', e.type);
+    let perms = EventSetting.getTypeDef(e.type, 'permissions');
     data.eventId = e.id;
     data.type    = e.type;
     data.options = JSON.stringify(e.options);
@@ -641,7 +641,7 @@ class Events { // {{{
       this.$selected.dataset.options = JSON.stringify({});
     }
 
-    let perms = EventSetting.t('permissions', value);
+    let perms = EventSetting.getTypeDef(value, 'permissions');
     if (perms.length) {
       this.$selected.dataset.permissions = perms;
     } else if ('permissions' in this.$selected.dataset) {

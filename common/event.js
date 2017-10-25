@@ -42,21 +42,18 @@ class EventSetting {
     return obj;
   }
 
-  static t(prop, key) {
-    let setting;
+  static getTypeDef(type, prop) {
+    let def = this.Types[type];
 
     switch (prop) {
-    case 'type':
-      setting = this.Types[key];
-      return setting ? setting.name : '';
+    case 'name':
+      return def ? def.name : '';
 
     case 'permissions':
-      setting = this.Types[key];
-      return (setting && 'permissions' in setting) ? setting.permissions : [];
+      return (def && 'permissions' in def) ? def.permissions : [];
 
     case 'options':
-      setting = this.Types[key];
-      return setting ? setting.name : 'No options for this type';
+      return (def && 'options' in def) ? def.options : null;
     }
   }
 }
