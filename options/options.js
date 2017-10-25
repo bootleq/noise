@@ -888,6 +888,17 @@ async function init() {
   $saved.addEventListener('click', () => $saved.className = 'info');
 
   $permsBtn.addEventListener('click', permissions.toggleDialog.bind(permissions, $permsBtn));
+
+  let resizeTimeout;
+  window.addEventListener('resize', () => {
+    if (!resizeTimeout) {
+      resizeTimeout = setTimeout(() => {
+        document.querySelectorAll('#menus ul').forEach(menu => menu.style.display = 'none');
+        document.querySelector('#permissions').classList.add('hidden');
+        resizeTimeout = null;
+      }, 66);
+    }
+  });
 }
 
 window.addEventListener('DOMContentLoaded', init, {once: true});
