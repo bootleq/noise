@@ -1,3 +1,4 @@
+@charset "UTF-8";
 :root {
   --sounds-cell-height: 60px;
   --color-fx-red-70: #a4000f;
@@ -298,6 +299,19 @@ table {
 #events tbody tr:hover:not(.current) {
   background-color: rgba(0, 149, 221, 0.4);
 }
+#events tbody tr.missing-permissions td.e-type {
+  color: #999;
+}
+#events tbody tr.missing-permissions td.e-type:after {
+  content: '💀';
+  margin-left: 5px;
+  padding: 0 2px;
+  display: inline-block;
+  font-size: smaller;
+  background-color: var(--color-fx-red-70);
+  color: white;
+  cursor: help;
+}
 #events .e-ctrl button,
 #events .e-edit button {
   font-size: small;
@@ -397,6 +411,47 @@ table {
   height: 3px;
   content: '';
   background-color: white;
+}
+#menus li.missing-permissions {
+  color: #999;
+}
+
+#permissions {
+  padding: 0 14px 21px 12px;
+  position: absolute;
+  left: 20px;
+  float: left;
+  background-color: white;
+  border: 6px solid #363959;
+  border-radius: 9px;
+  box-shadow: 1px 3px 4px rgba(0, 0, 0, 0.4);
+}
+#permissions ul {
+  list-style: none;
+}
+#permissions li {
+  line-height: 1.7;
+}
+#permissions label {
+  cursor: pointer;
+}
+#permissions input {
+  vertical-align: text-bottom;
+}
+#permissions code {
+  font-family: 'Segoe UI', 'San Francisco', 'Ubuntu', monospace;
+  font-size: small;
+  background-color: #ebebeb;
+  padding: 0 4px;
+  border-radius: 6px;
+}
+#permissions button {
+  padding: 0 3px;
+  border-color: transparent;
+  background-color: transparent;
+  position: absolute;
+  top: 1px;
+  right: 2px;
 }
 
 #main-ctrls {

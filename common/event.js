@@ -11,6 +11,10 @@ const Types = {
   },
   'download.interrupted': {
     name: browser.i18n.getMessage(`${scope}downloadInterrupted`)
+  },
+  'navigation.backForward': {
+    name: browser.i18n.getMessage(`${scope}navigationBackForward`),
+    permissions: ['webNavigation']
   }
 };
 
@@ -45,6 +49,11 @@ class EventSetting {
     case 'type':
       setting = this.Types[key];
       return setting ? setting.name : '';
+
+    case 'permissions':
+      setting = this.Types[key];
+      return (setting && 'permissions' in setting) ? setting.permissions : [];
+
     case 'options':
       setting = this.Types[key];
       return setting ? setting.name : 'No options for this type';

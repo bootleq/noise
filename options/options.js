@@ -3,6 +3,7 @@
 let gSounds = {};
 let gEvents = {};
 let gLoaded = [];
+let gPermissions = [];
 
 let $save   = document.querySelector('#save');
 let $import = document.querySelector('#import');
@@ -385,12 +386,37 @@ class Events { // {{{
 
   initMenus() {
     let html = Object.entries(EventSetting.Types).reduce((s, kv) => {
-      return s + `<li data-value="${kv[0]}">${kv[1].name}</li>`;
+      let perms = EventSetting.t('permissions', kv[0]);
+      let permProp = perms.length ? `data-permissions='${JSON.stringify(perms)}'` : '';
+      return s + `<li data-value="${kv[0]}" ${permProp}>${kv[1].name}</li>`;
     }, '');
     this.$menus.types.innerHTML = html;
+    this.updateEventMenu();
     this.$menus.types.addEventListener('click', this.onSelectType.bind(this));
 
     this.$menus.sounds.addEventListener('click', this.onSelectSound.bind(this));
+  }
+
+  updatePermissions() {
+    this.updateEventMenu();
+    this.$list.querySelectorAll('tr[data-permissions]').forEach($row => {
+      let perms = JSON.parse($row.dataset.permissions);
+      let missing = arrayDiff(perms, gPermissions).length;
+      let $type = $row.querySelector('td.e-type');
+      $row.classList.toggle('missing-permissions', missing);
+      if (missing) {
+        $type.title = browser.i18n.getMessage('options_title_warning_eventForbidden');
+      } else {
+        $type.removeAttribute('title');
+      }
+    });
+  }
+
+  updateEventMenu() {
+    this.$menus.types.querySelectorAll('li[data-permissions]').forEach(el => {
+      let perms = JSON.parse(el.dataset.permissions);
+      el.classList.toggle('missing-permissions', arrayDiff(perms, gPermissions).length);
+    });
   }
 
   updateSoundMenu() {
@@ -588,10 +614,14 @@ class Events { // {{{
 
     let tmpl = document.importNode(this.tmpl, true);
     let data = tmpl.querySelector('tr').dataset;
+    let perms = EventSetting.t('permissions', e.type);
     data.eventId = e.id;
     data.type    = e.type;
     data.options = JSON.stringify(e.options);
     data.soundId = e.soundId;
+    if (perms.length) {
+      data.permissions = JSON.stringify(perms);
+    }
 
     tmpl.querySelector('.e-toggle input').checked = e.enabled;
     this.$list.appendChild(tmpl);
@@ -600,12 +630,24 @@ class Events { // {{{
 
   onSelectType(e) {
     let $li = e.target.closest('li');
+    if ($li.classList.contains('missing-permissions')) {
+      return this.notifyObservers('requestPermissions', JSON.parse($li.dataset.permissions));
+    }
+
     let value = $li.dataset.value;
     this.$selected.dataset.type = value;
     this.$menus.types.style.display = 'none';
     if (this.editing.type !== value) {
       this.$selected.dataset.options = JSON.stringify({});
     }
+
+    let perms = EventSetting.t('permissions', value);
+    if (perms.length) {
+      this.$selected.dataset.permissions = perms;
+    } else if ('permissions' in this.$selected.dataset) {
+      delete this.$selected.dataset.permissions;
+    }
+
     this.render(this.$selected);
   }
 
@@ -615,6 +657,91 @@ class Events { // {{{
     this.$selected.dataset.soundId = value;
     this.$menus.sounds.style.display = 'none';
     this.render(this.$selected);
+  }
+}
+// }}}
+
+class Permissions { // {{{
+  constructor(el) {
+    this.$el = el;
+    this._observers = {};
+    this.bindCheckboxHandler();
+    this.bindCloseBtnHandler();
+  }
+
+  addObserver(topic, func) {
+    if (!(topic in this._observers)) {
+      this._observers[topic] = [];
+    }
+    this._observers[topic].push(func);
+  }
+  notifyObservers(topic, data) {
+    if (topic in this._observers) {
+      this._observers[topic].forEach((observer) => {
+        observer(data);
+      });
+    }
+  }
+
+  update() {
+    this.$el.querySelectorAll('input[data-perm]').forEach($box => {
+      $box.checked = gPermissions.includes($box.dataset.perm);
+    });
+    this.notifyObservers('update');
+  }
+
+  async request(names) {
+    await browser.permissions.request({permissions: names}).then(yes => {
+      if (yes) {
+        gPermissions = Array.from(new Set([...gPermissions, ...names]));
+        browser.runtime.sendMessage({type: 'listeners'});
+        this.update();
+      }
+    });
+  }
+
+  async revoke(names) {
+    browser.runtime.sendMessage({type: 'listeners', action: 'unbind'});
+    await browser.permissions.remove({permissions: names}).then(yes => {
+      if (yes) {
+        gPermissions = arrayDiff(gPermissions, names);
+        browser.runtime.sendMessage({type: 'listeners'});
+        this.update();
+      } else {
+        browser.runtime.sendMessage({type: 'listeners'});
+      }
+    });
+  }
+
+  toggleDialog($btn) {
+    if (this.$el.classList.contains('hidden')) {
+      this.$el.style.visibility = 'hidden';
+      this.$el.classList.remove('hidden');
+      let btnRect = $btn.getBoundingClientRect();
+      let boxRect = this.$el.getBoundingClientRect();
+      this.$el.style.top = (btnRect.top - boxRect.height - 10) + 'px';
+      this.$el.style.visibility = 'visible';
+    } else {
+      this.$el.classList.add('hidden');
+    }
+  }
+
+  bindCheckboxHandler() {
+    this.$el.addEventListener('click', e => {
+      let $target = e.target;
+      if ($target.tagName === 'INPUT') {
+        e.preventDefault();
+        if ($target.checked) {
+          this.request([$target.dataset.perm]);
+        } else {
+          this.revoke([$target.dataset.perm]);
+        }
+      }
+    });
+  }
+
+  bindCloseBtnHandler() {
+    this.$el.querySelector('button').addEventListener('click', () => this.toggleDialog());
   }
 }
 // }}}
@@ -700,12 +827,16 @@ async function init() {
   document.title = browser.i18n.getMessage('optionPageTitle');
   translateDOM();
 
+  gPermissions = await browser.permissions.getAll().then(result => result.permissions);
+
   let sounds      = new Sounds(document.querySelector('#sounds'));
   let soundDetail = new SoundDetail(document.querySelector('#sound_detail'));
   let events      = new Events(document.querySelector('#events'));
+  let permissions = new Permissions(document.querySelector('#permissions'));
 
   let $importFile = document.querySelector('#import-file');
   let $saved      = document.querySelector('#main-ctrls .info');
+  let $permsBtn   = document.querySelector('#review-permission');
 
   sounds.addObserver('select', soundDetail.attach.bind(soundDetail));
 
@@ -716,6 +847,9 @@ async function init() {
 
   sounds.addObserver('load', onLoad);
   events.addObserver('load', onLoad);
+  events.addObserver('load', permissions.update.bind(permissions));
+  events.addObserver('requestPermissions', permissions.request.bind(permissions));
+  permissions.addObserver('update', events.updatePermissions.bind(events))
 
   $save.addEventListener('click', () => {
     $save.disabled = true;
@@ -752,6 +886,8 @@ async function init() {
   });
 
   $saved.addEventListener('click', () => $saved.className = 'info');
+
+  $permsBtn.addEventListener('click', permissions.toggleDialog.bind(permissions, $permsBtn));
 }
 
 window.addEventListener('DOMContentLoaded', init, {once: true});

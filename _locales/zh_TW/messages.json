@@ -69,6 +69,9 @@
   "options_events_th_type": {
     "message": "類型"
   },
+  "options_title_warning_eventForbidden": {
+    "message": "這個事件需要額外權限，點選「權限」按鈕以審查權限"
+  },
   "options_events_th_options": {
     "message": "選項"
   },
@@ -115,6 +118,16 @@
     "message": "未設定"
   },
 
+  "options_header_permissions": {
+    "message": "已准許的額外權限"
+  },
+  "options_perms_desc_webNavigation": {
+    "message": "在上網時了解瀏覽器行為狀態"
+  },
+  "options_title_btn_close": {
+    "message": "關閉"
+  },
+
   "options_btn_save": {
     "message": "儲存"
   },
@@ -130,6 +143,9 @@
   "options_btn_export": {
     "message": "匯出設定"
   },
+  "options_btn_reviewPermission": {
+    "message": "權限"
+  },
 
   "event_types_name_downloadNew": {
     "message": "下載開始"
@@ -139,5 +155,8 @@
   },
   "event_types_name_downloadInterrupted": {
     "message": "下載失敗"
+  },
+  "event_types_name_navigationBackForward": {
+    "message": "上一頁／下一頁"
   }
 }

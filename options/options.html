@@ -107,6 +107,20 @@
       <ul class='sounds'></ul>
     </div>
 
+    <div id='permissions' class='hidden'>
+      <h2 data-i18n='_header_permissions'>Additional Granted Permissions</h2>
+      <button data-i18n-title='_btn_close'>✖</button>
+      <ul>
+        <li>
+          <label>
+            <input type='checkbox' data-perm='webNavigation' />
+            <span data-i18n='_perms_desc_webNavigation'>Access browser activity during navigation</span>
+            <code>webNavigation</code>
+          </label>
+        </li>
+      </ul>
+    </div>
+
     <div id='main-ctrls'>
       <button id='save' disabled data-i18n='_btn_save'>Save</button>
       <div class='info'>
@@ -115,6 +129,7 @@
       </div>
       <button id='import' disabled data-i18n='_btn_import'>Import</button>
       <button id='export' disabled data-i18n='_btn_export'>Export</button>
+      <button id='review-permission' data-i18n='_btn_reviewPermission'>Permissions</button>
     </div>
 
     <input id='import-file' type='file' accept='.json' class='hidden'>

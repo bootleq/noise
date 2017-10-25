@@ -12,6 +12,9 @@
     "storage",
     "downloads"
   ],
+  "optional_permissions": [
+    "webNavigation"
+  ],
 
   "background": {
     "scripts": [
