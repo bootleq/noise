@@ -130,6 +130,9 @@
     "message": "Access browser activity during navigation",
     "description": "description about 'webNavigation' permission, should be identical to 'webextPerms.description.webNavigation' in https://hg.mozilla.org/l10n-central/zh-TW/file/default/browser/chrome/browser/browser.properties (change `zh-TW` to your locale)."
   },
+  "options_title_btn_close": {
+    "message": "Close"
+  },
 
   "options_btn_save": {
     "message": "Save"

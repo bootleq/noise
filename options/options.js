@@ -666,6 +666,7 @@ class Permissions { // {{{
     this.$el = el;
     this._observers = {};
     this.bindCheckboxHandler();
+    this.bindCloseBtnHandler();
   }
 
   addObserver(topic, func) {
@@ -712,6 +713,19 @@ class Permissions { // {{{
     });
   }
 
+  toggleDialog($btn) {
+    if (this.$el.classList.contains('hidden')) {
+      this.$el.style.visibility = 'hidden';
+      this.$el.classList.remove('hidden');
+      let btnRect = $btn.getBoundingClientRect();
+      let boxRect = this.$el.getBoundingClientRect();
+      this.$el.style.top = (btnRect.top - boxRect.height - 10) + 'px';
+      this.$el.style.visibility = 'visible';
+    } else {
+      this.$el.classList.add('hidden');
+    }
+  }
+
   bindCheckboxHandler() {
     this.$el.addEventListener('click', e => {
       let $target = e.target;
@@ -724,6 +738,10 @@ class Permissions { // {{{
         }
       }
     });
+  }
+
+  bindCloseBtnHandler() {
+    this.$el.querySelector('button').addEventListener('click', () => this.toggleDialog());
   }
 }
 // }}}
@@ -818,6 +836,7 @@ async function init() {
 
   let $importFile = document.querySelector('#import-file');
   let $saved      = document.querySelector('#main-ctrls .info');
+  let $permsBtn   = document.querySelector('#review-permission');
 
   sounds.addObserver('select', soundDetail.attach.bind(soundDetail));
 
@@ -867,6 +886,8 @@ async function init() {
   });
 
   $saved.addEventListener('click', () => $saved.className = 'info');
+
+  $permsBtn.addEventListener('click', permissions.toggleDialog.bind(permissions, $permsBtn));
 }
 
 window.addEventListener('DOMContentLoaded', init, {once: true});

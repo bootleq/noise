@@ -124,6 +124,9 @@
   "options_perms_desc_webNavigation": {
     "message": "在上網時了解瀏覽器行為狀態"
   },
+  "options_title_btn_close": {
+    "message": "關閉"
+  },
 
   "options_btn_save": {
     "message": "儲存"

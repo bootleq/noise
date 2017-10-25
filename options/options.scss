@@ -458,6 +458,44 @@ table {
   }
 }
 
+#permissions {
+  padding: 0 14px 21px 12px;
+  position: absolute;
+  left: 20px;
+  float: left;
+  background-color: white;
+  border: 6px solid #363959;
+  border-radius: 9px;
+  box-shadow: 1px 3px 4px rgba(0, 0, 0, 0.4);
+  ul {
+    list-style: none;
+  }
+  li {
+    line-height: 1.7;
+  }
+  label {
+    cursor: pointer;
+  }
+  input {
+    vertical-align: text-bottom;
+  }
+  code {
+    font-family: 'Segoe UI', 'San Francisco', 'Ubuntu', monospace;
+    font-size: small;
+    background-color: #ebebeb;
+    padding: 0 4px;
+    border-radius: 6px;
+  }
+  button {
+    padding: 0 3px;
+    border-color: transparent;
+    background-color: transparent;
+    position: absolute;
+    top: 1px;
+    right: 2px;
+  }
+}
+
 #main-ctrls {
   margin: 1em 0 2em 9px;
   button {
