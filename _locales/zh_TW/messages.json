@@ -118,6 +118,13 @@
     "message": "未設定"
   },
 
+  "options_header_permissions": {
+    "message": "已准許的額外權限"
+  },
+  "options_perms_desc_webNavigation": {
+    "message": "在上網時了解瀏覽器行為狀態"
+  },
+
   "options_btn_save": {
     "message": "儲存"
   },

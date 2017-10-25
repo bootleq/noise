@@ -123,6 +123,14 @@
     "description": "If user didn't select a sound, Event table show this text for 'Sound' column."
   },
 
+  "options_header_permissions": {
+    "message": "Additional Granted Permissions"
+  },
+  "options_perms_desc_webNavigation": {
+    "message": "Access browser activity during navigation",
+    "description": "description about 'webNavigation' permission, should be identical to 'webextPerms.description.webNavigation' in https://hg.mozilla.org/l10n-central/zh-TW/file/default/browser/chrome/browser/browser.properties (change `zh-TW` to your locale)."
+  },
+
   "options_btn_save": {
     "message": "Save"
   },
