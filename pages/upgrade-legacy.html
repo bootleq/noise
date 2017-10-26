@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>New Noise</title>
+    <meta charset="utf-8">
+    <style>
+      html {
+        background: black radial-gradient(ellipse at 6%, #001010 0%, #300000 76%) 75% 70% / cover no-repeat;
+        color: #ddd;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-rendering: optimizeLegibility;
+        min-height: 100%;
+        font-size: large;
+        font: caption;
+        text-shadow: 1px 1px 1px black, -1px -1px 1px black;
+      }
+      h1 {
+        color: white;
+        font-style: italic;
+      }
+      h1 small {
+        font-size: medium;
+        font-weight: normal;
+      }
+      p {
+        margin-left: 1em;
+        font-size: larger;
+      }
+      strong {
+        color: white;
+      }
+      a {
+        color: white;
+      }
+      code {
+        font-family: 'Segoe UI', 'San Francisco', 'Ubuntu', monospace;
+        color: white;
+        padding: 0 2px;
+      }
+      code:hover {
+        background-color: gold;
+        border-radius: 3px;
+        color: black;
+        text-shadow: none;
+      }
+      hr {
+        visibility: hidden;
+      }
+      #write {
+        text-align: right;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1><small>about:</small> New Noise</h1>
+
+    <p>
+      You've upgraded to <strong>WebExtensions</strong> version.
+    </p>
+
+    <p>
+      This is a major update,
+      gave up powerful but legacy technologies which are no longer supported by Firefox.
+    </p>
+
+    <p>
+      You would find most existing functionalities become <strong>unavailable</strong>.
+    </p>
+
+    <p>
+      Also options UI is changed and <strong>not compatible</strong> with old settings.
+    </p>
+    <p>
+      <small>
+        you can find your old sound mappings from <code>noise-mappings.rdf</code> under
+        <a href="https://support.mozilla.org/kb/profiles-where-firefox-stores-user-data#w_how-do-i-find-my-profile">Profile</a> folder.
+        However it can't be restored.
+      </small>
+    </p>
+
+    <hr>
+
+    <p style="margin-left: -1em">
+      Please don't panic,
+      Noise is still aim to provide place to manage Sounds and Events,
+      and will gradually add more functionalities.
+    </p>
+
+    <p>
+      Thank you for using Noise since the good old days.
+    </p>
+
+    <p id='write'>
+      author, Chuang Chiao
+    </p>
+  </body>
+</html>
