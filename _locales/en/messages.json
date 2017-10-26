@@ -154,6 +154,13 @@
   "options_btn_reviewPermission": {
     "message": "Permissions"
   },
+  "options_btn_legacyUpgradeInfo": {
+    "message": "Existing User Notice",
+    "description": "User upgrade from legacy version can see this button, click it will open a notice page."
+  },
+  "options_title_btn_legacyUpgradeInfo": {
+    "message": "Read notice about upgrading from legacy verion, this button is only visible for existing user, and could be removed in future version"
+  },
 
   "event_types_name_downloadNew": {
     "message": "Download Started"

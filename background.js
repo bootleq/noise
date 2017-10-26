@@ -126,6 +126,7 @@ function play(soundId) {
 function onNoiseInstalled(details) {
   let prev = details.previousVersion;
   if (prev && prev.match(/^1\..+/)) {
+    browser.storage.local.set({"upgrade.legacy": prev});
     browser.tabs.create({
       active: false,
       url: '/pages/upgrade-legacy.html'
