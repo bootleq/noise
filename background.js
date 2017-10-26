@@ -77,6 +77,7 @@ function addListeners() {
 function removeListeners() {
   browser.downloads.onCreated.removeListener(onDownloadCreated);
   browser.downloads.onChanged.removeListener(onDownloadChanged);
+  browser.runtime.onInstalled.removeListener(onNoiseInstalled);
   if (typeof browser.webNavigation === 'object') {
     ['onCommitted', 'onHistoryStateUpdated', 'onReferenceFragmentUpdated'].forEach(event => {
       browser.webNavigation[event].removeListener(onBackForward);
@@ -122,6 +123,16 @@ function play(soundId) {
 
 // Event Handlers {{{
 
+function onNoiseInstalled(details) {
+  let prev = details.previousVersion;
+  if (prev && prev.match(/^1\..+/)) {
+    browser.tabs.create({
+      active: false,
+      url: '/pages/upgrade-legacy.html'
+    });
+  }
+}
+
 function onDownloadCreated(item) { // https://developer.mozilla.org/en-US/Add-ons/WebExtensions/API/downloads/onCreated
   gEvents['download.new'].forEach(e => play(e.soundId));
 }
@@ -154,3 +165,5 @@ function hasAny(targets, array) {
 // }}}
 
 window.addEventListener('DOMContentLoaded', init, {once: true});
+
+browser.runtime.onInstalled.addListener(onNoiseInstalled);
