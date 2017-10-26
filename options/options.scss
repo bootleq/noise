@@ -8,6 +8,7 @@
 body {
   margin-top: 1em;
   display: block;
+  -moz-user-select: element;
 }
 h1, ul {
   padding: 0;
