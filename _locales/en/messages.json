@@ -162,6 +162,9 @@
     "message": "Read notice about upgrading from legacy verion, this button is only visible for existing user, and could be removed in future version"
   },
 
+  "event_types_name_runtimeStartup": {
+    "message": "Firefox Startup"
+  },
   "event_types_name_downloadNew": {
     "message": "Download Started"
   },

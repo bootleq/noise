@@ -2,10 +2,15 @@
 
 const gSounds = {};
 const gEvents = {};
+let fxStartup = false;
 
 async function init() {
   window.addEventListener('unload', destroy, {once: true});
   await loadConfig();
+  if (fxStartup) {
+    gEvents['runtime.startup'].forEach(e => play(e.soundId));
+    fxStartup = false;
+  }
   browser.storage.onChanged.addListener(onStorageChange);
   browser.runtime.onMessage.addListener(onMessage);
   addListeners();
@@ -78,6 +83,7 @@ function removeListeners() {
   browser.downloads.onCreated.removeListener(onDownloadCreated);
   browser.downloads.onChanged.removeListener(onDownloadChanged);
   browser.runtime.onInstalled.removeListener(onNoiseInstalled);
+  browser.runtime.onStartup.removeListener(onStartup);
   if (typeof browser.webNavigation === 'object') {
     ['onCommitted', 'onHistoryStateUpdated', 'onReferenceFragmentUpdated'].forEach(event => {
       browser.webNavigation[event].removeListener(onBackForward);
@@ -123,6 +129,10 @@ function play(soundId) {
 
 // Event Handlers {{{
 
+function onStartup() {
+  fxStartup = true;
+}
+
 function onNoiseInstalled(details) {
   let prev = details.previousVersion;
   if (prev && prev.match(/^1\..+/)) {
@@ -167,4 +177,5 @@ function hasAny(targets, array) {
 
 window.addEventListener('DOMContentLoaded', init, {once: true});
 
+browser.runtime.onStartup.addListener(onStartup);
 browser.runtime.onInstalled.addListener(onNoiseInstalled);

@@ -3,6 +3,9 @@
 let scope = 'event_types_name_';
 
 const Types = {
+  'runtime.startup': {
+    name: browser.i18n.getMessage(`${scope}runtimeStartup`)
+  },
   'download.new': {
     name: browser.i18n.getMessage(`${scope}downloadNew`)
   },
