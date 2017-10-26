@@ -482,4 +482,8 @@ table {
   display: block;
 }
 
+#legacy-upgrade-info {
+  margin-left: 2em;
+}
+
 /*# sourceMappingURL=options.css.map */
