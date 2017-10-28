@@ -9,7 +9,7 @@ async function init() {
   window.addEventListener('unload', destroy, {once: true});
   await loadConfig();
   if (fxStartup) {
-    gEvents['runtime.startup'].forEach(e => play(e.soundId));
+    play('runtime.startup');
     fxStartup = false;
   }
   browser.storage.onChanged.addListener(onStorageChange);
@@ -44,11 +44,11 @@ function onMessage(msg, sender, respond) {
   case 'content.on':
     switch (msg.event.type) {
     case 'cut':
-      gEvents['window.cut'].forEach(e => play(e.soundId));
+      play('window.cut');
       break;
 
     case 'copy':
-      gEvents['window.copy'].forEach(e => play(e.soundId));
+      play('window.copy');
       break;
     }
     break;
@@ -151,11 +151,15 @@ function toggleListener(host, listener, toggle) {
   }
 }
 
-function play(soundId) {
-  let sound = gSounds[soundId];
-  if (sound) {
-    sound.play();
-  }
+function play(type) {
+  let events = gEvents[type] || [];
+
+  events.forEach(e => {
+    let sound = gSounds[e.soundId];
+    if (sound) {
+      sound.play();
+    }
+  });
 }
 
 // Event Handlers {{{
@@ -176,18 +180,18 @@ function onNoiseInstalled(details) {
 }
 
 function onDownloadCreated(item) { // https://developer.mozilla.org/en-US/Add-ons/WebExtensions/API/downloads/onCreated
-  gEvents['download.new'].forEach(e => play(e.soundId));
+  play('download.new');
 }
 
 function onDownloadChanged(delta) { // https://developer.mozilla.org/en-US/Add-ons/WebExtensions/API/downloads/onChanged
   if (delta.state) {
     switch (delta.state.current) {
     case 'complete':
-      gEvents['download.completed'].forEach(e => play(e.soundId));
+      play('download.completed');
       break;
 
     case 'interrupted':
-      gEvents['download.interrupted'].forEach(e => play(e.soundId));
+      play('download.interrupted');
       break;
     }
   }
@@ -195,7 +199,7 @@ function onDownloadChanged(delta) { // https://developer.mozilla.org/en-US/Add-o
 
 function onBackForward(details) { // webNavigation: onHistoryStateUpdated, onReferenceFragmentUpdated, onCommitted
   if (details.transitionQualifiers.includes('forward_back')) {
-    gEvents['navigation.backForward'].forEach(e => play(e.soundId));
+    play('navigation.backForward');
   }
 }
 // }}}
