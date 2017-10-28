@@ -19,9 +19,12 @@ const Types = {
     name: browser.i18n.getMessage(`${scope}navigationBackForward`),
     permissions: ['webNavigation']
   },
-  'window.copy': {
-    name: 'copy'
+  'window.cut': {
+    name: browser.i18n.getMessage(`${scope}windowCut`)
   },
+  'window.copy': {
+    name: browser.i18n.getMessage(`${scope}windowCopy`)
+  }
 };
 
 class EventSetting {

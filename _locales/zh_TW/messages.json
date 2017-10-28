@@ -167,5 +167,11 @@
   },
   "event_types_name_navigationBackForward": {
     "message": "上一頁／下一頁"
+  },
+  "event_types_name_windowCut": {
+    "message": "剪下"
+  },
+  "event_types_name_windowCopy": {
+    "message": "複製"
   }
 }

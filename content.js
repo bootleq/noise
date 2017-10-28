@@ -31,12 +31,14 @@ function onEvent(e) {
 function addListeners() {
   if (!bound) {
     window.addEventListener('copy', onEvent);
+    window.addEventListener('cut', onEvent);
   }
   bound = true;
 }
 
 function removeListeners() {
   window.removeEventListener('copy', onEvent);
+  window.removeEventListener('cut', onEvent);
   bound = false;
 }
 

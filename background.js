@@ -42,8 +42,14 @@ function onMessage(msg, sender, respond) {
 
   switch (msg.type) {
   case 'content.on':
-    if (msg.event.type === 'copy') {
+    switch (msg.event.type) {
+    case 'cut':
+      gEvents['window.cut'].forEach(e => play(e.soundId));
+      break;
+
+    case 'copy':
       gEvents['window.copy'].forEach(e => play(e.soundId));
+      break;
     }
     break;
 
