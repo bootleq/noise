@@ -1,6 +1,7 @@
 'use strict';
 
 let bound = false;
+let port = browser.runtime.connect();
 
 function onMessage(msg, sender, respond) {
   if (typeof msg.type !== 'string') {
@@ -19,7 +20,7 @@ function onMessage(msg, sender, respond) {
 }
 
 function onEvent(e) {
-  browser.runtime.sendMessage({
+  port.postMessage({
     type: 'content.on',
     event: {
       type: e.type
@@ -31,7 +32,6 @@ function addListeners() {
   if (!bound) {
     window.addEventListener('copy', onEvent);
   }
-
   bound = true;
 }
 
@@ -41,4 +41,6 @@ function removeListeners() {
 }
 
 addListeners();
-browser.runtime.onMessage.addListener(onMessage);
+port.onMessage.addListener(onMessage);
+
+window.addEventListener('unload', () => port.disconnect());

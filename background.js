@@ -2,6 +2,7 @@
 
 const gSounds = {};
 const gEvents = {};
+let ports = [];
 let fxStartup = false;
 
 async function init() {
@@ -60,6 +61,20 @@ function onMessage(msg, sender, respond) {
   }
 }
 
+function onConnect(port) {
+  ports.push(port);
+  port.onMessage.addListener(onMessage);
+  port.onDisconnect.addListener((p) => {
+    if (p.error) {
+      console.log('Disconnected due to error', p.error.message);
+    }
+    let index = ports.indexOf(p);
+    if (index > -1) {
+      ports.splice(index, 1);
+    }
+  });
+}
+
 async function loadConfig() {
   return browser.storage.local.get(['sounds', 'events']).then(items => {
     if ('sounds' in items) {
@@ -84,14 +99,7 @@ function addListeners() {
     });
   }
 
-  browser.tabs.query({}).then(tabs => {
-    tabs.forEach(tab => {
-      browser.tabs.sendMessage(tab.id, {type: 'bind'}).catch(error => {
-        // FIXME: avoid send to tabs without receiver
-        console.log(error);
-      });
-    });
-  });
+  ports.forEach(p => p.postMessage({type: 'bind'}));
 }
 
 function removeListeners() {
@@ -105,11 +113,7 @@ function removeListeners() {
     });
   }
 
-  browser.tabs.query({}).then(tab => {
-    tabs.forEach(tab => {
-      browser.tabs.sendMessage(tab.id, {type: 'unbind'});
-    });
-  });
+  ports.forEach(p => p.postMessage({type: 'unbind'}));
 }
 
 function resetSounds(configs) {
@@ -200,3 +204,4 @@ window.addEventListener('DOMContentLoaded', init, {once: true});
 
 browser.runtime.onStartup.addListener(onStartup);
 browser.runtime.onInstalled.addListener(onNoiseInstalled);
+browser.runtime.onConnect.addListener(onConnect);
