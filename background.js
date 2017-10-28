@@ -40,6 +40,12 @@ function onMessage(msg, sender, respond) {
   }
 
   switch (msg.type) {
+  case 'content.on':
+    if (msg.event.type === 'copy') {
+      gEvents['window.copy'].forEach(e => play(e.soundId));
+    }
+    break;
+
   case 'listeners':
     if ('action' in msg) {
       if (msg.action === 'bind') {
@@ -77,6 +83,15 @@ function addListeners() {
       toggleListener(browser.webNavigation[event], onBackForward, types.includes('navigation.backForward'));
     });
   }
+
+  browser.tabs.query({}).then(tabs => {
+    tabs.forEach(tab => {
+      browser.tabs.sendMessage(tab.id, {type: 'bind'}).catch(error => {
+        // FIXME: avoid send to tabs without receiver
+        console.log(error);
+      });
+    });
+  });
 }
 
 function removeListeners() {
@@ -89,6 +104,12 @@ function removeListeners() {
       browser.webNavigation[event].removeListener(onBackForward);
     });
   }
+
+  browser.tabs.query({}).then(tab => {
+    tabs.forEach(tab => {
+      browser.tabs.sendMessage(tab.id, {type: 'unbind'});
+    });
+  });
 }
 
 function resetSounds(configs) {

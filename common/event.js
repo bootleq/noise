@@ -18,7 +18,10 @@ const Types = {
   'navigation.backForward': {
     name: browser.i18n.getMessage(`${scope}navigationBackForward`),
     permissions: ['webNavigation']
-  }
+  },
+  'window.copy': {
+    name: 'copy'
+  },
 };
 
 class EventSetting {
