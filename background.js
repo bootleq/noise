@@ -2,17 +2,19 @@
 
 const gSounds = {};
 const gEvents = {};
+let ports = [];
 let fxStartup = false;
 
 async function init() {
   window.addEventListener('unload', destroy, {once: true});
   await loadConfig();
   if (fxStartup) {
-    gEvents['runtime.startup'].forEach(e => play(e.soundId));
+    play('runtime.startup');
     fxStartup = false;
   }
   browser.storage.onChanged.addListener(onStorageChange);
   browser.runtime.onMessage.addListener(onMessage);
+  tryReconnect();
   addListeners();
 }
 
@@ -40,6 +42,18 @@ function onMessage(msg, sender, respond) {
   }
 
   switch (msg.type) {
+  case 'content.on':
+    switch (msg.event.type) {
+    case 'cut':
+      play('window.cut');
+      break;
+
+    case 'copy':
+      play('window.copy');
+      break;
+    }
+    break;
+
   case 'listeners':
     if ('action' in msg) {
       if (msg.action === 'bind') {
@@ -52,6 +66,31 @@ function onMessage(msg, sender, respond) {
       addListeners();
     }
   }
+}
+
+function onConnect(port) {
+  ports.push(port);
+  port.onMessage.addListener(onMessage);
+  port.onDisconnect.addListener((p) => {
+    if (p.error) {
+      console.log('Disconnected due to error', p.error.message);
+    }
+    let index = ports.indexOf(p);
+    if (index > -1) {
+      ports.splice(index, 1);
+    }
+  });
+}
+
+function tryReconnect() {
+  browser.tabs.query({windowType: 'normal'}).then(tabs => {
+    tabs.forEach(tab => {
+      browser.tabs.sendMessage(tab.id, {type: 'reconnect'}).catch(error => {
+        // FIXME: browser console will still report no-message-handler error
+        // console.log('re-connect error', error);
+      });
+    });
+  });
 }
 
 async function loadConfig() {
@@ -77,6 +116,8 @@ function addListeners() {
       toggleListener(browser.webNavigation[event], onBackForward, types.includes('navigation.backForward'));
     });
   }
+
+  ports.forEach(p => p.postMessage({type: 'bind'}));
 }
 
 function removeListeners() {
@@ -89,6 +130,8 @@ function removeListeners() {
       browser.webNavigation[event].removeListener(onBackForward);
     });
   }
+
+  ports.forEach(p => p.postMessage({type: 'unbind'}));
 }
 
 function resetSounds(configs) {
@@ -120,11 +163,15 @@ function toggleListener(host, listener, toggle) {
   }
 }
 
-function play(soundId) {
-  let sound = gSounds[soundId];
-  if (sound) {
-    sound.play();
-  }
+function play(type) {
+  let events = gEvents[type] || [];
+
+  events.forEach(e => {
+    let sound = gSounds[e.soundId];
+    if (sound) {
+      sound.play();
+    }
+  });
 }
 
 // Event Handlers {{{
@@ -145,18 +192,18 @@ function onNoiseInstalled(details) {
 }
 
 function onDownloadCreated(item) { // https://developer.mozilla.org/en-US/Add-ons/WebExtensions/API/downloads/onCreated
-  gEvents['download.new'].forEach(e => play(e.soundId));
+  play('download.new');
 }
 
 function onDownloadChanged(delta) { // https://developer.mozilla.org/en-US/Add-ons/WebExtensions/API/downloads/onChanged
   if (delta.state) {
     switch (delta.state.current) {
     case 'complete':
-      gEvents['download.completed'].forEach(e => play(e.soundId));
+      play('download.completed');
       break;
 
     case 'interrupted':
-      gEvents['download.interrupted'].forEach(e => play(e.soundId));
+      play('download.interrupted');
       break;
     }
   }
@@ -164,7 +211,7 @@ function onDownloadChanged(delta) { // https://developer.mozilla.org/en-US/Add-o
 
 function onBackForward(details) { // webNavigation: onHistoryStateUpdated, onReferenceFragmentUpdated, onCommitted
   if (details.transitionQualifiers.includes('forward_back')) {
-    gEvents['navigation.backForward'].forEach(e => play(e.soundId));
+    play('navigation.backForward');
   }
 }
 // }}}
@@ -179,3 +226,4 @@ window.addEventListener('DOMContentLoaded', init, {once: true});
 
 browser.runtime.onStartup.addListener(onStartup);
 browser.runtime.onInstalled.addListener(onNoiseInstalled);
+browser.runtime.onConnect.addListener(onConnect);

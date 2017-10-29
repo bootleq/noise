@@ -18,6 +18,12 @@ const Types = {
   'navigation.backForward': {
     name: browser.i18n.getMessage(`${scope}navigationBackForward`),
     permissions: ['webNavigation']
+  },
+  'window.cut': {
+    name: browser.i18n.getMessage(`${scope}windowCut`)
+  },
+  'window.copy': {
+    name: browser.i18n.getMessage(`${scope}windowCopy`)
   }
 };
 

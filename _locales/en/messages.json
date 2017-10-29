@@ -176,5 +176,11 @@
   },
   "event_types_name_navigationBackForward": {
     "message": "Back / Forward"
+  },
+  "event_types_name_windowCut": {
+    "message": "Cut"
+  },
+  "event_types_name_windowCopy": {
+    "message": "Copy"
   }
 }
