@@ -905,7 +905,11 @@ async function init() {
       let btn = document.querySelector('#legacy-upgrade-info');
       btn.classList.remove('hidden');
       btn.addEventListener('click', () => {
-        browser.tabs.create({url: '/pages/upgrade-legacy.html'});
+        let lang = browser.i18n.getUILanguage();
+        if (!['zh-TW'].includes(lang)) {
+          lang = 'en';
+        }
+        browser.tabs.create({url: `/pages/${lang}/upgrade-legacy.html`});
       });
     }
   });

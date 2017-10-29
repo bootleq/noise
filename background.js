@@ -183,10 +183,14 @@ function onStartup() {
 function onNoiseInstalled(details) {
   let prev = details.previousVersion;
   if (prev && prev.match(/^1\..+/)) {
+    let lang = browser.i18n.getUILanguage();
+    if (!['zh-TW'].includes(lang)) {
+      lang = 'en';
+    }
     browser.storage.local.set({"upgrade.legacy": prev});
     browser.tabs.create({
       active: false,
-      url: '/pages/upgrade-legacy.html'
+      url: `/pages/${lang}/upgrade-legacy.html`
     });
   }
 }
