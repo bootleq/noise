@@ -6,6 +6,10 @@
   --color-thead: #ebebeb;
 }
 
+html {
+  min-height: 100%;
+}
+
 body {
   margin-top: 1em;
   display: block;
