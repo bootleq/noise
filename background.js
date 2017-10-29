@@ -14,6 +14,7 @@ async function init() {
   }
   browser.storage.onChanged.addListener(onStorageChange);
   browser.runtime.onMessage.addListener(onMessage);
+  tryReconnect();
   addListeners();
 }
 
@@ -78,6 +79,17 @@ function onConnect(port) {
     if (index > -1) {
       ports.splice(index, 1);
     }
+  });
+}
+
+function tryReconnect() {
+  browser.tabs.query({windowType: 'normal'}).then(tabs => {
+    tabs.forEach(tab => {
+      browser.tabs.sendMessage(tab.id, {type: 'reconnect'}).catch(error => {
+        // FIXME: browser console will still report no-message-handler error
+        // console.log('re-connect error', error);
+      });
+    });
   });
 }
 

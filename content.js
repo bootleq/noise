@@ -16,6 +16,14 @@ function onMessage(msg, sender, respond) {
   case 'unbind':
     removeListeners();
     break;
+
+  case 'reconnect':
+    if (port) {
+      return;
+    }
+    port = browser.runtime.connect();
+    addListeners();
+    break;
   }
 }
 
@@ -44,5 +52,10 @@ function removeListeners() {
 
 addListeners();
 port.onMessage.addListener(onMessage);
+port.onDisconnect.addListener((p) => { // stop when background script unload
+  port = null;
+  removeListeners();
+});
+browser.runtime.onMessage.addListener(onMessage);
 
 window.addEventListener('unload', () => port.disconnect());
