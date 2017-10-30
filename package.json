@@ -10,7 +10,8 @@
     "grunt-contrib-watch": "^1.0.0"
   },
   "scripts": {
-    "start": "grunt watch"
+    "start": "grunt watch",
+    "build": "web-ext build --artifacts-dir= --ignore-files *.md chrome defaults Gruntfile.js resource/ v1.4/ *.zsh"
   },
   "license": "MIT"
 }
