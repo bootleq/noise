@@ -246,8 +246,11 @@ class SoundDetail { // {{{
     }
 
     if (this.$audio.canPlayType(file.type) === '') {
-      msg = browser.i18n.getMessage('options_warning_unsupportedMedia', file.type);
-      this.$warning.innerHTML = msg;
+      msg = browser.i18n.getMessage('options_warning_unsupportedMedia');
+      this.$warning.textContent = msg;
+      let $code = document.createElement('code');
+      $code.textContent = file.type;
+      this.$warning.appendChild($code);
     } else {
       this.$warning.textContent = '';
     }
@@ -407,12 +410,16 @@ class Events { // {{{
   }
 
   initMenus() {
-    let html = Object.entries(EventSetting.Types).reduce((s, kv) => {
-      let perms = EventSetting.getTypeDef(kv[0], 'permissions');
-      let permProp = perms.length ? `data-permissions='${JSON.stringify(perms)}'` : '';
-      return s + `<li data-value="${kv[0]}" ${permProp}>${kv[1].name}</li>`;
-    }, '');
-    this.$menus.types.innerHTML = html;
+    Object.entries(EventSetting.Types).forEach(([key, value]) => {
+      let $li = document.createElement('li');
+      let perms = EventSetting.getTypeDef(key, 'permissions');
+      $li.dataset.value = key;
+      $li.textContent = value.name;
+      if (perms.length) {
+        $li.dataset.permissions = JSON.stringify(perms);
+      }
+      this.$menus.types.appendChild($li);
+    });
     this.updateEventMenu();
     this.$menus.types.addEventListener('click', this.onSelectType.bind(this));
 

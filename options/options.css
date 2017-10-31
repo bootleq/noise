@@ -184,6 +184,7 @@ table {
 }
 #sound_detail .player code {
   opacity: 0.55;
+  display: block;
 }
 #sound_detail .player.dragover {
   outline: 6px solid var(--color-fx-red-70);

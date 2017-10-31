@@ -32,14 +32,8 @@
     "description": "When file already picked and player appear, user can click this button to switch to 'droppable' UI, to pick another file."
   },
   "options_warning_unsupportedMedia": {
-    "message": "This media type maybe unable to play.<br><code>$type$</code>",
-    "description": "When upload a file seems can't be played by <audio>, this warning is shown below the player.",
-    "placeholders": {
-      "type": {
-        "content": "$1",
-        "example": "audio/aiff"
-      }
-    }
+    "message": "This media type maybe unable to play.",
+    "description": "When upload a file seems can't be played by <audio>, this warning is shown below the player."
   },
   "options_btn_sound_acceptEdit": {
     "message": "✔ Accept"

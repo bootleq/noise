@@ -30,13 +30,7 @@
     "message": "更換"
   },
   "options_warning_unsupportedMedia": {
-    "message": "聲音格式可能無法播放。<br><code>$type$</code>",
-    "placeholders": {
-      "type": {
-        "content": "$1",
-        "example": "audio/aiff"
-      }
-    }
+    "message": "聲音格式可能無法播放。"
   },
   "options_btn_sound_acceptEdit": {
     "message": "✔ 確認"
