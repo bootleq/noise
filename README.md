@@ -1,7 +1,7 @@
 Noise
 =====
 
-Play sounds (audio files you chose) when specific browser event happen.
+Make sound response when event happen.
 
 
 Links
@@ -11,7 +11,7 @@ Links
   https://addons.mozilla.org/firefox/addon/noise/
 
 - git repository  
-  http://github.com/bootleq/Noise
+  https://github.com/bootleq/Noise
 
 
 WebExtension Compatibility

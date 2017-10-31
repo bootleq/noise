@@ -1,6 +1,10 @@
 CHANGES
 =======
 
+## 2.0.0b (2017-10-31)
+
+* Major update to support WebExtensions.
+
 ## 1.4.3 (2017-04-17)
 
 * Explicitly flag not compatible with multiprocess (e10s) Firefox.
