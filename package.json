@@ -11,7 +11,7 @@
   },
   "scripts": {
     "start": "grunt watch",
-    "build": "web-ext build --artifacts-dir= --ignore-files *.md chrome defaults Gruntfile.js resource/ v1.4/ *.zsh"
+    "build": "web-ext build --artifacts-dir= --ignore-files *.md Gruntfile.js *.zsh"
   },
   "license": "MIT"
 }
