@@ -17,7 +17,7 @@ Links
 WebExtension Compatibility
 --------------------------
 
-Compatible version is under development at `webext` branch.
+Compatible version will be released soon, under development at `webext` branch.
 
 Please understand that most functionalities will become unavailable.
 

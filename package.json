@@ -1,7 +1,6 @@
 {
   "name": "noise",
   "description": "Make sound response when events happen",
-  "version": "1.4.4a",
   "private": true,
   "devDependencies": {
     "grunt": "~0.4.5",
