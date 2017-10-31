@@ -19,8 +19,15 @@ class Sounds { // {{{
     this._observers = {};
     this.$addSound = this.$el.querySelector('.add_sound');
 
+    this.$list.addEventListener('focus', this.onFocus.bind(this), {capture: true});
     this.$list.addEventListener('click', this.onSelect.bind(this));
-    this.$addSound.addEventListener('click', () => this.addSound());
+    this.$list.addEventListener('keydown', this.onKey.bind(this));
+    this.$addSound.addEventListener('click', () => {
+      this.addSound();
+      if (Object.keys(gSounds).length === 1) { // auto select first added sound
+        this.$selected = this.$list.firstElementChild;
+      }
+    });
     this.load();
   }
 
@@ -62,10 +69,25 @@ class Sounds { // {{{
     shrinkFont($name);
   }
 
+  onFocus(e) {
+    let $li = e.target.closest('.list li');
+    if ($li !== this.$addSound) {
+      this.$selected = $li;
+    }
+  }
+
   onSelect(e) {
     let $li = e.target.closest('.list li');
     if ($li !== this.$addSound) {
       this.$selected = $li;
+    }
+  }
+
+  onKey(e) {
+    switch (e.key) {
+    case 'Escape':
+      this._$selected = null;
+      this.notifyObservers('select');
     }
   }
 
