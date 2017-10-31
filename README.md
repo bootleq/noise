@@ -10,9 +10,6 @@ Links
 - add-on page  
   https://addons.mozilla.org/firefox/addon/noise/
 
-- homepage  
-  http://www.bootleq.com/noise/
-
 - git repository  
   http://github.com/bootleq/Noise
 

@@ -1,0 +1,177 @@
+{
+  "extDescription": {
+    "message": "事件發生的時候，製造一點聲響。"
+  },
+
+  "optionPageTitle": {
+    "message": "Noise 設定"
+  },
+
+  "options_header_sounds": {
+    "message": "聲音"
+  },
+  "options_btn_addSound": {
+    "message": "➕"
+  },
+  "options_title_btn_addSound": {
+    "message": "新增聲音"
+  },
+
+  "options_sound_name": {
+    "message": "名稱"
+  },
+  "options_title_btn_cancelUpload": {
+    "message": "取消上傳"
+  },
+  "options_sound_clickOrDropFile": {
+    "message": "點選以選擇，或拖曳檔案到這裡"
+  },
+  "options_btn_changeSound": {
+    "message": "更換"
+  },
+  "options_warning_unsupportedMedia": {
+    "message": "聲音格式可能無法播放。<br><code>$type$</code>",
+    "placeholders": {
+      "type": {
+        "content": "$1",
+        "example": "audio/aiff"
+      }
+    }
+  },
+  "options_btn_sound_acceptEdit": {
+    "message": "✔ 確認"
+  },
+  "options_btn_sound_cancelEdit": {
+    "message": "取消"
+  },
+  "options_btn_sound_delete": {
+    "message": "✖"
+  },
+  "options_title_btn_sound_delete": {
+    "message": "刪除這個聲音"
+  },
+  "options_btn_sound_moveBack": {
+    "message": "◀"
+  },
+  "options_title_btn_sound_moveBack": {
+    "message": "往前移動順序"
+  },
+  "options_btn_sound_moveNext": {
+    "message": "▶"
+  },
+  "options_title_btn_sound_moveNext": {
+    "message": "往後移動順序"
+  },
+
+  "options_header_events": {
+    "message": "事件"
+  },
+  "options_events_th_type": {
+    "message": "類型"
+  },
+  "options_title_warning_eventForbidden": {
+    "message": "這個事件需要額外權限，點選「權限」按鈕以審查權限"
+  },
+  "options_events_th_options": {
+    "message": "選項"
+  },
+  "options_events_th_sound": {
+    "message": "聲音"
+  },
+  "options_title_checkbox_event_enabled": {
+    "message": "啟用"
+  },
+  "options_btn_event_edit": {
+    "message": "✏️ 編輯"
+  },
+  "options_btn_event_accept": {
+    "message": "✔ 確認"
+  },
+  "options_btn_event_cancel": {
+    "message": "取消"
+  },
+  "options_btn_event_play": {
+    "message": "▸ 播放"
+  },
+  "options_btn_event_delete": {
+    "message": "✖"
+  },
+  "options_title_btn_event_delete": {
+    "message": "刪除這個事件"
+  },
+  "options_btn_event_moveUp": {
+    "message": "▲"
+  },
+  "options_title_btn_event_moveUp": {
+    "message": "往上移動順序"
+  },
+  "options_btn_event_moveDown": {
+    "message": "▼"
+  },
+  "options_title_btn_event_moveDown": {
+    "message": "往下移動順序"
+  },
+  "options_btn_event_add": {
+    "message": "➕ 新增事件"
+  },
+  "options_event_soundNotSet": {
+    "message": "未設定"
+  },
+
+  "options_header_permissions": {
+    "message": "已准許的額外權限"
+  },
+  "options_perms_desc_webNavigation": {
+    "message": "在上網時了解瀏覽器行為狀態"
+  },
+  "options_title_btn_close": {
+    "message": "關閉"
+  },
+
+  "options_btn_save": {
+    "message": "儲存"
+  },
+  "options_info_saveSuccess": {
+    "message": "已儲存"
+  },
+  "options_info_saveFail": {
+    "message": "儲存失敗"
+  },
+  "options_btn_import": {
+    "message": "匯入設定"
+  },
+  "options_btn_export": {
+    "message": "匯出設定"
+  },
+  "options_btn_reviewPermission": {
+    "message": "權限"
+  },
+  "options_btn_legacyUpgradeInfo": {
+    "message": "舊版升級者說明"
+  },
+  "options_title_btn_legacyUpgradeInfo": {
+    "message": "開啟升級說明頁面，只有從 1.x 版本升級的使用者會看到此按鈕，且未來版本將移除此通知"
+  },
+
+  "event_types_name_runtimeStartup": {
+    "message": "Firefox 啟動"
+  },
+  "event_types_name_downloadNew": {
+    "message": "下載開始"
+  },
+  "event_types_name_downloadCompleted": {
+    "message": "下載完成"
+  },
+  "event_types_name_downloadInterrupted": {
+    "message": "下載失敗"
+  },
+  "event_types_name_navigationBackForward": {
+    "message": "上一頁／下一頁"
+  },
+  "event_types_name_windowCut": {
+    "message": "剪下"
+  },
+  "event_types_name_windowCopy": {
+    "message": "複製"
+  }
+}

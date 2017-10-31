@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="chrome://browser/content/extension.css">
+    <link rel="stylesheet" type="text/css" href="options.css">
+  </head>
+
+  <body>
+    <fieldset id="sounds">
+      <legend data-i18n='_header_sounds'>Sounds</legend>
+
+      <ul class="list">
+        <li class="add_sound"><button data-i18n='_btn_addSound' data-i18n-title='_btn_addSound'>Add Sound</button></li>
+      </ul>
+
+      <template>
+        <li>
+          <label class="name" tabindex="0">
+            <span>Name</span>
+          </label>
+        </li>
+      </template>
+    </fieldset>
+
+    <fieldset id='sound_detail' disabled>
+      <label data-i18n='_sound_name'>
+        Name
+        <input type="text" class='name'/>
+      </label>
+
+      <div class='upload'>
+        <button class="cancel_upload hidden" data-i18n-title='_btn_cancelUpload'>✖ </button>
+        <label class='droppable' data-i18n='_sound_clickOrDropFile'>
+          Click or drop new sound here.
+          <input type='file' accept='audio/*'>
+        </label>
+      </div>
+
+      <div class='player droppable'>
+        <div class='flex'>
+          <span class="filename"></span>
+          <button class="change" data-i18n='_btn_changeSound'>Change</button>
+        </div>
+        <audio controls></audio>
+        <div class='warning'></div>
+      </div>
+
+      <div class='ctrls'>
+        <button class="accept" disabled data-i18n='_btn_sound_acceptEdit'>✔ Accept</button>
+        <button class="cancel" data-i18n='_btn_sound_cancelEdit'>Cancel</button>
+        <div class='non-edit'>
+          <button class="delete" data-i18n='_btn_sound_delete' data-i18n-title='_btn_sound_delete'>✖</button>
+          <button class="move-back" data-i18n='_btn_sound_moveBack' data-i18n-title='_btn_sound_moveBack'>◀</button>
+          <button class="move-next" data-i18n='_btn_sound_moveNext' data-i18n-title='_btn_sound_moveNext'>▶</button>
+        </td>
+      </div>
+    </fieldset>
+
+    <fieldset id="events">
+      <legend data-i18n='_header_events'>Events</legend>
+
+      <table>
+        <thead>
+          <tr>
+            <th></th>
+            <th><span data-i18n='_events_th_type'>Type</span></th>
+            <th><span data-i18n='_events_th_options'>Options</span></th>
+            <th><span data-i18n='_events_th_sound'>Sound</span></th>
+            <th><span></span></th>
+            <th><span></span></th>
+          </tr>
+        </thead>
+
+        <tbody></tbody>
+
+        <template>
+          <tr>
+            <td class='e-ctrl e-toggle'><label data-i18n-title='_checkbox_event_enabled'><input type='checkbox'/></label></td>
+            <td class='e-type'></td>
+            <td class='e-options'></td>
+            <td class='e-sound'></td>
+            <td class='e-edit'>
+              <button class="edit">
+                <span class='on' data-i18n='_btn_event_edit'>✏️ Edit</span>
+                <span class='off' data-i18n='_btn_event_accept'>✔ Accept</span>
+              </button>
+              <button class="cancel" data-i18n='_btn_event_cancel'>Cancel</button>
+              <button class="play" data-i18n='_btn_event_play'>▸ Play</button>
+            </td>
+            <td class='e-ctrl e-non-edit'>
+              <div>
+                <button class="delete" data-i18n='_btn_event_delete' data-i18n-title='_btn_event_delete'>✖</button>
+                <button class="move-up" data-i18n='_btn_event_moveUp' data-i18n-title='_btn_event_moveUp'>▲</button>
+                <button class="move-down" data-i18n='_btn_event_moveDown' data-i18n-title='_btn_event_moveDown'>▼</button>
+              </div>
+            </td>
+          </tr>
+        </template>
+      </table>
+
+      <button class='add_event' data-i18n='_btn_event_add'>➕ Add Event</button>
+    </fieldset>
+
+    <div id='menus'>
+      <ul class='types'></ul>
+      <ul class='sounds'></ul>
+    </div>
+
+    <div id='permissions' class='hidden'>
+      <h2 data-i18n='_header_permissions'>Additional Granted Permissions</h2>
+      <button data-i18n-title='_btn_close'>✖</button>
+      <ul>
+        <li>
+          <label>
+            <input type='checkbox' data-perm='webNavigation' />
+            <span data-i18n='_perms_desc_webNavigation'>Access browser activity during navigation</span>
+            <code>webNavigation</code>
+          </label>
+        </li>
+      </ul>
+    </div>
+
+    <div id='main-ctrls'>
+      <button id='save' disabled data-i18n='_btn_save'>Save</button>
+      <div class='info'>
+        <strong class='success' data-i18n='_info_saveSuccess'>Saved</strong>
+        <strong class='fail' data-i18n='_info_saveFail'>Failed</strong>
+      </div>
+      <button id='import' disabled data-i18n='_btn_import'>Import</button>
+      <button id='export' disabled data-i18n='_btn_export'>Export</button>
+      <button id='review-permission' data-i18n='_btn_reviewPermission'>Permissions</button>
+
+      <button id='legacy-upgrade-info' data-i18n='_btn_legacyUpgradeInfo' data-i18n-title='_btn_legacyUpgradeInfo' class='hidden'>Legacy Upgrade Info</button>
+    </div>
+
+    <input id='import-file' type='file' accept='.json' class='hidden'>
+
+    <script src="utils.js"></script>
+    <script src="/common/utils.js"></script>
+    <script src="/common/sound.js"></script>
+    <script src="/common/event.js"></script>
+    <script src="options.js"></script>
+  </body>
+</html>

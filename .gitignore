@@ -1,7 +1,10 @@
-*.svn
 *.xpi
+*.zsh
 *.bat
 *.lnk
+*.css.map
 Thumbs.db
 Desktop.ini
 changelog.txt
+node_modules/*
+.sass-cache/*

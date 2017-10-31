@@ -1,0 +1,17 @@
+{
+  "name": "noise",
+  "description": "Make sound response when events happen",
+  "version": "1.4.4a",
+  "private": true,
+  "devDependencies": {
+    "grunt": "~0.4.5",
+    "load-grunt-tasks": "^3.4.0",
+    "grunt-contrib-sass": "^1.0.0",
+    "grunt-contrib-watch": "^1.0.0"
+  },
+  "scripts": {
+    "start": "grunt watch",
+    "build": "web-ext build --artifacts-dir= --ignore-files *.md Gruntfile.js *.zsh"
+  },
+  "license": "MIT"
+}
