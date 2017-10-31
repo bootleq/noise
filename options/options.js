@@ -56,6 +56,7 @@ class Sounds { // {{{
   }
 
   clear() {
+    this.$selected = null;
     this.$list.querySelectorAll('ul > li:not(.add_sound)').forEach(node => {
       node.remove();
     });
@@ -371,7 +372,7 @@ class Events { // {{{
     this.$addEvent = this.$el.querySelector('button.add_event');
 
     this.editing = null;
-    this._before = {};
+    this._before = '{}';
 
     this.initMenus();
     this.$list.addEventListener('click', this.onSelect.bind(this));
@@ -405,6 +406,10 @@ class Events { // {{{
   }
 
   clear() {
+    if (this.editing) {
+      let $row = this.$list.querySelector('tr.current');
+      this.cancelEdit($row);
+    }
     this.$list.innerHTML = '';
     emptyObject(gEvents);
   }
