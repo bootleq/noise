@@ -25,8 +25,5 @@ Please use Noise v1.4.3.
 Alternatives
 ------------
 
-- Notification Sound
-  https://addons.mozilla.org/firefox/addon/notification-sound/
-
-- Download Sound
-  https://addons.mozilla.org/firefox/addon/download-sound/
+- [Notification Sound](https://addons.mozilla.org/firefox/addon/notification-sound/)
+- [Download Sound](https://addons.mozilla.org/firefox/addon/download-sound/)
