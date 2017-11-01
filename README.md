@@ -4,20 +4,10 @@ Noise
 Make sound response when event happen.
 
 
-Links
------
-
-- add-on page  
-  https://addons.mozilla.org/firefox/addon/noise/
-
-- git repository  
-  https://github.com/bootleq/Noise
-
-
 WebExtension Compatibility
 --------------------------
 
-Compatible version will be released soon, under development at `webext` branch.
+Compatible version (2.0) will be released soon.
 
 Please understand that most functionalities will become unavailable.
 
@@ -30,3 +20,13 @@ Legacy Version (Firefox &lt; v57)
 ---------------------------------
 
 Please use Noise v1.4.3.
+
+
+Alternatives
+------------
+
+- Notification Sound
+  https://addons.mozilla.org/firefox/addon/notification-sound/
+
+- Download Sound
+  https://addons.mozilla.org/firefox/addon/download-sound/
