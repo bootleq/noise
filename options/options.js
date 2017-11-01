@@ -913,6 +913,7 @@ async function init() {
           gSounds[cfg.id].src = newConfig[`src.${cfg.id}`];
         });
         newConfig['events'].forEach((cfg) => events.addEvent(cfg));
+        events.updatePermissions();
       } else {
         console.log('import fail');
       }
