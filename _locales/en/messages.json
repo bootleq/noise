@@ -124,6 +124,10 @@
     "message": "Access browser activity during navigation",
     "description": "description about 'webNavigation' permission, should be identical to 'webextPerms.description.webNavigation' in https://hg.mozilla.org/l10n-central/zh-TW/file/default/browser/chrome/browser/browser.properties (change `zh-TW` to your locale)."
   },
+  "options_perms_desc_webRequest": {
+    "message": "Access HTTP request activity",
+    "description": "description about 'webRequest' permission. Note there seems no built-in translation for this."
+  },
   "options_title_btn_close": {
     "message": "Close"
   },
@@ -170,6 +174,9 @@
   },
   "event_types_name_navigationBackForward": {
     "message": "Back / Forward"
+  },
+  "event_types_name_requestCompleted": {
+    "message": "HTTP Request Completed"
   },
   "event_types_name_windowCut": {
     "message": "Cut"

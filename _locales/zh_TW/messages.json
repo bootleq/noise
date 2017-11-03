@@ -118,6 +118,9 @@
   "options_perms_desc_webNavigation": {
     "message": "在上網時了解瀏覽器行為狀態"
   },
+  "options_perms_desc_webRequest": {
+    "message": "存取 HTTP 請求狀態"
+  },
   "options_title_btn_close": {
     "message": "關閉"
   },
@@ -161,6 +164,9 @@
   },
   "event_types_name_navigationBackForward": {
     "message": "上一頁／下一頁"
+  },
+  "event_types_name_requestCompleted": {
+    "message": "HTTP 請求完成"
   },
   "event_types_name_windowCut": {
     "message": "剪下"

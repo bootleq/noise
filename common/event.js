@@ -19,6 +19,10 @@ const Types = {
     name: browser.i18n.getMessage(`${scope}navigationBackForward`),
     permissions: ['webNavigation']
   },
+  'request.completed': {
+    name: browser.i18n.getMessage(`${scope}requestCompleted`),
+    permissions: ['webRequest']
+  },
   'window.cut': {
     name: browser.i18n.getMessage(`${scope}windowCut`)
   },

@@ -117,6 +117,18 @@ function addListeners() {
     });
   }
 
+  if (typeof browser.webRequest === 'object') {
+    toggleListener(
+      browser.webRequest.onCompleted,
+      onRequestCompleted,
+      types.includes('request.completed'),
+      {
+        urls: ['<all_urls>'],
+        types: ['main_frame', 'sub_frame']
+      }
+    );
+  }
+
   ports.forEach(p => p.postMessage({type: 'bind'}));
 }
 
@@ -129,6 +141,9 @@ function removeListeners() {
     ['onCommitted', 'onHistoryStateUpdated', 'onReferenceFragmentUpdated'].forEach(event => {
       browser.webNavigation[event].removeListener(onBackForward);
     });
+  }
+  if (typeof browser.webRequest === 'object') {
+    browser.webRequest.onCompleted.removeListener(onRequestCompleted);
   }
 
   ports.forEach(p => p.postMessage({type: 'unbind'}));
@@ -153,10 +168,10 @@ function resetEvents(configs) {
   });
 }
 
-function toggleListener(host, listener, toggle) {
+function toggleListener(host, listener, toggle, ...args) {
   if (toggle) {
     if (!host.hasListener(listener)) {
-      host.addListener(listener);
+      host.addListener(listener, ...args);
     }
   } else {
     host.removeListener(listener);
@@ -216,6 +231,13 @@ function onDownloadChanged(delta) { // https://developer.mozilla.org/en-US/Add-o
 function onBackForward(details) { // webNavigation: onHistoryStateUpdated, onReferenceFragmentUpdated, onCommitted
   if (details.transitionQualifiers.includes('forward_back')) {
     play('navigation.backForward');
+  }
+}
+
+function onRequestCompleted(details) {
+  let code = (details.statusCode).toString();
+  if (code.match(/[45]../)) {
+    play('request.completed');
   }
 }
 // }}}

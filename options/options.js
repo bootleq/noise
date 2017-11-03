@@ -434,7 +434,7 @@ class Events { // {{{
   updatePermissions() {
     this.updateEventMenu();
     this.$list.querySelectorAll('tr[data-permissions]').forEach($row => {
-      let perms = JSON.parse($row.dataset.permissions);
+      let perms = JSON.parse($row.dataset.permissions || '[]');
       let missing = arrayDiff(perms, gPermissions).length;
       let $type = $row.querySelector('td.e-type');
       $row.classList.toggle('missing-permissions', missing);
@@ -448,7 +448,7 @@ class Events { // {{{
 
   updateEventMenu() {
     this.$menus.types.querySelectorAll('li[data-permissions]').forEach(el => {
-      let perms = JSON.parse(el.dataset.permissions);
+      let perms = JSON.parse(el.dataset.permissions || '[]');
       el.classList.toggle('missing-permissions', arrayDiff(perms, gPermissions).length);
     });
   }
