@@ -1,6 +1,10 @@
 CHANGES
 =======
 
+## 2.0.0 (2017-11-04)
+
+* Same as beta, just do release.
+
 ## 2.0.0b (2017-10-31)
 
 * Major update to support WebExtensions.
