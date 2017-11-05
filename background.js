@@ -178,10 +178,10 @@ function toggleListener(host, listener, toggle, ...args) {
   }
 }
 
-function play(type) {
+function play(type, filter = () => true) {
   let events = gEvents[type] || [];
 
-  events.forEach(e => {
+  events.filter(filter).forEach(e => {
     let sound = gSounds[e.soundId];
     if (sound) {
       sound.play();
@@ -236,9 +236,14 @@ function onBackForward(details) { // webNavigation: onHistoryStateUpdated, onRef
 
 function onRequestCompleted(details) {
   let code = (details.statusCode).toString();
-  if (code.match(/[45]../)) {
-    play('request.completed');
-  }
+  let filter = (event) => {
+    if ('filter_statusCode' in event.options) {
+      let pattern = event.options['filter_statusCode']['filter'];
+      return code.match(pattern);
+    }
+    return true;
+  };
+  play('request.completed', filter);
 }
 // }}}
 
