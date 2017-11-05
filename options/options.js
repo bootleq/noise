@@ -425,14 +425,14 @@ class Events { // {{{
       }
       this.$menus.types.appendChild($li);
     });
-    this.updateEventMenu();
+    this.updateTypeMenu();
     this.$menus.types.addEventListener('click', this.onSelectType.bind(this));
 
     this.$menus.sounds.addEventListener('click', this.onSelectSound.bind(this));
   }
 
   updatePermissions() {
-    this.updateEventMenu();
+    this.updateTypeMenu();
     this.$list.querySelectorAll('tr[data-permissions]').forEach($row => {
       let perms = JSON.parse($row.dataset.permissions || '[]');
       let missing = arrayDiff(perms, gPermissions).length;
@@ -446,7 +446,7 @@ class Events { // {{{
     });
   }
 
-  updateEventMenu() {
+  updateTypeMenu() {
     this.$menus.types.querySelectorAll('li[data-permissions]').forEach(el => {
       let perms = JSON.parse(el.dataset.permissions || '[]');
       el.classList.toggle('missing-permissions', arrayDiff(perms, gPermissions).length);
