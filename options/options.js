@@ -597,6 +597,7 @@ class Events { // {{{
           break;
 
         case $target.matches('.move-up'):
+          Object.values(this.$menus).forEach(el => el.style.display = 'none');
           if ($row.previousElementSibling) {
             $row.parentNode.insertBefore($row, $row.previousElementSibling);
           } else {
@@ -605,6 +606,7 @@ class Events { // {{{
           break;
 
         case $target.matches('.move-down'):
+          Object.values(this.$menus).forEach(el => el.style.display = 'none');
           if ($row.nextElementSibling) {
             if ($row.nextElementSibling.nextElementSibling) {
               $row.parentNode.insertBefore($row, $row.nextElementSibling.nextElementSibling);
@@ -617,6 +619,7 @@ class Events { // {{{
           break;
 
         case $target.matches('.delete'):
+          Object.values(this.$menus).forEach(el => el.style.display = 'none');
           this.delete($row);
           break;
       }
@@ -1010,7 +1013,7 @@ async function init() {
   window.addEventListener('resize', () => {
     if (!resizeTimeout) {
       resizeTimeout = setTimeout(() => {
-        document.querySelectorAll('#menus ul').forEach(menu => menu.style.display = 'none');
+        document.querySelectorAll('#menus > *').forEach(menu => menu.style.display = 'none');
         document.querySelector('#permissions').classList.add('hidden');
         resizeTimeout = null;
       }, 66);
