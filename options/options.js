@@ -446,6 +446,17 @@ class Events { // {{{
     });
   }
 
+  updateMenu(type) {
+    switch (type) {
+      case 'types':
+        this.updateTypeMenu();
+        break;
+      case 'sounds':
+        this.updateSoundMenu();
+        break;
+    }
+  }
+
   updateTypeMenu() {
     this.$menus.types.querySelectorAll('li[data-permissions]').forEach(el => {
       let perms = JSON.parse(el.dataset.permissions || '[]');
@@ -510,7 +521,15 @@ class Events { // {{{
         default:
           $cell = $target.closest('.current td');
           if ($cell) {
-            this.toggleMenu($cell);
+            switch (true) {
+              case $cell.matches('.e-type'):
+                this.toggleMenu('types', $cell);
+                break;
+
+              case $cell.matches('.e-sound'):
+                this.toggleMenu('sounds', $cell);
+                break;
+            }
           }
           break;
       }
@@ -617,27 +636,14 @@ class Events { // {{{
     this.render($row);
   }
 
-  toggleMenu($cell) {
-    let $menu;
-
-    switch (true) {
-    case $cell.classList.contains('e-type'):
-      $menu = this.$menus.types;
-      break;
-
-    case $cell.classList.contains('e-sound'):
-      this.updateSoundMenu();
-      $menu = this.$menus.sounds;
-      break;
-
-    default:
-      return;
-    }
+  toggleMenu(type, $trigger) {
+    let $menu = this.$menus[type];
 
     if ($menu.style.display === 'block') {
       $menu.style.display = 'none';
     } else {
-      posisitionTo($menu, $cell);
+      this.updateMenu(type);
+      posisitionTo($menu, $trigger);
       $menu.style.display = 'block';
     }
   }
