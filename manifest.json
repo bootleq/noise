@@ -10,10 +10,12 @@
 
   "permissions": [
     "storage",
-    "downloads"
+    "downloads",
+    "<all_urls>"
   ],
   "optional_permissions": [
-    "webNavigation"
+    "webNavigation",
+    "webRequest"
   ],
 
   "background": {

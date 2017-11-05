@@ -117,6 +117,18 @@ function addListeners() {
     });
   }
 
+  if (typeof browser.webRequest === 'object') {
+    toggleListener(
+      browser.webRequest.onCompleted,
+      onRequestCompleted,
+      types.includes('request.completed'),
+      {
+        urls: ['<all_urls>'],
+        types: ['main_frame', 'sub_frame']
+      }
+    );
+  }
+
   ports.forEach(p => p.postMessage({type: 'bind'}));
 }
 
@@ -129,6 +141,9 @@ function removeListeners() {
     ['onCommitted', 'onHistoryStateUpdated', 'onReferenceFragmentUpdated'].forEach(event => {
       browser.webNavigation[event].removeListener(onBackForward);
     });
+  }
+  if (typeof browser.webRequest === 'object') {
+    browser.webRequest.onCompleted.removeListener(onRequestCompleted);
   }
 
   ports.forEach(p => p.postMessage({type: 'unbind'}));
@@ -153,20 +168,20 @@ function resetEvents(configs) {
   });
 }
 
-function toggleListener(host, listener, toggle) {
+function toggleListener(host, listener, toggle, ...args) {
   if (toggle) {
     if (!host.hasListener(listener)) {
-      host.addListener(listener);
+      host.addListener(listener, ...args);
     }
   } else {
     host.removeListener(listener);
   }
 }
 
-function play(type) {
+function play(type, filter = () => true) {
   let events = gEvents[type] || [];
 
-  events.forEach(e => {
+  events.filter(filter).forEach(e => {
     let sound = gSounds[e.soundId];
     if (sound) {
       sound.play();
@@ -217,6 +232,18 @@ function onBackForward(details) { // webNavigation: onHistoryStateUpdated, onRef
   if (details.transitionQualifiers.includes('forward_back')) {
     play('navigation.backForward');
   }
+}
+
+function onRequestCompleted(details) {
+  let code = (details.statusCode).toString();
+  let filter = (event) => {
+    if ('filter_statusCode' in event.options) {
+      let pattern = event.options['filter_statusCode']['filter'];
+      return code.match(pattern);
+    }
+    return true;
+  };
+  play('request.completed', filter);
 }
 // }}}
 

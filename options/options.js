@@ -363,8 +363,9 @@ class Events { // {{{
     this.$list  = this.$el.querySelector('tbody');
     this.tmpl   = this.$el.querySelector('template').content;
     this.$menus = {
-      types:  document.querySelector('#menus .types'),
-      sounds: document.querySelector('#menus .sounds')
+      types:   document.querySelector('#menus .types'),
+      sounds:  document.querySelector('#menus .sounds'),
+      options: document.querySelector('#menus .options')
     };
 
     this._$selected = null;
@@ -425,16 +426,17 @@ class Events { // {{{
       }
       this.$menus.types.appendChild($li);
     });
-    this.updateEventMenu();
+    this.updateTypeMenu();
     this.$menus.types.addEventListener('click', this.onSelectType.bind(this));
 
+    this.$menus.options.addEventListener('click', this.onUpdateOptions.bind(this));
     this.$menus.sounds.addEventListener('click', this.onSelectSound.bind(this));
   }
 
   updatePermissions() {
-    this.updateEventMenu();
+    this.updateTypeMenu();
     this.$list.querySelectorAll('tr[data-permissions]').forEach($row => {
-      let perms = JSON.parse($row.dataset.permissions);
+      let perms = JSON.parse($row.dataset.permissions || '[]');
       let missing = arrayDiff(perms, gPermissions).length;
       let $type = $row.querySelector('td.e-type');
       $row.classList.toggle('missing-permissions', missing);
@@ -446,9 +448,25 @@ class Events { // {{{
     });
   }
 
-  updateEventMenu() {
+  updateMenu(type, $trigger) {
+    switch (type) {
+      case 'types':
+        this.updateTypeMenu();
+        break;
+      case 'sounds':
+        this.updateSoundMenu();
+        break;
+      case 'options':
+        let name = $trigger.dataset.name;
+        let opts = JSON.parse($trigger.closest('tr').dataset.options);
+        this.updateOptionsMenu(name, opts);
+        break;
+    }
+  }
+
+  updateTypeMenu() {
     this.$menus.types.querySelectorAll('li[data-permissions]').forEach(el => {
-      let perms = JSON.parse(el.dataset.permissions);
+      let perms = JSON.parse(el.dataset.permissions || '[]');
       el.classList.toggle('missing-permissions', arrayDiff(perms, gPermissions).length);
     });
   }
@@ -463,17 +481,47 @@ class Events { // {{{
     });
   }
 
+  updateOptionsMenu(type, options) {
+    let $menu = this.$menus.options;
+    let $form = $menu.querySelector('.form');
+    let $desc = $menu.querySelector('.desc');
+    let props = type in options ? options[type] : {};
+
+    $menu.dataset.type = type;
+    $form.innerHTML = '';
+    let tmpl  = document.querySelector(`#options_form_templates template.${type}`).content;
+    tmpl = document.importNode(tmpl, true);
+    tmpl.querySelectorAll('input[data-prop]').forEach($input => {
+      let prop = $input.dataset.prop;
+      $input.value = prop in props ? props[prop] : '';
+    });
+    $form.appendChild(tmpl);
+    $desc.innerHTML = browser.i18n.getMessage(`event_slots_desc_${type}`);
+  }
+
   render($row) {
     let data     = $row.dataset;
     let options  = JSON.parse(data.options);
     let sound    = gSounds[data.soundId];
     let $sound   = $row.querySelector('.e-sound');
     let $options = $row.querySelector('.e-options');
+    let slots    = EventSetting.getTypeDef(data.type, 'slots');
 
     $row.querySelector('.e-type').textContent = EventSetting.getTypeDef(data.type, 'name');
-    $options.classList.toggle('unavailable', Object.keys(options).length === 0);
-    if (Object.keys(options).length === 0) {
+    $options.classList.toggle('unavailable', Object.keys(slots).length === 0);
+    if (Object.keys(slots).length === 0) {
       $options.textContent = ' - - ';
+    } else {
+      $options.innerHTML = '';
+      Object.values(slots).forEach(slot => {
+        let $slot = document.createElement('button');
+        let name = browser.i18n.getMessage(`event_slots_name_${slot.name}`);
+        $slot.dataset.name = slot.name;
+        $slot.title        = name;
+        $slot.textContent  = name;
+        $slot.classList.toggle('enabled', Object.keys(options).includes(slot.name));
+        $options.appendChild($slot);
+      });
     }
 
     $sound.classList.toggle('not-set', !!!sound);
@@ -510,7 +558,19 @@ class Events { // {{{
         default:
           $cell = $target.closest('.current td');
           if ($cell) {
-            this.toggleMenu($cell);
+            switch (true) {
+              case $cell.matches('.e-type'):
+                this.toggleMenu('types', $cell);
+                break;
+
+              case $cell.matches('.e-sound'):
+                this.toggleMenu('sounds', $cell);
+                break;
+
+              case $cell.matches('.e-options') && $target.tagName === 'BUTTON':
+                this.toggleMenu('options', $target);
+                break;
+            }
           }
           break;
       }
@@ -531,7 +591,13 @@ class Events { // {{{
           }
           break;
 
+        case $target.matches('td.e-options button'):
+          this.$selected = $row;
+          this.toggleMenu('options', $target);
+          break;
+
         case $target.matches('.move-up'):
+          Object.values(this.$menus).forEach(el => el.style.display = 'none');
           if ($row.previousElementSibling) {
             $row.parentNode.insertBefore($row, $row.previousElementSibling);
           } else {
@@ -540,6 +606,7 @@ class Events { // {{{
           break;
 
         case $target.matches('.move-down'):
+          Object.values(this.$menus).forEach(el => el.style.display = 'none');
           if ($row.nextElementSibling) {
             if ($row.nextElementSibling.nextElementSibling) {
               $row.parentNode.insertBefore($row, $row.nextElementSibling.nextElementSibling);
@@ -552,6 +619,7 @@ class Events { // {{{
           break;
 
         case $target.matches('.delete'):
+          Object.values(this.$menus).forEach(el => el.style.display = 'none');
           this.delete($row);
           break;
       }
@@ -591,6 +659,7 @@ class Events { // {{{
 
   toggleEdit($row) {
     this.$list.classList.toggle('editing', !!!this.editing);
+    Object.values(this.$menus).forEach(el => el.style.display = 'none');
 
     if (this.editing) {
       let data = this.$selected.dataset;
@@ -598,7 +667,6 @@ class Events { // {{{
       this.editing.options = JSON.parse(data.options);
       this.editing.soundId = data.soundId;
       this.editing = null;
-      Object.values(this.$menus).forEach(el => el.style.display = 'none');
     } else {
       this.editing = gEvents[$row.dataset.eventId];
       this._before = JSON.stringify(this.editing);
@@ -617,27 +685,14 @@ class Events { // {{{
     this.render($row);
   }
 
-  toggleMenu($cell) {
-    let $menu;
-
-    switch (true) {
-    case $cell.classList.contains('e-type'):
-      $menu = this.$menus.types;
-      break;
-
-    case $cell.classList.contains('e-sound'):
-      this.updateSoundMenu();
-      $menu = this.$menus.sounds;
-      break;
-
-    default:
-      return;
-    }
+  toggleMenu(type, $trigger) {
+    let $menu = this.$menus[type];
 
     if ($menu.style.display === 'block') {
       $menu.style.display = 'none';
     } else {
-      posisitionTo($menu, $cell);
+      this.updateMenu(type, $trigger);
+      posisitionTo($menu, $trigger);
       $menu.style.display = 'block';
     }
   }
@@ -683,6 +738,36 @@ class Events { // {{{
     }
 
     this.render(this.$selected);
+  }
+
+  onUpdateOptions(e) {
+    let $menu   = this.$menus.options;
+    let type    = $menu.dataset.type;
+    let $target = e.target;
+    let $row    = this.$selected;
+    let options = JSON.parse($row.dataset.options);
+
+    if ($target.tagName === 'BUTTON') {
+      switch (true) {
+        case $target.matches('.accept'):
+          $menu.querySelectorAll('.form [data-prop]').forEach($input => {
+            if (!(type in options)) {
+              options[type] = {};
+            }
+            options[type][$input.dataset.prop] = $input.value;
+          });
+          $row.dataset.options = JSON.stringify(options);
+          break;
+
+        case $target.matches('.clear'):
+          delete options[type];
+          $row.dataset.options = JSON.stringify(options);
+          break;
+      }
+      gEvents[$row.dataset.eventId].options = options;
+      this.$menus.options.style.display = 'none';
+      this.render(this.$selected);
+    }
   }
 
   onSelectSound(e) {
@@ -928,7 +1013,7 @@ async function init() {
   window.addEventListener('resize', () => {
     if (!resizeTimeout) {
       resizeTimeout = setTimeout(() => {
-        document.querySelectorAll('#menus ul').forEach(menu => menu.style.display = 'none');
+        document.querySelectorAll('#menus > *').forEach(menu => menu.style.display = 'none');
         document.querySelector('#permissions').classList.add('hidden');
         resizeTimeout = null;
       }, 66);

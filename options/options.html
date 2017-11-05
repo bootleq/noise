@@ -105,6 +105,23 @@
     <div id='menus'>
       <ul class='types'></ul>
       <ul class='sounds'></ul>
+      <div class='options'>
+        <button data-i18n-title='_btn_close'>✖</button>
+        <div class='form'></div>
+        <div class='desc'></div>
+        <button class="accept" data-i18n='_btn_event_accept'>✔ Accept</button>
+        <button class="clear" data-i18n='_btn_event_clear'>Clear</button>
+      </div>
+    </div>
+
+    <div id='options_form_templates'>
+      <template class='filter_statusCode'>
+        <strong data-i18n='_header_slot_filter_statusCode'>Status Code</strong>
+        <label data-i18n='_slot_filterStatusCode_filter'>
+          Filter
+          <input type="text" data-prop='filter'/>
+        </label>
+      </template>
     </div>
 
     <div id='permissions' class='hidden'>
@@ -116,6 +133,13 @@
             <input type='checkbox' data-perm='webNavigation' />
             <span data-i18n='_perms_desc_webNavigation'>Access browser activity during navigation</span>
             <code>webNavigation</code>
+          </label>
+        </li>
+        <li>
+          <label>
+            <input type='checkbox' data-perm='webRequest' />
+            <span data-i18n='_perms_desc_webRequest'>Access HTTP request activity</span>
+            <code>webRequest</code>
           </label>
         </li>
       </ul>

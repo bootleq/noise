@@ -81,6 +81,9 @@
   "options_btn_event_accept": {
     "message": "✔ 確認"
   },
+  "options_btn_event_clear": {
+    "message": "清除"
+  },
   "options_btn_event_cancel": {
     "message": "取消"
   },
@@ -117,6 +120,9 @@
   },
   "options_perms_desc_webNavigation": {
     "message": "在上網時了解瀏覽器行為狀態"
+  },
+  "options_perms_desc_webRequest": {
+    "message": "存取 HTTP 請求狀態"
   },
   "options_title_btn_close": {
     "message": "關閉"
@@ -162,10 +168,26 @@
   "event_types_name_navigationBackForward": {
     "message": "上一頁／下一頁"
   },
+  "event_types_name_requestCompleted": {
+    "message": "HTTP 請求完成"
+  },
   "event_types_name_windowCut": {
     "message": "剪下"
   },
   "event_types_name_windowCopy": {
     "message": "複製"
+  },
+
+  "event_slots_name_filter_statusCode": {
+    "message": "篩選：狀態碼"
+  },
+  "event_slots_desc_filter_statusCode": {
+    "message": "<strong>符合</strong>：回應的 HTTP 狀態碼需符合此條件才繼續處理。<br>例：<code>200</code>。<br>支援正規表達式，例如 <code>[45]..</code> 會符合所有 4xx、5xx 錯誤狀態。"
+  },
+  "options_header_slot_filter_statusCode": {
+    "message": "狀態碼"
+  },
+  "options_slot_filterStatusCode_filter": {
+    "message": "符合"
   }
 }

@@ -19,6 +19,15 @@ const Types = {
     name: browser.i18n.getMessage(`${scope}navigationBackForward`),
     permissions: ['webNavigation']
   },
+  'request.completed': {
+    name: browser.i18n.getMessage(`${scope}requestCompleted`),
+    permissions: ['webRequest'],
+    slots: [
+      {
+        name: 'filter_statusCode'
+      }
+    ]
+  },
   'window.cut': {
     name: browser.i18n.getMessage(`${scope}windowCut`)
   },
@@ -61,8 +70,8 @@ class EventSetting {
     case 'permissions':
       return (def && 'permissions' in def) ? def.permissions : [];
 
-    case 'options':
-      return (def && 'options' in def) ? def.options : null;
+    case 'slots':
+      return (def && 'slots' in def) ? def.slots : [];
     }
   }
 }
