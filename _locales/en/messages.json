@@ -183,5 +183,12 @@
   },
   "event_types_name_windowCopy": {
     "message": "Copy"
+  },
+
+  "event_slots_name_filter_statusCode": {
+    "message": "Filter: status code"
+  },
+  "event_slots_desc_filter_statusCode": {
+    "message": "<strong>Filter</strong>: only catch event if HTTP response code matches given value. For example <code>200</code>, <code>304</code>.<br>Can use regular expression like <code>[45]..</code> to match all 4xx, 5xx errors."
   }
 }

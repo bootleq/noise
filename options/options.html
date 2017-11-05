@@ -105,6 +105,23 @@
     <div id='menus'>
       <ul class='types'></ul>
       <ul class='sounds'></ul>
+      <div class='options'>
+        <button data-i18n-title='_btn_close'>✖</button>
+        <div class='form'></div>
+        <div class='desc'></div>
+        <button class="accept">✔ Accept</button>
+        <button class="clear">Clear</button>
+      </div>
+    </div>
+
+    <div id='options_form_templates'>
+      <template class='filter_statusCode'>
+        <strong>Status Code</strong>
+        <label>
+          Filter
+          <input type="text" data-prop='filter'/>
+        </label>
+      </template>
     </div>
 
     <div id='permissions' class='hidden'>

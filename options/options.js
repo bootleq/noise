@@ -363,8 +363,9 @@ class Events { // {{{
     this.$list  = this.$el.querySelector('tbody');
     this.tmpl   = this.$el.querySelector('template').content;
     this.$menus = {
-      types:  document.querySelector('#menus .types'),
-      sounds: document.querySelector('#menus .sounds')
+      types:   document.querySelector('#menus .types'),
+      sounds:  document.querySelector('#menus .sounds'),
+      options: document.querySelector('#menus .options')
     };
 
     this._$selected = null;
@@ -428,6 +429,7 @@ class Events { // {{{
     this.updateTypeMenu();
     this.$menus.types.addEventListener('click', this.onSelectType.bind(this));
 
+    this.$menus.options.addEventListener('click', this.onUpdateOptions.bind(this));
     this.$menus.sounds.addEventListener('click', this.onSelectSound.bind(this));
   }
 
@@ -446,13 +448,18 @@ class Events { // {{{
     });
   }
 
-  updateMenu(type) {
+  updateMenu(type, $trigger) {
     switch (type) {
       case 'types':
         this.updateTypeMenu();
         break;
       case 'sounds':
         this.updateSoundMenu();
+        break;
+      case 'options':
+        let name = $trigger.dataset.name;
+        let opts = JSON.parse($trigger.closest('tr').dataset.options);
+        this.updateOptionsMenu(name, opts);
         break;
     }
   }
@@ -474,17 +481,47 @@ class Events { // {{{
     });
   }
 
+  updateOptionsMenu(type, options) {
+    let $menu = this.$menus.options;
+    let $form = $menu.querySelector('.form');
+    let $desc = $menu.querySelector('.desc');
+    let props = type in options ? options[type] : {};
+
+    $menu.dataset.type = type;
+    $form.innerHTML = '';
+    let tmpl  = document.querySelector(`#options_form_templates template.${type}`).content;
+    tmpl = document.importNode(tmpl, true);
+    tmpl.querySelectorAll('input[data-prop]').forEach($input => {
+      let prop = $input.dataset.prop;
+      $input.value = prop in props ? props[prop] : '';
+    });
+    $form.appendChild(tmpl);
+    $desc.innerHTML = browser.i18n.getMessage(`event_slots_desc_${type}`);
+  }
+
   render($row) {
     let data     = $row.dataset;
     let options  = JSON.parse(data.options);
     let sound    = gSounds[data.soundId];
     let $sound   = $row.querySelector('.e-sound');
     let $options = $row.querySelector('.e-options');
+    let slots    = EventSetting.getTypeDef(data.type, 'slots');
 
     $row.querySelector('.e-type').textContent = EventSetting.getTypeDef(data.type, 'name');
-    $options.classList.toggle('unavailable', Object.keys(options).length === 0);
-    if (Object.keys(options).length === 0) {
+    $options.classList.toggle('unavailable', Object.keys(slots).length === 0);
+    if (Object.keys(slots).length === 0) {
       $options.textContent = ' - - ';
+    } else {
+      $options.innerHTML = '';
+      Object.values(slots).forEach(slot => {
+        let $slot = document.createElement('button');
+        let name = browser.i18n.getMessage(`event_slots_name_${slot.name}`);
+        $slot.dataset.name = slot.name;
+        $slot.title        = name;
+        $slot.textContent  = name;
+        $slot.classList.toggle('enabled', Object.keys(options).includes(slot.name));
+        $options.appendChild($slot);
+      });
     }
 
     $sound.classList.toggle('not-set', !!!sound);
@@ -529,6 +566,10 @@ class Events { // {{{
               case $cell.matches('.e-sound'):
                 this.toggleMenu('sounds', $cell);
                 break;
+
+              case $cell.matches('.e-options') && $target.tagName === 'BUTTON':
+                this.toggleMenu('options', $target);
+                break;
             }
           }
           break;
@@ -548,6 +589,11 @@ class Events { // {{{
           if (sound) {
             sound.play();
           }
+          break;
+
+        case $target.matches('td.e-options button'):
+          this.$selected = $row;
+          this.toggleMenu('options', $target);
           break;
 
         case $target.matches('.move-up'):
@@ -610,6 +656,7 @@ class Events { // {{{
 
   toggleEdit($row) {
     this.$list.classList.toggle('editing', !!!this.editing);
+    Object.values(this.$menus).forEach(el => el.style.display = 'none');
 
     if (this.editing) {
       let data = this.$selected.dataset;
@@ -617,7 +664,6 @@ class Events { // {{{
       this.editing.options = JSON.parse(data.options);
       this.editing.soundId = data.soundId;
       this.editing = null;
-      Object.values(this.$menus).forEach(el => el.style.display = 'none');
     } else {
       this.editing = gEvents[$row.dataset.eventId];
       this._before = JSON.stringify(this.editing);
@@ -642,7 +688,7 @@ class Events { // {{{
     if ($menu.style.display === 'block') {
       $menu.style.display = 'none';
     } else {
-      this.updateMenu(type);
+      this.updateMenu(type, $trigger);
       posisitionTo($menu, $trigger);
       $menu.style.display = 'block';
     }
@@ -689,6 +735,36 @@ class Events { // {{{
     }
 
     this.render(this.$selected);
+  }
+
+  onUpdateOptions(e) {
+    let $menu   = this.$menus.options;
+    let type    = $menu.dataset.type;
+    let $target = e.target;
+    let $row    = this.$selected;
+    let options = JSON.parse($row.dataset.options);
+
+    if ($target.tagName === 'BUTTON') {
+      switch (true) {
+        case $target.matches('.accept'):
+          $menu.querySelectorAll('.form [data-prop]').forEach($input => {
+            if (!(type in options)) {
+              options[type] = {};
+            }
+            options[type][$input.dataset.prop] = $input.value;
+          });
+          $row.dataset.options = JSON.stringify(options);
+          break;
+
+        case $target.matches('.clear'):
+          delete options[type];
+          $row.dataset.options = JSON.stringify(options);
+          break;
+      }
+      gEvents[$row.dataset.eventId].options = options;
+      this.$menus.options.style.display = 'none';
+      this.render(this.$selected);
+    }
   }
 
   onSelectSound(e) {

@@ -318,6 +318,24 @@ table {
   color: white;
   cursor: help;
 }
+#events .e-options button {
+  display: inline-block;
+  height: 1em;
+  width: 1em;
+  line-height: 1;
+  color: transparent;
+  background-color: #0060df;
+  overflow: hidden;
+  padding: 0 2px;
+  vertical-align: text-bottom;
+  font-weight: bold;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  opacity: 0.4;
+}
+#events .e-options button.enabled {
+  opacity: 1;
+}
 #events .e-ctrl button,
 #events .e-edit button {
   font-size: small;
@@ -389,7 +407,8 @@ table {
   pointer-events: none;
 }
 
-#menus ul {
+#menus ul,
+#menus > div {
   position: absolute;
   list-style: none;
   display: none;
@@ -420,6 +439,19 @@ table {
 }
 #menus li.missing-permissions {
   color: #999;
+}
+#menus > div.options .form strong {
+  display: block;
+}
+#menus > div.options .form label input {
+  margin-left: 8px;
+}
+#menus > div.options .desc code {
+  font-family: 'Segoe UI', 'San Francisco', 'Ubuntu', monospace;
+  font-size: small;
+  background-color: #ebebeb;
+  padding: 0 4px;
+  border-radius: 6px;
 }
 
 #permissions {
