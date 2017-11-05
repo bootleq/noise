@@ -85,6 +85,9 @@
   "options_btn_event_accept": {
     "message": "✔ Accept"
   },
+  "options_btn_event_clear": {
+    "message": "Clear"
+  },
   "options_btn_event_cancel": {
     "message": "Cancel"
   },
@@ -189,6 +192,12 @@
     "message": "Filter: status code"
   },
   "event_slots_desc_filter_statusCode": {
-    "message": "<strong>Filter</strong>: only catch event if HTTP response code matches given value. For example <code>200</code>, <code>304</code>.<br>Can use regular expression like <code>[45]..</code> to match all 4xx, 5xx errors."
+    "message": "<strong>Filter</strong>: only catch event if HTTP response code matches given value. For example <code>200</code>.<br>Can use regular expression like <code>[45]..</code> to match all 4xx, 5xx errors."
+  },
+  "options_header_slot_filter_statusCode": {
+    "message": "Status Code"
+  },
+  "options_slot_filterStatusCode_filter": {
+    "message": "Filter"
   }
 }
