@@ -2,6 +2,7 @@
   --sounds-cell-height: 60px;
   --color-fx-red-70: #a4000f;
   --color-fx-red-80: #5a0002;
+  --color-fx-blue-60: #0060df;
   --color-thead: #ebebeb;
 }
 
@@ -350,16 +351,16 @@ table {
       width: 1em;
       line-height: 1;
       color: transparent;
-      background-color: #0060df;
+      background-color: transparent;
       overflow: hidden;
       padding: 0 2px;
       vertical-align: text-bottom;
       font-weight: bold;
-      border: 1px solid #ddd;
+      border: 1px inset black;
       border-radius: 10px;
-      opacity: 0.4;
       &.enabled {
         opacity: 1;
+        background-color: var(--color-fx-blue-60) !important;
       }
     }
   }
@@ -486,21 +487,55 @@ table {
   }
 
   > div.options {
+    padding: 3px 6px 10px;
+    width: 360px;
+    border: 2px solid var(--color-fx-blue-60);
+    margin-top: 3px;
+    background-color: rgba(255,255,255,0.9);
+
+    button[data-i18n-title='_btn_close'] {
+      padding: 0 3px;
+      border-color: transparent;
+      background-color: transparent;
+      position: absolute;
+      top: 1px;
+      right: 2px;
+    }
     .form {
-      strong {
+      > strong {
         display: block;
+        margin-bottom: 6px;
+      }
+      label {
+        font-size: small;
       }
       label input {
         margin-left: 8px;
       }
     }
     .desc {
+      margin: 8px 2px;
+      padding: 2px 4px 5px;
+      background-color: #efefef;
+      border: 1px inset rgba(0,0,0,0.4);
+      border-radius: 4px;
       code {
         font-family: 'Segoe UI', 'San Francisco', 'Ubuntu', monospace;
         font-size: small;
-        background-color: #ebebeb;
+        background-color: gold;
         padding: 0 4px;
         border-radius: 6px;
+        box-shadow: 0 0 1px;
+      }
+    }
+    button {
+      font-size: small;
+      padding: 1px 6px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      background-color: inherit;
+      &:hover {
+        background-color: rgba(0,149,221,0.25);
       }
     }
   }
