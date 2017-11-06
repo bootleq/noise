@@ -54,10 +54,16 @@ table {
   opacity: 0.6;
 }
 
+#sounds,
+#events {
+  @media (min-width: 640px) {
+    width: 90%;
+    min-width: 550px;
+  }
+}
+
 #sounds {
   margin-bottom: 1em;
-  width: 80%;
-  min-width: 550px;
 
   ul.list {
     display: grid;
@@ -255,9 +261,6 @@ table {
 }
 
 #events {
-  width: 80%;
-  min-width: 550px;
-
   table {
     table-layout: fixed;
     min-width: 100%;
@@ -341,6 +344,15 @@ table {
           cursor: help;
         }
       }
+    }
+  }
+
+  .e-name {
+    input {
+      font-size: 14px;
+      border: none;
+      border-bottom: 2px solid rgba(0,149,221,0.25);
+      background-color: transparent;
     }
   }
 
@@ -583,6 +595,7 @@ table {
   margin: 1em 0 2em 9px;
   button {
     padding: 2px 14px;
+    margin-bottom: 1em;
   }
 
   .info {

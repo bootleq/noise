@@ -507,6 +507,9 @@ class Events { // {{{
     let $options = $row.querySelector('.e-options');
     let slots    = EventSetting.getTypeDef(data.type, 'slots');
 
+    if (!this.editing) {
+      $row.querySelector('.e-name').textContent = data.name;
+    }
     $row.querySelector('.e-type').textContent = EventSetting.getTypeDef(data.type, 'name');
     $options.classList.toggle('unavailable', Object.keys(slots).length === 0);
     if (Object.keys(slots).length === 0) {
@@ -658,18 +661,27 @@ class Events { // {{{
   }
 
   toggleEdit($row) {
+    let $name = $row.querySelector('.e-name');
     this.$list.classList.toggle('editing', !!!this.editing);
     Object.values(this.$menus).forEach(el => el.style.display = 'none');
 
     if (this.editing) {
       let data = this.$selected.dataset;
+      let name = $name.querySelector('input').value;
+      this.editing.name    = name;
       this.editing.type    = data.type;
       this.editing.options = JSON.parse(data.options);
       this.editing.soundId = data.soundId;
       this.editing = null;
+      $name.textContent = name;
     } else {
       this.editing = gEvents[$row.dataset.eventId];
       this._before = JSON.stringify(this.editing);
+      let $input = document.createElement('input');
+      $input.type = 'text';
+      $input.value = this.editing.name;
+      $name.innerHTML = '';
+      $name.appendChild($input);
     }
   }
 
@@ -678,10 +690,12 @@ class Events { // {{{
     this.editing = null;
     let before = JSON.parse(this._before);
     let data = this.$selected.dataset;
+    data.name = before.name;
     data.type = before.type;
     data.options = JSON.stringify(before.options);
     data.soundId = before.soundId;
     Object.values(this.$menus).forEach(el => el.style.display = 'none');
+    $row.querySelector('.e-name').textContent = data.name;
     this.render($row);
   }
 
@@ -705,6 +719,7 @@ class Events { // {{{
     let data = tmpl.querySelector('tr').dataset;
     let perms = EventSetting.getTypeDef(e.type, 'permissions');
     data.eventId = e.id;
+    data.name    = e.name;
     data.type    = e.type;
     data.options = JSON.stringify(e.options);
     data.soundId = e.soundId;

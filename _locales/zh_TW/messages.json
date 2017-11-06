@@ -60,6 +60,9 @@
   "options_header_events": {
     "message": "事件"
   },
+  "options_events_th_name": {
+    "message": "名稱"
+  },
   "options_events_th_type": {
     "message": "類型"
   },
