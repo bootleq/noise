@@ -323,7 +323,7 @@ class SoundDetail { // {{{
     }
     this.$accept.disabled = true;
   }
-  
+
   render() {
     if (this.$selected) {
       let sound = gSounds[this.$selected.dataset.soundId];
@@ -376,6 +376,7 @@ class Events { // {{{
     this._before = '{}';
 
     this.initMenus();
+    this.$list.addEventListener('keydown', this.onKey.bind(this));
     this.$list.addEventListener('click', this.onSelect.bind(this));
     this.$addEvent.addEventListener('click', () => this.addEvent());
     this.$el.addEventListener('click', this.onOuterSelect.bind(this));
@@ -530,6 +531,23 @@ class Events { // {{{
     $sound.classList.toggle('not-set', !!!sound);
     $sound.textContent = sound ? sound.name : browser.i18n.getMessage('options_event_soundNotSet');
     $row.querySelector('button.play').disabled = !!!sound;
+  }
+
+  onKey(e) {
+    if (!this.editing) {
+      return;
+    }
+
+    let $row = e.target.closest('tr');
+    switch (e.key) {
+      case 'Escape':
+        this.cancelEdit($row);
+        break;
+
+      case 'Enter':
+        this.toggleEdit($row);
+        break;
+    }
   }
 
   onSelect(e) {
