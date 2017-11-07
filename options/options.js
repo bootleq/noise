@@ -794,7 +794,11 @@ class Events { // {{{
   onSelectType(e) {
     let $li = e.target.closest('li');
     if ($li.classList.contains('missing-permissions')) {
-      return this.notifyObservers('requestPermissions', JSON.parse($li.dataset.permissions));
+      let reqPerms = JSON.parse($li.dataset.permissions);
+      this.notifyObservers('requestPermissions', reqPerms);
+      if (reqPerms !== ['webRequest']) {
+        return; // webRequest doesn't need user confirm, so assume accepted and continue
+      }
     }
 
     let value = $li.dataset.value;
