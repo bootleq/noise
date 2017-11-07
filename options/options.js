@@ -378,7 +378,14 @@ class Events { // {{{
     this.initMenus();
     this.$list.addEventListener('keydown', this.onKey.bind(this));
     this.$list.addEventListener('click', this.onSelect.bind(this));
-    this.$addEvent.addEventListener('click', () => this.addEvent());
+    this.$addEvent.addEventListener('click', () => {
+      this.addEvent();
+      if (Object.keys(gEvents).length === 1) { // auto select first added event
+        let $row = this.$list.lastElementChild;
+        this.$selected = $row;
+        this.toggleEdit($row);
+      }
+    });
     this.$el.addEventListener('click', this.onOuterSelect.bind(this));
     this.load();
   }
