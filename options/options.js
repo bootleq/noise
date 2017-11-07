@@ -871,7 +871,7 @@ class Permissions { // {{{
       this.$el.classList.remove('hidden');
       let btnRect = $btn.getBoundingClientRect();
       let boxRect = this.$el.getBoundingClientRect();
-      this.$el.style.top = (btnRect.top - boxRect.height - 10) + 'px';
+      this.$el.style.top = (btnRect.top - boxRect.height - 10 + window.scrollY) + 'px';
       this.$el.style.visibility = 'visible';
     } else {
       this.$el.classList.add('hidden');
