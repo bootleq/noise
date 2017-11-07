@@ -497,6 +497,16 @@ table {
     &.missing-permissions {
       color: #999;
     }
+    &.hint {
+      width: 250px;
+      color: #666;
+      line-height: 1.55;
+      cursor: help;
+      strong,
+      code {
+        color: black;
+      }
+    }
   }
 
   > div.options {

@@ -487,6 +487,12 @@ class Events { // {{{
       $li.textContent = s.name;
       this.$menus.sounds.appendChild($li);
     });
+    if (Object.keys(gSounds).length === 0) {
+      let $li = document.createElement('li');
+      $li.innerHTML = browser.i18n.getMessage('options_event_noSounds');
+      $li.classList.add('hint');
+      this.$menus.sounds.appendChild($li);
+    }
   }
 
   updateOptionsMenu(type, options) {
@@ -818,6 +824,9 @@ class Events { // {{{
   onSelectSound(e) {
     let $li = e.target.closest('li');
     let value = $li.dataset.value;
+    if (!value) {
+      return; // is a hint item, not really sound
+    }
     this.$selected.dataset.soundId = value;
     this.$menus.sounds.style.display = 'none';
     this.render(this.$selected);

@@ -449,6 +449,16 @@ table {
 #menus li.missing-permissions {
   color: #999;
 }
+#menus li.hint {
+  width: 250px;
+  color: #666;
+  line-height: 1.55;
+  cursor: help;
+}
+#menus li.hint strong,
+#menus li.hint code {
+  color: black;
+}
 #menus > div.options {
   padding: 3px 6px 10px;
   width: 360px;
