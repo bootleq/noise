@@ -63,6 +63,9 @@
   "options_header_events": {
     "message": "Events"
   },
+  "options_events_th_name": {
+    "message": "Name"
+  },
   "options_events_th_type": {
     "message": "Type"
   },
