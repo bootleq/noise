@@ -335,6 +335,7 @@ class SoundDetail { // {{{
       this.$name.value = '';
       this.$upload.classList.remove('hidden');
     }
+    document.querySelectorAll('#menus > *').forEach(menu => menu.style.display = 'none');
     this.$filename.textContent = '';
   }
 
@@ -737,7 +738,7 @@ class Events { // {{{
       let $input = document.createElement('input');
       $input.type = 'text';
       $input.placeholder = browser.i18n.getMessage('options_event_nameNotSet');
-      $input.value = this.editing.name;
+      $input.value = this.editing.name || '';
       $name.innerHTML = '';
       $name.appendChild($input);
     }
@@ -777,7 +778,7 @@ class Events { // {{{
     let data = tmpl.querySelector('tr').dataset;
     let perms = EventSetting.getTypeDef(e.type, 'permissions');
     data.eventId = e.id;
-    data.name    = e.name;
+    data.name    = e.name || '';
     data.type    = e.type;
     data.options = JSON.stringify(e.options);
     data.soundId = e.soundId;
