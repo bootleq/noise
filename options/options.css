@@ -296,7 +296,7 @@ table {
 #events td.e-options.unavailable {
   opacity: 0.3 !important;
 }
-#events td.e-type.not-set, #events td.e-sound.not-set {
+#events td.e-name.not-set, #events td.e-type.not-set, #events td.e-sound.not-set {
   opacity: 0.4 !important;
 }
 #events thead {
@@ -324,8 +324,10 @@ table {
 #events .e-name input {
   font-size: 14px;
   border: none;
-  border-bottom: 2px solid rgba(0, 149, 221, 0.25);
   background-color: transparent;
+}
+#events .e-name input:focus {
+  border-bottom: 2px solid rgba(0, 149, 221, 0.25);
 }
 #events .e-options button {
   display: inline-block;
@@ -386,6 +388,7 @@ table {
   background-color: white;
   box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
 }
+#events tbody.editing tr.current td.e-name:not(.unavailable):hover,
 #events tbody.editing tr.current td.e-type:not(.unavailable):hover,
 #events tbody.editing tr.current td.e-options:not(.unavailable):hover,
 #events tbody.editing tr.current td.e-sound:not(.unavailable):hover {

@@ -377,6 +377,7 @@ class Events { // {{{
 
     this.initMenus();
     this.$list.addEventListener('keydown', this.onKey.bind(this));
+    this.$list.addEventListener('input', this.onInput.bind(this));
     this.$list.addEventListener('click', this.onSelect.bind(this));
     this.$addEvent.addEventListener('click', () => {
       this.addEvent();
@@ -517,6 +518,7 @@ class Events { // {{{
     let data     = $row.dataset;
     let options  = JSON.parse(data.options);
     let sound    = gSounds[data.soundId];
+    let $name    = $row.querySelector('.e-name');
     let type     = EventSetting.getTypeDef(data.type, 'name');
     let $type    = $row.querySelector('.e-type');
     let $sound   = $row.querySelector('.e-sound');
@@ -524,7 +526,11 @@ class Events { // {{{
     let slots    = EventSetting.getTypeDef(data.type, 'slots');
 
     if (!this.editing) {
-      $row.querySelector('.e-name').textContent = data.name;
+      if (data.name) {
+        $name.textContent = data.name;
+      } else {
+        $name.textContent = browser.i18n.getMessage('options_event_nameNotSet');
+      }
     }
 
     $options.classList.toggle('unavailable', Object.keys(slots).length === 0);
@@ -542,6 +548,8 @@ class Events { // {{{
         $options.appendChild($slot);
       });
     }
+
+    $name.classList.toggle('not-set', !!!data.name);
 
     $type.classList.toggle('not-set', !!!type);
     $type.textContent = type || browser.i18n.getMessage('options_event_typeNotSet');
@@ -565,6 +573,14 @@ class Events { // {{{
       case 'Enter':
         this.toggleEdit($row);
         break;
+    }
+  }
+
+  onInput(e) {
+    let $cell = e.target.closest('td');
+    if ($cell.matches('.e-name')) {
+      let $input = $cell.querySelector('input');
+      $cell.classList.toggle('not-set', $input.value.length === 0);
     }
   }
 
@@ -598,6 +614,10 @@ class Events { // {{{
           $cell = $target.closest('.current td');
           if ($cell) {
             switch (true) {
+              case $cell.matches('.e-name'):
+                $cell.querySelector('input').focus();
+                break;
+
               case $cell.matches('.e-type'):
                 this.toggleMenu('types', $cell);
                 break;
@@ -709,12 +729,14 @@ class Events { // {{{
       this.editing.options = JSON.parse(data.options);
       this.editing.soundId = data.soundId;
       this.editing = null;
-      $name.textContent = name;
+      $name.textContent = name || browser.i18n.getMessage('options_event_nameNotSet');
+      $name.classList.toggle('not-set', !!!name);
     } else {
       this.editing = gEvents[$row.dataset.eventId];
       this._before = JSON.stringify(this.editing);
       let $input = document.createElement('input');
       $input.type = 'text';
+      $input.placeholder = browser.i18n.getMessage('options_event_nameNotSet');
       $input.value = this.editing.name;
       $name.innerHTML = '';
       $name.appendChild($input);

@@ -314,6 +314,7 @@ table {
     &.e-options.unavailable {
       opacity: 0.3 !important;
     }
+    &.e-name.not-set,
     &.e-type.not-set,
     &.e-sound.not-set {
       opacity: 0.4 !important;
@@ -352,8 +353,10 @@ table {
     input {
       font-size: 14px;
       border: none;
-      border-bottom: 2px solid rgba(0,149,221,0.25);
       background-color: transparent;
+      &:focus {
+        border-bottom: 2px solid rgba(0,149,221,0.25);
+      }
     }
   }
 
@@ -424,6 +427,7 @@ table {
       background-color: white;
       box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
 
+      td.e-name,
       td.e-type,
       td.e-options,
       td.e-sound {

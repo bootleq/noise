@@ -118,6 +118,10 @@
   "options_btn_event_add": {
     "message": "➕ Add Event"
   },
+  "options_event_nameNotSet": {
+    "message": "Not set",
+    "description": "If user didn't input a event name, Event table show this text for 'Name' column."
+  },
   "options_event_typeNotSet": {
     "message": "Not set",
     "description": "If user didn't select a event type, Event table show this text for 'Type' column."
