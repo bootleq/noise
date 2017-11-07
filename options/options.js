@@ -511,6 +511,8 @@ class Events { // {{{
     let data     = $row.dataset;
     let options  = JSON.parse(data.options);
     let sound    = gSounds[data.soundId];
+    let type     = EventSetting.getTypeDef(data.type, 'name');
+    let $type    = $row.querySelector('.e-type');
     let $sound   = $row.querySelector('.e-sound');
     let $options = $row.querySelector('.e-options');
     let slots    = EventSetting.getTypeDef(data.type, 'slots');
@@ -518,7 +520,7 @@ class Events { // {{{
     if (!this.editing) {
       $row.querySelector('.e-name').textContent = data.name;
     }
-    $row.querySelector('.e-type').textContent = EventSetting.getTypeDef(data.type, 'name');
+
     $options.classList.toggle('unavailable', Object.keys(slots).length === 0);
     if (Object.keys(slots).length === 0) {
       $options.textContent = ' - - ';
@@ -534,6 +536,9 @@ class Events { // {{{
         $options.appendChild($slot);
       });
     }
+
+    $type.classList.toggle('not-set', !!!type);
+    $type.textContent = type || browser.i18n.getMessage('options_event_typeNotSet');
 
     $sound.classList.toggle('not-set', !!!sound);
     $sound.textContent = sound ? sound.name : browser.i18n.getMessage('options_event_soundNotSet');

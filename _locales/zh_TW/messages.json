@@ -114,6 +114,9 @@
   "options_btn_event_add": {
     "message": "➕ 新增事件"
   },
+  "options_event_typeNotSet": {
+    "message": "未設定"
+  },
   "options_event_soundNotSet": {
     "message": "未設定"
   },

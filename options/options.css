@@ -296,7 +296,7 @@ table {
 #events td.e-options.unavailable {
   opacity: 0.3 !important;
 }
-#events td.e-sound.not-set {
+#events td.e-type.not-set, #events td.e-sound.not-set {
   opacity: 0.4 !important;
 }
 #events thead {

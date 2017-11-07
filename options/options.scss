@@ -314,6 +314,7 @@ table {
     &.e-options.unavailable {
       opacity: 0.3 !important;
     }
+    &.e-type.not-set,
     &.e-sound.not-set {
       opacity: 0.4 !important;
     }
