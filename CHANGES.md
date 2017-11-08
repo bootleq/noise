@@ -1,6 +1,23 @@
 CHANGES
 =======
 
+## 2.1.0 (2017-11-08)
+
+* Allow customize event name.
+
+* Add "HTTP Request Completed" event.
+
+  It occurs when webpage load finish, you can further set status code filter to,
+  for example, catch only `404` not found results.
+
+  This event requires `webRequest` permission.
+
+* With above new event, introduced new "options" UI.
+  When select certain event, a circle icon will appear in "Options" column,
+  click it to review/edit available options.
+
+* Options UI enhancements and fixes, thanks to @rayman89's suggestion (#7).
+
 ## 2.0.0 (2017-11-04)
 
 * Same as beta, just do release.
