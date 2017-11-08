@@ -63,6 +63,9 @@
   "options_header_events": {
     "message": "Events"
   },
+  "options_events_th_name": {
+    "message": "Name"
+  },
   "options_events_th_type": {
     "message": "Type"
   },
@@ -115,9 +118,21 @@
   "options_btn_event_add": {
     "message": "➕ Add Event"
   },
+  "options_event_nameNotSet": {
+    "message": "Not set",
+    "description": "If user didn't input a event name, Event table show this text for 'Name' column."
+  },
+  "options_event_typeNotSet": {
+    "message": "Not set",
+    "description": "If user didn't select a event type, Event table show this text for 'Type' column."
+  },
   "options_event_soundNotSet": {
     "message": "Not set",
     "description": "If user didn't select a sound, Event table show this text for 'Sound' column."
+  },
+  "options_event_noSounds": {
+    "message": "Please set some <strong>Sound</strong> first.<br>(click <code>➕</code> button under <strong>Sound</strong> section)",
+    "description": "If user didn't add any sound, Event table show this text in the dropdown of 'Sound' column."
   },
 
   "options_header_permissions": {

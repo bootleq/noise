@@ -323,7 +323,7 @@ class SoundDetail { // {{{
     }
     this.$accept.disabled = true;
   }
-  
+
   render() {
     if (this.$selected) {
       let sound = gSounds[this.$selected.dataset.soundId];
@@ -335,6 +335,7 @@ class SoundDetail { // {{{
       this.$name.value = '';
       this.$upload.classList.remove('hidden');
     }
+    document.querySelectorAll('#menus > *').forEach(menu => menu.style.display = 'none');
     this.$filename.textContent = '';
   }
 
@@ -376,8 +377,17 @@ class Events { // {{{
     this._before = '{}';
 
     this.initMenus();
+    this.$list.addEventListener('keydown', this.onKey.bind(this));
+    this.$list.addEventListener('input', this.onInput.bind(this));
     this.$list.addEventListener('click', this.onSelect.bind(this));
-    this.$addEvent.addEventListener('click', () => this.addEvent());
+    this.$addEvent.addEventListener('click', () => {
+      this.addEvent();
+      if (Object.keys(gEvents).length === 1) { // auto select first added event
+        let $row = this.$list.lastElementChild;
+        this.$selected = $row;
+        this.toggleEdit($row);
+      }
+    });
     this.$el.addEventListener('click', this.onOuterSelect.bind(this));
     this.load();
   }
@@ -479,6 +489,12 @@ class Events { // {{{
       $li.textContent = s.name;
       this.$menus.sounds.appendChild($li);
     });
+    if (Object.keys(gSounds).length === 0) {
+      let $li = document.createElement('li');
+      $li.innerHTML = browser.i18n.getMessage('options_event_noSounds');
+      $li.classList.add('hint');
+      this.$menus.sounds.appendChild($li);
+    }
   }
 
   updateOptionsMenu(type, options) {
@@ -503,11 +519,21 @@ class Events { // {{{
     let data     = $row.dataset;
     let options  = JSON.parse(data.options);
     let sound    = gSounds[data.soundId];
+    let $name    = $row.querySelector('.e-name');
+    let type     = EventSetting.getTypeDef(data.type, 'name');
+    let $type    = $row.querySelector('.e-type');
     let $sound   = $row.querySelector('.e-sound');
     let $options = $row.querySelector('.e-options');
     let slots    = EventSetting.getTypeDef(data.type, 'slots');
 
-    $row.querySelector('.e-type').textContent = EventSetting.getTypeDef(data.type, 'name');
+    if (!this.editing) {
+      if (data.name) {
+        $name.textContent = data.name;
+      } else {
+        $name.textContent = browser.i18n.getMessage('options_event_nameNotSet');
+      }
+    }
+
     $options.classList.toggle('unavailable', Object.keys(slots).length === 0);
     if (Object.keys(slots).length === 0) {
       $options.textContent = ' - - ';
@@ -524,9 +550,39 @@ class Events { // {{{
       });
     }
 
+    $name.classList.toggle('not-set', !!!data.name);
+
+    $type.classList.toggle('not-set', !!!type);
+    $type.textContent = type || browser.i18n.getMessage('options_event_typeNotSet');
+
     $sound.classList.toggle('not-set', !!!sound);
     $sound.textContent = sound ? sound.name : browser.i18n.getMessage('options_event_soundNotSet');
     $row.querySelector('button.play').disabled = !!!sound;
+  }
+
+  onKey(e) {
+    if (!this.editing) {
+      return;
+    }
+
+    let $row = e.target.closest('tr');
+    switch (e.key) {
+      case 'Escape':
+        this.cancelEdit($row);
+        break;
+
+      case 'Enter':
+        this.toggleEdit($row);
+        break;
+    }
+  }
+
+  onInput(e) {
+    let $cell = e.target.closest('td');
+    if ($cell.matches('.e-name')) {
+      let $input = $cell.querySelector('input');
+      $cell.classList.toggle('not-set', $input.value.length === 0);
+    }
   }
 
   onSelect(e) {
@@ -559,6 +615,10 @@ class Events { // {{{
           $cell = $target.closest('.current td');
           if ($cell) {
             switch (true) {
+              case $cell.matches('.e-name'):
+                $cell.querySelector('input').focus();
+                break;
+
               case $cell.matches('.e-type'):
                 this.toggleMenu('types', $cell);
                 break;
@@ -658,18 +718,29 @@ class Events { // {{{
   }
 
   toggleEdit($row) {
+    let $name = $row.querySelector('.e-name');
     this.$list.classList.toggle('editing', !!!this.editing);
     Object.values(this.$menus).forEach(el => el.style.display = 'none');
 
     if (this.editing) {
       let data = this.$selected.dataset;
+      let name = $name.querySelector('input').value;
+      this.editing.name    = name;
       this.editing.type    = data.type;
       this.editing.options = JSON.parse(data.options);
       this.editing.soundId = data.soundId;
       this.editing = null;
+      $name.textContent = name || browser.i18n.getMessage('options_event_nameNotSet');
+      $name.classList.toggle('not-set', !!!name);
     } else {
       this.editing = gEvents[$row.dataset.eventId];
       this._before = JSON.stringify(this.editing);
+      let $input = document.createElement('input');
+      $input.type = 'text';
+      $input.placeholder = browser.i18n.getMessage('options_event_nameNotSet');
+      $input.value = this.editing.name || '';
+      $name.innerHTML = '';
+      $name.appendChild($input);
     }
   }
 
@@ -678,10 +749,12 @@ class Events { // {{{
     this.editing = null;
     let before = JSON.parse(this._before);
     let data = this.$selected.dataset;
+    data.name = before.name;
     data.type = before.type;
     data.options = JSON.stringify(before.options);
     data.soundId = before.soundId;
     Object.values(this.$menus).forEach(el => el.style.display = 'none');
+    $row.querySelector('.e-name').textContent = data.name;
     this.render($row);
   }
 
@@ -705,6 +778,7 @@ class Events { // {{{
     let data = tmpl.querySelector('tr').dataset;
     let perms = EventSetting.getTypeDef(e.type, 'permissions');
     data.eventId = e.id;
+    data.name    = e.name || '';
     data.type    = e.type;
     data.options = JSON.stringify(e.options);
     data.soundId = e.soundId;
@@ -720,7 +794,11 @@ class Events { // {{{
   onSelectType(e) {
     let $li = e.target.closest('li');
     if ($li.classList.contains('missing-permissions')) {
-      return this.notifyObservers('requestPermissions', JSON.parse($li.dataset.permissions));
+      let reqPerms = JSON.parse($li.dataset.permissions);
+      this.notifyObservers('requestPermissions', reqPerms);
+      if (reqPerms !== ['webRequest']) {
+        return; // webRequest doesn't need user confirm, so assume accepted and continue
+      }
     }
 
     let value = $li.dataset.value;
@@ -773,6 +851,9 @@ class Events { // {{{
   onSelectSound(e) {
     let $li = e.target.closest('li');
     let value = $li.dataset.value;
+    if (!value) {
+      return; // is a hint item, not really sound
+    }
     this.$selected.dataset.soundId = value;
     this.$menus.sounds.style.display = 'none';
     this.render(this.$selected);
@@ -838,7 +919,7 @@ class Permissions { // {{{
       this.$el.classList.remove('hidden');
       let btnRect = $btn.getBoundingClientRect();
       let boxRect = this.$el.getBoundingClientRect();
-      this.$el.style.top = (btnRect.top - boxRect.height - 10) + 'px';
+      this.$el.style.top = (btnRect.top - boxRect.height - 10 + window.scrollY) + 'px';
       this.$el.style.visibility = 'visible';
     } else {
       this.$el.classList.add('hidden');

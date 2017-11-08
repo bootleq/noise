@@ -63,10 +63,16 @@ table {
   opacity: 0.6;
 }
 
+@media (min-width: 640px) {
+  #sounds,
+  #events {
+    width: 90%;
+    min-width: 550px;
+  }
+}
+
 #sounds {
   margin-bottom: 1em;
-  width: 80%;
-  min-width: 550px;
 }
 #sounds ul.list {
   display: grid;
@@ -243,10 +249,6 @@ table {
   background-color: white;
 }
 
-#events {
-  width: 80%;
-  min-width: 550px;
-}
 #events table {
   table-layout: fixed;
   min-width: 100%;
@@ -294,7 +296,7 @@ table {
 #events td.e-options.unavailable {
   opacity: 0.3 !important;
 }
-#events td.e-sound.not-set {
+#events td.e-name.not-set, #events td.e-type.not-set, #events td.e-sound.not-set {
   opacity: 0.4 !important;
 }
 #events thead {
@@ -318,6 +320,14 @@ table {
   background-color: var(--color-fx-red-70);
   color: white;
   cursor: help;
+}
+#events .e-name input {
+  font-size: 14px;
+  border: none;
+  background-color: transparent;
+}
+#events .e-name input:focus {
+  border-bottom: 2px solid rgba(0, 149, 221, 0.25);
 }
 #events .e-options button {
   display: inline-block;
@@ -378,6 +388,7 @@ table {
   background-color: white;
   box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
 }
+#events tbody.editing tr.current td.e-name:not(.unavailable):hover,
 #events tbody.editing tr.current td.e-type:not(.unavailable):hover,
 #events tbody.editing tr.current td.e-options:not(.unavailable):hover,
 #events tbody.editing tr.current td.e-sound:not(.unavailable):hover {
@@ -440,6 +451,16 @@ table {
 }
 #menus li.missing-permissions {
   color: #999;
+}
+#menus li.hint {
+  width: 250px;
+  color: #666;
+  line-height: 1.55;
+  cursor: help;
+}
+#menus li.hint strong,
+#menus li.hint code {
+  color: black;
 }
 #menus > div.options {
   padding: 3px 6px 10px;
@@ -535,6 +556,7 @@ table {
 }
 #main-ctrls button {
   padding: 2px 14px;
+  margin-bottom: 1em;
 }
 #main-ctrls .info {
   display: inline-block;

@@ -39,6 +39,7 @@ const Types = {
 class EventSetting {
   constructor(config) {
     this.id      = config ? config.id      : newId();
+    this.name    = config ? config.name    : '';
     this.type    = config ? config.type    : null;
     this.options = config ? config.options : {};
     this.soundId = config ? config.soundId : null;
@@ -52,6 +53,7 @@ class EventSetting {
   toPersistedProps() {
     let obj = {
       id:      this.id,
+      name:    this.name || '',
       type:    this.type,
       options: this.options,
       soundId: this.soundId,
