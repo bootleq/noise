@@ -22,12 +22,7 @@ class Sounds { // {{{
     this.$list.addEventListener('focus', this.onFocus.bind(this), {capture: true});
     this.$list.addEventListener('click', this.onSelect.bind(this));
     this.$list.addEventListener('keydown', this.onKey.bind(this));
-    this.$addSound.addEventListener('click', () => {
-      this.addSound();
-      if (Object.keys(gSounds).length === 1) { // auto select first added sound
-        this.$selected = this.$list.firstElementChild;
-      }
-    });
+    this.$addSound.addEventListener('click', () => this.$selected = this.addSound());
     this.load();
   }
 
@@ -144,7 +139,9 @@ class Sounds { // {{{
     tmpl.querySelector('li').dataset.soundId     = sound.id;
     tmpl.querySelector('.name span').textContent = sound.name;
     this.$list.insertBefore(tmpl, this.$addSound);
-    this.render(this.$addSound.previousElementSibling);
+    let $li = this.$addSound.previousElementSibling;
+    this.render($li);
+    return $li;
   }
 }
 // }}}
@@ -381,9 +378,8 @@ class Events { // {{{
     this.$list.addEventListener('input', this.onInput.bind(this));
     this.$list.addEventListener('click', this.onSelect.bind(this));
     this.$addEvent.addEventListener('click', () => {
-      this.addEvent();
-      if (Object.keys(gEvents).length === 1) { // auto select first added event
-        let $row = this.$list.lastElementChild;
+      let $row = this.addEvent();
+      if (!this.editing) {
         this.$selected = $row;
         this.toggleEdit($row);
       }
@@ -526,7 +522,7 @@ class Events { // {{{
     let $options = $row.querySelector('.e-options');
     let slots    = EventSetting.getTypeDef(data.type, 'slots');
 
-    if (!this.editing) {
+    if (!(this.editing && $row.classList.contains('current'))) {
       if (data.name) {
         $name.textContent = data.name;
       } else {
@@ -741,6 +737,7 @@ class Events { // {{{
       $input.value = this.editing.name || '';
       $name.innerHTML = '';
       $name.appendChild($input);
+      $input.focus();
     }
   }
 
@@ -788,7 +785,9 @@ class Events { // {{{
 
     tmpl.querySelector('.e-toggle input').checked = e.enabled;
     this.$list.appendChild(tmpl);
-    this.render(this.$list.lastElementChild);
+    let $row = this.$list.lastElementChild;
+    this.render($row);
+    return $row;
   }
 
   onSelectType(e) {

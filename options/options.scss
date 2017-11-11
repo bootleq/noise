@@ -426,6 +426,7 @@ table {
     tr.current {
       background-color: white;
       box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
+      border-left: 3px solid var(--color-fx-blue-60);
 
       td.e-name,
       td.e-type,
