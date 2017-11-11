@@ -1,6 +1,10 @@
 CHANGES
 =======
 
+## 2.1.1 (2017-11-11)
+
+* Options page now automatcally start editing when adding new sound/event.
+
 ## 2.1.0 (2017-11-08)
 
 * Allow customize event name.
