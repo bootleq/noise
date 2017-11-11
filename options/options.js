@@ -735,6 +735,7 @@ class Events { // {{{
       $input.value = this.editing.name || '';
       $name.innerHTML = '';
       $name.appendChild($input);
+      $input.focus();
     }
   }
 
