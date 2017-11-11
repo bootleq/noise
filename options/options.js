@@ -379,8 +379,10 @@ class Events { // {{{
     this.$list.addEventListener('click', this.onSelect.bind(this));
     this.$addEvent.addEventListener('click', () => {
       let $row = this.addEvent();
-      this.$selected = $row;
-      this.toggleEdit($row);
+      if (!this.editing) {
+        this.$selected = $row;
+        this.toggleEdit($row);
+      }
     });
     this.$el.addEventListener('click', this.onOuterSelect.bind(this));
     this.load();
@@ -520,7 +522,7 @@ class Events { // {{{
     let $options = $row.querySelector('.e-options');
     let slots    = EventSetting.getTypeDef(data.type, 'slots');
 
-    if (!this.editing) {
+    if (!(this.editing && $row.classList.contains('current'))) {
       if (data.name) {
         $name.textContent = data.name;
       } else {
