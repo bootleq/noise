@@ -1,6 +1,10 @@
 CHANGES
 =======
 
+## 2.2.1 (2018-04-05)
+
+* Add "Download Failure" event.
+
 ## 2.1.1 (2017-11-11)
 
 * Options page now automatcally start editing when adding new sound/event.
