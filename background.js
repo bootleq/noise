@@ -226,6 +226,13 @@ function onDownloadChanged(delta) { // https://developer.mozilla.org/en-US/Add-o
       break;
     }
   }
+
+  if (delta.error) {
+    let type = delta.error.current;
+    if (type && !type.startsWith('USER_')) { // don't consider user action as error
+      play('download.failure');
+    }
+  }
 }
 
 function onBackForward(details) { // webNavigation: onHistoryStateUpdated, onReferenceFragmentUpdated, onCommitted

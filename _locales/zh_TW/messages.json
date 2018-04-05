@@ -174,8 +174,11 @@
   "event_types_name_downloadCompleted": {
     "message": "下載完成"
   },
-  "event_types_name_downloadInterrupted": {
+  "event_types_name_downloadFailure": {
     "message": "下載失敗"
+  },
+  "event_types_name_downloadInterrupted": {
+    "message": "下載中斷"
   },
   "event_types_name_navigationBackForward": {
     "message": "上一頁／下一頁"

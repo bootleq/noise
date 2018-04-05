@@ -12,6 +12,9 @@ const Types = {
   'download.completed': {
     name: browser.i18n.getMessage(`${scope}downloadCompleted`)
   },
+  'download.failure': {
+    name: browser.i18n.getMessage(`${scope}downloadFailure`)
+  },
   'download.interrupted': {
     name: browser.i18n.getMessage(`${scope}downloadInterrupted`)
   },

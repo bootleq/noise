@@ -187,6 +187,9 @@
   "event_types_name_downloadCompleted": {
     "message": "Download Completed"
   },
+  "event_types_name_downloadFailure": {
+    "message": "Download Failure"
+  },
   "event_types_name_downloadInterrupted": {
     "message": "Download Interrupted"
   },
