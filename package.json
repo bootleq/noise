@@ -4,9 +4,9 @@
   "private": true,
   "devDependencies": {
     "grunt": "~0.4.5",
-    "load-grunt-tasks": "^3.4.0",
     "grunt-contrib-sass": "^1.0.0",
-    "grunt-contrib-watch": "^1.0.0"
+    "grunt-contrib-watch": "^1.1.0",
+    "load-grunt-tasks": "^3.4.0"
   },
   "scripts": {
     "start": "grunt watch",
