@@ -1,6 +1,10 @@
 CHANGES
 =======
 
+## 2.2.2 (2018-10-17)
+
+* Upgrade some outdated node packages.
+
 ## 2.2.1 (2018-04-05)
 
 * Add "Download Failure" event.

@@ -1,7 +1,7 @@
 {
   "name": "Noise",
   "description": "__MSG_extDescription__",
-  "version": "2.2.1",
+  "version": "2.2.2",
   "homepage_url": "https://github.com/bootleq/noise",
   "icons": {
     "32": "icon.png"
