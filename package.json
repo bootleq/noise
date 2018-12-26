@@ -12,10 +12,5 @@
     "start": "grunt watch",
     "build": "web-ext build --artifacts-dir= --ignore-files *.md Gruntfile.js *.zsh package*.json"
   },
-  "license": "MIT",
-  "dependencies": {
-    "debug": ">=4.1.0",
-    "lodash": ">=4.17.11",
-    "minimatch": ">=3.0.4"
-  }
+  "license": "MIT"
 }
