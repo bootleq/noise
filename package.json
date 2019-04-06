@@ -10,7 +10,7 @@
   },
   "scripts": {
     "start": "grunt watch",
-    "build": "web-ext build --artifacts-dir=zips --ignore-files *.md Gruntfile.js *.zsh **/*.scss package*.json"
+    "build": "web-ext build --artifacts-dir=zips --overwrite-dest --ignore-files *.md Gruntfile.js *.zsh **/*.scss package*.json"
   },
   "license": "MIT"
 }
