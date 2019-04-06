@@ -7,4 +7,5 @@ Thumbs.db
 Desktop.ini
 node_modules/*
 .sass-cache/*
+.tool-versions
 zips
