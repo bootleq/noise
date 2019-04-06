@@ -1,6 +1,11 @@
 CHANGES
 =======
 
+## 2.2.3 (2019-04-14)
+
+* Options page: fix upload button inaccessible with only keyboard (#9).
+* Options page: fix Event editing has no response.
+
 ## 2.2.2 (2018-10-17)
 
 * Upgrade some outdated node packages.

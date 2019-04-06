@@ -7,7 +7,7 @@ Make sound response when event happen.
 WebExtension Compatibility
 --------------------------
 
-Compatible version (2.0) is completely rewritten from legacy one.
+Compatible version (2.0 onward) is completely rewritten from legacy one.
 
 Most old functionalities are unavailable for the time being.
 
