@@ -583,6 +583,7 @@ class Events { // {{{
 
   onSelect(e) {
     let $target = e.target;
+    let $button = $target.closest('button');
     let $row    = $target.closest('tr');
     let sound   = gSounds[$row.dataset.soundId];
     let $cell;
@@ -593,17 +594,17 @@ class Events { // {{{
 
     if (this.editing) {
       switch (true) {
-        case $target.matches('button.edit'):
+        case $button && $button.matches('button.edit'):
           this.toggleEdit($row);
           break;
 
-        case $target.matches('button.play'):
+        case $button && $button.matches('button.play'):
           if (sound) {
             sound.play();
           }
           break;
 
-        case $target.matches('button.cancel'):
+        case $button && $button.matches('button.cancel'):
           this.cancelEdit($row);
           break;
 
@@ -633,26 +634,25 @@ class Events { // {{{
       return;
     }
 
-    switch (true) {
-    case $target.matches('button'):
+    if ($button) {
       switch (true) {
-        case $target.matches('.edit'):
+        case $button.matches('.edit'):
           this.$selected = $row;
           this.toggleEdit($row);
           break;
 
-        case $target.matches('.play'):
+        case $button.matches('.play'):
           if (sound) {
             sound.play();
           }
           break;
 
-        case $target.matches('td.e-options button'):
+        case $button.matches('td.e-options button'):
           this.$selected = $row;
-          this.toggleMenu('options', $target);
+          this.toggleMenu('options', $button);
           break;
 
-        case $target.matches('.move-up'):
+        case $button.matches('.move-up'):
           Object.values(this.$menus).forEach(el => el.style.display = 'none');
           if ($row.previousElementSibling) {
             $row.parentNode.insertBefore($row, $row.previousElementSibling);
@@ -661,7 +661,7 @@ class Events { // {{{
           }
           break;
 
-        case $target.matches('.move-down'):
+        case $button.matches('.move-down'):
           Object.values(this.$menus).forEach(el => el.style.display = 'none');
           if ($row.nextElementSibling) {
             if ($row.nextElementSibling.nextElementSibling) {
@@ -674,7 +674,7 @@ class Events { // {{{
           }
           break;
 
-        case $target.matches('.delete'):
+        case $button.matches('.delete'):
           Object.values(this.$menus).forEach(el => el.style.display = 'none');
           this.delete($row);
           break;
