@@ -3,19 +3,14 @@
   "description": "Make sound response when events happen",
   "private": true,
   "devDependencies": {
-    "grunt": "~0.4.5",
+    "grunt": "^1.0.4",
     "grunt-contrib-sass": "^1.0.0",
     "grunt-contrib-watch": "^1.1.0",
     "load-grunt-tasks": "^3.4.0"
   },
   "scripts": {
     "start": "grunt watch",
-    "build": "web-ext build --artifacts-dir= --ignore-files *.md Gruntfile.js *.zsh package*.json"
+    "build": "web-ext build --artifacts-dir=zips --ignore-files *.md Gruntfile.js *.zsh **/*.scss package*.json"
   },
-  "license": "MIT",
-  "dependencies": {
-    "debug": ">=4.1.0",
-    "lodash": ">=4.17.11",
-    "minimatch": ">=3.0.4"
-  }
+  "license": "MIT"
 }
