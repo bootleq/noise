@@ -71,17 +71,17 @@ class Events {
 
   initMenus() {
     Object.entries(EventSetting.Types).forEach(([key, value]) => {
-      let $li = document.createElement('li');
+      let $opt = document.createElement('option');
       let perms = EventSetting.getTypeDef(key, 'permissions');
-      $li.dataset.value = key;
-      $li.textContent = value.name;
+      $opt.dataset.value = key;
+      $opt.value = key;
+      $opt.textContent = value.name;
       if (perms.length) {
-        $li.dataset.permissions = JSON.stringify(perms);
+        $opt.dataset.permissions = JSON.stringify(perms);
       }
-      this.$menus.types.appendChild($li);
+      this.$menus.types.appendChild($opt);
     });
     this.updateTypeMenu();
-    this.$menus.types.addEventListener('click', this.onSelectType.bind(this));
 
     this.$menus.options.addEventListener('click', this.onUpdateOptions.bind(this));
     this.$menus.sounds.addEventListener('click', this.onSelectSound.bind(this));
@@ -102,27 +102,24 @@ class Events {
     });
   }
 
-  updateMenu(type, $trigger) {
-    switch (type) {
-      case 'types':
-        this.updateTypeMenu();
-        break;
-      case 'sounds':
-        this.updateSoundMenu();
-        break;
-      case 'options':
-        let name = $trigger.dataset.name;
-        let opts = JSON.parse($trigger.closest('tr').dataset.options);
-        this.updateOptionsMenu(name, opts);
-        break;
-    }
-  }
-
   updateTypeMenu() {
-    this.$menus.types.querySelectorAll('li[data-permissions]').forEach(el => {
+    const $options = this.$menus.types.querySelectorAll('option[data-permissions]');
+    const $editing = this.$selected && this.$selected.querySelector('select.types');
+
+    $options.forEach(el => {
       let perms = JSON.parse(el.dataset.permissions || '[]');
-      el.classList.toggle('missing-permissions', arrayDiff(perms, gPermissions).length);
+      const missing = arrayDiff(perms, gPermissions).length;
+      el.disabled = missing;
     });
+
+    if ($editing) {
+      $options.forEach(el => {
+        const $match = $editing.querySelector(`option[value='${el.value}']`);
+        if ($match) {
+          $match.disabled = el.disabled;
+        }
+      });
+    }
   }
 
   updateSoundMenu() {
@@ -176,6 +173,8 @@ class Events {
       } else {
         $name.textContent = browser.i18n.getMessage('options_event_nameNotSet');
       }
+
+      $type.textContent = data.type;
     }
 
     $options.classList.toggle('unavailable', Object.keys(slots).length === 0);
@@ -360,9 +359,12 @@ class Events {
 
   toggleEdit($row) {
     let $name = $row.querySelector('.e-name');
+    let $type = $row.querySelector('.e-type');
     this.$list.classList.toggle('editing', !!!this.editing);
 
     if (this.editing) {
+      this.acceptType();
+
       let data = this.$selected.dataset;
       let name = $name.querySelector('input').value;
       this.editing.name    = name;
@@ -372,9 +374,21 @@ class Events {
       this.editing = null;
       $name.textContent = name || browser.i18n.getMessage('options_event_nameNotSet');
       $name.classList.toggle('not-set', !!!name);
+      $type.textContent = data.typeText || browser.i18n.getMessage('options_event_typeNotSet');
     } else {
       this.editing = gEvents[$row.dataset.eventId];
       this._before = JSON.stringify(this.editing);
+
+      let $typeSelect = this.$menus.types.cloneNode(true);
+      if (this.editing.type) {
+        let $opt = $typeSelect.querySelector(`option[value='${this.editing.type}']`);
+        if ($opt) {
+          $opt.selected = true;
+        }
+      }
+      $type.innerHTML = '';
+      $type.appendChild($typeSelect);
+
       let $input = document.createElement('input');
       $input.type = 'text';
       $input.placeholder = browser.i18n.getMessage('options_event_nameNotSet');
@@ -424,30 +438,27 @@ class Events {
     return $row;
   }
 
-  onSelectType(e) {
-    let $li = e.target.closest('li');
-    if ($li.classList.contains('missing-permissions')) {
-      let reqPerms = JSON.parse($li.dataset.permissions);
-      this.notifyObservers('requestPermissions', reqPerms);
-      if (reqPerms !== ['webRequest']) {
-        return; // webRequest doesn't need user confirm, so assume accepted and continue
-      }
+  acceptType() {
+    const $opt = this.$selected.querySelector('select.types option:checked');
+    if (!$opt) {
+      return;
     }
 
-    let value = $li.dataset.value;
+    const value = $opt.value;
+
     this.$selected.dataset.type = value;
+    this.$selected.dataset.typeText = $opt.textContent;
+
     if (this.editing.type !== value) {
       this.$selected.dataset.options = JSON.stringify({});
     }
 
     let perms = EventSetting.getTypeDef(value, 'permissions');
     if (perms.length) {
-      this.$selected.dataset.permissions = perms;
+      this.$selected.dataset.permissions = JSON.stringify(perms);
     } else if ('permissions' in this.$selected.dataset) {
       delete this.$selected.dataset.permissions;
     }
-
-    this.render(this.$selected);
   }
 
   onUpdateOptions(e) {

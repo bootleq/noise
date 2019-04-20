@@ -446,9 +446,6 @@ table {
   content: '';
   background-color: white;
 }
-#menus li.missing-permissions {
-  color: #999;
-}
 #menus li.hint {
   width: 250px;
   color: #666;
