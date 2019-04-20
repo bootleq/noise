@@ -186,7 +186,6 @@ class SoundDetail {
       this.$name.value = '';
       this.$upload.classList.remove('hidden');
     }
-    document.querySelectorAll('#menus > *').forEach(menu => menu.style.display = 'none');
     this.$filename.textContent = '';
   }
 

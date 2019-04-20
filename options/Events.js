@@ -301,7 +301,6 @@ class Events {
           break;
 
         case $button.matches('.move-up'):
-          Object.values(this.$menus).forEach(el => el.style.display = 'none');
           if ($row.previousElementSibling) {
             $row.parentNode.insertBefore($row, $row.previousElementSibling);
           } else {
@@ -310,7 +309,6 @@ class Events {
           break;
 
         case $button.matches('.move-down'):
-          Object.values(this.$menus).forEach(el => el.style.display = 'none');
           if ($row.nextElementSibling) {
             if ($row.nextElementSibling.nextElementSibling) {
               $row.parentNode.insertBefore($row, $row.nextElementSibling.nextElementSibling);
@@ -323,7 +321,6 @@ class Events {
           break;
 
         case $button.matches('.delete'):
-          Object.values(this.$menus).forEach(el => el.style.display = 'none');
           this.delete($row);
           break;
       }
@@ -364,7 +361,6 @@ class Events {
   toggleEdit($row) {
     let $name = $row.querySelector('.e-name');
     this.$list.classList.toggle('editing', !!!this.editing);
-    Object.values(this.$menus).forEach(el => el.style.display = 'none');
 
     if (this.editing) {
       let data = this.$selected.dataset;
@@ -398,21 +394,11 @@ class Events {
     data.type = before.type;
     data.options = JSON.stringify(before.options);
     data.soundId = before.soundId;
-    Object.values(this.$menus).forEach(el => el.style.display = 'none');
     $row.querySelector('.e-name').textContent = data.name;
     this.render($row);
   }
 
   toggleMenu(type, $trigger) {
-    let $menu = this.$menus[type];
-
-    if ($menu.style.display === 'block') {
-      $menu.style.display = 'none';
-    } else {
-      this.updateMenu(type, $trigger);
-      posisitionTo($menu, $trigger);
-      $menu.style.display = 'block';
-    }
   }
 
   addEvent(config) {
@@ -450,7 +436,6 @@ class Events {
 
     let value = $li.dataset.value;
     this.$selected.dataset.type = value;
-    this.$menus.types.style.display = 'none';
     if (this.editing.type !== value) {
       this.$selected.dataset.options = JSON.stringify({});
     }
@@ -490,7 +475,6 @@ class Events {
           break;
       }
       gEvents[$row.dataset.eventId].options = options;
-      this.$menus.options.style.display = 'none';
       this.render(this.$selected);
     }
   }
@@ -502,7 +486,6 @@ class Events {
       return; // is a hint item, not really sound
     }
     this.$selected.dataset.soundId = value;
-    this.$menus.sounds.style.display = 'none';
     this.render(this.$selected);
   }
 }

@@ -162,7 +162,6 @@ async function init() {
   window.addEventListener('resize', () => {
     if (!resizeTimeout) {
       resizeTimeout = setTimeout(() => {
-        document.querySelectorAll('#menus > *').forEach(menu => menu.style.display = 'none');
         document.querySelector('#permissions').classList.add('hidden');
         resizeTimeout = null;
       }, 66);
