@@ -809,7 +809,7 @@ class Events { // {{{
 
     let perms = EventSetting.getTypeDef(value, 'permissions');
     if (perms.length) {
-      this.$selected.dataset.permissions = perms;
+      this.$selected.dataset.permissions = JSON.stringify(perms);
     } else if ('permissions' in this.$selected.dataset) {
       delete this.$selected.dataset.permissions;
     }
