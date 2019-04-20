@@ -1,5 +1,7 @@
 'use strict';
 
+// import {emptyObject} from '../common/utils';
+
 class Sounds {
   constructor(el) {
     this.$el   = el;
