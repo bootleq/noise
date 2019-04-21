@@ -134,6 +134,9 @@ class SoundDetail {
 
   onCtrl(e) {
     let $btn = e.target.closest('button');
+    if (!$btn) {
+      return;
+    }
 
     switch (true) {
       case $btn.matches('.accept'):
