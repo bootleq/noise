@@ -1,6 +1,12 @@
 CHANGES
 =======
 
+## 2.3.0 (2019-04-22)
+
+* Options page: discard many UI and use back standard input for a11y compatibility.
+* Options page: fix exception during permission update.
+* Options page: minor enhancements to focus / keyboard navigation.
+
 ## 2.2.3 (2019-04-14)
 
 * Options page: fix upload button inaccessible with only keyboard (#9).
