@@ -8,6 +8,7 @@ class Permissions {
     this._observers = {};
     this.bindCheckboxHandler();
     this.bindCloseBtnHandler();
+    this.$el.addEventListener('keydown', this.onKey.bind(this));
   }
 
   addObserver(topic, func) {
@@ -21,6 +22,14 @@ class Permissions {
       this._observers[topic].forEach((observer) => {
         observer(data);
       });
+    }
+  }
+
+  onKey(e) {
+    switch (e.key) {
+      case 'Escape':
+        this.$el.classList.add('hidden');
+        break;
     }
   }
 
@@ -62,6 +71,7 @@ class Permissions {
       let boxRect = this.$el.getBoundingClientRect();
       this.$el.style.top = (btnRect.top - boxRect.height - 10 + window.scrollY) + 'px';
       this.$el.style.visibility = 'visible';
+      this.$el.querySelector('label').focus();
     } else {
       this.$el.classList.add('hidden');
     }
