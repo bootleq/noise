@@ -550,6 +550,7 @@ class Events {
       }
       gEvents[$row.dataset.eventId].options = options;
       this.updateOptionSlot($row);
+      $row.querySelector('td.e-options button').focus();
       this.toggleOptionMenu($target);
     }
   }
