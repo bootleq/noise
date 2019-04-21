@@ -40,6 +40,7 @@ class Sounds {
       };
       gLoaded.push('sounds');
       this.notifyObservers('load');
+      this.notifyObservers('update');
     });
   }
 

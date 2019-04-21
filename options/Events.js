@@ -135,11 +135,11 @@ class Events {
       this.$menus.sounds.appendChild($opt);
     });
 
-    this.updateEditingSounds();
+    this.renderSoundSelect();
   }
 
-  updateEditingSounds() {
-    if (!this.$selected) {
+  renderSoundSelect() {
+    if (!this.editing || !this.$selected) {
       return;
     }
 
@@ -401,7 +401,7 @@ class Events {
       $type.innerHTML = '';
       $type.appendChild($typeSelect);
 
-      this.updateEditingSounds();
+      this.renderSoundSelect();
 
       let $input = document.createElement('input');
       $input.type = 'text';
