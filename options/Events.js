@@ -73,7 +73,6 @@ class Events {
     Object.entries(EventSetting.Types).forEach(([key, value]) => {
       let $opt = document.createElement('option');
       let perms = EventSetting.getTypeDef(key, 'permissions');
-      $opt.dataset.value = key;
       $opt.value = key;
       $opt.textContent = value.name;
       if (perms.length) {
@@ -82,9 +81,9 @@ class Events {
       this.$menus.types.appendChild($opt);
     });
     this.updateTypeMenu();
+    this.updateSoundMenu();
 
     this.$menus.options.addEventListener('click', this.onUpdateOptions.bind(this));
-    this.$menus.sounds.addEventListener('click', this.onSelectSound.bind(this));
   }
 
   updatePermissions() {
@@ -123,19 +122,37 @@ class Events {
   }
 
   updateSoundMenu() {
-    this.$menus.sounds.innerHTML = '';
+    const $sounds = this.$menus.sounds;
+
+    $sounds.innerHTML = "<option value=''></option>";
     Object.values(gSounds).forEach(s => {
-      let $li = document.createElement('li');
-      $li.dataset.value = s.id;
-      $li.textContent = s.name;
-      this.$menus.sounds.appendChild($li);
+      let $opt = document.createElement('option');
+      $opt.value = s.id;
+      $opt.textContent = s.name;
+      this.$menus.sounds.appendChild($opt);
     });
-    if (Object.keys(gSounds).length === 0) {
-      let $li = document.createElement('li');
-      $li.innerHTML = browser.i18n.getMessage('options_event_noSounds');
-      $li.classList.add('hint');
-      this.$menus.sounds.appendChild($li);
+
+    this.updateEditingSounds();
+  }
+
+  updateEditingSounds() {
+    if (!this.$selected) {
+      return;
     }
+
+    const $editing = this.$selected.querySelector('td.e-sound');
+    const $editingSelected = $editing && $editing.querySelector('option:checked');
+    const soundId = this.editing ? this.editing.soundId : ($editingSelected && $editingSelected.value);
+    const $soundSelect = this.$menus.sounds.cloneNode(true);
+
+    if (soundId) {
+      let $opt = $soundSelect.querySelector(`option[value='${soundId}']`);
+      if ($opt) {
+        $opt.selected = true;
+      }
+    }
+    $editing.innerHTML = '';
+    $editing.appendChild($soundSelect);
   }
 
   updateOptionsMenu(type, options) {
@@ -360,10 +377,12 @@ class Events {
   toggleEdit($row) {
     let $name = $row.querySelector('.e-name');
     let $type = $row.querySelector('.e-type');
+    let $sound = $row.querySelector('.e-sound');
     this.$list.classList.toggle('editing', !!!this.editing);
 
     if (this.editing) {
       this.acceptType();
+      this.acceptSound();
 
       let data = this.$selected.dataset;
       let name = $name.querySelector('input').value;
@@ -375,6 +394,7 @@ class Events {
       $name.textContent = name || browser.i18n.getMessage('options_event_nameNotSet');
       $name.classList.toggle('not-set', !!!name);
       $type.textContent = data.typeText || browser.i18n.getMessage('options_event_typeNotSet');
+      $sound.textContent = data.soundText || browser.i18n.getMessage('options_event_soundNotSet');
     } else {
       this.editing = gEvents[$row.dataset.eventId];
       this._before = JSON.stringify(this.editing);
@@ -388,6 +408,8 @@ class Events {
       }
       $type.innerHTML = '';
       $type.appendChild($typeSelect);
+
+      this.updateEditingSounds();
 
       let $input = document.createElement('input');
       $input.type = 'text';
@@ -460,6 +482,14 @@ class Events {
       delete this.$selected.dataset.permissions;
     }
   }
+ 
+  acceptSound() {
+    const $opt = this.$selected.querySelector('select.sounds option:checked');
+    if ($opt) {
+      this.$selected.dataset.soundId = $opt.value;
+      this.$selected.dataset.soundText = $opt.textContent;
+    }
+  }
 
   onUpdateOptions(e) {
     let $menu   = this.$menus.options;
@@ -488,15 +518,5 @@ class Events {
       gEvents[$row.dataset.eventId].options = options;
       this.render(this.$selected);
     }
-  }
-
-  onSelectSound(e) {
-    let $li = e.target.closest('li');
-    let value = $li.dataset.value;
-    if (!value) {
-      return; // is a hint item, not really sound
-    }
-    this.$selected.dataset.soundId = value;
-    this.render(this.$selected);
   }
 }

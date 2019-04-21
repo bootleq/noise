@@ -107,6 +107,7 @@ async function init() {
   let $permsBtn   = document.querySelector('#review-permission');
 
   sounds.addObserver('select', soundDetail.attach.bind(soundDetail));
+  sounds.addObserver('update', events.updateSoundMenu.bind(events));
 
   soundDetail.render();
   soundDetail.addObserver('accept', sounds.accept.bind(sounds));

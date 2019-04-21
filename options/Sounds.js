@@ -100,11 +100,13 @@ class Sounds {
     delete gSounds[sound.id];
     this.$selected.remove();
     this.$selected = null;
+    this.notifyObservers('update');
   }
 
   accept() {
     this.render(this.$selected);
     this.$selected = null;
+    this.notifyObservers('update');
   }
 
   move(direction) {
