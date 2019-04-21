@@ -481,7 +481,7 @@ class Events {
     set.typeText = textContent;
 
     // Clear slot option only if type will change
-    if (this.editing.type !== value) {
+    if (this.editing.type && this.editing.type !== value) {
       set.options = JSON.stringify({});
     }
 
