@@ -59,6 +59,7 @@
 
     <fieldset id="events">
       <legend data-i18n='_header_events'>Events</legend>
+      <p class="no-sound">Please ensure set Sound first</p>
 
       <table>
         <thead>
@@ -105,8 +106,8 @@
     </fieldset>
 
     <div id='menus'>
-      <ul class='types'></ul>
-      <ul class='sounds'></ul>
+      <select class='types'><option value=''></option></select>
+      <select class='sounds'><option value=''></option></select>
       <div class='options'>
         <button data-i18n-title='_btn_close'>✖</button>
         <div class='form'></div>
@@ -121,7 +122,7 @@
         <strong data-i18n='_header_slot_filter_statusCode'>Status Code</strong>
         <label data-i18n='_slot_filterStatusCode_filter'>
           Filter
-          <input type="text" data-prop='filter'/>
+          <input type="text" data-prop='filter' data-autofocus='1' />
         </label>
       </template>
     </div>
@@ -166,6 +167,10 @@
     <script src="/common/utils.js"></script>
     <script src="/common/sound.js"></script>
     <script src="/common/event.js"></script>
-    <script src="options.js"></script>
+    <script src="Sounds.js"></script>
+    <script src="SoundDetail.js"></script>
+    <script src="Events.js"></script>
+    <script src="Permissions.js"></script>
+    <script src="index.js"></script>
   </body>
 </html>
