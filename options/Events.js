@@ -2,6 +2,7 @@
 
 // import EventSetting from '../common/event';
 // import {arrayDiff, emptyObject} from '../common/utils';
+// import {posisitionTo} from './utils';
 
 class Events {
   constructor(el) {
@@ -24,6 +25,7 @@ class Events {
     this.initMenus();
     this.$list.addEventListener('keydown', this.onKey.bind(this));
     this.$list.addEventListener('input', this.onInput.bind(this));
+    this.$list.addEventListener('change', this.onChange.bind(this));
     this.$list.addEventListener('click', this.onSelect.bind(this));
     this.$addEvent.addEventListener('click', () => {
       let $row = this.addEvent();
@@ -181,8 +183,6 @@ class Events {
     let type     = EventSetting.getTypeDef(data.type, 'name');
     let $type    = $row.querySelector('.e-type');
     let $sound   = $row.querySelector('.e-sound');
-    let $options = $row.querySelector('.e-options');
-    let slots    = EventSetting.getTypeDef(data.type, 'slots');
 
     if (!(this.editing && $row.classList.contains('current'))) {
       if (data.name) {
@@ -194,21 +194,7 @@ class Events {
       $type.textContent = data.type;
     }
 
-    $options.classList.toggle('unavailable', Object.keys(slots).length === 0);
-    if (Object.keys(slots).length === 0) {
-      $options.textContent = ' - - ';
-    } else {
-      $options.innerHTML = '';
-      Object.values(slots).forEach(slot => {
-        let $slot = document.createElement('button');
-        let name = browser.i18n.getMessage(`event_slots_name_${slot.name}`);
-        $slot.dataset.name = slot.name;
-        $slot.title        = name;
-        $slot.textContent  = name;
-        $slot.classList.toggle('enabled', Object.keys(options).includes(slot.name));
-        $options.appendChild($slot);
-      });
-    }
+    this.updateOptionSlot($row, data.type);
 
     $name.classList.toggle('not-set', !!!data.name);
 
@@ -242,6 +228,14 @@ class Events {
     if ($cell.matches('.e-name')) {
       let $input = $cell.querySelector('input');
       $cell.classList.toggle('not-set', $input.value.length === 0);
+    }
+  }
+
+  onChange(e) {
+    const $target = e.target;
+    if ($target.matches('td.e-type select.types')) {
+      const $row = $target.closest('tr');
+      this.updateOptionSlot($row, $target.value);
     }
   }
 
@@ -280,16 +274,8 @@ class Events {
                 $cell.querySelector('input').focus();
                 break;
 
-              case $cell.matches('.e-type'):
-                this.toggleMenu('types', $cell);
-                break;
-
-              case $cell.matches('.e-sound'):
-                this.toggleMenu('sounds', $cell);
-                break;
-
               case $cell.matches('.e-options') && $target.tagName === 'BUTTON':
-                this.toggleMenu('options', $target);
+                this.toggleOptionMenu($target);
                 break;
             }
           }
@@ -313,7 +299,7 @@ class Events {
 
         case $button.matches('td.e-options button'):
           this.$selected = $row;
-          this.toggleMenu('options', $button);
+          this.toggleOptionMenu($button);
           break;
 
         case $button.matches('.move-up'):
@@ -434,7 +420,19 @@ class Events {
     this.render($row);
   }
 
-  toggleMenu(type, $trigger) {
+  toggleOptionMenu($btn) {
+    const $menu = this.$menus.options;
+
+    if ($menu.style.display === 'block') {
+      $menu.style.display = 'none';
+    } else {
+      const name = $btn.dataset.name;
+      const opts = JSON.parse($btn.closest('tr').dataset.options);
+      this.updateOptionsMenu(name, opts);
+      posisitionTo($menu, $btn);
+      $menu.style.display = 'block';
+      $menu.querySelector('[data-autofocus]').focus();
+    }
   }
 
   addEvent(config) {
@@ -491,14 +489,45 @@ class Events {
     }
   }
 
+  updateOptionSlot($row, type) {
+    if (!$row) {
+      return;
+    }
+
+    const $options = $row.querySelector('.e-options');
+    const options = JSON.parse($row.dataset.options);
+    const optionType = type || $options.dataset.optionType;
+    const slots = EventSetting.getTypeDef(optionType, 'slots');
+
+    $options.classList.toggle('unavailable', Object.keys(slots).length === 0);
+    $options.dataset.optionType = optionType;
+
+    if (Object.keys(slots).length === 0) {
+      $options.textContent = ' - - ';
+    } else {
+      $options.innerHTML = '';
+
+      Object.values(slots).forEach(slot => {
+        let $slot = document.createElement('button');
+        let name = browser.i18n.getMessage(`event_slots_name_${slot.name}`);
+        $slot.dataset.name = slot.name;
+        $slot.title        = name;
+        $slot.textContent  = name;
+        $slot.classList.toggle('enabled', Object.keys(options).includes(slot.name));
+        $options.appendChild($slot);
+      });
+    }
+  }
+
   onUpdateOptions(e) {
-    let $menu   = this.$menus.options;
-    let type    = $menu.dataset.type;
-    let $target = e.target;
-    let $row    = this.$selected;
-    let options = JSON.parse($row.dataset.options);
+    const $target = e.target;
 
     if ($target.tagName === 'BUTTON') {
+      let $menu   = this.$menus.options;
+      let type    = $menu.dataset.type;
+      let $row    = this.$selected;
+      let options = JSON.parse($row.dataset.options);
+
       switch (true) {
         case $target.matches('.accept'):
           $menu.querySelectorAll('.form [data-prop]').forEach($input => {
@@ -507,6 +536,7 @@ class Events {
             }
             options[type][$input.dataset.prop] = $input.value;
           });
+
           $row.dataset.options = JSON.stringify(options);
           break;
 
@@ -516,7 +546,8 @@ class Events {
           break;
       }
       gEvents[$row.dataset.eventId].options = options;
-      this.render(this.$selected);
+      this.updateOptionSlot($row);
+      this.toggleOptionMenu($target);
     }
   }
 }
