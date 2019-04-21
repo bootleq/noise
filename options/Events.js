@@ -191,7 +191,8 @@ class Events {
         $name.textContent = browser.i18n.getMessage('options_event_nameNotSet');
       }
 
-      $type.textContent = data.type;
+      $type.textContent = type || browser.i18n.getMessage('options_event_typeNotSet');
+      $sound.textContent = sound ? sound.name : browser.i18n.getMessage('options_event_soundNotSet');
     }
 
     this.updateOptionSlot($row, data.type);
@@ -199,10 +200,8 @@ class Events {
     $name.classList.toggle('not-set', !!!data.name);
 
     $type.classList.toggle('not-set', !!!type);
-    $type.textContent = type || browser.i18n.getMessage('options_event_typeNotSet');
 
     $sound.classList.toggle('not-set', !!!sound);
-    $sound.textContent = sound ? sound.name : browser.i18n.getMessage('options_event_soundNotSet');
     $row.querySelector('button.play').disabled = !!!sound;
   }
 
@@ -381,6 +380,7 @@ class Events {
       $name.classList.toggle('not-set', !!!name);
       $type.textContent = data.typeText || browser.i18n.getMessage('options_event_typeNotSet');
       $sound.textContent = data.soundText || browser.i18n.getMessage('options_event_soundNotSet');
+      this.render(this.$selected);
     } else {
       this.editing = gEvents[$row.dataset.eventId];
       this._before = JSON.stringify(this.editing);
