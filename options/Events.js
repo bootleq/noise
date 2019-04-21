@@ -14,6 +14,10 @@ class Events {
       sounds:  document.querySelector('#menus .sounds'),
       options: document.querySelector('#menus .options')
     };
+    this.$hints = {
+      noSound: this.$el.querySelector('.no-sound')
+    };
+    this.$hints.noSound.innerHTML = browser.i18n.getMessage('options_event_noSounds');
 
     this._$selected = null;
     this._observers = {};
@@ -136,6 +140,7 @@ class Events {
     });
 
     this.renderSoundSelect();
+    this.updateNoSoundHint();
   }
 
   renderSoundSelect() {
@@ -569,5 +574,9 @@ class Events {
       $row.querySelector('td.e-options button').focus();
       this.toggleOptionMenu($target);
     }
+  }
+ 
+  updateNoSoundHint() {
+    this.$hints.noSound.classList.toggle('hidden', Object.keys(gSounds).length);
   }
 }

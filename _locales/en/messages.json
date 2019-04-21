@@ -132,7 +132,7 @@
   },
   "options_event_noSounds": {
     "message": "Please set some <strong>Sound</strong> first.<br>(click <code>➕</code> button under <strong>Sound</strong> section)",
-    "description": "If user didn't add any sound, Event table show this text in the dropdown of 'Sound' column."
+    "description": "If user didn't add any sound, Event table show this text below the table legend."
   },
 
   "options_header_permissions": {
