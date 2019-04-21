@@ -372,6 +372,8 @@ class Events {
 
       let data = this.$selected.dataset;
       let name = $name.querySelector('input').value;
+      data.name = name;
+
       this.editing.name    = name;
       this.editing.type    = data.type;
       this.editing.options = JSON.parse(data.options);
@@ -381,7 +383,8 @@ class Events {
       $name.classList.toggle('not-set', !!!name);
       $type.textContent = data.typeText || browser.i18n.getMessage('options_event_typeNotSet');
       $sound.textContent = data.soundText || browser.i18n.getMessage('options_event_soundNotSet');
-      this.render(this.$selected);
+
+      this.render($row);
 
       this.$menus.options.style.display = 'none';
     } else {
