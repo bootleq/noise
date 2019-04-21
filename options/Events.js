@@ -367,20 +367,13 @@ class Events {
     this.$list.classList.toggle('editing', !!!this.editing);
 
     if (this.editing) {
-      this.acceptType();
-      this.acceptSound();
-
-      let data = this.$selected.dataset;
-      let name = $name.querySelector('input').value;
-      data.name = name;
-
-      this.editing.name    = name;
-      this.editing.type    = data.type;
-      this.editing.options = JSON.parse(data.options);
-      this.editing.soundId = data.soundId;
+      const data = this.$selected.dataset;
+      this.inputToDataset(this.$selected, data);
+      this.datasetToEvent(data, this.editing);
       this.editing = null;
-      $name.textContent = name || browser.i18n.getMessage('options_event_nameNotSet');
-      $name.classList.toggle('not-set', !!!name);
+
+      $name.textContent = data.name || browser.i18n.getMessage('options_event_nameNotSet');
+      $name.classList.toggle('not-set', !!!data.name);
       $type.textContent = data.typeText || browser.i18n.getMessage('options_event_typeNotSet');
       $sound.textContent = data.soundText || browser.i18n.getMessage('options_event_soundNotSet');
 
@@ -464,35 +457,55 @@ class Events {
     return $row;
   }
 
-  acceptType() {
-    const $opt = this.$selected.querySelector('select.types option:checked');
-    if (!$opt) {
-      return;
-    }
+  // Accept editing inputs, save info to element's dataset
+  inputToDataset($row, data) {
+    this.acceptType(data, $row);
+    this.acceptSound(data, $row);
+    this.acceptName(data, $row);
+  }
 
-    const value = $opt.value;
+  datasetToEvent(data, gEvent) {
+    const {name, type, soundId} = data;
+    const options = JSON.parse(data.options);
 
-    this.$selected.dataset.type = value;
-    this.$selected.dataset.typeText = $opt.textContent;
+    Object.assign(gEvent, {name, type, soundId, options});
+  }
 
+  acceptType(set, $row) {
+    const $opt = $row.querySelector('select.types option:checked');
+    if (!$opt) return;
+
+    const {value, textContent} = $opt;
+
+    set.type = value;
+    set.typeText = textContent;
+
+    // Clear slot option only if type will change
     if (this.editing.type !== value) {
-      this.$selected.dataset.options = JSON.stringify({});
+      set.options = JSON.stringify({});
     }
 
     let perms = EventSetting.getTypeDef(value, 'permissions');
     if (perms.length) {
-      this.$selected.dataset.permissions = JSON.stringify(perms);
-    } else if ('permissions' in this.$selected.dataset) {
-      delete this.$selected.dataset.permissions;
+      set.permissions = JSON.stringify(perms);
+    } else if ('permissions' in set) {
+      delete set.permissions;
     }
   }
  
-  acceptSound() {
-    const $opt = this.$selected.querySelector('select.sounds option:checked');
+  acceptSound(set, $row) {
+    const $opt = $row.querySelector('select.sounds option:checked');
     if ($opt) {
-      this.$selected.dataset.soundId = $opt.value;
-      this.$selected.dataset.soundText = $opt.textContent;
+      const {value, textContent} = $opt;
+      set.soundId = value;
+      set.soundText = textContent;
     }
+  }
+
+  acceptName(set, $row) {
+    const $input = $row.querySelector('.e-name input');
+    const {value} = $input;
+    set.name = value;
   }
 
   updateOptionSlot($row, type) {
