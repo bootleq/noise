@@ -314,7 +314,10 @@ table {
     &.e-name.not-set,
     &.e-type.not-set,
     &.e-sound.not-set {
-      opacity: 0.4 !important;
+      color: rgba(0,0,0, .4);
+      select {
+        color: initial;
+      }
     }
   }
 
@@ -467,7 +470,10 @@ table {
 }
 
 #menus {
-  ul,
+  select {
+    display: none;
+  }
+
   > div {
     position: absolute;
     list-style: none;
@@ -477,35 +483,6 @@ table {
     border-top: none;
     box-shadow: 1px 3px 4px rgba(0, 0, 0, 0.4);
     font-size: small;
-  }
-  li {
-    padding: 4px;
-    min-width: 140px;
-    min-height: 22px;
-    cursor: pointer;
-    &:hover {
-      background-color: rgba(0,149,221,0.25);
-    }
-    &:first-child::before {
-      display: block;
-      position: absolute;
-      top: -3px;
-      left: 0;
-      width: 100%;
-      height: 3px;
-      content: '';
-      background-color: white;
-    }
-    &.hint {
-      width: 250px;
-      color: #666;
-      line-height: 1.55;
-      cursor: help;
-      strong,
-      code {
-        color: black;
-      }
-    }
   }
 
   > div.options {

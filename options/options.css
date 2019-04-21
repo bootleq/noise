@@ -293,7 +293,10 @@ table {
   opacity: 0.3 !important;
 }
 #events td.e-name.not-set, #events td.e-type.not-set, #events td.e-sound.not-set {
-  opacity: 0.4 !important;
+  color: rgba(0, 0, 0, 0.4);
+}
+#events td.e-name.not-set select, #events td.e-type.not-set select, #events td.e-sound.not-set select {
+  color: initial;
 }
 #events thead {
   background-color: var(--color-thead);
@@ -416,7 +419,9 @@ table {
   pointer-events: none;
 }
 
-#menus ul,
+#menus select {
+  display: none;
+}
 #menus > div {
   position: absolute;
   list-style: none;
@@ -426,35 +431,6 @@ table {
   border-top: none;
   box-shadow: 1px 3px 4px rgba(0, 0, 0, 0.4);
   font-size: small;
-}
-#menus li {
-  padding: 4px;
-  min-width: 140px;
-  min-height: 22px;
-  cursor: pointer;
-}
-#menus li:hover {
-  background-color: rgba(0, 149, 221, 0.25);
-}
-#menus li:first-child::before {
-  display: block;
-  position: absolute;
-  top: -3px;
-  left: 0;
-  width: 100%;
-  height: 3px;
-  content: '';
-  background-color: white;
-}
-#menus li.hint {
-  width: 250px;
-  color: #666;
-  line-height: 1.55;
-  cursor: help;
-}
-#menus li.hint strong,
-#menus li.hint code {
-  color: black;
 }
 #menus > div.options {
   padding: 3px 6px 10px;

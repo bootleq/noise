@@ -30,6 +30,7 @@ class Events {
     this.$addEvent.addEventListener('click', () => {
       let $row = this.addEvent();
       if (!this.editing) {
+        this.$menus.options.style.display = 'none';
         this.$selected = $row;
         this.toggleEdit($row);
       }
@@ -381,6 +382,8 @@ class Events {
       $type.textContent = data.typeText || browser.i18n.getMessage('options_event_typeNotSet');
       $sound.textContent = data.soundText || browser.i18n.getMessage('options_event_soundNotSet');
       this.render(this.$selected);
+
+      this.$menus.options.style.display = 'none';
     } else {
       this.editing = gEvents[$row.dataset.eventId];
       this._before = JSON.stringify(this.editing);
