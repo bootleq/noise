@@ -7,10 +7,12 @@
     "grunt-contrib-sass": "^1.0.0",
     "grunt-contrib-watch": "^1.1.0",
     "load-grunt-tasks": "^3.4.0",
-    "web-ext": "^7.3.1"
+    "web-ext": "^7.3.1",
+    "yargs": "^17.6.2"
   },
   "scripts": {
     "start": "grunt watch",
+    "test": "node ./test.js",
     "build": "web-ext build --artifacts-dir=zips --overwrite-dest --ignore-files *.md Gruntfile.js *.zsh **/*.scss package*.json"
   },
   "license": "MIT"
