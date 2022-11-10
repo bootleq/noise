@@ -207,7 +207,6 @@ table {
 #sound_detail .upload {
   display: flex;
   align-items: baseline;
-  height: 3em;
   margin: -5px 0 14px;
 }
 #sound_detail .upload label {
