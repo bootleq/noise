@@ -16,6 +16,20 @@ Noise still aims to provide a place to manage many events and sounds, while
 new function step by step.
 
 
+Development
+-----------
+
+Start with sass files watching:
+
+    yarn start
+
+Test with temporary build:
+
+    yarn test
+
+    yarn test --profile some_firefox_profile_name
+
+
 Legacy Version (Firefox &lt; v57)
 ---------------------------------
 
