@@ -1,6 +1,10 @@
 CHANGES
 =======
 
+## Unreleased
+
+* Options page: Fix Accept button overlapped when no Sound attached.
+
 ## 2.3.0 (2019-04-22)
 
 * Options page: discard many UI and use back standard input for a11y compatibility.
