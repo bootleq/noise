@@ -2,12 +2,9 @@
 *.zsh
 *.bat
 *.lnk
-*.css.map
 Thumbs.db
 Desktop.ini
 build
 dist
-node_modules/*
-.sass-cache/*
+node_modules
 .tool-versions
-zips
