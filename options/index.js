@@ -1,14 +1,19 @@
 'use strict';
 
-// import Sounds from './Sounds';
-// import SoundDetail from './SoundDetail';
-// import Events from './Events';
-// import Permissions from './Permissions';
+import Sounds from './Sounds';
+import SoundDetail from './SoundDetail';
+import Events from './Events';
+import Permissions from './Permissions';
+import { translateDOM } from './utils.js';
 
-let gSounds = {};
-let gEvents = {};
-let gLoaded = [];
-let gPermissions = [];
+import './options.scss';
+
+const store = {
+  Sounds: {},
+  Events: {},
+  Loaded: [],
+  Permissions: []
+};
 
 let $save   = document.querySelector('#save');
 let $import = document.querySelector('#import');
@@ -19,7 +24,7 @@ async function currentConfig() {
   let config = {};
 
   config['sounds'] = Array.from(document.querySelectorAll('#sounds ul > li:not(.add_sound)')).reduce((list, $i) => {
-    let sound = gSounds[$i.dataset.soundId];
+    let sound = store.Sounds[$i.dataset.soundId];
     if (sound) {
       list.push(sound.toPersistedProps());
     }
@@ -27,19 +32,19 @@ async function currentConfig() {
   }, []);
 
   config['events'] = Array.from(document.querySelectorAll('#events tbody tr')).reduce((list, $i) => {
-    let event = gEvents[$i.dataset.eventId];
+    let event = store.Events[$i.dataset.eventId];
     if (event) {
       list.push(event.toPersistedProps());
     }
     return list;
   }, []);
 
-  for (let i of Object.values(gSounds)) {
+  for (let i of Object.values(store.Sounds)) {
     if (!i.src) {
       i.src = await i.loadSrc();
     }
   }
-  Object.values(gSounds).forEach(i => config[`src.${i.id}`] = i.src);
+  Object.values(store.Sounds).forEach(i => config[`src.${i.id}`] = i.src);
   return Promise.resolve(config);
 }
 
@@ -47,7 +52,7 @@ async function save() {
   let config = await currentConfig();
 
   let deadKeys = await browser.storage.local.get().then(items => {
-    return Object.keys(items).filter(k => k.startsWith('src.') && !Object.keys(gSounds).includes(k.substr(4)));
+    return Object.keys(items).filter(k => k.startsWith('src.') && !Object.keys(store.Sounds).includes(k.substr(4)));
   });
   await browser.storage.local.remove(deadKeys);
 
@@ -83,7 +88,7 @@ function onImportFile(e, callback) {
 }
 
 function onLoad() {
-  if (gLoaded.length === 2) {
+  if (store.Loaded.length === 2) {
     $save.disabled = false;
     $import.disabled = false;
     $export.disabled = false;
@@ -95,12 +100,12 @@ async function init() {
   document.title = browser.i18n.getMessage('optionPageTitle');
   translateDOM();
 
-  gPermissions = await browser.permissions.getAll().then(result => result.permissions);
+  store.Permissions = await browser.permissions.getAll().then(result => result.permissions);
 
-  let sounds      = new Sounds(document.querySelector('#sounds'));
-  let soundDetail = new SoundDetail(document.querySelector('#sound_detail'));
-  let events      = new Events(document.querySelector('#events'));
-  let permissions = new Permissions(document.querySelector('#permissions'));
+  let sounds      = new Sounds(document.querySelector('#sounds'), store);
+  let soundDetail = new SoundDetail(document.querySelector('#sound_detail'), store);
+  let events      = new Events(document.querySelector('#events'), store);
+  let permissions = new Permissions(document.querySelector('#permissions'), store);
 
   let $importFile = document.querySelector('#import-file');
   let $saved      = document.querySelector('#main-ctrls .info');
@@ -145,7 +150,7 @@ async function init() {
         events.clear();
         newConfig['sounds'].forEach((cfg) => {
           sounds.addSound(cfg);
-          gSounds[cfg.id].src = newConfig[`src.${cfg.id}`];
+          store.Sounds[cfg.id].src = newConfig[`src.${cfg.id}`];
         });
         newConfig['events'].forEach((cfg) => events.addEvent(cfg));
         events.updatePermissions();

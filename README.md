@@ -19,15 +19,23 @@ new function step by step.
 Development
 -----------
 
-Start with sass files watching:
+Start development, with sass files watching:
 
-    yarn start
+    yarn dev:firefox
 
-Test with temporary build:
+Make temporary build to `build` folder:
 
-    yarn test
+    yarn build:firefox
 
-    yarn test --profile some_firefox_profile_name
+Test run with [web-ext][] after temporary build:
+
+    yarn test:firefox
+
+    yarn test:firefox --profile some_firefox_profile_name
+
+Package a zip file:
+
+    yarn build:firefox:prod
 
 
 Legacy Version (Firefox &lt; v57)
@@ -43,6 +51,7 @@ Alternatives
 - [Download Sound][]
 
 
+[web-ext]: https://github.com/mozilla/web-ext
 [WebExtensions]: https://developer.mozilla.org/en-US/Add-ons/WebExtensions
 [Notification Sound]: https://addons.mozilla.org/firefox/addon/notification-sound/
 [Download Sound]: https://addons.mozilla.org/firefox/addon/download-sound/

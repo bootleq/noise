@@ -20,9 +20,6 @@
 
   "background": {
     "scripts": [
-      "common/utils.js",
-      "common/sound.js",
-      "common/event.js",
       "background.js"
     ]
   },
@@ -37,7 +34,7 @@
   ],
 
   "options_ui": {
-    "page": "options/options.html",
+    "page": "options.html",
     "open_in_tab": true,
     "browser_style": true
   },

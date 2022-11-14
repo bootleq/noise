@@ -1,7 +1,11 @@
 'use strict';
 
+import { fileToDataURL, preventDefaultDrag } from './utils.js';
+
 class SoundDetail {
-  constructor(el) {
+  constructor(el, parentStore) {
+    this.store = parentStore;
+
     this.$el           = el;
     this.$uploadBox    = this.$el.querySelector('.upload');
     this.$playerBox    = this.$el.querySelector('.player');
@@ -35,7 +39,7 @@ class SoundDetail {
     this.$el.disabled = false;
     this.$selected = $sound;
 
-    let sound = gSounds[$sound.dataset.soundId];
+    let sound = this.store.Sounds[$sound.dataset.soundId];
     if (!sound.src) {
       sound.loadSrc().then(src => {
         sound.src = src;
@@ -163,7 +167,7 @@ class SoundDetail {
   }
 
   accept() {
-    let sound = gSounds[this.$selected.dataset.soundId];
+    let sound = this.store.Sounds[this.$selected.dataset.soundId];
     sound.name  = this.$name.value;
     sound.src   = this.$audio.src;
     sound.audio = null;
@@ -180,7 +184,7 @@ class SoundDetail {
 
   render() {
     if (this.$selected) {
-      let sound = gSounds[this.$selected.dataset.soundId];
+      let sound = this.store.Sounds[this.$selected.dataset.soundId];
       this.$name.value = sound.name || '';
       this.$audio.src  = sound.src || '';
       this.toggleUploadUI(!sound.src);
@@ -209,3 +213,5 @@ class SoundDetail {
     p.addEventListener('drop', this.onFile.bind(this));
   }
 }
+
+export default SoundDetail;

@@ -1,5 +1,9 @@
 'use strict';
 
+import Sound from './common/sound';
+import { EventSetting } from './common/event';
+import { emptyObject } from './common/utils';
+
 const gSounds = {};
 const gEvents = {};
 let ports = [];
@@ -135,7 +139,6 @@ function addListeners() {
 function removeListeners() {
   browser.downloads.onCreated.removeListener(onDownloadCreated);
   browser.downloads.onChanged.removeListener(onDownloadChanged);
-  browser.runtime.onInstalled.removeListener(onNoiseInstalled);
   browser.runtime.onStartup.removeListener(onStartup);
   if (typeof browser.webNavigation === 'object') {
     ['onCommitted', 'onHistoryStateUpdated', 'onReferenceFragmentUpdated'].forEach(event => {
@@ -195,21 +198,6 @@ function onStartup() {
   fxStartup = true;
 }
 
-function onNoiseInstalled(details) {
-  let prev = details.previousVersion;
-  if (prev && prev.match(/^1\..+/)) {
-    let lang = browser.i18n.getUILanguage();
-    if (!['zh-TW'].includes(lang)) {
-      lang = 'en';
-    }
-    browser.storage.local.set({"upgrade.legacy": prev});
-    browser.tabs.create({
-      active: false,
-      url: `/pages/${lang}/upgrade-legacy.html`
-    });
-  }
-}
-
 function onDownloadCreated(item) { // https://developer.mozilla.org/en-US/Add-ons/WebExtensions/API/downloads/onCreated
   play('download.new');
 }
@@ -263,5 +251,4 @@ function hasAny(targets, array) {
 window.addEventListener('DOMContentLoaded', init, {once: true});
 
 browser.runtime.onStartup.addListener(onStartup);
-browser.runtime.onInstalled.addListener(onNoiseInstalled);
 browser.runtime.onConnect.addListener(onConnect);

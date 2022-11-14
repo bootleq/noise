@@ -25,10 +25,6 @@ async function readAsDataURL(blob) {
   });
 }
 
-function newId() {
-  return new Date().valueOf().toString();
-}
-
 function posisitionTo($src, $target) {
   let rect = $target.getBoundingClientRect();
   $src.style.left = (rect.left + window.scrollX) + 'px';
@@ -71,3 +67,5 @@ function arrayDiff(a1, a2) {
   let s2 = new Set(a2);
   return [...a1].filter(item => !s2.has(item));
 }
+
+export { arrayDiff, fileToDataURL, posisitionTo, preventDefaultDrag, shrinkFont, translateDOM };

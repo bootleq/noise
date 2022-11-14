@@ -1,9 +1,13 @@
 'use strict';
 
-// import {emptyObject} from '../common/utils';
+import Sound from '../common/sound';
+import { emptyObject } from '../common/utils';
+import { shrinkFont } from './utils';
 
 class Sounds {
-  constructor(el) {
+  constructor(el, parentStore) {
+    this.store = parentStore;
+
     this.$el   = el;
     this.$list = this.$el.querySelector('ul.list');
     this.tmpl  = this.$el.querySelector('template').content;
@@ -38,7 +42,7 @@ class Sounds {
       for (let cfg of items['sounds']) {
         this.addSound(cfg);
       };
-      gLoaded.push('sounds');
+      this.store.Loaded.push('sounds');
       this.notifyObservers('load');
       this.notifyObservers('update');
     });
@@ -49,11 +53,11 @@ class Sounds {
     this.$list.querySelectorAll('ul > li:not(.add_sound)').forEach(node => {
       node.remove();
     });
-    emptyObject(gSounds);
+    emptyObject(this.store.Sounds);
   }
 
   render($item) {
-    let sound = gSounds[$item.dataset.soundId];
+    let sound = this.store.Sounds[$item.dataset.soundId];
     let $name = $item.querySelector('.name span');
     $name.textContent = sound.name;
     shrinkFont($name);
@@ -97,8 +101,8 @@ class Sounds {
   }
 
   delete() {
-    let sound = gSounds[this.$selected.dataset.soundId];
-    delete gSounds[sound.id];
+    let sound = this.store.Sounds[this.$selected.dataset.soundId];
+    delete this.store.Sounds[sound.id];
     this.$selected.remove();
     this.$selected = null;
     this.notifyObservers('update');
@@ -131,7 +135,7 @@ class Sounds {
     let sound = new Sound(config);
     let tmpl  = document.importNode(this.tmpl, true);
 
-    gSounds[sound.id] = sound;
+    this.store.Sounds[sound.id] = sound;
     tmpl.querySelector('li').dataset.soundId     = sound.id;
     tmpl.querySelector('.name span').textContent = sound.name;
     this.$list.insertBefore(tmpl, this.$addSound);
@@ -140,3 +144,5 @@ class Sounds {
     return $li;
   }
 }
+
+export default Sounds;

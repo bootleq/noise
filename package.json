@@ -3,17 +3,24 @@
   "description": "Make sound response when events happen",
   "private": true,
   "devDependencies": {
-    "grunt": "^1.5.3",
-    "grunt-contrib-sass": "^1.0.0",
-    "grunt-contrib-watch": "^1.1.0",
-    "load-grunt-tasks": "^3.4.0",
+    "clean-webpack-plugin": "^4.0.0",
+    "copy-webpack-plugin": "^11.0.0",
+    "cross-env": "^7.0.3",
+    "css-loader": "^6.7.2",
+    "mini-css-extract-plugin": "^2.6.1",
+    "sass": "^1.56.1",
+    "sass-loader": "^13.2.0",
     "web-ext": "^7.3.1",
-    "yargs": "^17.6.2"
+    "webpack": "^5.75.0",
+    "webpack-cli": "^4.10.0",
+    "yargs": "^17.6.2",
+    "zip-webpack-plugin": "^4.0.1"
   },
   "scripts": {
-    "start": "grunt watch",
-    "test": "node ./test.js",
-    "build": "web-ext build --artifacts-dir=zips --overwrite-dest --ignore-files *.md Gruntfile.js *.zsh **/*.scss package*.json"
+    "dev:firefox": "webpack watch",
+    "build:firefox": "webpack",
+    "build:firefox:prod": "cross-env NODE_ENV=production webpack",
+    "test:firefox": "node ./test.js --source-dir build"
   },
   "license": "MIT"
 }

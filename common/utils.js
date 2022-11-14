@@ -5,3 +5,9 @@ function emptyObject(obj) {
     delete obj[key];
   });
 }
+
+function newId() {
+  return new Date().valueOf().toString();
+}
+
+export { emptyObject, newId };
