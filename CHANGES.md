@@ -4,6 +4,7 @@ CHANGES
 ## Unreleased
 
 * Options page: Fix Accept button overlapped when no Sound attached.
+* Remove upgrade instruction for users from Firefox 57 downward.
 
 ## 2.3.0 (2019-04-22)
 
