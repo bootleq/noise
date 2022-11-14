@@ -1,0 +1,49 @@
+{
+  "name": "Noise",
+  "description": "__MSG_extDescription__",
+  "version": "2.3.0",
+  "homepage_url": "https://github.com/bootleq/noise",
+  "icons": {
+    "32": "icon.png"
+  },
+  "manifest_version": 2,
+
+  "permissions": [
+    "storage",
+    "downloads",
+    "<all_urls>"
+  ],
+  "optional_permissions": [
+    "webNavigation",
+    "webRequest"
+  ],
+
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "run_at": "document_start",
+      "matches": ["<all_urls>"],
+      "match_about_blank": true,
+      "all_frames": true,
+      "js": ["content.js"]
+    }
+  ],
+
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": true,
+    "browser_style": true
+  },
+
+  "default_locale": "en",
+  "applications": {
+    "gecko": {
+      "id": "noise@bootleq",
+      "strict_min_version": "57.0a1"
+    }
+  }
+}
