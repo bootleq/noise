@@ -1,7 +1,8 @@
 const path = require('path');
 const webpack = require('webpack');
 const dartSass = require('sass');
-const manifest = require('./manifest.json')
+const manifestFx = require('./manifest.json')
+const manifestGc = require('./manifest.chrome.json')
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
@@ -12,6 +13,11 @@ if (process.env.NODE_ENV == null) {
   process.env.NODE_ENV = 'development';
 }
 
+if (process.env.BROWSER != 'chrome') {
+  process.env.BROWSER = 'firefox';
+}
+
+const BROWSER = process.env.BROWSER;
 const ENV = process.env.NODE_ENV;
 
 const plugins = [
@@ -21,7 +27,9 @@ const plugins = [
   new CleanWebpackPlugin(),
   new CopyWebpackPlugin({
     patterns: [
-      "./manifest.json",
+      {
+        from: `manifest${BROWSER == 'firefox' ? '' : `.${BROWSER}`}.json`,
+        to: "manifest.json" },
       "./icon.png",
       "./options/options.html",
       { from: "./_locales", to: "_locales" },
@@ -34,7 +42,7 @@ if (ENV == 'production') {
   plugins.push(
     new ZipPlugin({
       path: path.resolve(__dirname, 'dist'),
-      filename: `noise-${manifest.version}.zip`,
+      filename: `noise-${BROWSER == 'firefox' ? manifestFx.version : manifestGc.version}.zip`,
       fileOptions: {
         mtime: new Date(),
         mode: 0o100664,

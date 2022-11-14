@@ -20,7 +20,9 @@
     "dev:firefox": "webpack watch",
     "build:firefox": "webpack",
     "build:firefox:prod": "cross-env NODE_ENV=production webpack",
-    "test:firefox": "node ./test.js --source-dir build"
+    "test:firefox": "node ./test.js --source-dir build",
+    "dev:chrome": "cross-env BROWSER=chrome webpack watch",
+    "build:chrome": "cross-env BROWSER=chrome webpack"
   },
   "license": "MIT"
 }
