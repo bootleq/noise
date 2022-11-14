@@ -1,5 +1,7 @@
 'use strict';
 
+import { newId } from './utils';
+
 class Sound {
   constructor(config) {
     this.id   = config ? config.id   : newId();
@@ -53,3 +55,5 @@ class Sound {
     }
   }
 }
+
+export default Sound;

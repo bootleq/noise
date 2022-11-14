@@ -1,5 +1,7 @@
 'use strict';
 
+import { newId } from './utils';
+
 let scope = 'event_types_name_';
 
 const Types = {
@@ -80,3 +82,5 @@ class EventSetting {
     }
   }
 }
+
+export { EventSetting, Types };
