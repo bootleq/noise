@@ -1,11 +1,13 @@
 'use strict';
 
-// import EventSetting from '../common/event';
-// import {arrayDiff, emptyObject} from '../common/utils';
-// import {posisitionTo} from './utils';
+import { EventSetting } from '../common/event.js';
+import { emptyObject } from '../common/utils.js';
+import { posisitionTo, arrayDiff } from './utils.js';
 
 class Events {
-  constructor(el) {
+  constructor(el, parentStore) {
+    this.store = parentStore;
+
     this.$el    = el;
     this.$list  = this.$el.querySelector('tbody');
     this.tmpl   = this.$el.querySelector('template').content;
@@ -40,6 +42,7 @@ class Events {
       }
     });
     this.$el.addEventListener('click', this.onOuterSelect.bind(this));
+
     this.load();
   }
 
@@ -62,7 +65,7 @@ class Events {
       for (let config of items['events']) {
         this.addEvent(config);
       };
-      gLoaded.push('events');
+      this.store.Loaded.push('events');
       this.notifyObservers('load');
     });
   }
@@ -73,7 +76,7 @@ class Events {
       this.cancelEdit($row);
     }
     this.$list.innerHTML = '';
-    emptyObject(gEvents);
+    emptyObject(this.store.Events);
   }
 
   initMenus() {
@@ -97,7 +100,7 @@ class Events {
     this.updateTypeMenu();
     this.$list.querySelectorAll('tr[data-permissions]').forEach($row => {
       let perms = JSON.parse($row.dataset.permissions || '[]');
-      let missing = arrayDiff(perms, gPermissions).length;
+      let missing = arrayDiff(perms, this.store.Permissions).length;
       let $type = $row.querySelector('td.e-type');
       $row.classList.toggle('missing-permissions', missing);
       if (missing) {
@@ -114,7 +117,7 @@ class Events {
 
     $options.forEach(el => {
       let perms = JSON.parse(el.dataset.permissions || '[]');
-      const missing = arrayDiff(perms, gPermissions).length;
+      const missing = arrayDiff(perms, this.store.Permissions).length;
       el.disabled = missing;
     });
 
@@ -132,7 +135,7 @@ class Events {
     const $sounds = this.$menus.sounds;
 
     $sounds.innerHTML = "<option value=''></option>";
-    Object.values(gSounds).forEach(s => {
+    Object.values(this.store.Sounds).forEach(s => {
       let $opt = document.createElement('option');
       $opt.value = s.id;
       $opt.textContent = s.name;
@@ -184,7 +187,7 @@ class Events {
   render($row) {
     let data     = $row.dataset;
     let options  = JSON.parse(data.options);
-    let sound    = gSounds[data.soundId];
+    let sound    = this.store.Sounds[data.soundId];
     let $name    = $row.querySelector('.e-name');
     let type     = EventSetting.getTypeDef(data.type, 'name');
     let $type    = $row.querySelector('.e-type');
@@ -248,11 +251,11 @@ class Events {
     let $target = e.target;
     let $button = $target.closest('button');
     let $row    = $target.closest('tr');
-    let sound   = gSounds[$row.dataset.soundId];
+    let sound   = this.store.Sounds[$row.dataset.soundId];
     let $cell;
 
     if ($target.matches('.e-toggle input')) {
-      gEvents[$row.dataset.eventId].enabled = $target.checked;
+      this.store.Events[$row.dataset.eventId].enabled = $target.checked;
     }
 
     if (this.editing) {
@@ -361,7 +364,7 @@ class Events {
   }
 
   delete($row) {
-    delete gEvents[$row.dataset.eventId]
+    delete this.store.Events[$row.dataset.eventId]
     $row.remove();
   }
 
@@ -386,7 +389,7 @@ class Events {
 
       this.$menus.options.style.display = 'none';
     } else {
-      this.editing = gEvents[$row.dataset.eventId];
+      this.editing = this.store.Events[$row.dataset.eventId];
       this._before = JSON.stringify(this.editing);
 
       let $typeSelect = this.$menus.types.cloneNode(true);
@@ -441,7 +444,7 @@ class Events {
 
   addEvent(config) {
     let e = new EventSetting(config);
-    gEvents[e.id] = e;
+    this.store.Events[e.id] = e;
 
     let tmpl = document.importNode(this.tmpl, true);
     let data = tmpl.querySelector('tr').dataset;
@@ -569,7 +572,7 @@ class Events {
           $row.dataset.options = JSON.stringify(options);
           break;
       }
-      gEvents[$row.dataset.eventId].options = options;
+      this.store.Events[$row.dataset.eventId].options = options;
       this.updateOptionSlot($row);
       $row.querySelector('td.e-options button').focus();
       this.toggleOptionMenu($target);
@@ -577,6 +580,8 @@ class Events {
   }
  
   updateNoSoundHint() {
-    this.$hints.noSound.classList.toggle('hidden', Object.keys(gSounds).length);
+    this.$hints.noSound.classList.toggle('hidden', Object.keys(this.store.Sounds).length);
   }
 }
+
+export default Events;

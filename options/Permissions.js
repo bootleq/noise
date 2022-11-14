@@ -1,9 +1,11 @@
 'use strict';
 
-// import {arrayDiff} from '../common/utils';
+import { arrayDiff } from './utils';
 
 class Permissions {
-  constructor(el) {
+  constructor(el, parentStore) {
+    this.store = parentStore;
+
     this.$el = el;
     this._observers = {};
     this.bindCheckboxHandler();
@@ -35,7 +37,7 @@ class Permissions {
 
   update() {
     this.$el.querySelectorAll('input[data-perm]').forEach($box => {
-      $box.checked = gPermissions.includes($box.dataset.perm);
+      $box.checked = this.store.Permissions.includes($box.dataset.perm);
     });
     this.notifyObservers('update');
   }
@@ -43,7 +45,7 @@ class Permissions {
   async request(names) {
     await browser.permissions.request({permissions: names}).then(yes => {
       if (yes) {
-        gPermissions = Array.from(new Set([...gPermissions, ...names]));
+        this.store.Permissions = Array.from(new Set([...this.store.Permissions, ...names]));
         browser.runtime.sendMessage({type: 'listeners'});
         this.update();
       }
@@ -54,7 +56,7 @@ class Permissions {
     browser.runtime.sendMessage({type: 'listeners', action: 'unbind'});
     await browser.permissions.remove({permissions: names}).then(yes => {
       if (yes) {
-        gPermissions = arrayDiff(gPermissions, names);
+        this.store.Permissions = arrayDiff(this.store.Permissions, names);
         browser.runtime.sendMessage({type: 'listeners'});
         this.update();
       } else {
@@ -95,3 +97,5 @@ class Permissions {
     this.$el.querySelector('button').addEventListener('click', () => this.toggleDialog());
   }
 }
+
+export default Permissions;
