@@ -30,9 +30,9 @@ const plugins = [
       {
         from: `manifest${BROWSER == 'firefox' ? '' : `.${BROWSER}`}.json`,
         to: "manifest.json" },
-      "./icon.png",
       "./options/options.html",
       { from: "./_locales", to: "_locales" },
+      { from: "./icons", to: "icons" },
     ],
   }),
   new MiniCssExtractPlugin(),
