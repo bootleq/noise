@@ -1,5 +1,7 @@
 'use strict';
 
+import browser from "webextension-polyfill";
+
 import { fileToDataURL, preventDefaultDrag } from './utils.js';
 
 class SoundDetail {

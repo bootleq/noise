@@ -1,5 +1,7 @@
 'use strict';
 
+import browser from "webextension-polyfill";
+
 let bound = false;
 let port = browser.runtime.connect();
 

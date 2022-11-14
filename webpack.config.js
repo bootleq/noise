@@ -66,6 +66,11 @@ module.exports = {
     minimize: false,
   },
   devtool: ENV == 'development' ? 'source-map' : false,
+  resolve: {
+    alias: {
+      "webextension-polyfill": "webextension-polyfill/dist/browser-polyfill.min.js"
+    }
+  },
   module: {
     rules: [
       {

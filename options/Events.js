@@ -1,5 +1,7 @@
 'use strict';
 
+import browser from "webextension-polyfill";
+
 import { EventSetting } from '../common/event.js';
 import { emptyObject } from '../common/utils.js';
 import { posisitionTo, arrayDiff } from './utils.js';

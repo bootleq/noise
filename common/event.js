@@ -1,5 +1,7 @@
 'use strict';
 
+import browser from "webextension-polyfill";
+
 import { newId } from './utils';
 
 let scope = 'event_types_name_';
