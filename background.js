@@ -1,5 +1,9 @@
 'use strict';
 
+import Sound from './common/sound';
+import { EventSetting } from './common/event';
+import { emptyObject } from './common/utils';
+
 const gSounds = {};
 const gEvents = {};
 let ports = [];

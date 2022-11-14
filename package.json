@@ -17,8 +17,10 @@
     "zip-webpack-plugin": "^4.0.1"
   },
   "scripts": {
-    "test": "node ./test.js",
-    "build": "web-ext build --artifacts-dir=zips --overwrite-dest --ignore-files *.md Gruntfile.js *.zsh **/*.scss package*.json"
+    "dev:firefox": "webpack watch",
+    "build:firefox": "webpack",
+    "build:firefox:prod": "cross-env NODE_ENV=production webpack",
+    "test:firefox": "node ./test.js --source-dir build"
   },
   "license": "MIT"
 }

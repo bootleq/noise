@@ -5,6 +5,8 @@
 *.css.map
 Thumbs.db
 Desktop.ini
+build
+dist
 node_modules/*
 .sass-cache/*
 .tool-versions
