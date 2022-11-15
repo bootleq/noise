@@ -179,7 +179,7 @@
   },
 
   "event_types_name_runtimeStartup": {
-    "message": "Firefox Startup"
+    "message": "Browser Startup"
   },
   "event_types_name_downloadNew": {
     "message": "Download Started"

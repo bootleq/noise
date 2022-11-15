@@ -166,7 +166,7 @@
   },
 
   "event_types_name_runtimeStartup": {
-    "message": "Firefox 啟動"
+    "message": "瀏覽器啟動"
   },
   "event_types_name_downloadNew": {
     "message": "下載開始"
