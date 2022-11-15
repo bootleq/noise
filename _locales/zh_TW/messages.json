@@ -44,6 +44,9 @@
   "options_title_btn_sound_delete": {
     "message": "刪除這個聲音"
   },
+  "options_prompt_areYouSure": {
+    "message": "確定執行？"
+  },
   "options_btn_sound_moveBack": {
     "message": "◀"
   },

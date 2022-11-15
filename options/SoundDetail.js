@@ -4,6 +4,8 @@ import browser from "webextension-polyfill";
 
 import { fileToDataURL, preventDefaultDrag } from './utils.js';
 
+const confirmMsg = browser.i18n.getMessage('options_prompt_areYouSure');
+
 class SoundDetail {
   constructor(el, parentStore) {
     this.store = parentStore;
@@ -154,8 +156,10 @@ class SoundDetail {
         break;
 
       case $btn.matches('.delete'):
-        this.notifyObservers('delete');
-        this.attach();
+        if (globalThis.confirm(confirmMsg)) {
+          this.notifyObservers('delete');
+          this.attach();
+        }
         break;
 
       case $btn.matches('.move-back'):

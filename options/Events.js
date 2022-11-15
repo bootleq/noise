@@ -6,6 +6,8 @@ import { EventSetting } from '../common/event.js';
 import { emptyObject } from '../common/utils.js';
 import { posisitionTo, arrayDiff } from './utils.js';
 
+const confirmMsg = browser.i18n.getMessage('options_prompt_areYouSure');
+
 class Events {
   constructor(el, parentStore) {
     this.store = parentStore;
@@ -333,7 +335,9 @@ class Events {
           break;
 
         case $button.matches('.delete'):
-          this.delete($row);
+          if (globalThis.confirm(confirmMsg)) {
+            this.delete($row);
+          }
           break;
       }
       return;
