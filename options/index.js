@@ -81,7 +81,7 @@ function onImportFile(e, callback) {
         let data = JSON.parse(reader.result);
         callback(data);
       } catch (e) {
-        console.log('Fail parsing import file.', e);
+        console.error('Fail parsing import file.', e);
         callback();
       }
     };
@@ -156,8 +156,9 @@ async function init() {
         });
         newConfig['events'].forEach((cfg) => events.addEvent(cfg));
         events.updatePermissions();
+        events.updateSoundMenu();
       } else {
-        console.log('import fail');
+        console.error('import fail');
       }
     });
   });
