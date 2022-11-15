@@ -48,7 +48,7 @@
     "message": "Delete this sound"
   },
   "options_prompt_areYouSure": {
-    "message": "Are you sure?"
+    "message": "Are you sure?\n\nHint: hold Ctrl key can skip this prompt."
   },
   "options_btn_sound_moveBack": {
     "message": "◀"

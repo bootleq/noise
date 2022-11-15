@@ -156,7 +156,7 @@ class SoundDetail {
         break;
 
       case $btn.matches('.delete'):
-        if (globalThis.confirm(confirmMsg)) {
+        if (e.ctrlKey || globalThis.confirm(confirmMsg)) {
           this.notifyObservers('delete');
           this.attach();
         }

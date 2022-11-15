@@ -45,7 +45,7 @@
     "message": "刪除這個聲音"
   },
   "options_prompt_areYouSure": {
-    "message": "確定執行？"
+    "message": "確定執行？\n\n提示：按住 Ctrl 鍵可以跳過確認"
   },
   "options_btn_sound_moveBack": {
     "message": "◀"

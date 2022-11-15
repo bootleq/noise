@@ -344,7 +344,7 @@ class Events {
           break;
 
         case $button.matches('.delete'):
-          if (globalThis.confirm(confirmMsg)) {
+          if (e.ctrlKey || globalThis.confirm(confirmMsg)) {
             this.delete($row);
           }
           break;
