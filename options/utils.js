@@ -1,5 +1,7 @@
 'use strict';
 
+import browser from "webextension-polyfill";
+
 function preventDefaultDrag(el) {
   function noop(e) {
     e.preventDefault();

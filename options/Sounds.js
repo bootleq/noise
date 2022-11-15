@@ -1,5 +1,7 @@
 'use strict';
 
+import browser from "webextension-polyfill";
+
 import Sound from '../common/sound';
 import { emptyObject } from '../common/utils';
 import { shrinkFont } from './utils';

@@ -41,11 +41,5 @@
     "browser_style": true
   },
 
-  "default_locale": "en",
-  "applications": {
-    "gecko": {
-      "id": "noise@bootleq",
-      "strict_min_version": "57.0a1"
-    }
-  }
+  "default_locale": "en"
 }

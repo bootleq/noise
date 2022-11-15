@@ -6,6 +6,16 @@
   --color-thead: #ebebeb;
 }
 
+// from chrome://browser/content/extension.css {{{
+body * {
+  box-sizing: border-box;
+}
+html, body {
+  font: caption;
+}
+// }}}
+
+
 html {
   min-height: 100%;
 }

@@ -1,5 +1,7 @@
 'use strict';
 
+import browser from "webextension-polyfill";
+
 import { arrayDiff } from './utils';
 
 class Permissions {

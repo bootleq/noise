@@ -1,5 +1,7 @@
 'use strict';
 
+import browser from "webextension-polyfill";
+
 import Sound from './common/sound';
 import { EventSetting } from './common/event';
 import { emptyObject } from './common/utils';
