@@ -170,6 +170,12 @@
   "options_btn_export": {
     "message": "Export"
   },
+  "options_error_importFail": {
+    "message": "Import failed: "
+  },
+  "options_error_importFailFileIncomplete": {
+    "message": "File content incomplete."
+  },
   "options_btn_reviewPermission": {
     "message": "Permissions"
   },

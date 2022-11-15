@@ -158,6 +158,12 @@
   "options_btn_export": {
     "message": "匯出設定"
   },
+  "options_error_importFail": {
+    "message": "匯入失敗："
+  },
+  "options_error_importFailFileIncomplete": {
+    "message": "檔案內容不完整"
+  },
   "options_btn_reviewPermission": {
     "message": "權限"
   },

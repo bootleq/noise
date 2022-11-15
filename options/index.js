@@ -72,21 +72,13 @@ async function exportConfig() {
   });
 }
 
-function onImportFile(e, callback) {
-  let file = e.target.files[0];
-  if (file) {
-    let reader = new FileReader();
-    reader.onload = () => {
-      try {
-        let data = JSON.parse(reader.result);
-        callback(data);
-      } catch (e) {
-        console.error('Fail parsing import file.', e);
-        callback();
-      }
-    };
-    reader.readAsText(file);
+async function onImportFile(e) {
+  const json = await e.target.files[0]?.text();
+  const config = JSON.parse(json);
+  if (['sounds', 'events'].every(k => Object.keys(config).includes(k))) {
+    return JSON.parse(json);
   }
+  throw new Error(browser.i18n.getMessage('options_error_importFailFileIncomplete'));
 }
 
 function onLoad() {
@@ -146,20 +138,20 @@ async function init() {
 
   $import.addEventListener('click', () => $importFile.click());
   $importFile.addEventListener('change', (e) => {
-    onImportFile(e, (newConfig) => {
-      if (newConfig) {
-        sounds.clear();
-        events.clear();
-        newConfig['sounds'].forEach((cfg) => {
-          sounds.addSound(cfg);
-          store.Sounds[cfg.id].src = newConfig[`src.${cfg.id}`];
-        });
-        newConfig['events'].forEach((cfg) => events.addEvent(cfg));
-        events.updatePermissions();
-        events.updateSoundMenu();
-      } else {
-        console.error('import fail');
-      }
+    onImportFile(e).then((newConfig) => {
+      sounds.clear();
+      events.clear();
+      newConfig['sounds'].forEach((cfg) => {
+        sounds.addSound(cfg);
+        store.Sounds[cfg.id].src = newConfig[`src.${cfg.id}`];
+      });
+      newConfig['events'].forEach((cfg) => events.addEvent(cfg));
+      events.updatePermissions();
+      events.updateSoundMenu();
+    })
+    .catch(e => {
+      const msg = browser.i18n.getMessage('options_error_importFail');
+      console.error(msg, e);
     });
   });
 
