@@ -31,6 +31,14 @@ h1, ul {
 }
 fieldset {
   border: none;
+
+  > legend {
+    width: 100%;
+    padding-bottom: 2px;
+    margin-bottom: 2px;
+    font-weight: bold;
+    border-bottom: 1px solid;
+  }
 }
 legend {
   font-size: large;
@@ -270,6 +278,9 @@ table {
 }
 
 #events {
+  margin-top: 2em;
+  margin-bottom: 2em;
+
   table {
     table-layout: fixed;
     min-width: 100%;
