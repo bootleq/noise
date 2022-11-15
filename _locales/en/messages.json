@@ -35,6 +35,9 @@
     "message": "This media type maybe unable to play.",
     "description": "When upload a file seems can't be played by <audio>, this warning is shown below the player."
   },
+  "options_warning_loadError": {
+    "message": "Load failed. Data might be corrupted, or format not supported."
+  },
   "options_btn_sound_acceptEdit": {
     "message": "✔ Accept"
   },
