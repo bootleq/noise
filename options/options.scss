@@ -47,6 +47,9 @@ input[type="button"],
 input[type="checkbox"],
 button {
   cursor: pointer;
+  &:disabled {
+    cursor: not-allowed;
+  }
 }
 table {
   border-collapse: collapse;

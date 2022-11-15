@@ -215,7 +215,7 @@ class Events {
     $type.classList.toggle('not-set', !!!type);
 
     $sound.classList.toggle('not-set', !!!sound);
-    $row.querySelector('button.play').disabled = !!!sound;
+    this.updatePlayButton($row);
   }
 
   onKey(e) {
@@ -245,9 +245,19 @@ class Events {
 
   onChange(e) {
     const $target = e.target;
-    if ($target.matches('td.e-type select.types')) {
+
+    if ($target.tagName === 'SELECT') {
       const $row = $target.closest('tr');
-      this.updateOptionSlot($row, $target.value);
+
+      switch (true) {
+        case $target.matches('td.e-type .types'):
+          this.updateOptionSlot($row, $target.value);
+          break;
+        case $target.matches('td.e-sound .sounds'):
+          $row.dataset.tempSoundId = $target.value;
+          this.updatePlayButton($row);
+          break;
+      }
     }
   }
 
@@ -255,11 +265,11 @@ class Events {
     let $target = e.target;
     let $button = $target.closest('button');
     let $row    = $target.closest('tr');
-    let sound   = this.store.Sounds[$row.dataset.soundId];
-    let $cell;
+    const { eventId, soundId, tempSoundId } = $row.dataset;
+    let sound, $cell;
 
     if ($target.matches('.e-toggle input')) {
-      this.store.Events[$row.dataset.eventId].enabled = $target.checked;
+      this.store.Events[eventId].enabled = $target.checked;
     }
 
     if (this.editing) {
@@ -269,9 +279,8 @@ class Events {
           break;
 
         case $button && $button.matches('button.play'):
-          if (sound) {
-            sound.play();
-          }
+          sound = this.store.Sounds[tempSoundId];
+          sound?.play();
           break;
 
         case $button && $button.matches('button.cancel'):
@@ -296,6 +305,7 @@ class Events {
       return;
     }
 
+    // non editing
     if ($button) {
       switch (true) {
         case $button.matches('.edit'):
@@ -304,9 +314,8 @@ class Events {
           break;
 
         case $button.matches('.play'):
-          if (sound) {
-            sound.play();
-          }
+          sound = this.store.Sounds[soundId];
+          sound?.play();
           break;
 
         case $button.matches('td.e-options button'):
@@ -395,6 +404,8 @@ class Events {
 
       this.$menus.options.style.display = 'none';
     } else {
+      $row.dataset.tempSoundId = $row.dataset.soundId;
+
       this.editing = this.store.Events[$row.dataset.eventId];
       this._before = JSON.stringify(this.editing);
 
@@ -429,6 +440,7 @@ class Events {
     data.type = before.type;
     data.options = JSON.stringify(before.options);
     data.soundId = before.soundId;
+    delete data.tempSoundId;
     $row.querySelector('.e-name').textContent = data.name;
     this.render($row);
   }
@@ -512,6 +524,7 @@ class Events {
     if ($opt) {
       const {value, textContent} = $opt;
       set.soundId = value;
+      set.tempSoundId = value;
       set.soundText = textContent;
     }
   }
@@ -549,6 +562,17 @@ class Events {
         $slot.classList.toggle('enabled', Object.keys(options).includes(slot.name));
         $options.appendChild($slot);
       });
+    }
+  }
+
+  updatePlayButton($row) {
+    const { soundId, tempSoundId } = $row.dataset;
+    const $btn = $row.querySelector('button.play');
+
+    if (this.editing) {
+      $btn.disabled = !!!tempSoundId;
+    } else {
+      $btn.disabled = !!!soundId;
     }
   }
 
