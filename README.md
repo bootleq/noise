@@ -19,23 +19,27 @@ new function step by step.
 Development
 -----------
 
+Have some scripts for convenience, note the names without `:chrome` imply Firefox.
+
 Start development, with sass files watching:
 
-    yarn dev:firefox
+    yarn dev
+    yarn dev:chrome
 
 Make temporary build to `build` folder:
 
-    yarn build:firefox
+    yarn build
+    yarn build:chrome
 
-Test run with [web-ext][] after temporary build:
+Test run with [web-ext][] after temporary build (Firefox only):
 
-    yarn test:firefox
-
-    yarn test:firefox --profile some_firefox_profile_name
+    yarn test
+    yarn test --profile some_firefox_profile_name
 
 Package a zip file:
 
-    yarn build:firefox:prod
+    yarn build:prod
+    yarn build:prod:chrome
 
 
 Legacy Version (Firefox &lt; v57)

@@ -42,7 +42,7 @@ if (ENV == 'production') {
   plugins.push(
     new ZipPlugin({
       path: path.resolve(__dirname, 'dist'),
-      filename: `noise-${BROWSER == 'firefox' ? manifestFx.version : manifestGc.version}.zip`,
+      filename: `noise-${BROWSER}-${BROWSER == 'firefox' ? manifestFx.version : manifestGc.version}.zip`,
       fileOptions: {
         mtime: new Date(),
         mode: 0o100664,
