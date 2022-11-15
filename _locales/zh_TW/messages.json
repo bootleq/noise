@@ -170,12 +170,6 @@
   "options_btn_reviewPermission": {
     "message": "權限"
   },
-  "options_btn_legacyUpgradeInfo": {
-    "message": "舊版升級者說明"
-  },
-  "options_title_btn_legacyUpgradeInfo": {
-    "message": "開啟升級說明頁面，只有從 1.x 版本升級的使用者會看到此按鈕，且未來版本將移除此通知"
-  },
 
   "event_types_name_runtimeStartup": {
     "message": "瀏覽器啟動"

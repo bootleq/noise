@@ -182,20 +182,6 @@ async function init() {
       }, 66);
     }
   });
-
-  browser.storage.local.get({'upgrade.legacy': false}).then(result => {
-    if (result['upgrade.legacy']) {
-      let btn = document.querySelector('#legacy-upgrade-info');
-      btn.classList.remove('hidden');
-      btn.addEventListener('click', () => {
-        let lang = browser.i18n.getUILanguage();
-        if (!['zh-TW'].includes(lang)) {
-          lang = 'en';
-        }
-        browser.tabs.create({url: `/pages/${lang}/upgrade-legacy.html`});
-      });
-    }
-  });
 }
 
 window.addEventListener('DOMContentLoaded', init, {once: true});
