@@ -617,6 +617,12 @@ table {
     strong {
       display: none;
     }
+    i.dismiss {
+      display: none;
+      margin: 0 4px;
+      color: initial;
+      cursor: pointer;
+    }
 
     &.success {
       color: #006504;
@@ -625,8 +631,8 @@ table {
       color: #ff0039;
     }
     &.success, &.fail {
-      strong {
-        display: block;
+      strong, i.dismiss {
+        display: inline;
       }
     }
   }

@@ -114,6 +114,7 @@ async function init() {
   let $importFile = document.querySelector('#import-file');
   let $info       = document.querySelector('#main-ctrls .info');
   let $infoText   = $info.querySelector('strong');
+  let $infoClose  = $info.querySelector('.dismiss');
   let $permsBtn   = document.querySelector('#review-permission');
 
   sounds.addObserver('select', soundDetail.attach.bind(soundDetail));
@@ -168,7 +169,7 @@ async function init() {
     });
   });
 
-  $info.addEventListener('click', () => $info.className = 'info');
+  $infoClose.addEventListener('click', () => $info.className = 'info');
 
   $permsBtn.addEventListener('click', permissions.toggleDialog.bind(permissions, $permsBtn));
 
