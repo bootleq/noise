@@ -6,14 +6,23 @@
   --color-thead: #ebebeb;
 }
 
-// from chrome://browser/content/extension.css {{{
 body * {
   box-sizing: border-box;
 }
-html, body {
+
+body.firefox {
   font: caption;
+
+  label,
+  input[type="button"] {
+    font-size: larger;
+  }
+
+  input, button {
+    font: caption;
+    font-size: larger;
+  }
 }
-// }}}
 
 
 html {
@@ -42,14 +51,6 @@ fieldset {
 }
 legend {
   font-size: large;
-}
-input, button {
-  font: caption;
-}
-label,
-input[type="button"],
-button {
-  font-size: larger;
 }
 input[type="button"],
 input[type="checkbox"],

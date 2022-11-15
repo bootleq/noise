@@ -7,6 +7,7 @@ import SoundDetail from './SoundDetail';
 import Events from './Events';
 import Permissions from './Permissions';
 import { translateDOM } from './utils.js';
+import { browserInfo } from '../common/utils';
 
 import './options.scss';
 
@@ -88,11 +89,20 @@ function onLoad() {
     $export.disabled = false;
   }
 }
+
+function applyBodyClass() {
+  browserInfo().then(info => {
+    if (info.name) {
+      document.body.classList.add(info.name.toLowerCase());
+    }
+  });
+}
 // }}}
 
 async function init() {
   document.title = browser.i18n.getMessage('optionPageTitle');
   translateDOM();
+  applyBodyClass();
 
   store.Permissions = await browser.permissions.getAll().then(result => result.permissions);
 
