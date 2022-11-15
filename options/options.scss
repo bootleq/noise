@@ -620,13 +620,12 @@ table {
 
     &.success {
       color: #006504;
-      .success {
-        display: block;
-      }
     }
     &.fail {
       color: #ff0039;
-      .fail {
+    }
+    &.success, &.fail {
+      strong {
         display: block;
       }
     }

@@ -112,7 +112,8 @@ async function init() {
   let permissions = new Permissions(document.querySelector('#permissions'), store);
 
   let $importFile = document.querySelector('#import-file');
-  let $saved      = document.querySelector('#main-ctrls .info');
+  let $info       = document.querySelector('#main-ctrls .info');
+  let $infoText   = $info.querySelector('strong');
   let $permsBtn   = document.querySelector('#review-permission');
 
   sounds.addObserver('select', soundDetail.attach.bind(soundDetail));
@@ -131,15 +132,16 @@ async function init() {
 
   $save.addEventListener('click', () => {
     $save.disabled = true;
-    $saved.className = 'info';
+    $info.className = 'info';
 
     save().then(() => {
       $save.disabled = false;
-      $saved.classList.add('success');
+      $infoText.textContent = browser.i18n.getMessage('options_info_saveSuccess');
+      $info.classList.add('success');
     })
     .catch(e => {
-      console.log('fail saving config', e);
-      $saved.classList.add('fail');
+      $infoText.textContent = browser.i18n.getMessage('options_info_saveFail');
+      $info.classList.add('fail');
       $save.disabled = false;
     });
   });
@@ -160,12 +162,13 @@ async function init() {
       events.updateSoundMenu();
     })
     .catch(e => {
-      const msg = browser.i18n.getMessage('options_error_importFail');
-      console.error(msg, e);
+      const prefix = browser.i18n.getMessage('options_error_importFail');
+      $infoText.textContent = `${prefix}${e.message}`;
+      $info.classList.add('fail');
     });
   });
 
-  $saved.addEventListener('click', () => $saved.className = 'info');
+  $info.addEventListener('click', () => $info.className = 'info');
 
   $permsBtn.addEventListener('click', permissions.toggleDialog.bind(permissions, $permsBtn));
 
