@@ -506,7 +506,7 @@ class Events {
       delete set.permissions;
     }
   }
- 
+
   acceptSound(set, $row) {
     const $opt = $row.querySelector('select.sounds option:checked');
     if ($opt) {
@@ -584,7 +584,7 @@ class Events {
       this.toggleOptionMenu($target);
     }
   }
- 
+
   updateNoSoundHint() {
     this.$hints.noSound.classList.toggle('hidden', Object.keys(this.store.Sounds).length);
   }
