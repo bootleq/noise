@@ -1,7 +1,7 @@
 CHANGES
 =======
 
-## Unreleased
+## 3.0.0 (2022-11-16)
 
 * Google Chrome port version.
 * Improve development process with webpack.

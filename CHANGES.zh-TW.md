@@ -1,7 +1,7 @@
 CHANGES
 =======
 
-## 未發布
+## 3.0.0 (2022-11-16)
 
 * Google Chrome 版本。
 * 導入 webpack 改善開發流程。
