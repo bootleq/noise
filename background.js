@@ -9,14 +9,14 @@ import { emptyObject } from './common/utils';
 const gSounds = {};
 const gEvents = {};
 let ports = [];
-let fxStartup = false;
+let hasStarted = false;
 
 async function init() {
   window.addEventListener('unload', destroy, {once: true});
   await loadConfig();
-  if (fxStartup) {
+  if (hasStarted) {
     play('runtime.startup');
-    fxStartup = false;
+    hasStarted = false;
   }
   browser.storage.onChanged.addListener(onStorageChange);
   browser.runtime.onMessage.addListener(onMessage);
@@ -197,7 +197,7 @@ function play(type, filter = () => true) {
 // Event Handlers {{{
 
 function onStartup() {
-  fxStartup = true;
+  hasStarted = true;
 }
 
 function onDownloadCreated(item) { // https://developer.mozilla.org/en-US/Add-ons/WebExtensions/API/downloads/onCreated
