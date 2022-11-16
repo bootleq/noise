@@ -67,8 +67,10 @@ class Permissions {
     });
   }
 
-  toggleDialog($btn) {
-    if (this.$el.classList.contains('hidden')) {
+  toggleDialog($btn, force) {
+    const show = (typeof force === 'boolean') ? force : this.$el.classList.contains('hidden');
+
+    if (show) {
       this.$el.style.visibility = 'hidden';
       this.$el.classList.remove('hidden');
       let btnRect = $btn.getBoundingClientRect();

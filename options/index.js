@@ -6,7 +6,8 @@ import Sounds from './Sounds';
 import SoundDetail from './SoundDetail';
 import Events from './Events';
 import Permissions from './Permissions';
-import { translateDOM } from './utils.js';
+import { translateDOM, posisitionTo } from './utils.js';
+import { browserInfo, newId } from '../common/utils';
 
 import './options.scss';
 
@@ -17,29 +18,37 @@ const store = {
   Permissions: []
 };
 
-let $save   = document.querySelector('#save');
-let $import = document.querySelector('#import');
-let $export = document.querySelector('#export');
+const $save   = document.querySelector('#save');
+const $import = document.querySelector('#import');
+const $export = document.querySelector('#export');
+const $importMenu = document.querySelector('#import-menu');
 
 // {{{
-async function currentConfig() {
-  let config = {};
-
-  config['sounds'] = Array.from(document.querySelectorAll('#sounds ul > li:not(.add_sound)')).reduce((list, $i) => {
+function currentSoundsConfig() {
+  return Array.from(document.querySelectorAll('#sounds ul > li:not(.add_sound)')).reduce((list, $i) => {
     let sound = store.Sounds[$i.dataset.soundId];
     if (sound) {
       list.push(sound.toPersistedProps());
     }
     return list;
   }, []);
+}
 
-  config['events'] = Array.from(document.querySelectorAll('#events tbody tr')).reduce((list, $i) => {
+function currentEventsConfig() {
+  return Array.from(document.querySelectorAll('#events tbody tr')).reduce((list, $i) => {
     let event = store.Events[$i.dataset.eventId];
     if (event) {
       list.push(event.toPersistedProps());
     }
     return list;
   }, []);
+}
+
+async function currentConfig() {
+  let config = {};
+
+  config['sounds'] = currentSoundsConfig();
+  config['events'] = currentEventsConfig();
 
   for (let i of Object.values(store.Sounds)) {
     if (!i.src) {
@@ -72,22 +81,55 @@ async function exportConfig() {
   });
 }
 
-function onImportFile(e, callback) {
-  let file = e.target.files[0];
-  if (file) {
-    let reader = new FileReader();
-    reader.onload = () => {
-      try {
-        let data = JSON.parse(reader.result);
-        callback(data);
-      } catch (e) {
-        console.log('Fail parsing import file.', e);
-        callback();
+function rewriteDuplicatedIds(config) {
+  let oldIds;
+
+  oldIds = currentSoundsConfig().map(i => i['id']);
+  config['sounds'].forEach((cfg) => {
+    const id = cfg['id'];
+    if (oldIds.includes(id)) {
+      const nId = newId();
+      cfg['id'] = nId;
+
+      config['events'].filter(e => e['soundId'] === id).forEach(e => {
+        e['soundId'] = nId;
+      });
+
+      if (config[`src.${id}`]) {
+        config[`src.${nId}`] = config[`src.${id}`];
+        delete config[`src.${id}`];
       }
-    };
-    reader.readAsText(file);
-  }
+    }
+  });
+
+  oldIds = currentEventsConfig().map(i => i['id']);
+  config['events'].forEach((cfg) => {
+    const id = cfg['id'];
+    if (oldIds.includes(id)) {
+      const nId = newId();
+      cfg['id'] = nId;
+    }
+  });
+
+  return config;
 }
+
+async function onImportFile(e) {
+  const json = await e.target.files[0]?.text();
+  const config = JSON.parse(json);
+  if (['sounds', 'events'].every(k => Object.keys(config).includes(k))) {
+    return JSON.parse(json);
+  }
+  throw new Error(browser.i18n.getMessage('options_error_importFailFileIncomplete'));
+}
+
+function toggleImportMenu(force) {
+  if (!$importMenu.classList.contains('show' || force === true)) {
+    posisitionTo($importMenu, $import, 'top');
+  }
+  $importMenu.classList.toggle('show', force);
+}
+
 
 function onLoad() {
   if (store.Loaded.length === 2) {
@@ -96,11 +138,20 @@ function onLoad() {
     $export.disabled = false;
   }
 }
+
+function applyBodyClass() {
+  browserInfo().then(info => {
+    if (info.name) {
+      document.body.classList.add(info.name.toLowerCase());
+    }
+  });
+}
 // }}}
 
 async function init() {
   document.title = browser.i18n.getMessage('optionPageTitle');
   translateDOM();
+  applyBodyClass();
 
   store.Permissions = await browser.permissions.getAll().then(result => result.permissions);
 
@@ -109,9 +160,19 @@ async function init() {
   let events      = new Events(document.querySelector('#events'), store);
   let permissions = new Permissions(document.querySelector('#permissions'), store);
 
+  let importMode = 'append';
+
   let $importFile = document.querySelector('#import-file');
-  let $saved      = document.querySelector('#main-ctrls .info');
+  let $info       = document.querySelector('#main-ctrls .info');
+  let $infoText   = $info.querySelector('strong');
+  let $infoClose  = $info.querySelector('.dismiss');
   let $permsBtn   = document.querySelector('#review-permission');
+
+  function hideFloatMenus() {
+    events.toggleOptionMenu.bind(events)(null, false);
+    permissions.toggleDialog.bind(permissions)($permsBtn, false);
+    toggleImportMenu(false);
+  }
 
   sounds.addObserver('select', soundDetail.attach.bind(soundDetail));
   sounds.addObserver('update', events.updateSoundMenu.bind(events));
@@ -129,64 +190,73 @@ async function init() {
 
   $save.addEventListener('click', () => {
     $save.disabled = true;
-    $saved.className = 'info';
+    $info.className = 'info';
 
     save().then(() => {
       $save.disabled = false;
-      $saved.classList.add('success');
+      $infoText.textContent = browser.i18n.getMessage('options_info_saveSuccess');
+      $info.classList.add('success');
     })
     .catch(e => {
-      console.log('fail saving config', e);
-      $saved.classList.add('fail');
+      $infoText.textContent = browser.i18n.getMessage('options_info_saveFail');
+      $info.classList.add('fail');
       $save.disabled = false;
     });
   });
 
+  $import.addEventListener('click', () => toggleImportMenu());
   $export.addEventListener('click', exportConfig);
 
-  $import.addEventListener('click', () => $importFile.click());
+  $importMenu.addEventListener('click', (e) => {
+    const mode = e.target.closest('li')?.dataset.mode;
+    if (['append', 'overwrite'].includes(mode)) {
+      importMode = mode;
+      hideFloatMenus();
+      $importFile.click();
+    }
+  });
+
   $importFile.addEventListener('change', (e) => {
-    onImportFile(e, (newConfig) => {
-      if (newConfig) {
+    onImportFile(e).then((newConfig) => {
+      if (importMode === 'overwrite') {
         sounds.clear();
         events.clear();
-        newConfig['sounds'].forEach((cfg) => {
-          sounds.addSound(cfg);
-          store.Sounds[cfg.id].src = newConfig[`src.${cfg.id}`];
-        });
-        newConfig['events'].forEach((cfg) => events.addEvent(cfg));
-        events.updatePermissions();
       } else {
-        console.log('import fail');
+        newConfig = rewriteDuplicatedIds(newConfig);
       }
+
+      newConfig['sounds'].forEach((cfg) => {
+        sounds.addSound(cfg);
+        store.Sounds[cfg.id].src = newConfig[`src.${cfg.id}`];
+      });
+      newConfig['events'].forEach((cfg) => events.addEvent(cfg));
+      events.updatePermissions();
+      events.updateSoundMenu();
+    })
+    .catch(e => {
+      const prefix = browser.i18n.getMessage('options_error_importFail');
+      $infoText.textContent = `${prefix}${e.message}`;
+      $info.classList.add('fail');
     });
   });
 
-  $saved.addEventListener('click', () => $saved.className = 'info');
+  $infoClose.addEventListener('click', () => $info.className = 'info');
 
   $permsBtn.addEventListener('click', permissions.toggleDialog.bind(permissions, $permsBtn));
+
+  document.body.addEventListener('click', e => {
+    if (e.target.tagName === 'BODY') {
+      hideFloatMenus();
+    }
+  });
 
   let resizeTimeout;
   window.addEventListener('resize', () => {
     if (!resizeTimeout) {
       resizeTimeout = setTimeout(() => {
-        document.querySelector('#permissions').classList.add('hidden');
+        hideFloatMenus();
         resizeTimeout = null;
-      }, 66);
-    }
-  });
-
-  browser.storage.local.get({'upgrade.legacy': false}).then(result => {
-    if (result['upgrade.legacy']) {
-      let btn = document.querySelector('#legacy-upgrade-info');
-      btn.classList.remove('hidden');
-      btn.addEventListener('click', () => {
-        let lang = browser.i18n.getUILanguage();
-        if (!['zh-TW'].includes(lang)) {
-          lang = 'en';
-        }
-        browser.tabs.create({url: `/pages/${lang}/upgrade-legacy.html`});
-      });
+      }, 100);
     }
   });
 }

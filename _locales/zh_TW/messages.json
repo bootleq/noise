@@ -24,13 +24,16 @@
     "message": "取消上傳"
   },
   "options_sound_clickOrDropFile": {
-    "message": "點選以選擇，或拖曳檔案到這裡"
+    "message": "點選以選擇，或拖曳聲音檔到這裡"
   },
   "options_btn_changeSound": {
     "message": "更換"
   },
   "options_warning_unsupportedMedia": {
     "message": "聲音格式可能無法播放。"
+  },
+  "options_warning_loadError": {
+    "message": "載入失敗，資料可能已損壞，或格式不支援。"
   },
   "options_btn_sound_acceptEdit": {
     "message": "✔ 確認"
@@ -43,6 +46,9 @@
   },
   "options_title_btn_sound_delete": {
     "message": "刪除這個聲音"
+  },
+  "options_prompt_areYouSure": {
+    "message": "確定執行？\n\n提示：按住 Ctrl 鍵可以跳過確認"
   },
   "options_btn_sound_moveBack": {
     "message": "◀"
@@ -150,19 +156,25 @@
     "message": "儲存失敗"
   },
   "options_btn_import": {
-    "message": "匯入設定"
+    "message": "匯入設定 ▼"
   },
   "options_btn_export": {
     "message": "匯出設定"
   },
+  "options_btn_importOverwrite": {
+    "message": "覆蓋現有設定"
+  },
+  "options_btn_importAppend": {
+    "message": "保留原設定，新項目加到後面"
+  },
+  "options_error_importFail": {
+    "message": "匯入失敗："
+  },
+  "options_error_importFailFileIncomplete": {
+    "message": "檔案內容不完整"
+  },
   "options_btn_reviewPermission": {
     "message": "權限"
-  },
-  "options_btn_legacyUpgradeInfo": {
-    "message": "舊版升級者說明"
-  },
-  "options_title_btn_legacyUpgradeInfo": {
-    "message": "開啟升級說明頁面，只有從 1.x 版本升級的使用者會看到此按鈕，且未來版本將移除此通知"
   },
 
   "event_types_name_runtimeStartup": {

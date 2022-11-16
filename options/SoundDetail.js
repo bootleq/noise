@@ -2,7 +2,10 @@
 
 import browser from "webextension-polyfill";
 
+import { testAudioSrc } from '../common/utils';
 import { fileToDataURL, preventDefaultDrag } from './utils.js';
+
+const confirmMsg = browser.i18n.getMessage('options_prompt_areYouSure');
 
 class SoundDetail {
   constructor(el, parentStore) {
@@ -114,10 +117,11 @@ class SoundDetail {
     }
 
     fileToDataURL(file).then(src => {
-      this.$audio.src = src;
-      this.$cancelUpload.classList.remove('hidden');
-      this.toggleUploadUI(false);
-      setTimeout(this.validate.bind(this)); // currentSrc not updated immediately
+      this.testAndSetSrc(src).then(() => {
+        this.$cancelUpload.classList.remove('hidden');
+        this.toggleUploadUI(false);
+        this.validate();
+      });
     })
     .catch(e => {
       this.toggleUploadUI(true);
@@ -154,8 +158,10 @@ class SoundDetail {
         break;
 
       case $btn.matches('.delete'):
-        this.notifyObservers('delete');
-        this.attach();
+        if (e.ctrlKey || globalThis.confirm(confirmMsg)) {
+          this.notifyObservers('delete');
+          this.attach();
+        }
         break;
 
       case $btn.matches('.move-back'):
@@ -177,20 +183,35 @@ class SoundDetail {
   }
 
   validate() {
-    if (this.$name.value.length && this.$audio.currentSrc) {
+    if (this.$name.value.length && this.$audio.src) {
       this.$accept.disabled = false;
       return;
     }
     this.$accept.disabled = true;
   }
 
-  render() {
+  async testAndSetSrc(src) {
+    await testAudioSrc(src).then(() => {
+      this.$audio.src = src;
+      this.$playerBox.classList.toggle('error', false);
+      this.$warning.textContent = '';
+    }).catch(() => {
+      this.$audio.removeAttribute('src');
+      this.$playerBox.classList.toggle('error', true);
+      const msg = browser.i18n.getMessage('options_warning_loadError');
+      this.$warning.textContent = msg;
+    });
+  }
+
+  async render() {
     if (this.$selected) {
       let sound = this.store.Sounds[this.$selected.dataset.soundId];
       this.$name.value = sound.name || '';
-      this.$audio.src  = sound.src || '';
+
+      await this.testAndSetSrc(sound.src);
+
       this.toggleUploadUI(!sound.src);
-      setTimeout(this.validate.bind(this)); // currentSrc not updated immediately
+      this.validate();
     } else {
       this.$name.value = '';
       this.$upload.classList.remove('hidden');

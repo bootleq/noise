@@ -24,7 +24,7 @@
     "message": "Cancel Upload"
   },
   "options_sound_clickOrDropFile": {
-    "message": "Click or drop new sound here.",
+    "message": "Click or drop a sound file here.",
     "description": "Droppable zone for upload new sound file."
   },
   "options_btn_changeSound": {
@@ -34,6 +34,9 @@
   "options_warning_unsupportedMedia": {
     "message": "This media type maybe unable to play.",
     "description": "When upload a file seems can't be played by <audio>, this warning is shown below the player."
+  },
+  "options_warning_loadError": {
+    "message": "Load failed. Data might be corrupted, or format not supported."
   },
   "options_btn_sound_acceptEdit": {
     "message": "✔ Accept"
@@ -46,6 +49,9 @@
   },
   "options_title_btn_sound_delete": {
     "message": "Delete this sound"
+  },
+  "options_prompt_areYouSure": {
+    "message": "Are you sure?\n\nHint: hold Ctrl key can skip this prompt."
   },
   "options_btn_sound_moveBack": {
     "message": "◀"
@@ -162,20 +168,25 @@
     "description": "Little info text shown near Save button, when fail"
   },
   "options_btn_import": {
-    "message": "Import"
+    "message": "Import ▼"
   },
   "options_btn_export": {
     "message": "Export"
   },
+  "options_btn_importOverwrite": {
+    "message": "Overwrite current settings"
+  },
+  "options_btn_importAppend": {
+    "message": "Keep current, append new items"
+  },
+  "options_error_importFail": {
+    "message": "Import failed: "
+  },
+  "options_error_importFailFileIncomplete": {
+    "message": "File content incomplete."
+  },
   "options_btn_reviewPermission": {
     "message": "Permissions"
-  },
-  "options_btn_legacyUpgradeInfo": {
-    "message": "Existing User Notice",
-    "description": "User upgrade from legacy version can see this button, click it will open a notice page."
-  },
-  "options_title_btn_legacyUpgradeInfo": {
-    "message": "Read notice about upgrading from legacy verion, this button is only visible for existing user, and could be removed in future version"
   },
 
   "event_types_name_runtimeStartup": {

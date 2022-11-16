@@ -27,10 +27,34 @@ async function readAsDataURL(blob) {
   });
 }
 
-function posisitionTo($src, $target) {
-  let rect = $target.getBoundingClientRect();
-  $src.style.left = (rect.left + window.scrollX) + 'px';
-  $src.style.top  = (rect.top + window.scrollY + rect.height) + 'px';
+function posisitionTo($src, $target, placement) {
+  const rect = $target.getBoundingClientRect();
+  let left, top, srcRect, srcDisplay;
+
+  switch (placement) {
+  case 'top':
+    if ($src.offsetHeight === 0) {
+      // force display to measure dimension
+      srcDisplay = $src.style.display;
+      $src.style.visibility = 'hidden';
+      $src.style.display = 'block';
+      srcRect = $src.getBoundingClientRect();
+      $src.style.display = srcDisplay;
+      $src.style.visibility = null;
+    } else {
+      srcRect = $src.getBoundingClientRect();
+    }
+
+    left = rect.left + window.scrollX;
+    top  = rect.top + window.scrollY - srcRect.height;
+    break;
+  default:
+    left = rect.left + window.scrollX;
+    top  = rect.top + window.scrollY + rect.height;
+  }
+
+  $src.style.left = `${left}px`;
+  $src.style.top  = `${top}px`;
 }
 
 function shrinkFont(el) {
