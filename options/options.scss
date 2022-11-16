@@ -655,9 +655,34 @@ table {
 
   > .secondary {
     display: flex;
+    position: static;
 
     @media (max-width: 375px) {
       flex-basis: 100%;
+    }
+  }
+
+  menu#import-menu {
+    display: none;
+    position: absolute;
+    padding: 4px;
+    margin: 0 0 2px;
+    list-style: none;
+    background-color: white;
+    border-radius: 4px;
+    box-shadow: 1px 3px 4px rgba(0, 0, 0, 0.4);
+
+    li {
+      padding: 6px 4px;
+      width: 100%;
+      cursor: pointer;
+      &:hover {
+        background-color: #efefef;
+      }
+    }
+
+    &.show {
+      display: block;
     }
   }
 }
