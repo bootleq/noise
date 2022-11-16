@@ -3,7 +3,11 @@ CHANGES
 
 ## Unreleased
 
+* Google Chrome port version.
+* Improve development process with webpack.
+* Allow import with new items appended, instead of just overwrite.
 * Options page: Fix Accept button overlapped when no Sound attached.
+* Options page: Various improvements and fixes.
 * Remove upgrade instruction for users from Firefox 57 downward.
 
 ## 2.3.0 (2019-04-22)
