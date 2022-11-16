@@ -24,7 +24,7 @@
     "message": "Cancel Upload"
   },
   "options_sound_clickOrDropFile": {
-    "message": "Click or drop new sound here.",
+    "message": "Click or drop a sound file here.",
     "description": "Droppable zone for upload new sound file."
   },
   "options_btn_changeSound": {
