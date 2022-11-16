@@ -442,13 +442,15 @@ class Events {
     data.soundId = before.soundId;
     delete data.tempSoundId;
     $row.querySelector('.e-name').textContent = data.name;
+    this.$menus.options.style.display = 'none';
     this.render($row);
   }
 
-  toggleOptionMenu($btn) {
+  toggleOptionMenu($btn, force) {
     const $menu = this.$menus.options;
+    const show = (typeof force === 'boolean') ? force : $menu.style.display === 'none';
 
-    if ($menu.style.display === 'block') {
+    if (!show) {
       $menu.style.display = 'none';
     } else {
       const name = $btn.dataset.name;

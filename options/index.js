@@ -168,6 +168,12 @@ async function init() {
   let $infoClose  = $info.querySelector('.dismiss');
   let $permsBtn   = document.querySelector('#review-permission');
 
+  function hideFloatMenus() {
+    events.toggleOptionMenu.bind(events)(null, false);
+    permissions.toggleDialog.bind(permissions)($permsBtn, false);
+    toggleImportMenu(false);
+  }
+
   sounds.addObserver('select', soundDetail.attach.bind(soundDetail));
   sounds.addObserver('update', events.updateSoundMenu.bind(events));
 
@@ -205,7 +211,7 @@ async function init() {
     const mode = e.target.closest('li')?.dataset.mode;
     if (['append', 'overwrite'].includes(mode)) {
       importMode = mode;
-      toggleImportMenu(false);
+      hideFloatMenus();
       $importFile.click();
     }
   });
@@ -238,13 +244,19 @@ async function init() {
 
   $permsBtn.addEventListener('click', permissions.toggleDialog.bind(permissions, $permsBtn));
 
+  document.body.addEventListener('click', e => {
+    if (e.target.tagName === 'BODY') {
+      hideFloatMenus();
+    }
+  });
+
   let resizeTimeout;
   window.addEventListener('resize', () => {
     if (!resizeTimeout) {
       resizeTimeout = setTimeout(() => {
-        document.querySelector('#permissions').classList.add('hidden');
+        hideFloatMenus();
         resizeTimeout = null;
-      }, 66);
+      }, 100);
     }
   });
 }
