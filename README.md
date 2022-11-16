@@ -5,6 +5,15 @@ Make sound response when event happen.
 
 - Firefox Add-on: https://addons.mozilla.org/firefox/addon/noise/
 
+Available Events
+----------------
+
+- Browser startup
+- Download start / completed / interrupted / failed
+- Back or Forward navigation
+- Request completed, like 404, 500 response
+- Clipboard copy
+
 
 Development
 -----------
