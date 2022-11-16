@@ -177,7 +177,7 @@
     "message": "Overwrite current settings"
   },
   "options_btn_importAppend": {
-    "message": "Append imported items to current"
+    "message": "Keep current, append new items"
   },
   "options_error_importFail": {
     "message": "Import failed: "

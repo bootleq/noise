@@ -165,7 +165,7 @@
     "message": "覆蓋現有設定"
   },
   "options_btn_importAppend": {
-    "message": "保留原設定，匯入新項目到後面"
+    "message": "保留原設定，新項目加到後面"
   },
   "options_error_importFail": {
     "message": "匯入失敗："
