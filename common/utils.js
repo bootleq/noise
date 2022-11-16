@@ -1,6 +1,7 @@
 'use strict';
 
 import browser from "webextension-polyfill";
+import { nanoid } from "nanoid";
 
 function emptyObject(obj) {
   Object.keys(obj).forEach(key => {
@@ -9,7 +10,7 @@ function emptyObject(obj) {
 }
 
 function newId() {
-  return new Date().valueOf().toString();
+  return nanoid(14);
 }
 
 function testAudioSrc(src) {

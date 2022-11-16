@@ -156,10 +156,16 @@
     "message": "儲存失敗"
   },
   "options_btn_import": {
-    "message": "匯入設定"
+    "message": "匯入設定 ▼"
   },
   "options_btn_export": {
     "message": "匯出設定"
+  },
+  "options_btn_importOverwrite": {
+    "message": "覆蓋現有設定"
+  },
+  "options_btn_importAppend": {
+    "message": "保留原設定，匯入新項目到後面"
   },
   "options_error_importFail": {
     "message": "匯入失敗："

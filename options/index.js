@@ -6,8 +6,8 @@ import Sounds from './Sounds';
 import SoundDetail from './SoundDetail';
 import Events from './Events';
 import Permissions from './Permissions';
-import { translateDOM } from './utils.js';
-import { browserInfo } from '../common/utils';
+import { translateDOM, posisitionTo } from './utils.js';
+import { browserInfo, newId } from '../common/utils';
 
 import './options.scss';
 
@@ -18,29 +18,37 @@ const store = {
   Permissions: []
 };
 
-let $save   = document.querySelector('#save');
-let $import = document.querySelector('#import');
-let $export = document.querySelector('#export');
+const $save   = document.querySelector('#save');
+const $import = document.querySelector('#import');
+const $export = document.querySelector('#export');
+const $importMenu = document.querySelector('#import-menu');
 
 // {{{
-async function currentConfig() {
-  let config = {};
-
-  config['sounds'] = Array.from(document.querySelectorAll('#sounds ul > li:not(.add_sound)')).reduce((list, $i) => {
+function currentSoundsConfig() {
+  return Array.from(document.querySelectorAll('#sounds ul > li:not(.add_sound)')).reduce((list, $i) => {
     let sound = store.Sounds[$i.dataset.soundId];
     if (sound) {
       list.push(sound.toPersistedProps());
     }
     return list;
   }, []);
+}
 
-  config['events'] = Array.from(document.querySelectorAll('#events tbody tr')).reduce((list, $i) => {
+function currentEventsConfig() {
+  return Array.from(document.querySelectorAll('#events tbody tr')).reduce((list, $i) => {
     let event = store.Events[$i.dataset.eventId];
     if (event) {
       list.push(event.toPersistedProps());
     }
     return list;
   }, []);
+}
+
+async function currentConfig() {
+  let config = {};
+
+  config['sounds'] = currentSoundsConfig();
+  config['events'] = currentEventsConfig();
 
   for (let i of Object.values(store.Sounds)) {
     if (!i.src) {
@@ -73,6 +81,39 @@ async function exportConfig() {
   });
 }
 
+function rewriteDuplicatedIds(config) {
+  let oldIds;
+
+  oldIds = currentSoundsConfig().map(i => i['id']);
+  config['sounds'].forEach((cfg) => {
+    const id = cfg['id'];
+    if (oldIds.includes(id)) {
+      const nId = newId();
+      cfg['id'] = nId;
+
+      config['events'].filter(e => e['soundId'] === id).forEach(e => {
+        e['soundId'] = nId;
+      });
+
+      if (config[`src.${id}`]) {
+        config[`src.${nId}`] = config[`src.${id}`];
+        delete config[`src.${id}`];
+      }
+    }
+  });
+
+  oldIds = currentEventsConfig().map(i => i['id']);
+  config['events'].forEach((cfg) => {
+    const id = cfg['id'];
+    if (oldIds.includes(id)) {
+      const nId = newId();
+      cfg['id'] = nId;
+    }
+  });
+
+  return config;
+}
+
 async function onImportFile(e) {
   const json = await e.target.files[0]?.text();
   const config = JSON.parse(json);
@@ -81,6 +122,14 @@ async function onImportFile(e) {
   }
   throw new Error(browser.i18n.getMessage('options_error_importFailFileIncomplete'));
 }
+
+function toggleImportMenu(force) {
+  if (!$importMenu.classList.contains('show' || force === true)) {
+    posisitionTo($importMenu, $import, 'top');
+  }
+  $importMenu.classList.toggle('show', force);
+}
+
 
 function onLoad() {
   if (store.Loaded.length === 2) {
@@ -110,6 +159,8 @@ async function init() {
   let soundDetail = new SoundDetail(document.querySelector('#sound_detail'), store);
   let events      = new Events(document.querySelector('#events'), store);
   let permissions = new Permissions(document.querySelector('#permissions'), store);
+
+  let importMode = 'append';
 
   let $importFile = document.querySelector('#import-file');
   let $info       = document.querySelector('#main-ctrls .info');
@@ -147,13 +198,27 @@ async function init() {
     });
   });
 
+  $import.addEventListener('click', () => toggleImportMenu());
   $export.addEventListener('click', exportConfig);
 
-  $import.addEventListener('click', () => $importFile.click());
+  $importMenu.addEventListener('click', (e) => {
+    const mode = e.target.closest('li')?.dataset.mode;
+    if (['append', 'overwrite'].includes(mode)) {
+      importMode = mode;
+      toggleImportMenu(false);
+      $importFile.click();
+    }
+  });
+
   $importFile.addEventListener('change', (e) => {
     onImportFile(e).then((newConfig) => {
-      sounds.clear();
-      events.clear();
+      if (importMode === 'overwrite') {
+        sounds.clear();
+        events.clear();
+      } else {
+        newConfig = rewriteDuplicatedIds(newConfig);
+      }
+
       newConfig['sounds'].forEach((cfg) => {
         sounds.addSound(cfg);
         store.Sounds[cfg.id].src = newConfig[`src.${cfg.id}`];

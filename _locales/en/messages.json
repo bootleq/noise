@@ -168,10 +168,16 @@
     "description": "Little info text shown near Save button, when fail"
   },
   "options_btn_import": {
-    "message": "Import"
+    "message": "Import ▼"
   },
   "options_btn_export": {
     "message": "Export"
+  },
+  "options_btn_importOverwrite": {
+    "message": "Overwrite current settings"
+  },
+  "options_btn_importAppend": {
+    "message": "Append imported items to current"
   },
   "options_error_importFail": {
     "message": "Import failed: "

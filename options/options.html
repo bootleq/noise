@@ -157,9 +157,14 @@
       </div>
 
       <div class='secondary'>
-        <button id='import' disabled data-i18n='_btn_import'>Import</button>
+        <button id='import' disabled data-i18n='_btn_import'>Import ▼</button>
         <button id='export' disabled data-i18n='_btn_export'>Export</button>
         <button id='review-permission' data-i18n='_btn_reviewPermission'>Permissions</button>
+
+        <menu id='import-menu'>
+          <li data-mode='overwrite' data-i18n='_btn_importOverwrite'>Overwrite</li>
+          <li data-mode='append' data-i18n='_btn_importAppend'>Append</li>
+        </menu>
       </div>
     </div>
 
