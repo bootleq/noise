@@ -143,6 +143,7 @@ table {
       font-size: inherit;
       cursor: pointer;
       span {
+        word-break: normal;
         padding: 1px 6px;
         &:empty::after {
           content: 'new';
@@ -475,6 +476,7 @@ table {
       td.e-type,
       td.e-options,
       td.e-sound {
+        max-width: 18vw;
         &:not(.unavailable):hover {
           background-color: rgba(0,149,221,0.25);
           cursor: pointer;
