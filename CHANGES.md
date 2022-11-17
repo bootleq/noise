@@ -3,7 +3,6 @@ CHANGES
 
 ## 3.0.0 (2022-11-16)
 
-* Google Chrome port version.
 * Improve development process with webpack.
 * Allow import with new items appended, instead of just overwrite.
 * Options page: Fix Accept button overlapped when no Sound attached.
