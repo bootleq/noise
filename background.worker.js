@@ -11,10 +11,22 @@ const gEvents = {};
 let ports = [];
 let hasStarted = false;
 
+let livePort;
+
+function getRelayPort() {
+  return new Promise((resolve, reject) => {
+    (function wait() {
+      if (livePort) {
+        return resolve(livePort);
+      }
+      setTimeout(wait, 100);
+    })()
+  });
+}
+
 async function init() {
-  window.addEventListener('unload', destroy, {once: true});
   await loadConfig();
-  if (hasStarted) {
+  if (true || hasStarted) {
     play('runtime.startup');
     hasStarted = false;
   }
@@ -76,6 +88,11 @@ function onMessage(msg, sender, respond) {
 
 function onConnect(port) {
   ports.push(port);
+
+  if (!livePort) {
+    livePort = port;
+  }
+
   port.onMessage.addListener(onMessage);
   port.onDisconnect.addListener((p) => {
     if (p.error) {
@@ -84,6 +101,10 @@ function onConnect(port) {
     let index = ports.indexOf(p);
     if (index > -1) {
       ports.splice(index, 1);
+
+      if (livePort == p) {
+        livePort = ports[0];
+      }
     }
   });
 }
@@ -189,7 +210,14 @@ function play(type, filter = () => true) {
   events.filter(filter).forEach(e => {
     let sound = gSounds[e.soundId];
     if (sound) {
-      sound.play();
+      getRelayPort().then(p => {
+        sound.loadSrc().then(src => {
+          p.postMessage({
+            type: 'play-sound',
+            sound: {id: sound.id, src: src}
+          });
+        })
+      }).catch(e => console.error('relay play failed', e));
     }
   });
 }
@@ -250,7 +278,8 @@ function hasAny(targets, array) {
 }
 // }}}
 
-window.addEventListener('DOMContentLoaded', init, {once: true});
+init();
+browser.runtime.onSuspend.addListener(destroy);
 
 browser.runtime.onStartup.addListener(onStartup);
 browser.runtime.onConnect.addListener(onConnect);

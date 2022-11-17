@@ -35,6 +35,10 @@
       "js": ["content.js"]
     }
   ],
+  "web_accessible_resources": [{
+    "resources": ["content.js.map"],
+    "matches": ["<all_urls>"]
+  }],
 
   "options_ui": {
     "page": "options.html",

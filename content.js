@@ -1,9 +1,26 @@
 'use strict';
 
 import browser from "webextension-polyfill";
+import Sound from './common/sound';
+import { emptyObject } from './common/utils';
 
 let bound = false;
 let port = browser.runtime.connect();
+
+// For service worker to play audio
+const sounds = {};
+
+function play(soundProps) {
+  const { id, src } = soundProps;
+  let sound = sounds[id];
+
+  if (!sound) {
+    sound = new Sound(soundProps);
+  }
+  sounds[id] = sound;
+  sound.play();
+}
+
 
 function onMessage(msg, sender, respond) {
   if (typeof msg.type !== 'string') {
@@ -25,6 +42,10 @@ function onMessage(msg, sender, respond) {
     }
     port = browser.runtime.connect();
     addListeners();
+    break;
+
+  case 'play-sound':
+    play(msg['sound']);
     break;
   }
 }
@@ -56,6 +77,7 @@ addListeners();
 port.onMessage.addListener(onMessage);
 port.onDisconnect.addListener((p) => { // stop when background script unload
   port = null;
+  emptyObject(sounds);
   removeListeners();
 });
 browser.runtime.onMessage.addListener(onMessage);
