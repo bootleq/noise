@@ -51,13 +51,20 @@ if (ENV == 'production') {
   );
 }
 
+const entries = {
+  content: './content.js',
+  options: './options/index.js'
+};
+
+if (BROWSER != 'chrome') {
+  entries['background'] = './background.js';
+} else {
+  entries['background.worker'] = './background.worker.js';
+}
+
 module.exports = {
   mode: ENV,
-  entry: {
-    background: './background.js',
-    content: './content.js',
-    options: './options/index.js',
-  },
+  entry: entries,
   output: {
     path: path.resolve(__dirname, 'build'),
     filename: '[name].js',
