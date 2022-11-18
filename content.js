@@ -44,11 +44,14 @@ function removeListeners() {
   bound = false;
 }
 
-addListeners();
-port.onMessage.addListener(onPortMessage);
-port.onDisconnect.addListener((p) => { // stop when background script unload
-  port = null;
-  removeListeners();
-});
+globalThis.requestIdleCallback(() => {
+  port = browser.runtime.connect();
 
-window.addEventListener('unload', () => port.disconnect());
+  addListeners();
+  port.onMessage.addListener(onPortMessage);
+  port.onDisconnect.addListener((p) => { // stop when background script unload
+    port = null;
+    removeListeners();
+  });
+  window.addEventListener('unload', () => port.disconnect());
+});

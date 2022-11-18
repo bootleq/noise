@@ -27,7 +27,7 @@
   },
   "content_scripts": [
     {
-      "run_at": "document_start",
+      "run_at": "document_end",
       "matches": ["<all_urls>"],
       "match_about_blank": true,
       "all_frames": true,
