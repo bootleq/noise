@@ -20,7 +20,6 @@ async function init() {
   }
   browser.storage.onChanged.addListener(onStorageChange);
   browser.runtime.onMessage.addListener(onMessage);
-  tryReconnect();
   addListeners();
 }
 
@@ -48,18 +47,6 @@ function onMessage(msg, sender, respond) {
   }
 
   switch (msg.type) {
-  case 'content.on':
-    switch (msg.event.type) {
-    case 'cut':
-      play('window.cut');
-      break;
-
-    case 'copy':
-      play('window.copy');
-      break;
-    }
-    break;
-
   case 'listeners':
     if ('action' in msg) {
       if (msg.action === 'bind') {
@@ -74,9 +61,29 @@ function onMessage(msg, sender, respond) {
   }
 }
 
+function onPortMessage(msg, port) {
+  if (typeof msg.type !== 'string') {
+    return;
+  }
+
+  switch (msg.type) {
+  case 'content.on':
+    switch (msg.event.type) {
+    case 'cut':
+      play('window.cut');
+      break;
+
+    case 'copy':
+      play('window.copy');
+      break;
+    }
+    break;
+  }
+}
+
 function onConnect(port) {
   ports.push(port);
-  port.onMessage.addListener(onMessage);
+  port.onMessage.addListener(onPortMessage);
   port.onDisconnect.addListener((p) => {
     if (p.error) {
       console.log('Disconnected due to error', p.error.message);
@@ -85,17 +92,6 @@ function onConnect(port) {
     if (index > -1) {
       ports.splice(index, 1);
     }
-  });
-}
-
-function tryReconnect() {
-  browser.tabs.query({windowType: 'normal'}).then(tabs => {
-    tabs.forEach(tab => {
-      browser.tabs.sendMessage(tab.id, {type: 'reconnect'}).catch(error => {
-        // FIXME: browser console will still report no-message-handler error
-        // console.log('re-connect error', error);
-      });
-    });
   });
 }
 

@@ -5,7 +5,7 @@ import browser from "webextension-polyfill";
 let bound = false;
 let port = browser.runtime.connect();
 
-function onMessage(msg, sender, respond) {
+function onPortMessage(msg, port) {
   if (typeof msg.type !== 'string') {
     return;
   }
@@ -17,14 +17,6 @@ function onMessage(msg, sender, respond) {
 
   case 'unbind':
     removeListeners();
-    break;
-
-  case 'reconnect':
-    if (port) {
-      return;
-    }
-    port = browser.runtime.connect();
-    addListeners();
     break;
   }
 }
@@ -53,11 +45,10 @@ function removeListeners() {
 }
 
 addListeners();
-port.onMessage.addListener(onMessage);
+port.onMessage.addListener(onPortMessage);
 port.onDisconnect.addListener((p) => { // stop when background script unload
   port = null;
   removeListeners();
 });
-browser.runtime.onMessage.addListener(onMessage);
 
 window.addEventListener('unload', () => port.disconnect());
