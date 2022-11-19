@@ -2,29 +2,21 @@
 
 import browser from "webextension-polyfill";
 
-let bound = false;
 let port = browser.runtime.connect();
 
-function onMessage(msg, sender, respond) {
+function onPortMessage(msg, port) {
   if (typeof msg.type !== 'string') {
     return;
   }
 
   switch (msg.type) {
   case 'bind':
-    addListeners();
+    removeListeners();
+    addListeners(msg.events);
     break;
 
   case 'unbind':
     removeListeners();
-    break;
-
-  case 'reconnect':
-    if (port) {
-      return;
-    }
-    port = browser.runtime.connect();
-    addListeners();
     break;
   }
 }
@@ -38,26 +30,34 @@ function onEvent(e) {
   });
 }
 
-function addListeners() {
-  if (!bound) {
-    window.addEventListener('copy', onEvent);
-    window.addEventListener('cut', onEvent);
+function toggleListener(target, eventName, handler, toggle) {
+  if (toggle) {
+    target.addEventListener(eventName, handler);
+  } else {
+    target.removeEventListener(eventName, handler);
   }
-  bound = true;
+}
+
+function addListeners(events) {
+  const types = Object.keys(events);
+
+  toggleListener(window, 'copy', onEvent, types.includes('window.copy'));
+  toggleListener(window, 'cut',  onEvent, types.includes('window.cut'));
 }
 
 function removeListeners() {
   window.removeEventListener('copy', onEvent);
   window.removeEventListener('cut', onEvent);
-  bound = false;
 }
 
-addListeners();
-port.onMessage.addListener(onMessage);
-port.onDisconnect.addListener((p) => { // stop when background script unload
-  port = null;
-  removeListeners();
-});
-browser.runtime.onMessage.addListener(onMessage);
+globalThis.requestIdleCallback(() => {
+  port = browser.runtime.connect();
+  port.postMessage({type: 'ready'});
 
-window.addEventListener('unload', () => port.disconnect());
+  port.onMessage.addListener(onPortMessage);
+  port.onDisconnect.addListener((p) => { // stop when background script unload
+    port = null;
+    removeListeners();
+  });
+  window.addEventListener('unload', () => port.disconnect());
+});

@@ -8,6 +8,8 @@ import { emptyObject } from './common/utils';
 
 const gSounds = {};
 const gEvents = {};
+const contentEvents = {}; // cache events specific to content script, example: {'window.cut': [{options: ...}] }
+
 let ports = [];
 let hasStarted = false;
 
@@ -20,7 +22,6 @@ async function init() {
   }
   browser.storage.onChanged.addListener(onStorageChange);
   browser.runtime.onMessage.addListener(onMessage);
-  tryReconnect();
   addListeners();
 }
 
@@ -28,6 +29,7 @@ function destroy() {
   browser.storage.onChanged.removeListener(onStorageChange);
   browser.runtime.onMessage.removeListener(onMessage);
   removeListeners();
+  broadcast({type: 'unbind'});
 }
 
 function onStorageChange(changes, _area) {
@@ -39,10 +41,38 @@ function onStorageChange(changes, _area) {
     resetEvents(changes.events.newValue);
     removeListeners();
     addListeners();
+    broadcast({type: 'bind', events: contentEvents});
   }
 }
 
 function onMessage(msg, sender, respond) {
+  if (typeof msg.type !== 'string') {
+    return;
+  }
+
+  switch (msg.type) {
+  case 'listeners':
+    if ('action' in msg) {
+      if (msg.action === 'bind') {
+        addListeners();
+        broadcast({type: 'bind', events: contentEvents});
+      } else {
+        removeListeners();
+        broadcast({type: 'unbind'});
+      }
+    } else {
+      removeListeners();
+      addListeners();
+      broadcast({type: 'bind', events: contentEvents});
+    }
+  }
+}
+
+function broadcast(...args) {
+  ports.forEach(port => port.postMessage(...args));
+}
+
+function onPortMessage(msg, port) {
   if (typeof msg.type !== 'string') {
     return;
   }
@@ -59,24 +89,15 @@ function onMessage(msg, sender, respond) {
       break;
     }
     break;
-
-  case 'listeners':
-    if ('action' in msg) {
-      if (msg.action === 'bind') {
-        addListeners();
-      } else {
-        removeListeners();
-      }
-    } else {
-      removeListeners();
-      addListeners();
-    }
+  case 'ready':
+    port.postMessage({type: 'bind', events: contentEvents});
+    break;
   }
 }
 
 function onConnect(port) {
   ports.push(port);
-  port.onMessage.addListener(onMessage);
+  port.onMessage.addListener(onPortMessage);
   port.onDisconnect.addListener((p) => {
     if (p.error) {
       console.log('Disconnected due to error', p.error.message);
@@ -85,17 +106,6 @@ function onConnect(port) {
     if (index > -1) {
       ports.splice(index, 1);
     }
-  });
-}
-
-function tryReconnect() {
-  browser.tabs.query({windowType: 'normal'}).then(tabs => {
-    tabs.forEach(tab => {
-      browser.tabs.sendMessage(tab.id, {type: 'reconnect'}).catch(error => {
-        // FIXME: browser console will still report no-message-handler error
-        // console.log('re-connect error', error);
-      });
-    });
   });
 }
 
@@ -134,8 +144,6 @@ function addListeners() {
       }
     );
   }
-
-  ports.forEach(p => p.postMessage({type: 'bind'}));
 }
 
 function removeListeners() {
@@ -150,8 +158,6 @@ function removeListeners() {
   if (typeof browser.webRequest === 'object') {
     browser.webRequest.onCompleted.removeListener(onRequestCompleted);
   }
-
-  ports.forEach(p => p.postMessage({type: 'unbind'}));
 }
 
 function resetSounds(configs) {
@@ -161,6 +167,8 @@ function resetSounds(configs) {
 
 function resetEvents(configs) {
   emptyObject(gEvents);
+  emptyObject(contentEvents);
+
   configs.forEach(cfg => {
     let type = cfg.type;
 
@@ -168,7 +176,15 @@ function resetEvents(configs) {
       gEvents[type] = [];
     }
     if (cfg.enabled && gSounds[cfg.soundId]) {
-      gEvents[type].push(new EventSetting(cfg));
+      const e = new EventSetting(cfg);
+      gEvents[type].push(e);
+
+      if (EventSetting.getTypeDef(type, 'forContent')) {
+        if (!(type in contentEvents)) {
+          contentEvents[type] = [];
+        }
+        contentEvents[type].push({options: e.options});
+      }
     }
   });
 }

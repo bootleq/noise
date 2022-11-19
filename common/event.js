@@ -36,10 +36,12 @@ const Types = {
     ]
   },
   'window.cut': {
-    name: browser.i18n.getMessage(`${scope}windowCut`)
+    name: browser.i18n.getMessage(`${scope}windowCut`),
+    forContent: true
   },
   'window.copy': {
-    name: browser.i18n.getMessage(`${scope}windowCopy`)
+    name: browser.i18n.getMessage(`${scope}windowCopy`),
+    forContent: true
   }
 };
 
@@ -73,6 +75,9 @@ class EventSetting {
     let def = this.Types[type];
 
     switch (prop) {
+    case 'forContent':
+      return Boolean(def.forContent);
+
     case 'name':
       return def ? def.name : '';
 
