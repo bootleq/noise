@@ -76,7 +76,7 @@ class EventSetting {
 
     switch (prop) {
     case 'forContent':
-      return Boolean(def.forContent);
+      return Boolean(def?.forContent);
 
     case 'name':
       return def ? def.name : '';
