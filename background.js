@@ -73,7 +73,7 @@ function broadcast(...args) {
 }
 
 function onPortMessage(msg, port) {
-  if (typeof msg.type !== 'string') {
+  if (typeof msg.type !== 'string' || port?.sender.tab.mutedInfo.muted === true) {
     return;
   }
 
