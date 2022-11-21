@@ -4,7 +4,7 @@ import browser from "webextension-polyfill";
 
 import Sound from './common/sound';
 import { EventSetting } from './common/event';
-import { emptyObject } from './common/utils';
+import { emptyObject, getSenderMuted } from './common/utils';
 
 const gSounds = {};
 const gEvents = {};
@@ -72,13 +72,16 @@ function broadcast(...args) {
   ports.forEach(port => port.postMessage(...args));
 }
 
-function onPortMessage(msg, port) {
-  if (typeof msg.type !== 'string' || port?.sender.tab.mutedInfo.muted === true) {
+async function onPortMessage(msg, port) {
+  if (typeof msg.type !== 'string') {
     return;
   }
 
   switch (msg.type) {
   case 'content.on':
+    if (await getSenderMuted(port.sender) === true) {
+      return;
+    }
     switch (msg.event.type) {
     case 'cut':
       play('window.cut');

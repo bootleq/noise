@@ -22,6 +22,18 @@ function testAudioSrc(src) {
   })
 }
 
+// For Port.onMessage to check whether the sender tab has muted.
+// Return promise filled with boolean.
+function getSenderMuted(sender) {
+  let senderTabId = sender?.tab.id // tab info from sender can stale, need to get again by id
+  let tab;
+
+  if (senderTabId) {
+    return browser.tabs.get(senderTabId).then(tab => tab?.mutedInfo.muted === true);
+  }
+  return Promise.resolve(false);
+}
+
 async function browserInfo() {
   if (browser.runtime.hasOwnProperty('getBrowserInfo')) {
     return await browser.runtime.getBrowserInfo();
@@ -30,4 +42,4 @@ async function browserInfo() {
   return {}; // return dummy object for chrome is enough
 }
 
-export { emptyObject, newId, testAudioSrc, browserInfo };
+export { emptyObject, newId, testAudioSrc, getSenderMuted, browserInfo };
