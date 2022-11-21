@@ -1,6 +1,11 @@
 CHANGES
 =======
 
+## 3.1.0 (2022-11-21)
+
+* Improve efficiency by defer execution and skip unnecessary listener binding.
+* Respect tab's "muted" state, don't play sound when muted. Exception: Download and HTTP Request events doesn't follow this currently.
+
 ## 3.0.0 (2022-11-16)
 
 * Improve development process with webpack.
