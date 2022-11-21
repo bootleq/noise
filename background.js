@@ -245,8 +245,12 @@ function onDownloadChanged(delta) { // https://developer.mozilla.org/en-US/Add-o
 }
 
 function onBackForward(details) { // webNavigation: onHistoryStateUpdated, onReferenceFragmentUpdated, onCommitted
-  if (details.transitionQualifiers.includes('forward_back')) {
-    play('navigation.backForward');
+  if (details.transitionQualifiers.includes('forward_back') && details.tabId > -1) {
+    browser.tabs.get(details.tabId).then(tab => {
+      if (tab.mutedInfo.muted !== true) {
+        play('navigation.backForward');
+      }
+    });
   }
 }
 
