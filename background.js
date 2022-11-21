@@ -4,7 +4,7 @@ import browser from "webextension-polyfill";
 
 import Sound from './common/sound';
 import { EventSetting } from './common/event';
-import { emptyObject } from './common/utils';
+import { emptyObject, getSenderMuted } from './common/utils';
 
 const gSounds = {};
 const gEvents = {};
@@ -72,13 +72,16 @@ function broadcast(...args) {
   ports.forEach(port => port.postMessage(...args));
 }
 
-function onPortMessage(msg, port) {
+async function onPortMessage(msg, port) {
   if (typeof msg.type !== 'string') {
     return;
   }
 
   switch (msg.type) {
   case 'content.on':
+    if (await getSenderMuted(port.sender) === true) {
+      return;
+    }
     switch (msg.event.type) {
     case 'cut':
       play('window.cut');
@@ -242,8 +245,12 @@ function onDownloadChanged(delta) { // https://developer.mozilla.org/en-US/Add-o
 }
 
 function onBackForward(details) { // webNavigation: onHistoryStateUpdated, onReferenceFragmentUpdated, onCommitted
-  if (details.transitionQualifiers.includes('forward_back')) {
-    play('navigation.backForward');
+  if (details.transitionQualifiers.includes('forward_back') && details.tabId > -1) {
+    browser.tabs.get(details.tabId).then(tab => {
+      if (tab.mutedInfo.muted !== true) {
+        play('navigation.backForward');
+      }
+    });
   }
 }
 
