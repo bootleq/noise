@@ -21,11 +21,9 @@
     "zip-webpack-plugin": "^4.0.1"
   },
   "scripts": {
-    "dev": "webpack watch",
     "build": "webpack",
     "build:prod": "cross-env NODE_ENV=production webpack",
     "test": "node ./test.js --source-dir build",
-    "dev:chrome": "cross-env BROWSER=chrome webpack watch",
     "build:chrome": "cross-env BROWSER=chrome webpack",
     "build:prod:chrome": "cross-env NODE_ENV=production BROWSER=chrome webpack"
   },

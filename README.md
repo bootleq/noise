@@ -20,15 +20,13 @@ Development
 
 Have some scripts for developer convenience, note the names without `:chrome` imply Firefox.
 
-Start development, with sass files watching:
-
-    yarn dev
-    yarn dev:chrome
-
 Make temporary build to `build` folder:
 
     yarn build
     yarn build:chrome
+
+    yarn build watch
+    yarn build:chrome watch
 
 Run with [web-ext][] after temporary build (Firefox only):
 
