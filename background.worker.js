@@ -13,12 +13,26 @@ const contentEvents = {}; // cache events specific to content script, example: {
 let ports = [];
 let hasStarted = false;
 
+async function postToOffscreenDoc(type, data) {
+  if (!await chrome.offscreen.hasDocument()) {
+    await chrome.offscreen.createDocument({
+      url: 'offscreen.html',
+      reasons: [chrome.offscreen.Reason.AUDIO_PLAYBACK],
+      justification: 'Audio playback',
+    });
+  }
+
+  chrome.runtime.sendMessage({
+    type: type,
+    target: 'noise-offscreen',
+    data: data,
+  });
+}
+
 async function init() {
-  window.addEventListener('unload', destroy, {once: true});
   await loadConfig();
   if (hasStarted) {
     play('runtime.startup');
-    hasStarted = false;
   }
   browser.storage.onChanged.addListener(onStorageChange);
   browser.runtime.onMessage.addListener(onMessage);
@@ -208,7 +222,15 @@ function play(type, filter = () => true) {
   events.filter(filter).forEach(e => {
     let sound = gSounds[e.soundId];
     if (sound) {
-      sound.play();
+      sound.loadSrc().then(src => {
+        postToOffscreenDoc(
+          'noise-play',
+          {
+            id:  sound.id,
+            src: src
+          }
+        );
+      });
     }
   });
 }
@@ -273,7 +295,8 @@ function hasAny(targets, array) {
 }
 // }}}
 
-window.addEventListener('DOMContentLoaded', init, {once: true});
+init();
+browser.runtime.onSuspend.addListener(destroy);
 
 browser.runtime.onStartup.addListener(onStartup);
 browser.runtime.onConnect.addListener(onConnect);

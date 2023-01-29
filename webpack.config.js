@@ -20,20 +20,24 @@ if (process.env.BROWSER != 'chrome') {
 const BROWSER = process.env.BROWSER;
 const ENV = process.env.NODE_ENV;
 
+const identity = e => e;
+const compact = arr => arr.filter(identity);
+
 const plugins = [
   new webpack.DefinePlugin({
     "process.env.NODE_ENV": JSON.stringify(ENV),
   }),
   new CleanWebpackPlugin(),
   new CopyWebpackPlugin({
-    patterns: [
+    patterns: compact([
       {
         from: `manifest${BROWSER == 'firefox' ? '' : `.${BROWSER}`}.json`,
         to: "manifest.json" },
       "./options/options.html",
+      BROWSER == 'chrome' ? './offscreen.html' : null,
       { from: "./_locales", to: "_locales" },
       { from: "./icons", to: "icons" },
-    ],
+    ]),
   }),
   new MiniCssExtractPlugin(),
 ];
@@ -51,10 +55,13 @@ if (ENV == 'production') {
   );
 }
 
-const entries = {
-  content: './content.js',
-  options: './options/index.js'
-};
+const entries = Object.fromEntries(compact([
+  ['content', './content.js'],
+  ['options', './options/index.js'],
+  (BROWSER == 'chrome'
+    ? ['offscreen', './offscreen.js']
+    : null)
+]));
 
 if (BROWSER != 'chrome') {
   entries['background'] = './background.js';

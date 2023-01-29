@@ -12,7 +12,8 @@
 
   "permissions": [
     "storage",
-    "downloads"
+    "downloads",
+    "offscreen"
   ],
   "optional_permissions": [
     "webNavigation",
@@ -43,5 +44,5 @@
   },
 
   "default_locale": "en",
-  "minimum_chrome_version": "76"
+  "minimum_chrome_version": "109"
 }
