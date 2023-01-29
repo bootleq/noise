@@ -8,22 +8,24 @@
     "48": "icons/48.png",
     "128": "icons/128.png"
   },
-  "manifest_version": 2,
+  "manifest_version": 3,
 
   "permissions": [
     "storage",
     "downloads",
-    "<all_urls>"
+    "offscreen"
   ],
   "optional_permissions": [
     "webNavigation",
     "webRequest"
   ],
+  "host_permissions": [
+    "<all_urls>"
+  ],
 
   "background": {
-    "scripts": [
-      "background.js"
-    ]
+    "service_worker": "background.worker.js",
+    "type": "module"
   },
   "content_scripts": [
     {
@@ -42,5 +44,5 @@
   },
 
   "default_locale": "en",
-  "minimum_chrome_version": "76"
+  "minimum_chrome_version": "109"
 }
