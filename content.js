@@ -59,5 +59,9 @@ globalThis.requestIdleCallback(() => {
     port = null;
     removeListeners();
   });
-  window.addEventListener('unload', () => port.disconnect());
+  window.addEventListener('unload', () => {
+    if (port) {
+      port.disconnect();
+    }
+  });
 });
