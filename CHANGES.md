@@ -1,6 +1,11 @@
 CHANGES
 =======
 
+## 3.1.1 (2023-01-29)
+
+* Chrome manifest v3 support, requires Chrome version 109+
+* Minor fix error message when unload content script
+
 ## 3.1.0 (2022-11-21)
 
 * Improve efficiency by defer execution and skip unnecessary listener binding.
