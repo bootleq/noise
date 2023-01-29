@@ -79,7 +79,7 @@ class Events {
       let $row = this.$list.querySelector('tr.current');
       this.cancelEdit($row);
     }
-    this.$list.innerHTML = '';
+    this.$list.textContent = '';
     emptyObject(this.store.Events);
   }
 
@@ -166,7 +166,7 @@ class Events {
         $opt.selected = true;
       }
     }
-    $editing.innerHTML = '';
+    $editing.textContent = '';
     $editing.appendChild($soundSelect);
   }
 
@@ -177,7 +177,7 @@ class Events {
     let props = type in options ? options[type] : {};
 
     $menu.dataset.type = type;
-    $form.innerHTML = '';
+    $form.textContent = '';
     let tmpl  = document.querySelector(`#options_form_templates template.${type}`).content;
     tmpl = document.importNode(tmpl, true);
     tmpl.querySelectorAll('input[data-prop]').forEach($input => {
@@ -416,7 +416,7 @@ class Events {
           $opt.selected = true;
         }
       }
-      $type.innerHTML = '';
+      $type.textContent = '';
       $type.appendChild($typeSelect);
 
       this.renderSoundSelect();
@@ -425,7 +425,7 @@ class Events {
       $input.type = 'text';
       $input.placeholder = browser.i18n.getMessage('options_event_nameNotSet');
       $input.value = this.editing.name || '';
-      $name.innerHTML = '';
+      $name.textContent = '';
       $name.appendChild($input);
       $input.focus();
     }
@@ -553,7 +553,7 @@ class Events {
     if (Object.keys(slots).length === 0) {
       $options.textContent = ' - - ';
     } else {
-      $options.innerHTML = '';
+      $options.textContent = '';
 
       Object.values(slots).forEach(slot => {
         let $slot = document.createElement('button');
