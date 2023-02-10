@@ -42,10 +42,18 @@ Package a zip file:
 Alternatives
 ------------
 
+### Firefox
+
 - [Notification Sound][]
 - [Download Sound][]
+
+### Chrome
+
+- [Download Sound][Download Sound - Chrome] - can use speech output as a sound
+
 
 
 [web-ext]: https://github.com/mozilla/web-ext
 [Notification Sound]: https://addons.mozilla.org/firefox/addon/notification-sound/
 [Download Sound]: https://addons.mozilla.org/firefox/addon/download-sound/
+[Download Sound - Chrome]: https://chrome.google.com/webstore/detail/download-sound/fmcbineojopoamfhaabogigdbpbklnld
