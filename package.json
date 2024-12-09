@@ -3,7 +3,7 @@
   "description": "Make sound response when events happen",
   "private": true,
   "dependencies": {
-    "nanoid": "^4.0.0"
+    "nanoid": "^5.0.9"
   },
   "devDependencies": {
     "clean-webpack-plugin": "^4.0.0",
