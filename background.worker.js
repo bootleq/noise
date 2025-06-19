@@ -147,14 +147,15 @@ function addListeners() {
   toggleListener(browser.tabs.onCreated, onTabCreated, types.includes('tabs.created'));
   toggleListener(browser.tabs.onRemoved, onTabRemoved, types.includes('tabs.removed'));
   toggleListener(browser.tabs.onAttached, onTabAttached, types.includes('tabs.attached'));
+  // Chrome doesn't support `tabs.attention`, also not support filter
   toggleListener(
     browser.tabs.onUpdated,
     onTabUpdated,
-    hasAny(['tabs.attention', 'tabs.pinned'], types),
-    {
-      urls: ['<all_urls>'],
-      properties: ['attention', 'pinned']
-    }
+    types.includes('tabs.pinned')
+    // {
+    //   urls: ['<all_urls>'],
+    //   properties: ['attention', 'pinned']
+    // }
   );
 
   if (typeof browser.webNavigation === 'object') {
@@ -298,10 +299,7 @@ function onTabAttached(tab) {
 function onTabUpdated(tabId, changeInfo, tabInfo) {
   const keys = Object.keys(changeInfo);
 
-  if (keys.includes('attention') && changeInfo['attention']) {
-    play('tabs.attention');
-  }
-
+  // Chrome doesn't support `tabs.attention`, also not support filter
   if (keys.includes('pinned')) {
     if (changeInfo['pinned']) {
       play('tabs.pinned');
