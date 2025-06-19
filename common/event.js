@@ -22,24 +22,6 @@ const Types = {
   'download.interrupted': {
     name: browser.i18n.getMessage(`${scope}downloadInterrupted`)
   },
-  'tabs.created': {
-    name: browser.i18n.getMessage(`${scope}tabsCreated`)
-  },
-  'tabs.removed': {
-    name: browser.i18n.getMessage(`${scope}tabsRemoved`)
-  },
-  'tabs.attached': {
-    name: browser.i18n.getMessage(`${scope}tabsAttached`)
-  },
-  'tabs.attention': {
-    name: browser.i18n.getMessage(`${scope}tabsAttention`)
-  },
-  'tabs.pinned': {
-    name: browser.i18n.getMessage(`${scope}tabsPinned`)
-  },
-  'tabs.unpinned': {
-    name: browser.i18n.getMessage(`${scope}tabsUnpinned`)
-  },
   'navigation.backForward': {
     name: browser.i18n.getMessage(`${scope}navigationBackForward`),
     permissions: ['webNavigation']
@@ -60,7 +42,26 @@ const Types = {
   'window.copy': {
     name: browser.i18n.getMessage(`${scope}windowCopy`),
     forContent: true
-  }
+  },
+  'hr.tabs': {},
+  'tabs.created': {
+    name: browser.i18n.getMessage(`${scope}tabsCreated`)
+  },
+  'tabs.removed': {
+    name: browser.i18n.getMessage(`${scope}tabsRemoved`)
+  },
+  'tabs.attached': {
+    name: browser.i18n.getMessage(`${scope}tabsAttached`)
+  },
+  'tabs.pinned': {
+    name: browser.i18n.getMessage(`${scope}tabsPinned`)
+  },
+  'tabs.unpinned': {
+    name: browser.i18n.getMessage(`${scope}tabsUnpinned`)
+  },
+  'tabs.attention': {
+    name: browser.i18n.getMessage(`${scope}tabsAttention`)
+  },
 };
 
 class EventSetting {

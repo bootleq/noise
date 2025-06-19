@@ -85,6 +85,12 @@ class Events {
 
   initMenus() {
     Object.entries(EventSetting.Types).forEach(([key, value]) => {
+      if (key.startsWith('hr.')) {
+        const $hr = document.createElement('hr');
+        this.$menus.types.appendChild($hr);
+        return;
+      }
+
       let $opt = document.createElement('option');
       let perms = EventSetting.getTypeDef(key, 'permissions');
       $opt.value = key;
