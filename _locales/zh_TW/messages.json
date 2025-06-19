@@ -204,6 +204,15 @@
   "event_types_name_tabsAttached": {
     "message": "移動分頁到其他視窗"
   },
+  "event_types_name_tabsAttention": {
+    "message": "分頁注意提示"
+  },
+  "event_types_name_tabsPinned": {
+    "message": "釘選分頁"
+  },
+  "event_types_name_tabsUnpinned": {
+    "message": "解除釘選分頁"
+  },
   "event_types_name_requestCompleted": {
     "message": "HTTP 請求完成"
   },

@@ -147,6 +147,15 @@ function addListeners() {
   toggleListener(browser.tabs.onCreated, onTabCreated, types.includes('tabs.created'));
   toggleListener(browser.tabs.onRemoved, onTabRemoved, types.includes('tabs.removed'));
   toggleListener(browser.tabs.onAttached, onTabAttached, types.includes('tabs.attached'));
+  toggleListener(
+    browser.tabs.onUpdated,
+    onTabUpdated,
+    hasAny(['tabs.attention', 'tabs.pinned'], types),
+    {
+      urls: ['<all_urls>'],
+      properties: ['attention', 'pinned']
+    }
+  );
 
   if (typeof browser.webNavigation === 'object') {
     ['onCommitted', 'onHistoryStateUpdated', 'onReferenceFragmentUpdated'].forEach(event => {
@@ -173,6 +182,7 @@ function removeListeners() {
   browser.tabs.onCreated.removeListener(onTabCreated);
   browser.tabs.onRemoved.removeListener(onTabRemoved);
   browser.tabs.onAttached.removeListener(onTabAttached);
+  browser.tabs.onUpdated.removeListener(onTabUpdated);
   browser.runtime.onStartup.removeListener(onStartup);
   if (typeof browser.webNavigation === 'object') {
     ['onCommitted', 'onHistoryStateUpdated', 'onReferenceFragmentUpdated'].forEach(event => {
@@ -283,6 +293,22 @@ function onTabRemoved(tab) {
 
 function onTabAttached(tab) {
   play('tabs.attached');
+}
+
+function onTabUpdated(tabId, changeInfo, tabInfo) {
+  const keys = Object.keys(changeInfo);
+
+  if (keys.includes('attention') && changeInfo['attention']) {
+    play('tabs.attention');
+  }
+
+  if (keys.includes('pinned')) {
+    if (changeInfo['pinned']) {
+      play('tabs.pinned');
+    } else {
+      play('tabs.unpinned');
+    }
+  }
 }
 
 function onBackForward(details) { // webNavigation: onHistoryStateUpdated, onReferenceFragmentUpdated, onCommitted

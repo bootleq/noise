@@ -216,6 +216,15 @@
   "event_types_name_tabsAttached": {
     "message": "Attach Tab To Another Window"
   },
+  "event_types_name_tabsAttention": {
+    "message": "Tab Attention Notice"
+  },
+  "event_types_name_tabsPinned": {
+    "message": "Pin Tab"
+  },
+  "event_types_name_tabsUnpinned": {
+    "message": "Unpin Tab"
+  },
   "event_types_name_requestCompleted": {
     "message": "HTTP Request Completed"
   },

@@ -31,6 +31,15 @@ const Types = {
   'tabs.attached': {
     name: browser.i18n.getMessage(`${scope}tabsAttached`)
   },
+  'tabs.attention': {
+    name: browser.i18n.getMessage(`${scope}tabsAttention`)
+  },
+  'tabs.pinned': {
+    name: browser.i18n.getMessage(`${scope}tabsPinned`)
+  },
+  'tabs.unpinned': {
+    name: browser.i18n.getMessage(`${scope}tabsUnpinned`)
+  },
   'navigation.backForward': {
     name: browser.i18n.getMessage(`${scope}navigationBackForward`),
     permissions: ['webNavigation']
