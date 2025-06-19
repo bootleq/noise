@@ -136,7 +136,7 @@ function addListeners() {
   toggleListener(
     browser.tabs.onUpdated,
     onTabUpdated,
-    hasAny(['tabs.attention', 'tabs.pinned'], types),
+    hasAny(['tabs.attention', 'tabs.pinned', 'tabs.unpinned'], types),
     {
       urls: ['<all_urls>'],
       properties: ['attention', 'pinned']
