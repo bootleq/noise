@@ -79,6 +79,10 @@
     "message": "This type requires additional permission, you can review permissions by click \"Permission\" button",
     "description": "When selected event type has no sufficient permission, this title will be served as tooltip on event 'Type'."
   },
+  "options_title_warning_eventUnavailable": {
+    "message": "Current browser doesn't support this type",
+    "description": "When selected event type does not supported by user's browser, this title will be served as tooltip on event 'Type'."
+  },
   "options_events_th_options": {
     "message": "Options"
   },

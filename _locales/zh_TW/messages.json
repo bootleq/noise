@@ -75,6 +75,9 @@
   "options_title_warning_eventForbidden": {
     "message": "這個事件需要額外權限，點選「權限」按鈕以審查權限"
   },
+  "options_title_warning_eventUnavailable": {
+    "message": "瀏覽器尚未支援這個事件"
+  },
   "options_events_th_options": {
     "message": "選項"
   },

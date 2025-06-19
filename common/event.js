@@ -60,7 +60,8 @@ const Types = {
     name: browser.i18n.getMessage(`${scope}tabsUnpinned`)
   },
   'tabs.attention': {
-    name: browser.i18n.getMessage(`${scope}tabsAttention`)
+    name: browser.i18n.getMessage(`${scope}tabsAttention`),
+    browsers: ['firefox']
   },
 };
 
@@ -102,6 +103,9 @@ class EventSetting {
 
     case 'permissions':
       return (def && 'permissions' in def) ? def.permissions : [];
+
+    case 'browsers':
+      return (def && 'browsers' in def) ? def.browsers : [];
 
     case 'slots':
       return (def && 'slots' in def) ? def.slots : [];

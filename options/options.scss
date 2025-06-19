@@ -376,7 +376,8 @@ table {
     tr:hover:not(.current) {
       background-color: rgba(0,149,221,0.4);
     }
-    tr.missing-permissions {
+    tr.missing-permissions,
+    tr.missing-browsers {
       & td.e-type {
         color: #999;
         &:after {
