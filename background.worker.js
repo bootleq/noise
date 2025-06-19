@@ -146,6 +146,7 @@ function addListeners() {
 
   toggleListener(browser.tabs.onCreated, onTabCreated, types.includes('tabs.created'));
   toggleListener(browser.tabs.onRemoved, onTabRemoved, types.includes('tabs.removed'));
+  toggleListener(browser.tabs.onAttached, onTabAttached, types.includes('tabs.attached'));
 
   if (typeof browser.webNavigation === 'object') {
     ['onCommitted', 'onHistoryStateUpdated', 'onReferenceFragmentUpdated'].forEach(event => {
@@ -171,6 +172,7 @@ function removeListeners() {
   browser.downloads.onChanged.removeListener(onDownloadChanged);
   browser.tabs.onCreated.removeListener(onTabCreated);
   browser.tabs.onRemoved.removeListener(onTabRemoved);
+  browser.tabs.onAttached.removeListener(onTabAttached);
   browser.runtime.onStartup.removeListener(onStartup);
   if (typeof browser.webNavigation === 'object') {
     ['onCommitted', 'onHistoryStateUpdated', 'onReferenceFragmentUpdated'].forEach(event => {
@@ -277,6 +279,10 @@ function onTabCreated(tab) {
 
 function onTabRemoved(tab) {
   play('tabs.removed');
+}
+
+function onTabAttached(tab) {
+  play('tabs.attached');
 }
 
 function onBackForward(details) { // webNavigation: onHistoryStateUpdated, onReferenceFragmentUpdated, onCommitted

@@ -213,6 +213,9 @@
   "event_types_name_tabsRemoved": {
     "message": "Close Tab"
   },
+  "event_types_name_tabsAttached": {
+    "message": "Attach Tab To Another Window"
+  },
   "event_types_name_requestCompleted": {
     "message": "HTTP Request Completed"
   },

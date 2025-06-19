@@ -28,6 +28,9 @@ const Types = {
   'tabs.removed': {
     name: browser.i18n.getMessage(`${scope}tabsRemoved`)
   },
+  'tabs.attached': {
+    name: browser.i18n.getMessage(`${scope}tabsAttached`)
+  },
   'navigation.backForward': {
     name: browser.i18n.getMessage(`${scope}navigationBackForward`),
     permissions: ['webNavigation']
