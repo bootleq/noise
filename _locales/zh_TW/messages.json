@@ -195,6 +195,12 @@
   "event_types_name_navigationBackForward": {
     "message": "上一頁／下一頁"
   },
+  "event_types_name_tabsCreated": {
+    "message": "開啟新分頁"
+  },
+  "event_types_name_tabsRemoved": {
+    "message": "關閉分頁"
+  },
   "event_types_name_requestCompleted": {
     "message": "HTTP 請求完成"
   },

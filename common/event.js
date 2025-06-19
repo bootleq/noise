@@ -22,6 +22,12 @@ const Types = {
   'download.interrupted': {
     name: browser.i18n.getMessage(`${scope}downloadInterrupted`)
   },
+  'tabs.created': {
+    name: browser.i18n.getMessage(`${scope}tabsCreated`)
+  },
+  'tabs.removed': {
+    name: browser.i18n.getMessage(`${scope}tabsRemoved`)
+  },
   'navigation.backForward': {
     name: browser.i18n.getMessage(`${scope}navigationBackForward`),
     permissions: ['webNavigation']

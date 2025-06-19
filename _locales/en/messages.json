@@ -207,6 +207,12 @@
   "event_types_name_navigationBackForward": {
     "message": "Back / Forward"
   },
+  "event_types_name_tabsCreated": {
+    "message": "Create New Tab"
+  },
+  "event_types_name_tabsRemoved": {
+    "message": "Close Tab"
+  },
   "event_types_name_requestCompleted": {
     "message": "HTTP Request Completed"
   },

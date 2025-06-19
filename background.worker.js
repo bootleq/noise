@@ -144,6 +144,9 @@ function addListeners() {
   toggleListener(browser.downloads.onCreated, onDownloadCreated, types.includes('download.new'));
   toggleListener(browser.downloads.onChanged, onDownloadChanged, hasAny(['download.completed', 'download.interrupted'], types));
 
+  toggleListener(browser.tabs.onCreated, onTabCreated, types.includes('tabs.created'));
+  toggleListener(browser.tabs.onRemoved, onTabRemoved, types.includes('tabs.removed'));
+
   if (typeof browser.webNavigation === 'object') {
     ['onCommitted', 'onHistoryStateUpdated', 'onReferenceFragmentUpdated'].forEach(event => {
       toggleListener(browser.webNavigation[event], onBackForward, types.includes('navigation.backForward'));
@@ -166,6 +169,8 @@ function addListeners() {
 function removeListeners() {
   browser.downloads.onCreated.removeListener(onDownloadCreated);
   browser.downloads.onChanged.removeListener(onDownloadChanged);
+  browser.tabs.onCreated.removeListener(onTabCreated);
+  browser.tabs.onRemoved.removeListener(onTabRemoved);
   browser.runtime.onStartup.removeListener(onStartup);
   if (typeof browser.webNavigation === 'object') {
     ['onCommitted', 'onHistoryStateUpdated', 'onReferenceFragmentUpdated'].forEach(event => {
@@ -264,6 +269,14 @@ function onDownloadChanged(delta) { // https://developer.mozilla.org/en-US/Add-o
       play('download.failure');
     }
   }
+}
+
+function onTabCreated(tab) {
+  play('tabs.created');
+}
+
+function onTabRemoved(tab) {
+  play('tabs.removed');
 }
 
 function onBackForward(details) { // webNavigation: onHistoryStateUpdated, onReferenceFragmentUpdated, onCommitted
