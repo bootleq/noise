@@ -106,6 +106,7 @@ table {
       border-radius: 3px;
       text-shadow: 1px 1px 1px black, -1px -1px 1px black;
       overflow: auto;
+      scrollbar-width: thin;
       word-break: break-all;
       &:hover {
         background-color: var(--color-fx-red-80);
