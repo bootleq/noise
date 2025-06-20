@@ -42,7 +42,27 @@ const Types = {
   'window.copy': {
     name: browser.i18n.getMessage(`${scope}windowCopy`),
     forContent: true
-  }
+  },
+  'hr.tabs': {},
+  'tabs.created': {
+    name: browser.i18n.getMessage(`${scope}tabsCreated`)
+  },
+  'tabs.removed': {
+    name: browser.i18n.getMessage(`${scope}tabsRemoved`)
+  },
+  'tabs.attached': {
+    name: browser.i18n.getMessage(`${scope}tabsAttached`)
+  },
+  'tabs.pinned': {
+    name: browser.i18n.getMessage(`${scope}tabsPinned`)
+  },
+  'tabs.unpinned': {
+    name: browser.i18n.getMessage(`${scope}tabsUnpinned`)
+  },
+  'tabs.attention': {
+    name: browser.i18n.getMessage(`${scope}tabsAttention`),
+    browsers: ['firefox']
+  },
 };
 
 class EventSetting {
@@ -83,6 +103,9 @@ class EventSetting {
 
     case 'permissions':
       return (def && 'permissions' in def) ? def.permissions : [];
+
+    case 'browsers':
+      return (def && 'browsers' in def) ? def.browsers : [];
 
     case 'slots':
       return (def && 'slots' in def) ? def.slots : [];

@@ -144,6 +144,20 @@ function addListeners() {
   toggleListener(browser.downloads.onCreated, onDownloadCreated, types.includes('download.new'));
   toggleListener(browser.downloads.onChanged, onDownloadChanged, hasAny(['download.completed', 'download.interrupted'], types));
 
+  toggleListener(browser.tabs.onCreated, onTabCreated, types.includes('tabs.created'));
+  toggleListener(browser.tabs.onRemoved, onTabRemoved, types.includes('tabs.removed'));
+  toggleListener(browser.tabs.onAttached, onTabAttached, types.includes('tabs.attached'));
+  // Chrome doesn't support `tabs.attention`, also not support filter
+  toggleListener(
+    browser.tabs.onUpdated,
+    onTabUpdated,
+    hasAny(['tabs.pinned', 'tabs.unpinned'], types)
+    // {
+    //   urls: ['<all_urls>'],
+    //   properties: ['attention', 'pinned']
+    // }
+  );
+
   if (typeof browser.webNavigation === 'object') {
     ['onCommitted', 'onHistoryStateUpdated', 'onReferenceFragmentUpdated'].forEach(event => {
       toggleListener(browser.webNavigation[event], onBackForward, types.includes('navigation.backForward'));
@@ -166,6 +180,10 @@ function addListeners() {
 function removeListeners() {
   browser.downloads.onCreated.removeListener(onDownloadCreated);
   browser.downloads.onChanged.removeListener(onDownloadChanged);
+  browser.tabs.onCreated.removeListener(onTabCreated);
+  browser.tabs.onRemoved.removeListener(onTabRemoved);
+  browser.tabs.onAttached.removeListener(onTabAttached);
+  browser.tabs.onUpdated.removeListener(onTabUpdated);
   browser.runtime.onStartup.removeListener(onStartup);
   if (typeof browser.webNavigation === 'object') {
     ['onCommitted', 'onHistoryStateUpdated', 'onReferenceFragmentUpdated'].forEach(event => {
@@ -262,6 +280,31 @@ function onDownloadChanged(delta) { // https://developer.mozilla.org/en-US/Add-o
     let type = delta.error.current;
     if (type && !type.startsWith('USER_')) { // don't consider user action as error
       play('download.failure');
+    }
+  }
+}
+
+function onTabCreated(tab) {
+  play('tabs.created');
+}
+
+function onTabRemoved(tab) {
+  play('tabs.removed');
+}
+
+function onTabAttached(tab) {
+  play('tabs.attached');
+}
+
+function onTabUpdated(tabId, changeInfo, tabInfo) {
+  const keys = Object.keys(changeInfo);
+
+  // Chrome doesn't support `tabs.attention`, also not support filter
+  if (keys.includes('pinned')) {
+    if (changeInfo['pinned']) {
+      play('tabs.pinned');
+    } else {
+      play('tabs.unpinned');
     }
   }
 }

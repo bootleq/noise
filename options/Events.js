@@ -3,14 +3,15 @@
 import browser from "webextension-polyfill";
 
 import { EventSetting } from '../common/event.js';
-import { emptyObject } from '../common/utils.js';
+import { browserInfo, emptyObject } from '../common/utils.js';
 import { posisitionTo, arrayDiff } from './utils.js';
 
 const confirmMsg = browser.i18n.getMessage('options_prompt_areYouSure');
 
 class Events {
-  constructor(el, parentStore) {
+  constructor(el, parentStore, browserName) {
     this.store = parentStore;
+    this.browserName = browserName;
 
     this.$el    = el;
     this.$list  = this.$el.querySelector('tbody');
@@ -85,12 +86,22 @@ class Events {
 
   initMenus() {
     Object.entries(EventSetting.Types).forEach(([key, value]) => {
+      if (key.startsWith('hr.')) {
+        const $hr = document.createElement('hr');
+        this.$menus.types.appendChild($hr);
+        return;
+      }
+
       let $opt = document.createElement('option');
       let perms = EventSetting.getTypeDef(key, 'permissions');
+      let browsers = EventSetting.getTypeDef(key, 'browsers');
       $opt.value = key;
       $opt.textContent = value.name;
       if (perms.length) {
         $opt.dataset.permissions = JSON.stringify(perms);
+      }
+      if (browsers.length) {
+        $opt.dataset.browsers = JSON.stringify(browsers);
       }
       this.$menus.types.appendChild($opt);
     });
@@ -100,28 +111,60 @@ class Events {
     this.$menus.options.addEventListener('click', this.onUpdateOptions.bind(this));
   }
 
-  updatePermissions() {
+  updateAvailability() {
     this.updateTypeMenu();
-    this.$list.querySelectorAll('tr[data-permissions]').forEach($row => {
-      let perms = JSON.parse($row.dataset.permissions || '[]');
-      let missing = arrayDiff(perms, this.store.Permissions).length;
-      let $type = $row.querySelector('td.e-type');
-      $row.classList.toggle('missing-permissions', missing);
-      if (missing) {
-        $type.title = browser.i18n.getMessage('options_title_warning_eventForbidden');
+    this.updatePermissions();
+    this.updateBrowserCompatibility();
+
+    this.$list.querySelectorAll('tr[data-permissions], tr[data-browsers]').forEach($row => {
+      const $type = $row.querySelector('td.e-type');
+      let title = null;
+
+      if ($row.classList.contains('missing-permissions')) {
+        title = browser.i18n.getMessage('options_title_warning_eventForbidden');
+      }
+      if ($row.classList.contains('missing-browsers')) {
+        title = browser.i18n.getMessage('options_title_warning_eventUnavailable');
+      }
+
+      if (title) {
+        $type.title = title;
       } else {
         $type.removeAttribute('title');
       }
     });
   }
 
+  updatePermissions() {
+    this.$list.querySelectorAll('tr[data-permissions]').forEach($row => {
+      let perms = JSON.parse($row.dataset.permissions || '[]');
+      let missing = arrayDiff(perms, this.store.Permissions).length;
+      $row.classList.toggle('missing-permissions', missing);
+    });
+  }
+
+  updateBrowserCompatibility() {
+    this.$list.querySelectorAll('tr[data-browsers]').forEach($row => {
+      let browsers = JSON.parse($row.dataset.browsers || '[]');
+      let missing = !browsers.includes(this.browserName);
+      $row.classList.toggle('missing-browsers', missing);
+    });
+  }
+
   updateTypeMenu() {
-    const $options = this.$menus.types.querySelectorAll('option[data-permissions]');
+    const $options = this.$menus.types.querySelectorAll('option[data-permissions], option[data-browsers]');
     const $editing = this.$selected && this.$selected.querySelector('select.types');
 
     $options.forEach(el => {
-      let perms = JSON.parse(el.dataset.permissions || '[]');
-      const missing = arrayDiff(perms, this.store.Permissions).length;
+      const perms = JSON.parse(el.dataset.permissions || '[]');
+      const browsers = JSON.parse(el.dataset.browsers || '[]');
+      let missing = false;
+      if (perms.length && arrayDiff(perms, this.store.Permissions).length) {
+        missing = true;
+      }
+      if (!missing && browsers.length && !browsers.includes(this.browserName)) {
+        missing = true;
+      }
       el.disabled = missing;
     });
 
@@ -469,6 +512,7 @@ class Events {
     let tmpl = document.importNode(this.tmpl, true);
     let data = tmpl.querySelector('tr').dataset;
     let perms = EventSetting.getTypeDef(e.type, 'permissions');
+    let browsers = EventSetting.getTypeDef(e.type, 'browsers');
     data.eventId = e.id;
     data.name    = e.name || '';
     data.type    = e.type;
@@ -476,6 +520,9 @@ class Events {
     data.soundId = e.soundId;
     if (perms.length) {
       data.permissions = JSON.stringify(perms);
+    }
+    if (browsers.length) {
+      data.browsers = JSON.stringify(browsers);
     }
 
     tmpl.querySelector('.e-toggle input').checked = e.enabled;
@@ -518,6 +565,13 @@ class Events {
       set.permissions = JSON.stringify(perms);
     } else if ('permissions' in set) {
       delete set.permissions;
+    }
+
+    let browsers = EventSetting.getTypeDef(value, 'browsers');
+    if (browsers.length) {
+      set.browsers = JSON.stringify(browsers);
+    } else if ('browsers' in set) {
+      delete set.browsers;
     }
   }
 

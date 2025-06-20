@@ -75,6 +75,9 @@
   "options_title_warning_eventForbidden": {
     "message": "這個事件需要額外權限，點選「權限」按鈕以審查權限"
   },
+  "options_title_warning_eventUnavailable": {
+    "message": "瀏覽器尚未支援這個事件"
+  },
   "options_events_th_options": {
     "message": "選項"
   },
@@ -194,6 +197,24 @@
   },
   "event_types_name_navigationBackForward": {
     "message": "上一頁／下一頁"
+  },
+  "event_types_name_tabsCreated": {
+    "message": "開啟新分頁"
+  },
+  "event_types_name_tabsRemoved": {
+    "message": "關閉分頁"
+  },
+  "event_types_name_tabsAttached": {
+    "message": "移動分頁到其他視窗"
+  },
+  "event_types_name_tabsAttention": {
+    "message": "分頁注意提示"
+  },
+  "event_types_name_tabsPinned": {
+    "message": "釘選分頁"
+  },
+  "event_types_name_tabsUnpinned": {
+    "message": "解除釘選分頁"
   },
   "event_types_name_requestCompleted": {
     "message": "HTTP 請求完成"

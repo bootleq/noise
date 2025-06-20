@@ -79,6 +79,10 @@
     "message": "This type requires additional permission, you can review permissions by click \"Permission\" button",
     "description": "When selected event type has no sufficient permission, this title will be served as tooltip on event 'Type'."
   },
+  "options_title_warning_eventUnavailable": {
+    "message": "Current browser doesn't support this type",
+    "description": "When selected event type does not supported by user's browser, this title will be served as tooltip on event 'Type'."
+  },
   "options_events_th_options": {
     "message": "Options"
   },
@@ -206,6 +210,24 @@
   },
   "event_types_name_navigationBackForward": {
     "message": "Back / Forward"
+  },
+  "event_types_name_tabsCreated": {
+    "message": "Create New Tab"
+  },
+  "event_types_name_tabsRemoved": {
+    "message": "Close Tab"
+  },
+  "event_types_name_tabsAttached": {
+    "message": "Attach Tab To Another Window"
+  },
+  "event_types_name_tabsAttention": {
+    "message": "Tab Attention Notice"
+  },
+  "event_types_name_tabsPinned": {
+    "message": "Pin Tab"
+  },
+  "event_types_name_tabsUnpinned": {
+    "message": "Unpin Tab"
   },
   "event_types_name_requestCompleted": {
     "message": "HTTP Request Completed"

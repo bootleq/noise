@@ -138,26 +138,22 @@ function onLoad() {
     $export.disabled = false;
   }
 }
-
-function applyBodyClass() {
-  browserInfo().then(info => {
-    if (info.name) {
-      document.body.classList.add(info.name.toLowerCase());
-    }
-  });
-}
 // }}}
 
 async function init() {
   document.title = browser.i18n.getMessage('optionPageTitle');
   translateDOM();
-  applyBodyClass();
+
+  const browserName = (await browserInfo())?.name?.toLowerCase() || '';
+  if (browserName) {
+    document.body.classList.add(browserName);
+  }
 
   store.Permissions = await browser.permissions.getAll().then(result => result.permissions);
 
   let sounds      = new Sounds(document.querySelector('#sounds'), store);
   let soundDetail = new SoundDetail(document.querySelector('#sound_detail'), store);
-  let events      = new Events(document.querySelector('#events'), store);
+  let events      = new Events(document.querySelector('#events'), store, browserName);
   let permissions = new Permissions(document.querySelector('#permissions'), store);
 
   let importMode = 'append';
@@ -186,7 +182,7 @@ async function init() {
   events.addObserver('load', onLoad);
   events.addObserver('load', permissions.update.bind(permissions));
   events.addObserver('requestPermissions', permissions.request.bind(permissions));
-  permissions.addObserver('update', events.updatePermissions.bind(events))
+  permissions.addObserver('update', events.updateAvailability.bind(events))
 
   $save.addEventListener('click', () => {
     $save.disabled = true;
@@ -230,7 +226,8 @@ async function init() {
         store.Sounds[cfg.id].src = newConfig[`src.${cfg.id}`];
       });
       newConfig['events'].forEach((cfg) => events.addEvent(cfg));
-      events.updatePermissions();
+      events.updateAvailability();
+      events.updateBrowserCompatibility();
       events.updateSoundMenu();
     })
     .catch(e => {
