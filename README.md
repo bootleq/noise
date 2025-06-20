@@ -54,6 +54,7 @@ Alternatives
 ### Chrome
 
 - [Download Sound][Download Sound - Chrome] - can use speech output as a sound
+- [Navigational Sounds][]
 
 
 
@@ -61,3 +62,4 @@ Alternatives
 [Notification Sound]: https://addons.mozilla.org/firefox/addon/notification-sound/
 [Download Sound]: https://addons.mozilla.org/firefox/addon/download-sound/
 [Download Sound - Chrome]: https://chrome.google.com/webstore/detail/download-sound/fmcbineojopoamfhaabogigdbpbklnld
+[Navigational Sounds]: https://chromewebstore.google.com/detail/navigational-sounds/plhoioliblcddpmljieonfdndcmjmkpd
