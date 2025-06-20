@@ -24,6 +24,7 @@
     "build": "webpack",
     "build:prod": "cross-env NODE_ENV=production webpack",
     "we:run": "node ./webext-run.js --source-dir build",
+    "we:lint": "web-ext lint",
     "build:chrome": "cross-env BROWSER=chrome webpack",
     "build:prod:chrome": "cross-env NODE_ENV=production BROWSER=chrome webpack"
   },
