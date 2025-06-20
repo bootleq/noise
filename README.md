@@ -15,7 +15,7 @@ Available Events
 - Back or Forward navigation
 - Request completed, like 404, 500 response
 - Clipboard copy
-- composition started
+- Composition started
 
 
 Development
