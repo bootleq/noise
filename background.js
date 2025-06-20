@@ -4,7 +4,7 @@ import browser from "webextension-polyfill";
 
 import Sound from './common/sound';
 import { EventSetting } from './common/event';
-import { emptyObject, getSenderMuted } from './common/utils';
+import { emptyObject, hasAny, getSenderMuted } from './common/utils';
 
 const gSounds = {};
 const gEvents = {};
@@ -313,12 +313,6 @@ function onRequestCompleted(details) {
     return true;
   };
   play('request.completed', filter);
-}
-// }}}
-
-// Utils {{{
-function hasAny(targets, array) {
-  return array.some(a => targets.includes(a));
 }
 // }}}
 

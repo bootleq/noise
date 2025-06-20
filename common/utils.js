@@ -9,6 +9,10 @@ function emptyObject(obj) {
   });
 }
 
+function hasAny(targets, array) {
+  return array.some(a => targets.includes(a));
+}
+
 function newId() {
   return nanoid(14);
 }
@@ -42,4 +46,4 @@ async function browserInfo() {
   return {}; // return dummy object for chrome is enough
 }
 
-export { emptyObject, newId, testAudioSrc, getSenderMuted, browserInfo };
+export { emptyObject, hasAny, newId, testAudioSrc, getSenderMuted, browserInfo };
