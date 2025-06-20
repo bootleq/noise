@@ -88,7 +88,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.scss$/,
+        test: /\.s[ac]ss$/i,
         use: [
           {
             loader: MiniCssExtractPlugin.loader,
@@ -97,6 +97,7 @@ module.exports = {
           {
             loader: "sass-loader",
             options: {
+              api: 'modern',
               implementation: dartSass,
             },
           },
