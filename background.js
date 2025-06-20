@@ -90,6 +90,10 @@ async function onPortMessage(msg, port) {
     case 'copy':
       play('window.copy');
       break;
+
+    case 'compositionstart':
+      play('window.compositionstart');
+      break;
     }
     break;
   case 'ready':

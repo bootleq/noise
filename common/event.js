@@ -43,6 +43,10 @@ const Types = {
     name: browser.i18n.getMessage(`${scope}windowCopy`),
     forContent: true
   },
+  'window.compositionstart': {
+    name: browser.i18n.getMessage(`${scope}windowCompositionStart`),
+    forContent: true
+  },
   'hr.tabs': {},
   'tabs.created': {
     name: browser.i18n.getMessage(`${scope}tabsCreated`)

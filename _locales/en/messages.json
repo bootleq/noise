@@ -238,6 +238,9 @@
   "event_types_name_windowCopy": {
     "message": "Copy"
   },
+  "event_types_name_windowCompositionStart": {
+    "message": "Composition Start"
+  },
 
   "event_slots_name_filter_statusCode": {
     "message": "Filter: status code"
