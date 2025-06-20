@@ -34,6 +34,7 @@ Run with [web-ext][] after temporary build (Firefox only):
 
     yarn test
     yarn test --profile some_firefox_profile_name
+    yarn test -p some_profile_name -f /path/to/your/firefox/or/alias
 
 Package a zip file:
 
