@@ -8,7 +8,8 @@ const yargs = require('yargs/yargs');
 const argv = yargs(process.argv.slice(2)).options({
   s: {alias: 'source-dir', nargs: 1, type: 'string'},
   p: {alias: 'profile', nargs: 1, type: 'string'},
-}).check(({sourceDir, profile}) => {
+  f: {alias: 'firefox', nargs: 1, type: 'string'},
+}).check(({sourceDir, profile, firefox}) => {
   if (Array.isArray(sourceDir)) {
     return "Too many argument for 'source-dir'.";
   }
@@ -23,6 +24,7 @@ const options = [
   '--start-url about:debugging',
   '--verbose',
   '--browser-console',
+  '--devtools',
 ];
 
 const profile = argv.profile;
@@ -33,6 +35,11 @@ if (profile) {
 const sourceDir = argv.sourceDir;
 if (sourceDir) {
   options.push(`--source-dir=${sourceDir}`);
+}
+
+const fxBin = argv.firefox;
+if (fxBin) {
+  options.push(`--firefox=${fxBin}`);
 }
 
 const main = () => {
