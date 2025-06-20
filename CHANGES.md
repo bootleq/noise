@@ -3,6 +3,7 @@ CHANGES
 
 ## 3.x.x (?)
 
+* Add fullscreen enter / leave events.
 * Add compositionstart event.
 
 ## 3.2.0 (2025-06-20)

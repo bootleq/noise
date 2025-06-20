@@ -241,6 +241,12 @@
   "event_types_name_windowCompositionStart": {
     "message": "Composition Start"
   },
+  "event_types_name_docFullscreenEnter": {
+    "message": "Enter Fullscreen Mode"
+  },
+  "event_types_name_docFullscreenLeave": {
+    "message": "Leave Fullscreen Mode"
+  },
 
   "event_slots_name_filter_statusCode": {
     "message": "Filter: status code"
