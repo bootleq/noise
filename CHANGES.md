@@ -1,6 +1,11 @@
 CHANGES
 =======
 
+## 3.2.0 (2025-06-20)
+
+* Support various Tab events: opened / closed / attached / pin / unpin.
+* Also a tab "attention" event (Firefox only), for example a background tab raises a modal dialog.
+
 ## 3.1.1 (2023-01-29)
 
 * Chrome manifest v3 support, requires Chrome version 109+
