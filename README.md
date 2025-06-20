@@ -32,9 +32,9 @@ Make temporary build to `build` folder:
 
 Run with [web-ext][] after temporary build (Firefox only):
 
-    yarn test
-    yarn test --profile some_firefox_profile_name
-    yarn test -p some_profile_name -f /path/to/your/firefox/or/alias
+    yarn we:run
+    yarn we:run --profile some_firefox_profile_name
+    yarn we:run -p some_profile_name -f /path/to/your/firefox/or/alias
 
 Package a zip file:
 

@@ -23,7 +23,7 @@
   "scripts": {
     "build": "webpack",
     "build:prod": "cross-env NODE_ENV=production webpack",
-    "test": "node ./test.js --source-dir build",
+    "we:run": "node ./webext-run.js --source-dir build",
     "build:chrome": "cross-env BROWSER=chrome webpack",
     "build:prod:chrome": "cross-env NODE_ENV=production BROWSER=chrome webpack"
   },
