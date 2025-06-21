@@ -4,7 +4,7 @@ Noise
 Make sound response when event happen.
 
 - Firefox Add-on: https://addons.mozilla.org/firefox/addon/noise/
-- Chrome Web Store: https://chrome.google.com/webstore/detail/noise/bhookghbiabmdcjpphjikookipcddidk/
+- Chrome Web Store: https://chromewebstore.google.com/detail/noise/bhookghbiabmdcjpphjikookipcddidk
 
 Available Events
 ----------------
@@ -62,5 +62,5 @@ Alternatives
 [web-ext]: https://github.com/mozilla/web-ext
 [Notification Sound]: https://addons.mozilla.org/firefox/addon/notification-sound/
 [Download Sound]: https://addons.mozilla.org/firefox/addon/download-sound/
-[Download Sound - Chrome]: https://chrome.google.com/webstore/detail/download-sound/fmcbineojopoamfhaabogigdbpbklnld
+[Download Sound - Chrome]: https://chromewebstore.google.com/detail/download-sound/fmcbineojopoamfhaabogigdbpbklnld
 [Navigational Sounds]: https://chromewebstore.google.com/detail/navigational-sounds/plhoioliblcddpmljieonfdndcmjmkpd
