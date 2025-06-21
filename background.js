@@ -4,7 +4,7 @@ import browser from "webextension-polyfill";
 
 import Sound from './common/sound';
 import { EventSetting } from './common/event';
-import { emptyObject, getSenderMuted } from './common/utils';
+import { emptyObject, hasAny, getSenderMuted } from './common/utils';
 
 const gSounds = {};
 const gEvents = {};
@@ -93,6 +93,13 @@ async function onPortMessage(msg, port) {
 
     case 'compositionstart':
       play('window.compositionstart');
+      break;
+
+    case 'enter-fullscreen':
+      play('doc.fullscreenEnter');
+      break;
+    case 'leave-fullscreen':
+      play('doc.fullscreenLeave');
       break;
     }
     break;
@@ -313,12 +320,6 @@ function onRequestCompleted(details) {
     return true;
   };
   play('request.completed', filter);
-}
-// }}}
-
-// Utils {{{
-function hasAny(targets, array) {
-  return array.some(a => targets.includes(a));
 }
 // }}}
 

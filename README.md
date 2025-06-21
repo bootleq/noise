@@ -14,8 +14,9 @@ Available Events
 - Tab opened / closed / attached / attention / pin / unpin
 - Back or Forward navigation
 - Request completed, like 404, 500 response
+- Enter or leave fullscreen mode
 - Clipboard copy
-- composition started
+- Composition started
 
 
 Development

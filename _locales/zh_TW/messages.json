@@ -228,6 +228,12 @@
   "event_types_name_windowCompositionStart": {
     "message": "組字開始"
   },
+  "event_types_name_docFullscreenEnter": {
+    "message": "進入全螢幕模式"
+  },
+  "event_types_name_docFullscreenLeave": {
+    "message": "離開全螢幕模式"
+  },
 
   "event_slots_name_filter_statusCode": {
     "message": "篩選：狀態碼"

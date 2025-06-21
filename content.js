@@ -1,6 +1,7 @@
 'use strict';
 
 import browser from "webextension-polyfill";
+import { hasAny } from './common/utils';
 
 let port = browser.runtime.connect();
 
@@ -30,6 +31,17 @@ function onEvent(e) {
   });
 }
 
+function onFullscreenChange(e) {
+  let type = '';
+
+  if (document.fullscreenElement) {
+    type = 'enter-fullscreen';
+  } else {
+    type = 'leave-fullscreen';
+  }
+  onEvent({ type });
+}
+
 function toggleListener(target, eventName, handler, toggle) {
   if (toggle) {
     target.addEventListener(eventName, handler);
@@ -44,12 +56,14 @@ function addListeners(events) {
   toggleListener(window, 'copy', onEvent, types.includes('window.copy'));
   toggleListener(window, 'cut',  onEvent, types.includes('window.cut'));
   toggleListener(window, 'compositionstart', onEvent, types.includes('window.compositionstart'));
+  toggleListener(document, 'fullscreenchange', onFullscreenChange, hasAny(['doc.fullscreenEnter', 'doc.fullscreenLeave'], types));
 }
 
 function removeListeners() {
   window.removeEventListener('copy', onEvent);
   window.removeEventListener('cut', onEvent);
   window.removeEventListener('compositionstart', onEvent);
+  document.removeEventListener('fullscreenchange', onFullscreenChange);
 }
 
 globalThis.requestIdleCallback(() => {

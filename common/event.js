@@ -47,6 +47,14 @@ const Types = {
     name: browser.i18n.getMessage(`${scope}windowCompositionStart`),
     forContent: true
   },
+  'doc.fullscreenEnter': {
+    name: browser.i18n.getMessage(`${scope}docFullscreenEnter`),
+    forContent: true
+  },
+  'doc.fullscreenLeave': {
+    name: browser.i18n.getMessage(`${scope}docFullscreenLeave`),
+    forContent: true
+  },
   'hr.tabs': {},
   'tabs.created': {
     name: browser.i18n.getMessage(`${scope}tabsCreated`)
