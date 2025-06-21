@@ -43,6 +43,10 @@ const Types = {
     name: browser.i18n.getMessage(`${scope}windowCopy`),
     forContent: true
   },
+  'window.paste': {
+    name: browser.i18n.getMessage(`${scope}windowPaste`),
+    forContent: true
+  },
   'window.compositionstart': {
     name: browser.i18n.getMessage(`${scope}windowCompositionStart`),
     forContent: true

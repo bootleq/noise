@@ -104,6 +104,10 @@ async function onPortMessage(msg, port) {
     case 'copy':
       play('window.copy');
       break;
+
+    case 'paste':
+      play('window.paste');
+      break;
     }
     break;
   case 'ready':
