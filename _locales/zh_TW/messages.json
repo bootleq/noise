@@ -225,6 +225,9 @@
   "event_types_name_windowCopy": {
     "message": "複製"
   },
+  "event_types_name_windowPaste": {
+    "message": "貼上"
+  },
   "event_types_name_windowCompositionStart": {
     "message": "組字開始"
   },

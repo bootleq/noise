@@ -55,6 +55,7 @@ function addListeners(events) {
 
   toggleListener(window, 'copy', onEvent, types.includes('window.copy'));
   toggleListener(window, 'cut',  onEvent, types.includes('window.cut'));
+  toggleListener(window, 'paste', onEvent, types.includes('window.paste'));
   toggleListener(window, 'compositionstart', onEvent, types.includes('window.compositionstart'));
   toggleListener(document, 'fullscreenchange', onFullscreenChange, hasAny(['doc.fullscreenEnter', 'doc.fullscreenLeave'], types));
 }
@@ -62,6 +63,7 @@ function addListeners(events) {
 function removeListeners() {
   window.removeEventListener('copy', onEvent);
   window.removeEventListener('cut', onEvent);
+  window.removeEventListener('paste', onEvent);
   window.removeEventListener('compositionstart', onEvent);
   document.removeEventListener('fullscreenchange', onFullscreenChange);
 }

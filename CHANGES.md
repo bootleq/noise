@@ -5,6 +5,7 @@ CHANGES
 
 * Add fullscreen enter / leave events.
 * Add compositionstart event.
+* Add clibpoard paste event.
 
 ## 3.2.0 (2025-06-20)
 

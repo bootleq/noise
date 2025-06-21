@@ -77,30 +77,30 @@ async function onPortMessage(msg, port) {
     return;
   }
 
+  const eType = msg.event?.type;
+
   switch (msg.type) {
   case 'content.on':
     if (await getSenderMuted(port.sender) === true) {
       return;
     }
-    switch (msg.event.type) {
-    case 'cut':
-      play('window.cut');
-      break;
+    switch (eType) {
+      case 'cut':
+      case 'copy':
+      case 'paste':
+        play(`window.${eType}`);
+        break;
 
-    case 'copy':
-      play('window.copy');
-      break;
+      case 'compositionstart':
+        play('window.compositionstart');
+        break;
 
-    case 'compositionstart':
-      play('window.compositionstart');
-      break;
-
-    case 'enter-fullscreen':
-      play('doc.fullscreenEnter');
-      break;
-    case 'leave-fullscreen':
-      play('doc.fullscreenLeave');
-      break;
+      case 'enter-fullscreen':
+        play('doc.fullscreenEnter');
+        break;
+      case 'leave-fullscreen':
+        play('doc.fullscreenLeave');
+        break;
     }
     break;
   case 'ready':

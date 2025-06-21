@@ -91,21 +91,21 @@ async function onPortMessage(msg, port) {
     return;
   }
 
+  const eType = msg.event?.type;
+
   switch (msg.type) {
   case 'content.on':
-    if (await getSenderMuted(port.sender) === true) {
-      return;
-    }
-    switch (msg.event.type) {
-    case 'cut':
-      play('window.cut');
+      if (await getSenderMuted(port.sender) === true) {
+        return;
+      }
+      switch (eType) {
+        case 'cut':
+        case 'copy':
+        case 'paste':
+          play(`window.${eType}`);
+          break;
+      }
       break;
-
-    case 'copy':
-      play('window.copy');
-      break;
-    }
-    break;
   case 'ready':
     port.postMessage({type: 'bind', events: contentEvents});
     break;

@@ -238,6 +238,9 @@
   "event_types_name_windowCopy": {
     "message": "Copy"
   },
+  "event_types_name_windowPaste": {
+    "message": "Paste"
+  },
   "event_types_name_windowCompositionStart": {
     "message": "Composition Start"
   },
