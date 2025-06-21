@@ -104,6 +104,17 @@ async function onPortMessage(msg, port) {
         case 'paste':
           play(`window.${eType}`);
           break;
+
+        case 'compositionstart':
+          play('window.compositionstart');
+          break;
+
+        case 'enter-fullscreen':
+          play('doc.fullscreenEnter');
+          break;
+        case 'leave-fullscreen':
+          play('doc.fullscreenLeave');
+          break;
       }
       break;
   case 'ready':
