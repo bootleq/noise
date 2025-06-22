@@ -501,7 +501,7 @@ class Events {
       this.updateOptionsMenu(name, opts);
       posisitionTo($menu, $btn);
       $menu.style.display = 'block';
-      $menu.querySelector('[data-autofocus]').focus();
+      $menu.querySelector('[data-autofocus]')?.focus();
     }
   }
 
