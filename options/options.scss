@@ -517,7 +517,7 @@ table {
 }
 
 #menus {
-  select {
+  > select {
     display: none;
   }
 
@@ -554,6 +554,16 @@ table {
       label input {
         margin-left: 8px;
       }
+
+      select {
+        background-color: initial;
+      }
+
+      .loosen {
+        line-height: 1.8;
+        margin-top: 0.5em;
+        margin-bottom: 1.5em;
+      }
     }
     .desc {
       margin: 8px 2px;
@@ -561,6 +571,11 @@ table {
       background-color: #efefef;
       border: 1px inset rgba(0,0,0,0.4);
       border-radius: 4px;
+
+      &:empty {
+        display: none;
+      }
+
       code {
         font-family: 'Segoe UI', 'San Francisco', 'Ubuntu', monospace;
         font-size: small;
@@ -693,4 +708,8 @@ table {
       display: block;
     }
   }
+}
+
+.ml-2 {
+  margin-left: 0.5rem;
 }

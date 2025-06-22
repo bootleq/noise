@@ -281,8 +281,16 @@ function onTabCreated(tab) {
   play('tabs.created');
 }
 
-function onTabRemoved(tab) {
-  play('tabs.removed');
+function onTabRemoved(tabId, info) {
+  let filter = (event) => {
+    if ('ignoreWinClose' in event.options) {
+      if (event.options['ignoreWinClose']['ignore'] === 'ignore' && info.isWindowClosing) {
+        return false;
+      }
+    }
+    return true;
+  };
+  play('tabs.removed', filter);
 }
 
 function onTabAttached(tab) {

@@ -221,9 +221,10 @@ class Events {
 
     $menu.dataset.type = type;
     $form.textContent = '';
-    let tmpl  = document.querySelector(`#options_form_templates template.${type}`).content;
+    let tmpl = document.querySelector(`#options_form_templates template.${type}`).content;
+
     tmpl = document.importNode(tmpl, true);
-    tmpl.querySelectorAll('input[data-prop]').forEach($input => {
+    tmpl.querySelectorAll('[data-prop]').forEach($input => {
       let prop = $input.dataset.prop;
       $input.value = prop in props ? props[prop] : '';
     });

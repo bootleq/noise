@@ -125,6 +125,19 @@
           <input type="text" data-prop='filter' data-autofocus='1' />
         </label>
       </template>
+
+      <template class='ignoreWinClose'>
+        <div class='loosen'>
+          <label data-i18n='_whenTabCloseWithWindow'>
+            When closing window:
+            <br>
+            <select data-prop='ignore' class='ml-2' />
+              <option value='work' selected data-i18n='_ignoreWinClose_work'>Still make sound, as usual</option>
+              <option value='ignore' data-i18n='_ignoreWinClose_ignore'>Ignore, quiet</option>
+            </select>
+          </label>
+        </div>
+      </template>
     </div>
 
     <div id='permissions' class='hidden'>

@@ -64,7 +64,12 @@ const Types = {
     name: browser.i18n.getMessage(`${scope}tabsCreated`)
   },
   'tabs.removed': {
-    name: browser.i18n.getMessage(`${scope}tabsRemoved`)
+    name: browser.i18n.getMessage(`${scope}tabsRemoved`),
+    slots: [
+      {
+        name: 'ignoreWinClose'
+      }
+    ]
   },
   'tabs.attached': {
     name: browser.i18n.getMessage(`${scope}tabsAttached`)

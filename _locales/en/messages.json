@@ -271,5 +271,18 @@
   },
   "options_slot_filterStatusCode_filter": {
     "message": "Filter"
+  },
+
+  "event_slots_name_ignoreWinClose": {
+    "message": "Ignore When Closing Window"
+  },
+  "options_whenTabCloseWithWindow": {
+    "message": "When closing window:"
+  },
+  "options_ignoreWinClose_work": {
+    "message": "Still make sound, as usual"
+  },
+  "options_ignoreWinClose_ignore": {
+    "message": "Ignore, quiet"
   }
 }
