@@ -169,6 +169,9 @@ function addListeners() {
     // }
   );
 
+  toggleListener(browser.windows.onCreated, onWindowCreated, hasAny(['windows.created', 'windows.created-private'], types));
+  toggleListener(browser.windows.onRemoved, onWindowRemoved, types.includes('windows.removed'));
+
   if (typeof browser.webNavigation === 'object') {
     ['onCommitted', 'onHistoryStateUpdated', 'onReferenceFragmentUpdated'].forEach(event => {
       toggleListener(browser.webNavigation[event], onBackForward, types.includes('navigation.backForward'));
@@ -195,6 +198,9 @@ function removeListeners() {
   browser.tabs.onRemoved.removeListener(onTabRemoved);
   browser.tabs.onAttached.removeListener(onTabAttached);
   browser.tabs.onUpdated.removeListener(onTabUpdated);
+  browser.windows.onCreated.removeListener(onWindowCreated);
+  browser.windows.onRemoved.removeListener(onWindowRemoved);
+
   browser.runtime.onStartup.removeListener(onStartup);
   if (typeof browser.webNavigation === 'object') {
     ['onCommitted', 'onHistoryStateUpdated', 'onReferenceFragmentUpdated'].forEach(event => {
@@ -318,6 +324,18 @@ function onTabUpdated(tabId, changeInfo, tabInfo) {
       play('tabs.unpinned');
     }
   }
+}
+
+function onWindowCreated(win) {
+  if (win.incognito) {
+    play('windows.created-private');
+  } else {
+    play('windows.created');
+  }
+}
+
+function onWindowRemoved(winId) {
+  play('windows.removed');
 }
 
 function onBackForward(details) { // webNavigation: onHistoryStateUpdated, onReferenceFragmentUpdated, onCommitted

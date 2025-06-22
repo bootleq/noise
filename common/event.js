@@ -79,6 +79,16 @@ const Types = {
     name: browser.i18n.getMessage(`${scope}tabsAttention`),
     browsers: ['firefox']
   },
+  'hr.windows': {},
+  'windows.created': {
+    name: browser.i18n.getMessage(`${scope}windowsCreated`)
+  },
+  'windows.created-private': {
+    name: browser.i18n.getMessage(`${scope}windowsCreatedIncognito`)
+  },
+  'windows.removed': {
+    name: browser.i18n.getMessage(`${scope}windowsRemoved`)
+  },
 };
 
 class EventSetting {

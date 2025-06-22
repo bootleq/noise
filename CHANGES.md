@@ -3,6 +3,7 @@ CHANGES
 
 ## 3.x.x (?)
 
+* Add window open / close events.
 * Add fullscreen enter / leave events.
 * Add compositionstart event.
 * Add clibpoard paste event.

@@ -229,6 +229,15 @@
   "event_types_name_tabsUnpinned": {
     "message": "Unpin Tab"
   },
+  "event_types_name_windowsCreated": {
+    "message": "Open Window"
+  },
+  "event_types_name_windowsCreatedIncognito": {
+    "message": "Open Incognito Window"
+  },
+  "event_types_name_windowsRemoved": {
+    "message": "Close Window"
+  },
   "event_types_name_requestCompleted": {
     "message": "HTTP Request Completed"
   },
