@@ -231,9 +231,7 @@ function resetEvents(configs) {
       gEvents[type].push(e);
 
       if (EventSetting.getTypeDef(type, 'forContent')) {
-        if (!(type in contentEvents)) {
-          contentEvents[type] = [];
-        }
+        if (!(type in contentEvents)) contentEvents[type] = [];
         contentEvents[type].push({options: e.options});
       }
     }
