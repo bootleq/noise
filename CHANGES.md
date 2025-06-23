@@ -8,6 +8,7 @@ CHANGES
 * Add compositionstart event.
 * Add clibpoard paste event.
 * Tab close event now have an option to ignore itself when closing window.
+* Avoid unnecessary event listener for disabled events.
 
 ## 3.2.0 (2025-06-20)
 

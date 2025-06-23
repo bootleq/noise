@@ -208,17 +208,14 @@ function resetEvents(configs) {
   configs.forEach(cfg => {
     let type = cfg.type;
 
-    if (!(type in gEvents)) {
-      gEvents[type] = [];
-    }
     if (cfg.enabled && gSounds[cfg.soundId]) {
       const e = new EventSetting(cfg);
+
+      if (!(type in gEvents)) gEvents[type] = [];
       gEvents[type].push(e);
 
       if (EventSetting.getTypeDef(type, 'forContent')) {
-        if (!(type in contentEvents)) {
-          contentEvents[type] = [];
-        }
+        if (!(type in contentEvents)) contentEvents[type] = [];
         contentEvents[type].push({options: e.options});
       }
     }
