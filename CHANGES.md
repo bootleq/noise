@@ -1,11 +1,11 @@
 CHANGES
 =======
 
-## 3.x.x (?)
+## 3.3.0 (2025-06-23)
 
 * Add window open / close events.
 * Add fullscreen enter / leave events.
-* Add compositionstart event.
+* Add compositionstart event, for example when start composition with IME.
 * Add clibpoard paste event.
 * Tab close event now have an option to ignore itself when closing window.
 * Avoid unnecessary event listener for disabled events.
