@@ -216,6 +216,15 @@
   "event_types_name_tabsUnpinned": {
     "message": "解除釘選分頁"
   },
+  "event_types_name_windowsCreated": {
+    "message": "開新視窗"
+  },
+  "event_types_name_windowsCreatedIncognito": {
+    "message": "開新隱私視窗"
+  },
+  "event_types_name_windowsRemoved": {
+    "message": "關閉視窗"
+  },
   "event_types_name_requestCompleted": {
     "message": "HTTP 請求完成"
   },
@@ -249,5 +258,18 @@
   },
   "options_slot_filterStatusCode_filter": {
     "message": "符合"
+  },
+
+  "event_slots_name_ignoreWinClose": {
+    "message": "關閉視窗時"
+  },
+  "options_whenTabCloseWithWindow": {
+    "message": "關閉視窗時："
+  },
+  "options_ignoreWinClose_work": {
+    "message": "仍要發出聲音，跟平常一樣"
+  },
+  "options_ignoreWinClose_ignore": {
+    "message": "忽略事件"
   }
 }

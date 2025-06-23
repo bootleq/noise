@@ -229,6 +229,15 @@
   "event_types_name_tabsUnpinned": {
     "message": "Unpin Tab"
   },
+  "event_types_name_windowsCreated": {
+    "message": "Open Window"
+  },
+  "event_types_name_windowsCreatedIncognito": {
+    "message": "Open Incognito Window"
+  },
+  "event_types_name_windowsRemoved": {
+    "message": "Close Window"
+  },
   "event_types_name_requestCompleted": {
     "message": "HTTP Request Completed"
   },
@@ -262,5 +271,18 @@
   },
   "options_slot_filterStatusCode_filter": {
     "message": "Filter"
+  },
+
+  "event_slots_name_ignoreWinClose": {
+    "message": "Ignore When Closing Window"
+  },
+  "options_whenTabCloseWithWindow": {
+    "message": "When closing window:"
+  },
+  "options_ignoreWinClose_work": {
+    "message": "Still make sound, as usual"
+  },
+  "options_ignoreWinClose_ignore": {
+    "message": "Ignore, quiet"
   }
 }

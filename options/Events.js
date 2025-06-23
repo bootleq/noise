@@ -221,9 +221,10 @@ class Events {
 
     $menu.dataset.type = type;
     $form.textContent = '';
-    let tmpl  = document.querySelector(`#options_form_templates template.${type}`).content;
+    let tmpl = document.querySelector(`#options_form_templates template.${type}`).content;
+
     tmpl = document.importNode(tmpl, true);
-    tmpl.querySelectorAll('input[data-prop]').forEach($input => {
+    tmpl.querySelectorAll('[data-prop]').forEach($input => {
       let prop = $input.dataset.prop;
       $input.value = prop in props ? props[prop] : '';
     });
@@ -501,7 +502,7 @@ class Events {
       this.updateOptionsMenu(name, opts);
       posisitionTo($menu, $btn);
       $menu.style.display = 'block';
-      $menu.querySelector('[data-autofocus]').focus();
+      $menu.querySelector('[data-autofocus]')?.focus();
     }
   }
 

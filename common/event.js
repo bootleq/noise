@@ -64,7 +64,12 @@ const Types = {
     name: browser.i18n.getMessage(`${scope}tabsCreated`)
   },
   'tabs.removed': {
-    name: browser.i18n.getMessage(`${scope}tabsRemoved`)
+    name: browser.i18n.getMessage(`${scope}tabsRemoved`),
+    slots: [
+      {
+        name: 'ignoreWinClose'
+      }
+    ]
   },
   'tabs.attached': {
     name: browser.i18n.getMessage(`${scope}tabsAttached`)
@@ -78,6 +83,16 @@ const Types = {
   'tabs.attention': {
     name: browser.i18n.getMessage(`${scope}tabsAttention`),
     browsers: ['firefox']
+  },
+  'hr.windows': {},
+  'windows.created': {
+    name: browser.i18n.getMessage(`${scope}windowsCreated`)
+  },
+  'windows.created-private': {
+    name: browser.i18n.getMessage(`${scope}windowsCreatedIncognito`)
+  },
+  'windows.removed': {
+    name: browser.i18n.getMessage(`${scope}windowsRemoved`)
   },
 };
 
