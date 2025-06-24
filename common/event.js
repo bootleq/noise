@@ -84,6 +84,29 @@ const Types = {
     name: browser.i18n.getMessage(`${scope}tabsAttention`),
     browsers: ['firefox']
   },
+  'hr.tabGroups': {},
+  'tabGroups.created': {
+    name: browser.i18n.getMessage(`${scope}tabGroupsCreated`),
+    permissions: ['tabGroups']
+  },
+  'tabGroups.updated': {
+    name: browser.i18n.getMessage(`${scope}tabGroupsUpdated`),
+    permissions: ['tabGroups']
+  },
+  'tabGroups.moved': {
+    name: browser.i18n.getMessage(`${scope}tabGroupsMoved`),
+    permissions: ['tabGroups']
+  },
+  'tabs.group-in': {
+    name: browser.i18n.getMessage(`${scope}tabsGroupIn`)
+  },
+  'tabs.group-out': {
+    name: browser.i18n.getMessage(`${scope}tabsGroupOut`)
+  },
+  'tabGroups.removed': {
+    name: browser.i18n.getMessage(`${scope}tabGroupsRemoved`),
+    permissions: ['tabGroups']
+  },
   'hr.windows': {},
   'windows.created': {
     name: browser.i18n.getMessage(`${scope}windowsCreated`)

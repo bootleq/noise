@@ -145,6 +145,9 @@
   "options_perms_desc_webRequest": {
     "message": "存取 HTTP 請求狀態"
   },
+  "options_perms_desc_tabGroups": {
+    "message": "檢視與管理分頁群組"
+  },
   "options_title_btn_close": {
     "message": "關閉"
   },
@@ -175,6 +178,9 @@
   },
   "options_error_importFailFileIncomplete": {
     "message": "檔案內容不完整"
+  },
+  "options_error_requestPermissionFailed": {
+    "message": "請求權限失敗，請查看主控台的訊息"
   },
   "options_btn_reviewPermission": {
     "message": "權限"
@@ -215,6 +221,24 @@
   },
   "event_types_name_tabsUnpinned": {
     "message": "解除釘選分頁"
+  },
+  "event_types_name_tabsGroupIn": {
+    "message": "將分頁加入群組"
+  },
+  "event_types_name_tabsGroupOut": {
+    "message": "將分頁移出群組"
+  },
+  "event_types_name_tabGroupsCreated": {
+    "message": "新增分頁群組"
+  },
+  "event_types_name_tabGroupsRemoved": {
+    "message": "關閉分頁群組"
+  },
+  "event_types_name_tabGroupsMoved": {
+    "message": "移動分頁群組"
+  },
+  "event_types_name_tabGroupsUpdated": {
+    "message": "分頁群組變更（名稱、顏色等）"
   },
   "event_types_name_windowsCreated": {
     "message": "開新視窗"

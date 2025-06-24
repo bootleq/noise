@@ -150,11 +150,15 @@
   },
   "options_perms_desc_webNavigation": {
     "message": "Access browser activity during navigation",
-    "description": "description about 'webNavigation' permission, should be identical to 'webextPerms.description.webNavigation' in https://hg.mozilla.org/l10n-central/zh-TW/file/default/browser/chrome/browser/browser.properties (change `zh-TW` to your locale)."
+    "description": "description about 'webNavigation' permission, should be identical to corresponding term in https://pontoon.mozilla.org/zh-TW/firefox/toolkit/toolkit/global/extensionPermissions.ftl (change `zh-TW` to your locale)."
   },
   "options_perms_desc_webRequest": {
     "message": "Access HTTP request activity",
     "description": "description about 'webRequest' permission. Note there seems no built-in translation for this."
+  },
+  "options_perms_desc_tabGroups": {
+    "message": "View and manage your tab groups",
+    "description": "description about 'tabGroups' permission. The term can be refered to https://developer.chrome.com/docs/extensions/reference/permissions-list#tabGroups, while it doesn't necessary to have translated in your locale, more: https://chromium.googlesource.com/chromium/src/+/HEAD/chrome/app/generated_resources.grd"
   },
   "options_title_btn_close": {
     "message": "Close"
@@ -188,6 +192,9 @@
   },
   "options_error_importFailFileIncomplete": {
     "message": "File content incomplete."
+  },
+  "options_error_requestPermissionFailed": {
+    "message": "Request permission failed. Please check console output for detail."
   },
   "options_btn_reviewPermission": {
     "message": "Permissions"
@@ -228,6 +235,24 @@
   },
   "event_types_name_tabsUnpinned": {
     "message": "Unpin Tab"
+  },
+  "event_types_name_tabsGroupIn": {
+    "message": "Add Tab into Group"
+  },
+  "event_types_name_tabsGroupOut": {
+    "message": "Remove Tab from Group"
+  },
+  "event_types_name_tabGroupsCreated": {
+    "message": "Create New Tab Group"
+  },
+  "event_types_name_tabGroupsRemoved": {
+    "message": "Close Tab Group"
+  },
+  "event_types_name_tabGroupsRemoved": {
+    "message": "Move Tab Group"
+  },
+  "event_types_name_tabGroupsUpdated": {
+    "message": "Tab Group Updated (title, color, etc)"
   },
   "event_types_name_windowsCreated": {
     "message": "Open Window"

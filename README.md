@@ -12,6 +12,7 @@ Available Events
 - Browser startup
 - Download start / completed / interrupted / failed
 - Tab opened / closed / attached / attention / pin / unpin
+- Tab groups created / moved / updated / closed
 - Window opened / closed
 - Back or Forward navigation
 - Request completed, like 404, 500 response
