@@ -242,6 +242,9 @@
   "event_types_name_tabGroupsRemoved": {
     "message": "Move Tab Group"
   },
+  "event_types_name_tabGroupsUpdated": {
+    "message": "Tab Group Updated (title, color, etc)"
+  },
   "event_types_name_windowsCreated": {
     "message": "Open Window"
   },

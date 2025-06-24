@@ -228,6 +228,9 @@
   "event_types_name_tabGroupsMoved": {
     "message": "移動分頁群組"
   },
+  "event_types_name_tabGroupsUpdated": {
+    "message": "分頁群組變更（名稱、顏色等）"
+  },
   "event_types_name_windowsCreated": {
     "message": "開新視窗"
   },

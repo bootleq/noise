@@ -3,7 +3,7 @@ CHANGES
 
 ## 3.?.? (?)
 
-* Add tab groups open / close / move events.
+* Add tab groups open / close / move / update events.
 * Fix missing to remove tabs.onTabUpdated listener on Firefox.
 
 ## 3.3.0 (2025-06-23)

@@ -89,6 +89,10 @@ const Types = {
     name: browser.i18n.getMessage(`${scope}tabGroupsCreated`),
     permissions: ['tabGroups']
   },
+  'tabGroups.updated': {
+    name: browser.i18n.getMessage(`${scope}tabGroupsUpdated`),
+    permissions: ['tabGroups']
+  },
   'tabGroups.removed': {
     name: browser.i18n.getMessage(`${scope}tabGroupsRemoved`),
     permissions: ['tabGroups']

@@ -176,6 +176,7 @@ function addListeners() {
     toggleListener(browser.tabGroups.onCreated, onTabGroupCreated, types.includes('tabGroups.created'));
     toggleListener(browser.tabGroups.onRemoved, onTabGroupRemoved, types.includes('tabGroups.removed'));
     toggleListener(browser.tabGroups.onMoved, onTabGroupMoved, types.includes('tabGroups.moved'));
+    toggleListener(browser.tabGroups.onUpdated, onTabGroupUpdated, types.includes('tabGroups.updated'));
   }
 
   if (typeof browser.webNavigation === 'object') {
@@ -211,6 +212,7 @@ function removeListeners() {
     browser.tabGroups.onCreated.removeListener(onTabGroupCreated);
     browser.tabGroups.onRemoved.removeListener(onTabGroupRemoved);
     browser.tabGroups.onMoved.removeListener(onTabGroupMoved);
+    browser.tabGroups.onUpdated.removeListener(onTabGroupUpdated);
   }
 
   browser.runtime.onStartup.removeListener(onStartup);
@@ -351,6 +353,9 @@ function onTabGroupRemoved(group) {
 }
 function onTabGroupMoved(group) {
   play('tabGroups.moved');
+}
+function onTabGroupUpdated(group) {
+  play('tabGroups.updated');
 }
 
 function onWindowCreated(win) {
