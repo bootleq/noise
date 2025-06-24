@@ -93,12 +93,12 @@ const Types = {
     name: browser.i18n.getMessage(`${scope}tabGroupsUpdated`),
     permissions: ['tabGroups']
   },
-  'tabGroups.removed': {
-    name: browser.i18n.getMessage(`${scope}tabGroupsRemoved`),
-    permissions: ['tabGroups']
-  },
   'tabGroups.moved': {
     name: browser.i18n.getMessage(`${scope}tabGroupsMoved`),
+    permissions: ['tabGroups']
+  },
+  'tabGroups.removed': {
+    name: browser.i18n.getMessage(`${scope}tabGroupsRemoved`),
     permissions: ['tabGroups']
   },
   'hr.windows': {},
