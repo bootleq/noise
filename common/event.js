@@ -97,6 +97,12 @@ const Types = {
     name: browser.i18n.getMessage(`${scope}tabGroupsMoved`),
     permissions: ['tabGroups']
   },
+  'tabs.group-in': {
+    name: browser.i18n.getMessage(`${scope}tabsGroupIn`)
+  },
+  'tabs.group-out': {
+    name: browser.i18n.getMessage(`${scope}tabsGroupOut`)
+  },
   'tabGroups.removed': {
     name: browser.i18n.getMessage(`${scope}tabGroupsRemoved`),
     permissions: ['tabGroups']

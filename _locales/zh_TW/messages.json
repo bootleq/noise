@@ -219,6 +219,12 @@
   "event_types_name_tabsUnpinned": {
     "message": "解除釘選分頁"
   },
+  "event_types_name_tabsGroupIn": {
+    "message": "將分頁加入群組"
+  },
+  "event_types_name_tabsGroupOut": {
+    "message": "將分頁移出群組"
+  },
   "event_types_name_tabGroupsCreated": {
     "message": "新增分頁群組"
   },

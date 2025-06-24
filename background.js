@@ -147,10 +147,10 @@ function addListeners() {
   toggleListener(
     browser.tabs.onUpdated,
     onTabUpdated,
-    hasAny(['tabs.attention', 'tabs.pinned', 'tabs.unpinned'], types),
+    hasAny(['tabs.attention', 'tabs.pinned', 'tabs.unpinned', 'tabs.group-in', 'tabs.group-out'], types),
     {
       urls: ['<all_urls>'],
-      properties: ['attention', 'pinned']
+      properties: ['attention', 'pinned', 'groupId']
     }
   );
 
@@ -321,6 +321,14 @@ function onTabUpdated(tabId, changeInfo, tabInfo) {
       play('tabs.pinned');
     } else {
       play('tabs.unpinned');
+    }
+  }
+
+  if (keys.includes('groupId')) {
+    if (changeInfo['groupId'] === -1) {
+      play('tabs.group-out');
+    } else {
+      play('tabs.group-in');
     }
   }
 }
