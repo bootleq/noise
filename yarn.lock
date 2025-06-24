@@ -2987,6 +2987,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"just-throttle@npm:^4.2.0":
+  version: 4.2.0
+  resolution: "just-throttle@npm:4.2.0"
+  checksum: 10c0/53004eecd4833e8d476cf099f11fbfc7b46463675973dd77cd70dff7f2844a3cc5878779ab524440a7bf4ebb2d74b37680f11393606f789035ac868ad3b153d4
+  languageName: node
+  linkType: hard
+
 "keyv@npm:^4.5.3":
   version: 4.5.4
   resolution: "keyv@npm:4.5.4"
@@ -3435,6 +3442,7 @@ __metadata:
     copy-webpack-plugin: "npm:^11.0.0"
     cross-env: "npm:^7.0.3"
     css-loader: "npm:^6.7.2"
+    just-throttle: "npm:^4.2.0"
     mini-css-extract-plugin: "npm:^2.6.1"
     nanoid: "npm:^4.0.0"
     sass: "npm:^1.56.1"
