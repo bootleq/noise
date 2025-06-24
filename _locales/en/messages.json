@@ -150,7 +150,7 @@
   },
   "options_perms_desc_webNavigation": {
     "message": "Access browser activity during navigation",
-    "description": "description about 'webNavigation' permission, should be identical to 'webextPerms.description.webNavigation' in https://hg.mozilla.org/l10n-central/zh-TW/file/default/browser/chrome/browser/browser.properties (change `zh-TW` to your locale)."
+    "description": "description about 'webNavigation' permission, should be identical to corresponding term in https://pontoon.mozilla.org/zh-TW/firefox/toolkit/toolkit/global/extensionPermissions.ftl (change `zh-TW` to your locale)."
   },
   "options_perms_desc_webRequest": {
     "message": "Access HTTP request activity",
