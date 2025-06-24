@@ -193,6 +193,9 @@
   "options_error_importFailFileIncomplete": {
     "message": "File content incomplete."
   },
+  "options_error_requestPermissionFailed": {
+    "message": "Request permission failed. Please check console output for detail."
+  },
   "options_btn_reviewPermission": {
     "message": "Permissions"
   },
