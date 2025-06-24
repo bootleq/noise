@@ -1,6 +1,10 @@
 CHANGES
 =======
 
+## 3.?.? (?)
+
+* Fix missing to remove tabs.onTabUpdated listener on Firefox.
+
 ## 3.3.0 (2025-06-23)
 
 * Add window open / close events.

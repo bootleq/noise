@@ -182,6 +182,7 @@ function removeListeners() {
   browser.tabs.onCreated.removeListener(onTabCreated);
   browser.tabs.onRemoved.removeListener(onTabRemoved);
   browser.tabs.onAttached.removeListener(onTabAttached);
+  browser.tabs.onUpdated.removeListener(onTabUpdated);
   browser.windows.onCreated.removeListener(onWindowCreated);
   browser.windows.onRemoved.removeListener(onWindowRemoved);
 
