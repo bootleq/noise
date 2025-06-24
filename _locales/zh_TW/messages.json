@@ -145,6 +145,9 @@
   "options_perms_desc_webRequest": {
     "message": "存取 HTTP 請求狀態"
   },
+  "options_perms_desc_tabGroups": {
+    "message": "檢視與管理分頁群組"
+  },
   "options_title_btn_close": {
     "message": "關閉"
   },
@@ -215,6 +218,15 @@
   },
   "event_types_name_tabsUnpinned": {
     "message": "解除釘選分頁"
+  },
+  "event_types_name_tabGroupsCreated": {
+    "message": "新增分頁群組"
+  },
+  "event_types_name_tabGroupsRemoved": {
+    "message": "關閉分頁群組"
+  },
+  "event_types_name_tabGroupsMoved": {
+    "message": "移動分頁群組"
   },
   "event_types_name_windowsCreated": {
     "message": "開新視窗"

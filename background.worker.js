@@ -172,6 +172,12 @@ function addListeners() {
   toggleListener(browser.windows.onCreated, onWindowCreated, hasAny(['windows.created', 'windows.created-private'], types));
   toggleListener(browser.windows.onRemoved, onWindowRemoved, types.includes('windows.removed'));
 
+  if (typeof browser.tabGroups === 'object') {
+    toggleListener(browser.tabGroups.onCreated, onTabGroupCreated, types.includes('tabGroups.created'));
+    toggleListener(browser.tabGroups.onRemoved, onTabGroupRemoved, types.includes('tabGroups.removed'));
+    toggleListener(browser.tabGroups.onMoved, onTabGroupMoved, types.includes('tabGroups.moved'));
+  }
+
   if (typeof browser.webNavigation === 'object') {
     ['onCommitted', 'onHistoryStateUpdated', 'onReferenceFragmentUpdated'].forEach(event => {
       toggleListener(browser.webNavigation[event], onBackForward, types.includes('navigation.backForward'));
@@ -200,6 +206,12 @@ function removeListeners() {
   browser.tabs.onUpdated.removeListener(onTabUpdated);
   browser.windows.onCreated.removeListener(onWindowCreated);
   browser.windows.onRemoved.removeListener(onWindowRemoved);
+
+  if (typeof browser.tabGroups === 'object') {
+    browser.tabGroups.onCreated.removeListener(onTabGroupCreated);
+    browser.tabGroups.onRemoved.removeListener(onTabGroupRemoved);
+    browser.tabGroups.onMoved.removeListener(onTabGroupMoved);
+  }
 
   browser.runtime.onStartup.removeListener(onStartup);
   if (typeof browser.webNavigation === 'object') {
@@ -329,6 +341,16 @@ function onTabUpdated(tabId, changeInfo, tabInfo) {
       play('tabs.unpinned');
     }
   }
+}
+
+function onTabGroupCreated(group) {
+  play('tabGroups.created');
+}
+function onTabGroupRemoved(group) {
+  play('tabGroups.removed');
+}
+function onTabGroupMoved(group) {
+  play('tabGroups.moved');
 }
 
 function onWindowCreated(win) {

@@ -156,6 +156,10 @@
     "message": "Access HTTP request activity",
     "description": "description about 'webRequest' permission. Note there seems no built-in translation for this."
   },
+  "options_perms_desc_tabGroups": {
+    "message": "View and manage your tab groups",
+    "description": "description about 'tabGroups' permission. The term can be refered to https://developer.chrome.com/docs/extensions/reference/permissions-list#tabGroups, while it doesn't necessary to have translated in your locale, more: https://chromium.googlesource.com/chromium/src/+/HEAD/chrome/app/generated_resources.grd"
+  },
   "options_title_btn_close": {
     "message": "Close"
   },
@@ -228,6 +232,15 @@
   },
   "event_types_name_tabsUnpinned": {
     "message": "Unpin Tab"
+  },
+  "event_types_name_tabGroupsCreated": {
+    "message": "Create New Tab Group"
+  },
+  "event_types_name_tabGroupsRemoved": {
+    "message": "Close Tab Group"
+  },
+  "event_types_name_tabGroupsRemoved": {
+    "message": "Move Tab Group"
   },
   "event_types_name_windowsCreated": {
     "message": "Open Window"
