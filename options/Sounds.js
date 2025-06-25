@@ -174,9 +174,7 @@ class Sounds {
   }
 
   set $selected(v) {
-    if (this._$selected) {
-      this._$selected.classList.remove('current');
-    }
+    this.$list.querySelectorAll('li.current').forEach(el => el.classList.remove('current'));
     this._$selected = v;
     if (this._$selected) {
       this._$selected.classList.add('current');
