@@ -5,6 +5,7 @@ import browser from "webextension-polyfill";
 import Sound from '../common/sound';
 import { emptyObject } from '../common/utils';
 import { shrinkFont } from './utils';
+import throttle from 'just-throttle';
 
 class Sounds {
   constructor(el, parentStore) {
@@ -18,9 +19,14 @@ class Sounds {
     this._observers = {};
     this.$addSound = this.$el.querySelector('.add_sound');
 
+    this.$dragging = null;
     this.$list.addEventListener('focus', this.onFocus.bind(this), {capture: true});
     this.$list.addEventListener('click', this.onSelect.bind(this));
     this.$list.addEventListener('keydown', this.onKey.bind(this));
+    this.$list.addEventListener('dragstart', this.onDragStart.bind(this));
+    this.$list.addEventListener('dragover', throttle(this.onDragOver.bind(this)), 900);
+    this.$list.addEventListener('drop', this.onDrop.bind(this));
+    this.$list.addEventListener('dragend', this.onDragEnd.bind(this));
     this.$addSound.addEventListener('click', () => this.$selected = this.addSound());
     this.load();
   }
@@ -84,6 +90,67 @@ class Sounds {
     case 'Escape':
       this._$selected = null;
       this.notifyObservers('select');
+    }
+  }
+
+  onDragStart(e) {
+    const $li = e.target;
+    if ($li.tagName === 'LI' && !$li.classList.contains('add_sound')) {
+      this.$dragging = $li;
+    }
+  }
+
+  onDragEnd(e) {
+    this.$dragging = null;
+    this.$list.querySelectorAll('.drag-before, .drag-after').forEach((otherLi) => {
+      otherLi.classList.remove('drag-before', 'drag-after');
+    });
+  }
+
+  findDropee(el) {
+    if (!this.$dragging) return;
+
+    const tagName = el.tagName;
+    let $li = tagName === 'LI' ? el : (
+      ['LABEL', 'SPAN'].includes(tagName) ? el.closest('li[draggable]') : null
+    );
+
+    if ($li?.draggable && !$li.classList.contains('add_sound') && $li !== this.$dragging) {
+      return $li;
+    }
+  }
+
+  findDropSide(el, clientX) {
+    const boundingBox = el.getBoundingClientRect();
+    const offset = boundingBox.x + boundingBox.width / 2;
+    return clientX < offset;
+  }
+
+  onDragOver(e) {
+    e.preventDefault();
+    const $li = this.findDropee(e.target);
+    if (!$li) return;
+
+    this.$list.querySelectorAll('.drag-before, .drag-after').forEach((otherLi) => {
+      otherLi.classList.remove('drag-before', 'drag-after');
+    });
+
+    if (this.findDropSide($li, e.clientX)) {
+      $li.classList.add('drag-before');
+    } else {
+      $li.classList.add('drag-after');
+    }
+  }
+
+  onDrop(e) {
+    e.preventDefault();
+    const $li = this.findDropee(e.target);
+    if (!$li) return;
+
+    if (this.findDropSide($li, e.clientX)) {
+      this.$dragging.parentNode.insertBefore(this.$dragging, $li);
+    } else {
+      this.$dragging.parentNode.insertBefore(this.$dragging, $li.nextElementSibling);
     }
   }
 

@@ -102,16 +102,14 @@ table {
     li {
       font-size: 16px;
       color: #eee;
-      background-color: var(--color-fx-red-70);
-      border-radius: 3px;
       text-shadow: 1px 1px 1px black, -1px -1px 1px black;
-      overflow: auto;
+      overflow: hidden;
       scrollbar-width: thin;
-      word-break: break-all;
+      perspective: 180px;
+
       &:hover {
-        background-color: var(--color-fx-red-80);
-        overflow: visible;
-        span {
+        label {
+          overflow: visible;
           background-color: var(--color-fx-red-80);
         }
       }
@@ -119,18 +117,32 @@ table {
         background-color: inherit;
       }
       &.current {
-        color: var(--color-fx-red-70);
-        background-color: white;
-        border: 1px solid var(--color-fx-red-70);
         text-shadow: none;
         overflow: visible;
-        span {
+
+        label {
+          color: var(--color-fx-red-70);
           background-color: white;
+          border: 1px solid var(--color-fx-red-70);
         }
       }
       &.dirty {
         border-bottom: 3px solid maroon;
       }
+
+      &.drag-before {
+        label {
+          transform: rotateY(-29deg);
+          transform-origin: right;
+        }
+      }
+      &.drag-after {
+        label {
+          transform: rotateY(29deg);
+          transform-origin: left;
+        }
+      }
+
       > * {
         display: flex;
         align-items: center;
@@ -141,8 +153,14 @@ table {
     }
 
     label {
+      scrollbar-width: thin;
+      word-break: break-all;
+      background-color: var(--color-fx-red-70);
+      border-radius: 3px;
       font-size: inherit;
       cursor: pointer;
+      transition: transform 0.2s ease-out;
+
       span {
         word-break: normal;
         padding: 1px 6px;
