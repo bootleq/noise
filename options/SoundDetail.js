@@ -55,6 +55,12 @@ class SoundDetail {
     }
   }
 
+  testPlay() {
+    if (this.$audio.src) {
+      this.onPlay();
+    }
+  }
+
   addObserver(topic, func) {
     if (!(topic in this._observers)) {
       this._observers[topic] = [];
@@ -130,7 +136,9 @@ class SoundDetail {
 
   onPlay(e) {
     this.$audio.currentTime = 0;
-    this.$audio.play();
+    setTimeout(() => {
+      this.$audio.play();
+    }, 200);
   }
 
   onKey(e) {

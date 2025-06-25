@@ -172,6 +172,7 @@ async function init() {
 
   sounds.addObserver('select', soundDetail.attach.bind(soundDetail));
   sounds.addObserver('update', events.updateSoundMenu.bind(events));
+  sounds.addObserver('testPlay', soundDetail.testPlay.bind(soundDetail));
 
   soundDetail.render();
   soundDetail.addObserver('accept', sounds.accept.bind(sounds));

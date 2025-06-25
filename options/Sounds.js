@@ -10,6 +10,7 @@ import throttle from 'just-throttle';
 class Sounds {
   constructor(el, parentStore) {
     this.store = parentStore;
+    this.ctrlPressed = false;
 
     this.$el   = el;
     this.$list = this.$el.querySelector('ul.list');
@@ -23,6 +24,7 @@ class Sounds {
     this.$list.addEventListener('focus', this.onFocus.bind(this), {capture: true});
     this.$list.addEventListener('click', this.onSelect.bind(this));
     this.$list.addEventListener('keydown', this.onKey.bind(this));
+    this.$list.addEventListener('keyup', this.onKeyUp.bind(this));
     this.$list.addEventListener('dragstart', this.onDragStart.bind(this));
     this.$list.addEventListener('dragover', throttle(this.onDragOver.bind(this)), 900);
     this.$list.addEventListener('drop', this.onDrop.bind(this));
@@ -73,7 +75,8 @@ class Sounds {
 
   onFocus(e) {
     let $li = e.target.closest('.list li');
-    if ($li !== this.$addSound) {
+
+    if (!this.ctrlPressed && $li !== this.$addSound) {
       this.$selected = $li;
     }
   }
@@ -81,15 +84,31 @@ class Sounds {
   onSelect(e) {
     let $li = e.target.closest('.list li');
     if ($li !== this.$addSound) {
-      this.$selected = $li;
+      if (this.ctrlPressed) {
+        this.$selected = $li;
+        this.notifyObservers('testPlay');
+      } else {
+        this.$selected = $li;
+      }
     }
   }
 
   onKey(e) {
+    if (e.ctrlKey) {
+      this.ctrlPressed = true;
+      return;
+    }
+
     switch (e.key) {
     case 'Escape':
       this._$selected = null;
       this.notifyObservers('select');
+    }
+  }
+
+  onKeyUp(e) {
+    if (!e.ctrlKey) {
+      this.ctrlPressed = false;
     }
   }
 
