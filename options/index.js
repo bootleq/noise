@@ -164,6 +164,8 @@ async function init() {
   let $infoClose  = $info.querySelector('.dismiss');
   let $permsBtn   = document.querySelector('#review-permission');
 
+  let $soundTip = document.querySelector('.sound-tips');
+
   function hideFloatMenus() {
     events.toggleOptionMenu.bind(events)(null, false);
     permissions.toggleDialog.bind(permissions)($permsBtn, false);
@@ -184,6 +186,11 @@ async function init() {
   events.addObserver('load', permissions.update.bind(permissions));
   events.addObserver('requestPermissions', permissions.request.bind(permissions));
   permissions.addObserver('update', events.updateAvailability.bind(events))
+
+  $soundTip.querySelector('span[data-i18n$="tips_ctrlPlay"]').innerHTML = browser.i18n.getMessage('options_sound_tips_ctrlPlay');
+  $soundTip.querySelector('button.dismiss').addEventListener('click', e => {
+    $soundTip.classList.add('hidden');
+  });
 
   $save.addEventListener('click', () => {
     $save.disabled = true;
