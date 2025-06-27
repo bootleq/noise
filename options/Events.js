@@ -5,6 +5,7 @@ import browser from "webextension-polyfill";
 import { EventSetting } from '../common/event.js';
 import { browserInfo, emptyObject } from '../common/utils.js';
 import { posisitionTo, arrayDiff } from './utils.js';
+import throttle from 'just-throttle';
 
 const confirmMsg = browser.i18n.getMessage('options_prompt_areYouSure');
 
@@ -33,11 +34,16 @@ class Events {
     this.editing = null;
     this._before = '{}';
 
+    this.$dragging = null;
     this.initMenus();
     this.$list.addEventListener('keydown', this.onKey.bind(this));
     this.$list.addEventListener('input', this.onInput.bind(this));
     this.$list.addEventListener('change', this.onChange.bind(this));
     this.$list.addEventListener('click', this.onSelect.bind(this));
+    this.$list.addEventListener('dragstart', this.onDragStart.bind(this));
+    this.$list.addEventListener('dragover', throttle(this.onDragOver.bind(this)), 900);
+    this.$list.addEventListener('drop', this.onDrop.bind(this));
+    this.$list.addEventListener('dragend', this.onDragEnd.bind(this));
     this.$addEvent.addEventListener('click', () => {
       let $row = this.addEvent();
       if (!this.editing) {
@@ -434,6 +440,8 @@ class Events {
     this.$list.classList.toggle('editing', !!!this.editing);
 
     if (this.editing) {
+      $row.draggable = true;
+
       const data = this.$selected.dataset;
       this.inputToDataset(this.$selected, data);
       this.datasetToEvent(data, this.editing);
@@ -448,6 +456,8 @@ class Events {
 
       this.$menus.options.style.display = 'none';
     } else {
+      $row.draggable = false;
+
       $row.dataset.tempSoundId = $row.dataset.soundId;
 
       this.editing = this.store.Events[$row.dataset.eventId];
@@ -476,6 +486,7 @@ class Events {
   }
 
   cancelEdit($row) {
+    $row.draggable = true;
     this.$list.classList.remove('editing');
     this.editing = null;
     let before = JSON.parse(this._before);
@@ -630,6 +641,64 @@ class Events {
       $btn.disabled = !!!tempSoundId;
     } else {
       $btn.disabled = !!!soundId;
+    }
+  }
+
+  onDragStart(e) {
+    const $el = e.target;
+    if ($el.tagName === 'TR') {
+      this.$dragging = $el;
+    }
+  }
+
+  onDragEnd(e) {
+    this.$dragging = null;
+    this.$list.querySelectorAll('.drag-before, .drag-after').forEach((otherItem) => {
+      otherItem.classList.remove('drag-before', 'drag-after');
+    });
+  }
+
+  findDropee(el) {
+    if (!this.$dragging) return;
+
+    let $row = el.tagName === 'TR' ? el : el.closest('tr[draggable]');
+
+    if ($row?.draggable && $row !== this.$dragging) {
+      return $row;
+    }
+  }
+
+  findDropSide(el, clientY) {
+    const boundingBox = el.getBoundingClientRect();
+    const offset = boundingBox.y + boundingBox.height / 2;
+    return clientY < offset;
+  }
+
+  onDragOver(e) {
+    e.preventDefault();
+    const $row = this.findDropee(e.target);
+    if (!$row) return;
+
+    this.$list.querySelectorAll('.drag-before, .drag-after').forEach((otherItem) => {
+      otherItem.classList.remove('drag-before', 'drag-after');
+    });
+
+    if (this.findDropSide($row, e.clientY)) {
+      $row.classList.add('drag-before');
+    } else {
+      $row.classList.add('drag-after');
+    }
+  }
+
+  onDrop(e) {
+    e.preventDefault();
+    const $row = this.findDropee(e.target);
+    if (!$row) return;
+
+    if (this.findDropSide($row, e.clientY)) {
+      this.$dragging.parentNode.insertBefore(this.$dragging, $row);
+    } else {
+      this.$dragging.parentNode.insertBefore(this.$dragging, $row.nextElementSibling);
     }
   }
 

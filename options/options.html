@@ -15,7 +15,7 @@
       </ul>
 
       <template>
-        <li>
+        <li draggable="true">
           <label class="name" tabindex="0">
             <span>Name</span>
           </label>
@@ -57,6 +57,13 @@
       </div>
     </fieldset>
 
+    <p class='sound-tips'>
+      <span data-i18n='_sound_tips_ctrlPlay'>
+        Hint: You can also play a sound by click it with <kbd>Ctrl</kbd> key pressed.
+      </span>
+      <button class="dismiss" >✖</button>
+    </p>
+
     <fieldset id="events">
       <legend data-i18n='_header_events'>Events</legend>
       <p class="no-sound">Please ensure set Sound first</p>
@@ -77,7 +84,7 @@
         <tbody></tbody>
 
         <template>
-          <tr>
+          <tr draggable='true'>
             <td class='e-ctrl e-toggle'><label data-i18n-title='_checkbox_event_enabled'><input type='checkbox'/></label></td>
             <td class='e-name'></td>
             <td class='e-type'></td>

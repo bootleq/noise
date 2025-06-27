@@ -3,6 +3,7 @@
   "description": "Make sound response when events happen",
   "private": true,
   "dependencies": {
+    "just-throttle": "^4.2.0",
     "nanoid": "^4.0.0"
   },
   "devDependencies": {

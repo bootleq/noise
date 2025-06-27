@@ -3,6 +3,8 @@ CHANGES
 
 ## 3.?.? (?)
 
+* Allow reorder sounds by drag and drop each sound.
+* Option page: play sound by press Ctrl + click.
 * Add tab groups open / close / move / update events.
 * Add tab add-into / remove-from group events.
 * Fix missing to remove tabs.onTabUpdated listener on Firefox.
