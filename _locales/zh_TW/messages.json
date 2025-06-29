@@ -199,6 +199,25 @@
     "message": "權限"
   },
 
+  "default_sound_pickupCoin_name": {
+    "message": "Pickup Coin"
+  },
+  "default_sound_pickupCoin_desc": {
+    "message": "Pickup sound generated with jsfxr\n\nhttps://sfxr.me/"
+  },
+  "default_sound_barbetA_name": {
+    "message": "五色鳥 上"
+  },
+  "default_sound_barbetA_desc": {
+    "message": "五色鳥（臺灣擬啄木）的叫聲 1\n\n改作來源：\nSunny Tseng, XC559593，見 https://www.xeno-canto.org/559593 ，授權條款 CC BY-NC-SA 4.0"
+  },
+  "default_sound_barbetB_name": {
+    "message": "五色鳥 下"
+  },
+  "default_sound_barbetB_desc": {
+    "message": "五色鳥（臺灣擬啄木）的叫聲 2\n\n改作來源：\nSunny Tseng, XC559593，見 https://www.xeno-canto.org/559593 ，授權條款 CC BY-NC-SA 4.0"
+  },
+
   "event_types_name_runtimeStartup": {
     "message": "瀏覽器啟動"
   },

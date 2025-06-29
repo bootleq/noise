@@ -115,6 +115,34 @@ function rewriteDuplicatedIds(config) {
   return config;
 }
 
+function translateDefaultSounds(config) {
+  config['sounds'].forEach((cfg) => {
+    let key;
+
+    switch (cfg['name']) {
+      case 'Pickup Coin':
+        key = 'pickupCoin'
+        break;
+      case '五色鳥 上': // Taiwan Barbet A
+        key = 'barbetA'
+        break;
+      case '五色鳥 下': // Taiwan Barbet B
+        key = 'barbetB'
+        break;
+
+      default:
+        break;
+    }
+
+    const name = browser.i18n.getMessage(`default_sound_${key}_name`);
+    const desc = browser.i18n.getMessage(`default_sound_${key}_desc`);
+    if (name) cfg['name'] = name;
+    if (desc) cfg['desc'] = desc;
+  });
+
+  return config;
+}
+
 async function onImportFile(e) {
   const json = await e.target.files[0]?.text();
   const config = JSON.parse(json);
@@ -234,9 +262,10 @@ async function init() {
         const cfgURL = browser.runtime.getURL('defaults.json');
         const response = await fetch(cfgURL);
         const newConfig = await response.json();
+        const translated = translateDefaultSounds(newConfig);
         sounds.clear();
         events.clear();
-        acceptImported(newConfig);
+        acceptImported(translated);
       } catch (err) {
         const prefix = browser.i18n.getMessage('options_error_importFail');
         $infoText.textContent = `${prefix}${err.message}`;

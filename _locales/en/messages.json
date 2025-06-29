@@ -214,6 +214,27 @@
     "message": "Permissions"
   },
 
+  "default_sound_pickupCoin_name": {
+    "message": "Pickup Coin"
+  },
+  "default_sound_pickupCoin_desc": {
+    "message": "Pickup sound generated with jsfxr\n\nhttps://sfxr.me/"
+  },
+  "default_sound_barbetA_name": {
+    "message": "Taiwan Barbet's Call A"
+  },
+  "default_sound_barbetA_desc": {
+    "message": "Taiwan Barbet's song call 1\n\nAdapted from:\nSunny Tseng, XC559593. Accessible at https://www.xeno-canto.org/559593 | CC BY-NC-SA 4.0",
+    "description": "Origin of this audio, the license part must be kept."
+  },
+  "default_sound_barbetB_name": {
+    "message": "Taiwan Barbet's Call B"
+  },
+  "default_sound_barbetB_desc": {
+    "message": "Taiwan Barbet's song call 2\n\nAdapted from:\nSunny Tseng, XC559593. Accessible at https://www.xeno-canto.org/559593 | CC BY-NC-SA 4.0",
+    "description": "Origin of this audio, the license part must be kept."
+  },
+
   "event_types_name_runtimeStartup": {
     "message": "Browser Startup"
   },
