@@ -159,14 +159,14 @@ function toggleImportMenu(force) {
   $importMenu.classList.toggle('show', force);
 }
 
-
-function onLoad() {
-  if (store.Loaded.length === 2) {
-    $save.disabled = false;
-    $import.disabled = false;
-    $export.disabled = false;
-  }
+async function loadDefaults() {
+  const cfgURL = browser.runtime.getURL('defaults.json');
+  const response = await fetch(cfgURL);
+  const config = await response.json();
+  const translated = translateDefaultSounds(config);
+  return translated;
 }
+
 // }}}
 
 async function init() {
@@ -210,6 +210,27 @@ async function init() {
     events.updateAvailability();
     events.updateBrowserCompatibility();
     events.updateSoundMenu();
+  }
+
+  async function onLoad() {
+    if (store.Loaded.length === 2) {
+      // Load defaults if nothing available
+      if (Object.keys(store.Sounds).length === 0 && Object.keys(store.Events).length === 0) {
+        try {
+          const defaults = await loadDefaults();
+          acceptImported(defaults);
+        } catch (err) {
+          const prefix = browser.i18n.getMessage('options_error_loadDefaultFail');
+          $infoText.textContent = `${prefix}${err.message}`;
+          console.error('Load defaults failed', err);
+          $info.classList.add('fail');
+        }
+      }
+
+      $save.disabled = false;
+      $import.disabled = false;
+      $export.disabled = false;
+    }
   }
 
   sounds.addObserver('select', soundDetail.attach.bind(soundDetail));
@@ -259,13 +280,10 @@ async function init() {
       if (!globalThis.confirm(importConfirmMsg)) return;
 
       try {
-        const cfgURL = browser.runtime.getURL('defaults.json');
-        const response = await fetch(cfgURL);
-        const newConfig = await response.json();
-        const translated = translateDefaultSounds(newConfig);
+        const defaults = await loadDefaults();
         sounds.clear();
         events.clear();
-        acceptImported(translated);
+        acceptImported(defaults);
       } catch (err) {
         const prefix = browser.i18n.getMessage('options_error_importFail');
         $infoText.textContent = `${prefix}${err.message}`;

@@ -207,6 +207,10 @@
   "options_error_importFailFileIncomplete": {
     "message": "File content incomplete."
   },
+  "options_error_loadDefaultFail": {
+    "message": "Load default setting failed: ",
+    "description": "Loading defaults is performed during options page's first load, will show this message if failed."
+  },
   "options_error_requestPermissionFailed": {
     "message": "Request permission failed. Please check console output for detail."
   },

@@ -192,6 +192,9 @@
   "options_error_importFailFileIncomplete": {
     "message": "檔案內容不完整"
   },
+  "options_error_loadDefaultFail": {
+    "message": "載入初始設定失敗："
+  },
   "options_error_requestPermissionFailed": {
     "message": "請求權限失敗，請查看主控台的訊息"
   },
