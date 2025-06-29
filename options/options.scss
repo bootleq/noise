@@ -334,8 +334,7 @@ table {
 
   .upload {
     display: flex;
-    align-items: baseline;
-    margin: -5px 0 14px;
+    align-items: stretch;
 
     label {
       flex: auto;
@@ -347,10 +346,23 @@ table {
       line-height: 3em;
     }
 
+    input[type='file'] {
+      margin-left: 0;
+      font-size: inherit;
+      cursor: pointer;
+    }
+
     button {
       border: none;
-      background: none;
+      background-color: rgba(0, 0, 0, 0.09);
+      padding-inline: 5px;
+      border-left: 3px solid white;
+      opacity: 0.5;
       order: 1;
+
+      &:hover {
+        opacity: 0.9;
+      }
     }
   }
 
