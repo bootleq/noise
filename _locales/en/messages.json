@@ -195,6 +195,12 @@
   "options_btn_importAppend": {
     "message": "Keep current, append new items"
   },
+  "options_btn_importDefaults": {
+    "message": "Restore to default settings"
+  },
+  "options_prompt_importDefaultsConfirm": {
+    "message": "Will replace are existing settings.\n\nAre you sure?"
+  },
   "options_error_importFail": {
     "message": "Import failed: "
   },

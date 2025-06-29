@@ -22,6 +22,7 @@ const $save   = document.querySelector('#save');
 const $import = document.querySelector('#import');
 const $export = document.querySelector('#export');
 const $importMenu = document.querySelector('#import-menu');
+const importConfirmMsg = browser.i18n.getMessage('options_prompt_importDefaultsConfirm');
 
 // {{{
 function currentSoundsConfig() {
@@ -172,6 +173,17 @@ async function init() {
     toggleImportMenu(false);
   }
 
+  function acceptImported(newConfig) {
+    newConfig['sounds'].forEach((cfg) => {
+      sounds.addSound(cfg);
+      store.Sounds[cfg.id].src = newConfig[`src.${cfg.id}`];
+    });
+    newConfig['events'].forEach((cfg) => events.addEvent(cfg));
+    events.updateAvailability();
+    events.updateBrowserCompatibility();
+    events.updateSoundMenu();
+  }
+
   sounds.addObserver('select', soundDetail.attach.bind(soundDetail));
   sounds.addObserver('update', events.updateSoundMenu.bind(events));
   sounds.addObserver('testPlay', soundDetail.testPlay.bind(soundDetail));
@@ -211,8 +223,29 @@ async function init() {
   $import.addEventListener('click', () => toggleImportMenu());
   $export.addEventListener('click', exportConfig);
 
-  $importMenu.addEventListener('click', (e) => {
+  $importMenu.addEventListener('click', async (e) => {
     const mode = e.target.closest('li')?.dataset.mode;
+
+    if (mode === 'defaults') {
+      hideFloatMenus();
+      if (!globalThis.confirm(importConfirmMsg)) return;
+
+      try {
+        const cfgURL = browser.runtime.getURL('defaults.json');
+        const response = await fetch(cfgURL);
+        const newConfig = await response.json();
+        sounds.clear();
+        events.clear();
+        acceptImported(newConfig);
+      } catch (err) {
+        const prefix = browser.i18n.getMessage('options_error_importFail');
+        $infoText.textContent = `${prefix}${err.message}`;
+        console.error('Import failed', err);
+        $info.classList.add('fail');
+      };
+      return;
+    }
+
     if (['append', 'overwrite'].includes(mode)) {
       importMode = mode;
       hideFloatMenus();
@@ -229,14 +262,7 @@ async function init() {
         newConfig = rewriteDuplicatedIds(newConfig);
       }
 
-      newConfig['sounds'].forEach((cfg) => {
-        sounds.addSound(cfg);
-        store.Sounds[cfg.id].src = newConfig[`src.${cfg.id}`];
-      });
-      newConfig['events'].forEach((cfg) => events.addEvent(cfg));
-      events.updateAvailability();
-      events.updateBrowserCompatibility();
-      events.updateSoundMenu();
+      acceptImported(newConfig);
     })
     .catch(e => {
       const prefix = browser.i18n.getMessage('options_error_importFail');

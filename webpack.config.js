@@ -34,6 +34,7 @@ const plugins = [
         from: `manifest${BROWSER == 'firefox' ? '' : `.${BROWSER}`}.json`,
         to: "manifest.json" },
       "./options/options.html",
+      "./defaults.json",
       BROWSER == 'chrome' ? './offscreen.html' : null,
       { from: "./_locales", to: "_locales" },
       { from: "./icons", to: "icons" },

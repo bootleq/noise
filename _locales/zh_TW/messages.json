@@ -180,6 +180,12 @@
   "options_btn_importAppend": {
     "message": "保留原設定，新項目加到後面"
   },
+  "options_btn_importDefaults": {
+    "message": "恢復為初始設定"
+  },
+  "options_prompt_importDefaultsConfirm": {
+    "message": "將覆蓋所有設定，確定執行？"
+  },
   "options_error_importFail": {
     "message": "匯入失敗："
   },
