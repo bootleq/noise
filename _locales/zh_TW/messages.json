@@ -35,6 +35,9 @@
   "options_warning_loadError": {
     "message": "載入失敗，資料可能已損壞，或格式不支援。"
   },
+  "options_title_sound_desc_memo": {
+    "message": "備忘"
+  },
   "options_btn_sound_acceptEdit": {
     "message": "✔ 確認"
   },

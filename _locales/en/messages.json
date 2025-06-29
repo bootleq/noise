@@ -38,6 +38,9 @@
   "options_warning_loadError": {
     "message": "Load failed. Data might be corrupted, or format not supported."
   },
+  "options_title_sound_desc_memo": {
+    "message": "Memo"
+  },
   "options_btn_sound_acceptEdit": {
     "message": "✔ Accept"
   },
