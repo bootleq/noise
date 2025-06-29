@@ -37,6 +37,10 @@ class SoundDetail {
     this.$ctrls.addEventListener('click', this.onCtrl.bind(this));
   }
 
+  focusName() {
+    this.$name.focus();
+  }
+
   attach($sound) {
     if (!$sound) {
       this.$el.disabled = true;

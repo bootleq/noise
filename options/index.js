@@ -233,6 +233,7 @@ async function init() {
     }
   }
 
+  sounds.addObserver('new', soundDetail.focusName.bind(soundDetail));
   sounds.addObserver('select', soundDetail.attach.bind(soundDetail));
   sounds.addObserver('update', events.updateSoundMenu.bind(events));
   sounds.addObserver('testPlay', soundDetail.testPlay.bind(soundDetail));
