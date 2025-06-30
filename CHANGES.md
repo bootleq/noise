@@ -9,7 +9,7 @@ CHANGES
 
 * Add "description" property to sounds, you can write some memo for each sound.
 * Allow reorder sounds by drag and drop each sound.
-* Option page: play sound by press Ctrl + click.
+* Option page: allow play a sound when selecting it.
 * Option page: auto focus "name" input when creating new sound.
 * Add tab groups open / close / move / update events.
 * Add tab add-into / remove-from group events.

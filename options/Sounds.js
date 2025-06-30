@@ -10,7 +10,7 @@ import throttle from 'just-throttle';
 class Sounds {
   constructor(el, parentStore) {
     this.store = parentStore;
-    this.ctrlPressed = false;
+    this.instantPlay = false;
 
     this.$el   = el;
     this.$list = this.$el.querySelector('ul.list');
@@ -18,18 +18,19 @@ class Sounds {
 
     this._$selected = null;
     this._observers = {};
+    this.$togglePickPlay = document.querySelector('#instant-play-toggle input[type="checkbox"]');
     this.$addSound = this.$el.querySelector('.add_sound');
 
     this.$dragging = null;
     this.$list.addEventListener('focus', this.onFocus.bind(this), {capture: true});
     this.$list.addEventListener('click', this.onSelect.bind(this));
     this.$list.addEventListener('keydown', this.onKey.bind(this));
-    this.$list.addEventListener('keyup', this.onKeyUp.bind(this));
     this.$list.addEventListener('dragstart', this.onDragStart.bind(this));
     this.$list.addEventListener('dragover', throttle(this.onDragOver.bind(this)), 900);
     this.$list.addEventListener('drop', this.onDrop.bind(this));
     this.$list.addEventListener('dragend', this.onDragEnd.bind(this));
     this.$addSound.addEventListener('click', this.newSound.bind(this));
+    this.$togglePickPlay.addEventListener('change', (e) => this.instantPlay = e.target.checked);
     this.load();
   }
 
@@ -76,15 +77,15 @@ class Sounds {
   onFocus(e) {
     let $li = e.target.closest('.list li');
 
-    if (!this.ctrlPressed && $li !== this.$addSound) {
+    if (!this.instantPlay && $li !== this.$addSound) {
       this.$selected = $li;
     }
   }
 
   onSelect(e) {
     let $li = e.target.closest('.list li');
-    if ($li !== this.$addSound) {
-      if (this.ctrlPressed) {
+    if ($li && $li !== this.$addSound) {
+      if (this.instantPlay) {
         this.$selected = $li;
         this.notifyObservers('testPlay');
       } else {
@@ -94,21 +95,10 @@ class Sounds {
   }
 
   onKey(e) {
-    if (e.ctrlKey) {
-      this.ctrlPressed = true;
-      return;
-    }
-
     switch (e.key) {
     case 'Escape':
       this._$selected = null;
       this.notifyObservers('select');
-    }
-  }
-
-  onKeyUp(e) {
-    if (!e.ctrlKey) {
-      this.ctrlPressed = false;
     }
   }
 
