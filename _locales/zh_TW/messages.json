@@ -76,10 +76,6 @@
     "message": "往後移動順序"
   },
 
-  "options_sound_tips_ctrlPlay": {
-    "message": "提示：按住 <kbd>Ctrl</kbd> 再點選聲音，可以直接播放"
-  },
-
   "options_header_events": {
     "message": "事件"
   },

@@ -80,11 +80,6 @@
     "message": "Move this sound afterward from current position"
   },
 
-  "options_sound_tips_ctrlPlay": {
-    "message": "Hint: You can also play a sound by click it with <kbd>Ctrl</kbd> key pressed.",
-    "description": "A hint below sound player"
-  },
-
   "options_header_events": {
     "message": "Events"
   },

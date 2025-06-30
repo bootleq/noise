@@ -475,42 +475,6 @@ table {
   }
 }
 
-#sound_detail:disabled + .sound-tips {
-  display: none;
-}
-
-.sound-tips {
-  display: flex;
-  align-items: center;
-  margin-top: -13px;
-  margin-left: 9px;
-  border-left: 10px solid purple;
-  padding-left: 1.4em;
-  font-size: 14px;
-  color: #888;
-
-  kbd {
-    text-decoration: underline;
-    text-underline-offset: 4px;
-    text-decoration-color: var(--color-fx-red-70);
-    text-decoration-thickness: 3px;
-  }
-
-  .dismiss {
-    margin-left: 1em;
-    border: none;
-    background-color: transparent;
-    opacity: 0.5;
-    cursor: pointer;
-    transform: scale(0.9);
-
-    &:hover {
-      opacity: 1;
-      transform: scale(1);
-    }
-  }
-}
-
 #events {
   margin-top: 2em;
   margin-bottom: 2em;
