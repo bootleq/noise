@@ -85,12 +85,13 @@ class Sounds {
   onSelect(e) {
     let $li = e.target.closest('.list li');
     if ($li && $li !== this.$addSound) {
+      this.$selected = $li;
+
       if (this.instantPlay) {
-        this.$selected = $li;
         this.notifyObservers('testPlay');
-      } else {
-        this.$selected = $li;
       }
+    } else {
+      this.$selected = null;
     }
   }
 
