@@ -41,6 +41,10 @@ Run with [web-ext][] after temporary build (Firefox only):
     yarn we:run --profile some_firefox_profile_name
     yarn we:run -p some_profile_name -f /path/to/your/firefox/or/alias
 
+Lint the temporary build (Firefox only):
+
+    yarn we:lint
+
 Package a zip file:
 
     yarn build:prod
