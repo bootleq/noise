@@ -61,9 +61,11 @@ class SoundDetail {
   }
 
   testPlay() {
-    if (this.$audio.src) {
-      this.onPlay();
-    }
+    setTimeout(() => {
+      if (this.$audio.src) {
+        this.onPlay();
+      }
+    }, 12);
   }
 
   addObserver(topic, func) {

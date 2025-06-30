@@ -7,13 +7,17 @@ CHANGES
   * Pickup Coin: generated with jsfxr (https://sfxr.me/)
   * Taiwan Barbet's Call (2 types): adapted from Sunny Tseng's recording, https://www.xeno-canto.org/559593
 
-* Add "description" property to sounds, you can write some memo for each sound.
-* Allow reorder sounds by drag and drop each sound.
-* Option page: allow play a sound when selecting it.
-* Option page: auto focus "name" input when creating new sound.
-* Add tab groups open / close / move / update events.
-* Add tab add-into / remove-from group events.
-* Fix missing to remove tabs.onTabUpdated listener on Firefox.
+* Options page:
+  * Add "description" property to sounds, you can write some memo for each sound.
+  * Allow reorder sounds / events by drag and drop.
+  * Allow play a sound when selecting it, by enable the "Play select" toggle.
+  * Auto focus "name" input when creating new sound.
+
+* New events:
+  * Add tab groups open / close / move / update events.
+  * Add tab add-into / remove-from group events.
+
+* Fix missing to remove `tabs.onTabUpdated` listener on Firefox.
 
 ## 3.3.0 (2025-06-23)
 

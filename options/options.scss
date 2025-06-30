@@ -637,6 +637,7 @@ table {
   .e-non-edit {
     div {
       display: flex;
+      flex-direction: column;
       justify-content: space-around;
       align-items: center;
       padding: 0 2px;
@@ -698,6 +699,15 @@ table {
       pointer-events: none;
       input, button {
         pointer-events: none;
+      }
+    }
+  }
+
+  @media (min-width: 640px) {
+    .e-ctrl {
+      > div {
+        flex-direction: row;
+        gap: 4px;
       }
     }
   }
