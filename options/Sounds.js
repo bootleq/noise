@@ -29,7 +29,7 @@ class Sounds {
     this.$list.addEventListener('dragover', throttle(this.onDragOver.bind(this)), 900);
     this.$list.addEventListener('drop', this.onDrop.bind(this));
     this.$list.addEventListener('dragend', this.onDragEnd.bind(this));
-    this.$addSound.addEventListener('click', () => this.$selected = this.addSound());
+    this.$addSound.addEventListener('click', this.newSound.bind(this));
     this.load();
   }
 
@@ -215,6 +215,11 @@ class Sounds {
         el.parentNode.insertBefore(el, el.parentNode.firstElementChild);
       }
     }
+  }
+
+  newSound() {
+    this.$selected = this.addSound();
+    this.notifyObservers('new');
   }
 
   addSound(config) {

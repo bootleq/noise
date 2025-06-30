@@ -8,12 +8,14 @@ class Sound {
   constructor(config) {
     this.id   = config ? config.id   : newId();
     this.name = config ? config.name : '';
+    this.desc = config ? config.desc : '';
   }
 
   toPersistedProps() {
     let obj = {
       id:   this.id,
       name: this.name,
+      desc: this.desc,
     }
     return obj;
   }

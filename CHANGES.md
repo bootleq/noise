@@ -1,10 +1,16 @@
 CHANGES
 =======
 
-## 3.?.? (?)
+## 4.0.0 (?)
 
+* Introduce default settings, with 3 built-in sounds:
+  * Pickup Coin: generated with jsfxr (https://sfxr.me/)
+  * Taiwan Barbet's Call (2 types): adapted from Sunny Tseng's recording, https://www.xeno-canto.org/559593
+
+* Add "description" property to sounds, you can write some memo for each sound.
 * Allow reorder sounds by drag and drop each sound.
 * Option page: play sound by press Ctrl + click.
+* Option page: auto focus "name" input when creating new sound.
 * Add tab groups open / close / move / update events.
 * Add tab add-into / remove-from group events.
 * Fix missing to remove tabs.onTabUpdated listener on Firefox.

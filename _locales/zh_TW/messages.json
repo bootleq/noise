@@ -7,6 +7,10 @@
     "message": "Noise 設定"
   },
 
+  "options_msg_defaultsLoaded": {
+    "message": "已載入初始設定。\n請記得按下 SAVE_BUTTON 讓設定生效。"
+  },
+
   "options_header_sounds": {
     "message": "聲音"
   },
@@ -34,6 +38,9 @@
   },
   "options_warning_loadError": {
     "message": "載入失敗，資料可能已損壞，或格式不支援。"
+  },
+  "options_title_sound_desc_memo": {
+    "message": "備忘"
   },
   "options_btn_sound_acceptEdit": {
     "message": "✔ 確認"
@@ -177,17 +184,45 @@
   "options_btn_importAppend": {
     "message": "保留原設定，新項目加到後面"
   },
+  "options_btn_importDefaults": {
+    "message": "恢復為初始設定"
+  },
+  "options_prompt_importDefaultsConfirm": {
+    "message": "將覆蓋所有設定，確定執行？"
+  },
   "options_error_importFail": {
     "message": "匯入失敗："
   },
   "options_error_importFailFileIncomplete": {
     "message": "檔案內容不完整"
   },
+  "options_error_loadDefaultFail": {
+    "message": "載入初始設定失敗："
+  },
   "options_error_requestPermissionFailed": {
     "message": "請求權限失敗，請查看主控台的訊息"
   },
   "options_btn_reviewPermission": {
     "message": "權限"
+  },
+
+  "default_sound_pickupCoin_name": {
+    "message": "Pickup Coin"
+  },
+  "default_sound_pickupCoin_desc": {
+    "message": "Pickup sound generated with jsfxr\n\nhttps://sfxr.me/"
+  },
+  "default_sound_barbetA_name": {
+    "message": "五色鳥 上"
+  },
+  "default_sound_barbetA_desc": {
+    "message": "五色鳥（臺灣擬啄木）的叫聲 1\n\n改作來源：\nSunny Tseng, XC559593，見 https://www.xeno-canto.org/559593 ，授權條款 CC BY-NC-SA 4.0"
+  },
+  "default_sound_barbetB_name": {
+    "message": "五色鳥 下"
+  },
+  "default_sound_barbetB_desc": {
+    "message": "五色鳥（臺灣擬啄木）的叫聲 2\n\n改作來源：\nSunny Tseng, XC559593，見 https://www.xeno-canto.org/559593 ，授權條款 CC BY-NC-SA 4.0"
   },
 
   "event_types_name_runtimeStartup": {
