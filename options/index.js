@@ -193,12 +193,23 @@ async function init() {
   let $infoClose  = $info.querySelector('.dismiss');
   let $permsBtn   = document.querySelector('#review-permission');
 
+  const $defaultLoaded = document.querySelector('#defaults-loaded-msg');
+
   let $soundTip = document.querySelector('.sound-tips');
 
   function hideFloatMenus() {
     events.toggleOptionMenu.bind(events)(null, false);
     permissions.toggleDialog.bind(permissions)($permsBtn, false);
     toggleImportMenu(false);
+  }
+
+  function showDefaultLoaded() {
+    const $text = $defaultLoaded.querySelector('div[data-i18n$="_msg_defaultsLoaded"]');
+    const btnText = browser.i18n.getMessage('options_btn_save');
+    const html = $text.innerHTML.replace('SAVE_BUTTON', `<kbd>${btnText}</kbd>`);
+    $text.innerHTML = html;
+
+    $defaultLoaded.classList.toggle('hidden', false);
   }
 
   function acceptImported(newConfig) {
@@ -219,6 +230,7 @@ async function init() {
         try {
           const defaults = await loadDefaults();
           acceptImported(defaults);
+          showDefaultLoaded();
         } catch (err) {
           const prefix = browser.i18n.getMessage('options_error_loadDefaultFail');
           $infoText.textContent = `${prefix}${err.message}`;
@@ -262,6 +274,7 @@ async function init() {
       $save.disabled = false;
       $infoText.textContent = browser.i18n.getMessage('options_info_saveSuccess');
       $info.classList.add('success');
+      $defaultLoaded.classList.toggle('hidden', true);
     })
     .catch(e => {
       $infoText.textContent = browser.i18n.getMessage('options_info_saveFail');
@@ -320,8 +333,9 @@ async function init() {
   });
 
   $infoClose.addEventListener('click', () => $info.className = 'info');
-
   $permsBtn.addEventListener('click', permissions.toggleDialog.bind(permissions, $permsBtn));
+
+  $defaultLoaded.querySelector('button').addEventListener('click', () => $defaultLoaded.classList.add('hidden'));
 
   document.body.addEventListener('click', e => {
     if (e.target.tagName === 'BODY') {

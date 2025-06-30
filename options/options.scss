@@ -76,6 +76,45 @@ table {
   opacity: 0.6;
 }
 
+#defaults-loaded-msg {
+	display: flex;
+	align-items: center;
+	padding: 6px 14px;
+	background-color: oklch(93.8% 0.127 124.321deg);
+  outline: 1px solid rgba(100,2,100, 0.2);
+	border-radius: 12px;
+	font-size: medium;
+	white-space: pre;
+	line-height: 1.6;
+  margin-left: 13px;
+	margin-bottom: 28px;
+	width: fit-content;
+
+  > div::first-line {
+    font-weight: bold;
+  }
+
+  kbd {
+    padding: 2px 4px;
+    font-weight: bold;
+    appearance: button;
+    outline: 1px solid silver;
+    border-radius: 4px;
+    margin: 0 4px;
+    vertical-align: bottom;
+  }
+
+  button {
+    padding: 0 3px;
+    border-color: transparent;
+    background-color: transparent;
+    margin-left: 2em;
+    &:hover {
+      transform: scale(1.3);
+    }
+  }
+}
+
 #sounds,
 #events {
   @media (min-width: 640px) {

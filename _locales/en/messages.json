@@ -7,6 +7,11 @@
     "message": "Noise - Options"
   },
 
+  "options_msg_defaultsLoaded": {
+    "message": "Default settings loaded.\nPlease note that you have to click SAVE_BUTTON to make it effective.",
+    "description": "Shown when auto loading defaults. First line will be shown in bold font. The 'SAVE_BUTTON' must be kept, will be replaced during runtime."
+  },
+
   "options_header_sounds": {
     "message": "Sounds"
   },
