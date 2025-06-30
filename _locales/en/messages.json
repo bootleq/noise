@@ -15,6 +15,12 @@
   "options_header_sounds": {
     "message": "Sounds"
   },
+  "options_btn_toggleClickPlay": {
+    "message": "Play select"
+  },
+  "options_title_btn_toggleClickPlay": {
+    "message": "Play a sound when selecting"
+  },
   "options_btn_addSound": {
     "message": "➕"
   },
