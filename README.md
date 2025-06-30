@@ -6,6 +6,7 @@ Make sound response when event happen.
 - Firefox Add-on: https://addons.mozilla.org/firefox/addon/noise/
 - Chrome Web Store: https://chromewebstore.google.com/detail/noise/bhookghbiabmdcjpphjikookipcddidk
 
+
 Available Events
 ----------------
 
@@ -46,6 +47,19 @@ Package a zip file:
     yarn build:prod:chrome
 
 
+Resource License
+----------------
+
+Some resources in this project have their own license.
+
+- The two default sounds **五色鳥 上** / **下** (Taiwan Barbet's Call A / B)
+  encoded in `defaults.json`,
+
+  were adapted from [Sunny Tseng][]'s recording [xeno-canto.org/559593][],
+
+  thus are licensed under [CC BY-NC-SA 4.0][].
+
+
 Alternatives
 ------------
 
@@ -66,3 +80,6 @@ Alternatives
 [Download Sound]: https://addons.mozilla.org/firefox/addon/download-sound/
 [Download Sound - Chrome]: https://chromewebstore.google.com/detail/download-sound/fmcbineojopoamfhaabogigdbpbklnld
 [Navigational Sounds]: https://chromewebstore.google.com/detail/navigational-sounds/plhoioliblcddpmljieonfdndcmjmkpd
+[Sunny Tseng]: https://sunnytseng.ca/
+[xeno-canto.org/559593]: https://www.xeno-canto.org/559593
+[CC BY-NC-SA 4.0]: https://creativecommons.org/licenses/by-nc-sa/4.0/
