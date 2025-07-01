@@ -84,14 +84,18 @@ class Sounds {
 
   onSelect(e) {
     let $li = e.target.closest('.list li');
-    if ($li && $li !== this.$addSound) {
+
+    if (!$li) { // click outside of sounds
+      this.$selected = null;
+      return;
+    }
+
+    if ($li !== this.$addSound) {
       this.$selected = $li;
 
       if (this.instantPlay) {
         this.notifyObservers('testPlay');
       }
-    } else {
-      this.$selected = null;
     }
   }
 
