@@ -17,7 +17,8 @@
   ],
   "optional_permissions": [
     "webNavigation",
-    "webRequest"
+    "webRequest",
+    "tabGroups"
   ],
   "host_permissions": [
     "<all_urls>"
