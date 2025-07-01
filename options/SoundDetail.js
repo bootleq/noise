@@ -21,6 +21,7 @@ class SoundDetail {
     this.$audio        = this.$el.querySelector('audio');
     this.$change       = this.$el.querySelector('button.change');
     this.$cancelUpload = this.$el.querySelector('button.cancel_upload');
+    this.$desc         = this.$el.querySelector('.desc textarea');
     this.$warning      = this.$el.querySelector('.player .warning');
     this.$ctrls        = this.$el.querySelector('.ctrls');
     this.$accept       = this.$el.querySelector('button.accept');
@@ -34,6 +35,10 @@ class SoundDetail {
     this.$name.addEventListener('input', this.validate.bind(this));
     this.$name.addEventListener('keydown', this.onKey.bind(this));
     this.$ctrls.addEventListener('click', this.onCtrl.bind(this));
+  }
+
+  focusName() {
+    this.$name.focus();
   }
 
   attach($sound) {
@@ -53,6 +58,14 @@ class SoundDetail {
     } else {
       this.render();
     }
+  }
+
+  testPlay() {
+    setTimeout(() => {
+      if (this.$audio.src) {
+        this.onPlay();
+      }
+    }, 12);
   }
 
   addObserver(topic, func) {
@@ -130,7 +143,9 @@ class SoundDetail {
 
   onPlay(e) {
     this.$audio.currentTime = 0;
-    this.$audio.play();
+    setTimeout(() => {
+      this.$audio.play();
+    }, 200);
   }
 
   onKey(e) {
@@ -177,6 +192,7 @@ class SoundDetail {
   accept() {
     let sound = this.store.Sounds[this.$selected.dataset.soundId];
     sound.name  = this.$name.value;
+    sound.desc  = this.$desc.value;
     sound.src   = this.$audio.src;
     sound.audio = null;
     this.notifyObservers('accept');
@@ -207,6 +223,7 @@ class SoundDetail {
     if (this.$selected) {
       let sound = this.store.Sounds[this.$selected.dataset.soundId];
       this.$name.value = sound.name || '';
+      this.$desc.value = sound.desc || '';
 
       await this.testAndSetSrc(sound.src);
 
@@ -214,6 +231,7 @@ class SoundDetail {
       this.validate();
     } else {
       this.$name.value = '';
+      this.$desc.value = '';
       this.$upload.classList.remove('hidden');
     }
     this.$filename.textContent = '';

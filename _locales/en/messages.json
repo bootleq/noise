@@ -7,8 +7,19 @@
     "message": "Noise - Options"
   },
 
+  "options_msg_defaultsLoaded": {
+    "message": "Default settings loaded.\nPlease note that you have to click SAVE_BUTTON to make it effective.",
+    "description": "Shown when auto loading defaults. First line will be shown in bold font. The 'SAVE_BUTTON' must be kept, will be replaced during runtime."
+  },
+
   "options_header_sounds": {
     "message": "Sounds"
+  },
+  "options_btn_toggleClickPlay": {
+    "message": "Play select"
+  },
+  "options_title_btn_toggleClickPlay": {
+    "message": "Play when selecting a sound"
   },
   "options_btn_addSound": {
     "message": "➕"
@@ -37,6 +48,9 @@
   },
   "options_warning_loadError": {
     "message": "Load failed. Data might be corrupted, or format not supported."
+  },
+  "options_title_sound_desc_memo": {
+    "message": "Memo"
   },
   "options_btn_sound_acceptEdit": {
     "message": "✔ Accept"
@@ -105,7 +119,7 @@
     "message": "Cancel"
   },
   "options_btn_event_play": {
-    "message": "▸ Play"
+    "message": "▶ Play"
   },
   "options_btn_event_delete": {
     "message": "✖"
@@ -150,11 +164,15 @@
   },
   "options_perms_desc_webNavigation": {
     "message": "Access browser activity during navigation",
-    "description": "description about 'webNavigation' permission, should be identical to 'webextPerms.description.webNavigation' in https://hg.mozilla.org/l10n-central/zh-TW/file/default/browser/chrome/browser/browser.properties (change `zh-TW` to your locale)."
+    "description": "description about 'webNavigation' permission, should be identical to corresponding term in https://pontoon.mozilla.org/zh-TW/firefox/toolkit/toolkit/global/extensionPermissions.ftl (change `zh-TW` to your locale)."
   },
   "options_perms_desc_webRequest": {
     "message": "Access HTTP request activity",
     "description": "description about 'webRequest' permission. Note there seems no built-in translation for this."
+  },
+  "options_perms_desc_tabGroups": {
+    "message": "View and manage your tab groups",
+    "description": "description about 'tabGroups' permission. The term can be refered to https://developer.chrome.com/docs/extensions/reference/permissions-list#tabGroups, while it doesn't necessary to have translated in your locale, more: https://chromium.googlesource.com/chromium/src/+/HEAD/chrome/app/generated_resources.grd"
   },
   "options_title_btn_close": {
     "message": "Close"
@@ -183,14 +201,48 @@
   "options_btn_importAppend": {
     "message": "Keep current, append new items"
   },
+  "options_btn_importDefaults": {
+    "message": "Restore to default settings"
+  },
+  "options_prompt_importDefaultsConfirm": {
+    "message": "Will replace are existing settings.\n\nAre you sure?"
+  },
   "options_error_importFail": {
     "message": "Import failed: "
   },
   "options_error_importFailFileIncomplete": {
     "message": "File content incomplete."
   },
+  "options_error_loadDefaultFail": {
+    "message": "Load default setting failed: ",
+    "description": "Loading defaults is performed during options page's first load, will show this message if failed."
+  },
+  "options_error_requestPermissionFailed": {
+    "message": "Request permission failed. Please check console output for detail."
+  },
   "options_btn_reviewPermission": {
     "message": "Permissions"
+  },
+
+  "default_sound_pickupCoin_name": {
+    "message": "Pickup Coin"
+  },
+  "default_sound_pickupCoin_desc": {
+    "message": "Pickup sound, generated with jsfxr\n\nhttps://sfxr.me/"
+  },
+  "default_sound_barbetA_name": {
+    "message": "Taiwan Barbet's Call A"
+  },
+  "default_sound_barbetA_desc": {
+    "message": "Taiwan Barbet's song call 1\n\nAdapted from:\nSunny Tseng, XC559593. Accessible at https://www.xeno-canto.org/559593 | CC BY-NC-SA 4.0",
+    "description": "Origin of this audio, the license part must be kept."
+  },
+  "default_sound_barbetB_name": {
+    "message": "Taiwan Barbet's Call B"
+  },
+  "default_sound_barbetB_desc": {
+    "message": "Taiwan Barbet's song call 2\n\nAdapted from:\nSunny Tseng, XC559593. Accessible at https://www.xeno-canto.org/559593 | CC BY-NC-SA 4.0",
+    "description": "Origin of this audio, the license part must be kept."
   },
 
   "event_types_name_runtimeStartup": {
@@ -228,6 +280,24 @@
   },
   "event_types_name_tabsUnpinned": {
     "message": "Unpin Tab"
+  },
+  "event_types_name_tabsGroupIn": {
+    "message": "Add Tab into Group"
+  },
+  "event_types_name_tabsGroupOut": {
+    "message": "Remove Tab from Group"
+  },
+  "event_types_name_tabGroupsCreated": {
+    "message": "Create New Tab Group"
+  },
+  "event_types_name_tabGroupsRemoved": {
+    "message": "Close Tab Group"
+  },
+  "event_types_name_tabGroupsMoved": {
+    "message": "Move Tab Group"
+  },
+  "event_types_name_tabGroupsUpdated": {
+    "message": "Tab Group Updated (title, color, etc)"
   },
   "event_types_name_windowsCreated": {
     "message": "Open Window"

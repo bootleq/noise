@@ -45,26 +45,40 @@ class Permissions {
   }
 
   async request(names) {
-    await browser.permissions.request({permissions: names}).then(yes => {
-      if (yes) {
-        this.store.Permissions = Array.from(new Set([...this.store.Permissions, ...names]));
-        browser.runtime.sendMessage({type: 'listeners'});
-        this.update();
-      }
-    });
+    let yes;
+    try {
+      yes = await browser.permissions.request({permissions: names});
+    } catch (error) {
+      const msg = browser.i18n.getMessage('options_error_requestPermissionFailed');
+      alert(msg);
+      console.error(error);
+    }
+
+    if (yes) {
+      this.store.Permissions = Array.from(new Set([...this.store.Permissions, ...names]));
+      browser.runtime.sendMessage({type: 'listeners'});
+      this.update();
+    }
   }
 
   async revoke(names) {
     browser.runtime.sendMessage({type: 'listeners', action: 'unbind'});
-    await browser.permissions.remove({permissions: names}).then(yes => {
-      if (yes) {
-        this.store.Permissions = arrayDiff(this.store.Permissions, names);
-        browser.runtime.sendMessage({type: 'listeners'});
-        this.update();
-      } else {
-        browser.runtime.sendMessage({type: 'listeners'});
-      }
-    });
+    let yes;
+    try {
+      yes = await browser.permissions.remove({permissions: names});
+    } catch (error) {
+      const msg = browser.i18n.getMessage('options_error_requestPermissionFailed');
+      alert(msg);
+      console.error(error);
+    }
+
+    if (yes) {
+      this.store.Permissions = arrayDiff(this.store.Permissions, names);
+      browser.runtime.sendMessage({type: 'listeners'});
+      this.update();
+    } else {
+      browser.runtime.sendMessage({type: 'listeners'});
+    }
   }
 
   toggleDialog($btn, force) {

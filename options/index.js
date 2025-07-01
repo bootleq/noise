@@ -22,6 +22,7 @@ const $save   = document.querySelector('#save');
 const $import = document.querySelector('#import');
 const $export = document.querySelector('#export');
 const $importMenu = document.querySelector('#import-menu');
+const importConfirmMsg = browser.i18n.getMessage('options_prompt_importDefaultsConfirm');
 
 // {{{
 function currentSoundsConfig() {
@@ -114,6 +115,34 @@ function rewriteDuplicatedIds(config) {
   return config;
 }
 
+function translateDefaultSounds(config) {
+  config['sounds'].forEach((cfg) => {
+    let key;
+
+    switch (cfg['name']) {
+      case 'Pickup Coin':
+        key = 'pickupCoin'
+        break;
+      case '五色鳥 上': // Taiwan Barbet A
+        key = 'barbetA'
+        break;
+      case '五色鳥 下': // Taiwan Barbet B
+        key = 'barbetB'
+        break;
+
+      default:
+        break;
+    }
+
+    const name = browser.i18n.getMessage(`default_sound_${key}_name`);
+    const desc = browser.i18n.getMessage(`default_sound_${key}_desc`);
+    if (name) cfg['name'] = name;
+    if (desc) cfg['desc'] = desc;
+  });
+
+  return config;
+}
+
 async function onImportFile(e) {
   const json = await e.target.files[0]?.text();
   const config = JSON.parse(json);
@@ -130,14 +159,14 @@ function toggleImportMenu(force) {
   $importMenu.classList.toggle('show', force);
 }
 
-
-function onLoad() {
-  if (store.Loaded.length === 2) {
-    $save.disabled = false;
-    $import.disabled = false;
-    $export.disabled = false;
-  }
+async function loadDefaults() {
+  const cfgURL = browser.runtime.getURL('defaults.json');
+  const response = await fetch(cfgURL);
+  const config = await response.json();
+  const translated = translateDefaultSounds(config);
+  return translated;
 }
+
 // }}}
 
 async function init() {
@@ -164,14 +193,60 @@ async function init() {
   let $infoClose  = $info.querySelector('.dismiss');
   let $permsBtn   = document.querySelector('#review-permission');
 
+  const $defaultLoaded = document.querySelector('#defaults-loaded-msg');
+
   function hideFloatMenus() {
     events.toggleOptionMenu.bind(events)(null, false);
     permissions.toggleDialog.bind(permissions)($permsBtn, false);
     toggleImportMenu(false);
   }
 
+  function showDefaultLoaded() {
+    const $text = $defaultLoaded.querySelector('div[data-i18n$="_msg_defaultsLoaded"]');
+    const btnText = browser.i18n.getMessage('options_btn_save');
+    const html = $text.innerHTML.replace('SAVE_BUTTON', `<kbd>${btnText}</kbd>`);
+    $text.innerHTML = html;
+
+    $defaultLoaded.classList.toggle('hidden', false);
+  }
+
+  function acceptImported(newConfig) {
+    newConfig['sounds'].forEach((cfg) => {
+      sounds.addSound(cfg);
+      store.Sounds[cfg.id].src = newConfig[`src.${cfg.id}`];
+    });
+    newConfig['events'].forEach((cfg) => events.addEvent(cfg));
+    events.updateAvailability();
+    events.updateBrowserCompatibility();
+    events.updateSoundMenu();
+  }
+
+  async function onLoad() {
+    if (store.Loaded.length === 2) {
+      // Load defaults if nothing available
+      if (Object.keys(store.Sounds).length === 0 && Object.keys(store.Events).length === 0) {
+        try {
+          const defaults = await loadDefaults();
+          acceptImported(defaults);
+          showDefaultLoaded();
+        } catch (err) {
+          const prefix = browser.i18n.getMessage('options_error_loadDefaultFail');
+          $infoText.textContent = `${prefix}${err.message}`;
+          console.error('Load defaults failed', err);
+          $info.classList.add('fail');
+        }
+      }
+
+      $save.disabled = false;
+      $import.disabled = false;
+      $export.disabled = false;
+    }
+  }
+
+  sounds.addObserver('new', soundDetail.focusName.bind(soundDetail));
   sounds.addObserver('select', soundDetail.attach.bind(soundDetail));
   sounds.addObserver('update', events.updateSoundMenu.bind(events));
+  sounds.addObserver('testPlay', soundDetail.testPlay.bind(soundDetail));
 
   soundDetail.render();
   soundDetail.addObserver('accept', sounds.accept.bind(sounds));
@@ -192,6 +267,7 @@ async function init() {
       $save.disabled = false;
       $infoText.textContent = browser.i18n.getMessage('options_info_saveSuccess');
       $info.classList.add('success');
+      $defaultLoaded.classList.toggle('hidden', true);
     })
     .catch(e => {
       $infoText.textContent = browser.i18n.getMessage('options_info_saveFail');
@@ -203,8 +279,27 @@ async function init() {
   $import.addEventListener('click', () => toggleImportMenu());
   $export.addEventListener('click', exportConfig);
 
-  $importMenu.addEventListener('click', (e) => {
+  $importMenu.addEventListener('click', async (e) => {
     const mode = e.target.closest('li')?.dataset.mode;
+
+    if (mode === 'defaults') {
+      hideFloatMenus();
+      if (!globalThis.confirm(importConfirmMsg)) return;
+
+      try {
+        const defaults = await loadDefaults();
+        sounds.clear();
+        events.clear();
+        acceptImported(defaults);
+      } catch (err) {
+        const prefix = browser.i18n.getMessage('options_error_importFail');
+        $infoText.textContent = `${prefix}${err.message}`;
+        console.error('Import failed', err);
+        $info.classList.add('fail');
+      };
+      return;
+    }
+
     if (['append', 'overwrite'].includes(mode)) {
       importMode = mode;
       hideFloatMenus();
@@ -221,14 +316,7 @@ async function init() {
         newConfig = rewriteDuplicatedIds(newConfig);
       }
 
-      newConfig['sounds'].forEach((cfg) => {
-        sounds.addSound(cfg);
-        store.Sounds[cfg.id].src = newConfig[`src.${cfg.id}`];
-      });
-      newConfig['events'].forEach((cfg) => events.addEvent(cfg));
-      events.updateAvailability();
-      events.updateBrowserCompatibility();
-      events.updateSoundMenu();
+      acceptImported(newConfig);
     })
     .catch(e => {
       const prefix = browser.i18n.getMessage('options_error_importFail');
@@ -238,8 +326,9 @@ async function init() {
   });
 
   $infoClose.addEventListener('click', () => $info.className = 'info');
-
   $permsBtn.addEventListener('click', permissions.toggleDialog.bind(permissions, $permsBtn));
+
+  $defaultLoaded.querySelector('button').addEventListener('click', () => $defaultLoaded.classList.add('hidden'));
 
   document.body.addEventListener('click', e => {
     if (e.target.tagName === 'BODY') {

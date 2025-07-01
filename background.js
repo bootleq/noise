@@ -147,15 +147,22 @@ function addListeners() {
   toggleListener(
     browser.tabs.onUpdated,
     onTabUpdated,
-    hasAny(['tabs.attention', 'tabs.pinned', 'tabs.unpinned'], types),
+    hasAny(['tabs.attention', 'tabs.pinned', 'tabs.unpinned', 'tabs.group-in', 'tabs.group-out'], types),
     {
       urls: ['<all_urls>'],
-      properties: ['attention', 'pinned']
+      properties: ['attention', 'pinned', 'groupId']
     }
   );
 
   toggleListener(browser.windows.onCreated, onWindowCreated, hasAny(['windows.created', 'windows.created-private'], types));
   toggleListener(browser.windows.onRemoved, onWindowRemoved, types.includes('windows.removed'));
+
+  if (typeof browser.tabGroups === 'object') {
+    toggleListener(browser.tabGroups.onCreated, onTabGroupCreated, types.includes('tabGroups.created'));
+    toggleListener(browser.tabGroups.onRemoved, onTabGroupRemoved, types.includes('tabGroups.removed'));
+    toggleListener(browser.tabGroups.onMoved, onTabGroupMoved, types.includes('tabGroups.moved'));
+    toggleListener(browser.tabGroups.onUpdated, onTabGroupUpdated, types.includes('tabGroups.updated'));
+  }
 
   if (typeof browser.webNavigation === 'object') {
     ['onCommitted', 'onHistoryStateUpdated', 'onReferenceFragmentUpdated'].forEach(event => {
@@ -182,8 +189,16 @@ function removeListeners() {
   browser.tabs.onCreated.removeListener(onTabCreated);
   browser.tabs.onRemoved.removeListener(onTabRemoved);
   browser.tabs.onAttached.removeListener(onTabAttached);
+  browser.tabs.onUpdated.removeListener(onTabUpdated);
   browser.windows.onCreated.removeListener(onWindowCreated);
   browser.windows.onRemoved.removeListener(onWindowRemoved);
+
+  if (typeof browser.tabGroups === 'object') {
+    browser.tabGroups.onCreated.removeListener(onTabGroupCreated);
+    browser.tabGroups.onRemoved.removeListener(onTabGroupRemoved);
+    browser.tabGroups.onMoved.removeListener(onTabGroupMoved);
+    browser.tabGroups.onUpdated.removeListener(onTabGroupUpdated);
+  }
 
   browser.runtime.onStartup.removeListener(onStartup);
   if (typeof browser.webNavigation === 'object') {
@@ -308,6 +323,27 @@ function onTabUpdated(tabId, changeInfo, tabInfo) {
       play('tabs.unpinned');
     }
   }
+
+  if (keys.includes('groupId')) {
+    if (changeInfo['groupId'] === -1) {
+      play('tabs.group-out');
+    } else {
+      play('tabs.group-in');
+    }
+  }
+}
+
+function onTabGroupCreated(group) {
+  play('tabGroups.created');
+}
+function onTabGroupRemoved(group) {
+  play('tabGroups.removed');
+}
+function onTabGroupMoved(group) {
+  play('tabGroups.moved');
+}
+function onTabGroupUpdated(group) {
+  play('tabGroups.updated');
 }
 
 function onWindowCreated(win) {

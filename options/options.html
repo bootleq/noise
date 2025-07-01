@@ -7,15 +7,28 @@
   </head>
 
   <body>
+    <div id='defaults-loaded-msg' class='hidden'>
+      <div data-i18n='_msg_defaultsLoaded'>
+        Default settings loaded.
+      </div>
+      <button data-i18n-title='_btn_close'>✖</button>
+    </div>
+
     <fieldset id="sounds">
       <legend data-i18n='_header_sounds'>Sounds</legend>
+
+      <label id='instant-play-toggle' data-i18n-title='_btn_toggleClickPlay'>
+        <input type='checkbox' class='sr-only' />
+        <div></div>
+        <span data-i18n='_btn_toggleClickPlay'>Click Play</span>
+      </label>
 
       <ul class="list">
         <li class="add_sound"><button data-i18n='_btn_addSound' data-i18n-title='_btn_addSound'>Add Sound</button></li>
       </ul>
 
       <template>
-        <li>
+        <li draggable="true">
           <label class="name" tabindex="0">
             <span>Name</span>
           </label>
@@ -24,26 +37,33 @@
     </fieldset>
 
     <fieldset id='sound_detail' disabled>
-      <label data-i18n='_sound_name'>
-        Name
-        <input type="text" class='name'/>
-      </label>
-
-      <div class='upload'>
-        <button class="cancel_upload hidden" data-i18n-title='_btn_cancelUpload'>✖ </button>
-        <label class='droppable' data-i18n='_sound_clickOrDropFile'>
-          Click or drop new sound here.
-          <input type='file' accept='audio/*'>
+      <div class='sound_detail_body'>
+        <label data-i18n='_sound_name'>
+          Name
+          <input type="text" class='name'/>
         </label>
+
+        <div class='upload'>
+          <button class="cancel_upload hidden" data-i18n-title='_btn_cancelUpload'>✖ </button>
+          <label class='droppable' data-i18n='_sound_clickOrDropFile'>
+            Click or drop new sound here.
+            <input type='file' accept='audio/*'>
+          </label>
+        </div>
+
+        <div class='player droppable'>
+          <div class='flex'>
+            <span class="filename"></span>
+            <button class="change" data-i18n='_btn_changeSound'>Change</button>
+          </div>
+          <audio controls></audio>
+          <div class='warning'></div>
+        </div>
       </div>
 
-      <div class='player droppable'>
-        <div class='flex'>
-          <span class="filename"></span>
-          <button class="change" data-i18n='_btn_changeSound'>Change</button>
-        </div>
-        <audio controls></audio>
-        <div class='warning'></div>
+      <div class='desc'>
+        <small data-i18n-title='_sound_desc_memo'>memo</small>
+        <textarea rows="3" cols="30"></textarea>
       </div>
 
       <div class='ctrls'>
@@ -77,7 +97,7 @@
         <tbody></tbody>
 
         <template>
-          <tr>
+          <tr draggable='true'>
             <td class='e-ctrl e-toggle'><label data-i18n-title='_checkbox_event_enabled'><input type='checkbox'/></label></td>
             <td class='e-name'></td>
             <td class='e-type'></td>
@@ -158,6 +178,13 @@
             <code>webRequest</code>
           </label>
         </li>
+        <li>
+          <label>
+            <input type='checkbox' data-perm='tabGroups' />
+            <span data-i18n='_perms_desc_tabGroups'>View and manage your tab groups</span>
+            <code>tabGroups</code>
+          </label>
+        </li>
       </ul>
     </div>
 
@@ -177,6 +204,7 @@
         <menu id='import-menu'>
           <li data-mode='overwrite' data-i18n='_btn_importOverwrite'>Overwrite</li>
           <li data-mode='append' data-i18n='_btn_importAppend'>Append</li>
+          <li data-mode='defaults' data-i18n='_btn_importDefaults'>Restore Defaults</li>
         </menu>
       </div>
     </div>
