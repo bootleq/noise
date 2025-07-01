@@ -18,7 +18,7 @@ class Sounds {
 
     this._$selected = null;
     this._observers = {};
-    this.$togglePickPlay = document.querySelector('#instant-play-toggle input[type="checkbox"]');
+    this.$togglePlaySelect = document.querySelector('#play-select-toggle input[type="checkbox"]');
     this.$addSound = this.$el.querySelector('.add_sound');
 
     this.$dragging = null;
@@ -30,7 +30,7 @@ class Sounds {
     this.$list.addEventListener('drop', this.onDrop.bind(this));
     this.$list.addEventListener('dragend', this.onDragEnd.bind(this));
     this.$addSound.addEventListener('click', this.newSound.bind(this));
-    this.$togglePickPlay.addEventListener('change', (e) => this.instantPlay = e.target.checked);
+    this.$togglePlaySelect.addEventListener('change', (e) => this.instantPlay = e.target.checked);
     this.load();
   }
 

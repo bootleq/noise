@@ -15,10 +15,10 @@
   "options_header_sounds": {
     "message": "Sounds"
   },
-  "options_btn_toggleClickPlay": {
+  "options_btn_togglePlaySelect": {
     "message": "Play select"
   },
-  "options_title_btn_toggleClickPlay": {
+  "options_title_btn_togglePlaySelect": {
     "message": "Play when selecting a sound"
   },
   "options_btn_addSound": {

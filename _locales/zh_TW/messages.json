@@ -14,10 +14,10 @@
   "options_header_sounds": {
     "message": "聲音"
   },
-  "options_btn_toggleClickPlay": {
+  "options_btn_togglePlaySelect": {
     "message": "點選播放"
   },
-  "options_title_btn_toggleClickPlay": {
+  "options_title_btn_togglePlaySelect": {
     "message": "選中聲音時直接播放"
   },
   "options_btn_addSound": {
