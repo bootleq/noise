@@ -19,7 +19,7 @@
     "message": "Play select"
   },
   "options_title_btn_toggleClickPlay": {
-    "message": "Play a sound when selecting"
+    "message": "Play when selecting a sound"
   },
   "options_btn_addSound": {
     "message": "➕"
@@ -228,7 +228,7 @@
     "message": "Pickup Coin"
   },
   "default_sound_pickupCoin_desc": {
-    "message": "Pickup sound generated with jsfxr\n\nhttps://sfxr.me/"
+    "message": "Pickup sound, generated with jsfxr\n\nhttps://sfxr.me/"
   },
   "default_sound_barbetA_name": {
     "message": "Taiwan Barbet's Call A"

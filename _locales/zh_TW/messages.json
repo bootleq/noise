@@ -212,7 +212,7 @@
     "message": "Pickup Coin"
   },
   "default_sound_pickupCoin_desc": {
-    "message": "Pickup sound generated with jsfxr\n\nhttps://sfxr.me/"
+    "message": "Pickup sound, generated with jsfxr\n\nhttps://sfxr.me/"
   },
   "default_sound_barbetA_name": {
     "message": "五色鳥 上"
