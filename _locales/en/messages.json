@@ -293,7 +293,7 @@
   "event_types_name_tabGroupsRemoved": {
     "message": "Close Tab Group"
   },
-  "event_types_name_tabGroupsRemoved": {
+  "event_types_name_tabGroupsMoved": {
     "message": "Move Tab Group"
   },
   "event_types_name_tabGroupsUpdated": {
