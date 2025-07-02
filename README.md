@@ -76,6 +76,7 @@ Alternatives
 
 - [Download Sound][Download Sound - Chrome] - can use speech output as a sound
 - [Navigational Sounds][]
+- [Extra Sounds][]
 
 
 About Findbar Wrapped
@@ -91,6 +92,7 @@ which accepts values like `beep` or `file:///C:/your.wav`.
 [Notification Sound]: https://addons.mozilla.org/firefox/addon/notification-sound/
 [Download Sound]: https://addons.mozilla.org/firefox/addon/download-sound/
 [Download Sound - Chrome]: https://chromewebstore.google.com/detail/download-sound/fmcbineojopoamfhaabogigdbpbklnld
+[Extra Sounds]: https://chromewebstore.google.com/detail/extra-sounds/ibmbabeddalpanmbopnjlgcgcmdfboco
 [Navigational Sounds]: https://chromewebstore.google.com/detail/navigational-sounds/plhoioliblcddpmljieonfdndcmjmkpd
 [Sunny Tseng]: https://sunnytseng.ca/
 [xeno-canto.org/559593]: https://www.xeno-canto.org/559593
