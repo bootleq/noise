@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "just-throttle": "^4.2.0",
-    "nanoid": "^4.0.0"
+    "nanoid": "^5.1.5"
   },
   "devDependencies": {
     "clean-webpack-plugin": "^4.0.0",

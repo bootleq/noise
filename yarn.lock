@@ -3347,12 +3347,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"nanoid@npm:^4.0.0":
-  version: 4.0.2
-  resolution: "nanoid@npm:4.0.2"
+"nanoid@npm:^5.1.5":
+  version: 5.1.5
+  resolution: "nanoid@npm:5.1.5"
   bin:
     nanoid: bin/nanoid.js
-  checksum: 10c0/3fec62f422bc4727918eda0e7aa43e9cbb2e759be72813a0587b9dac99727d3c7ad972efce7f4f1d4cb5c7c554136a1ec3b1043d1d91d28d818d6acbe98200e5
+  checksum: 10c0/e6004f1ad6c7123eeb037062c4441d44982037dc043aabb162457ef6986e99964ba98c63c975f96c547403beb0bf95bc537bd7bf9a09baf381656acdc2975c3c
   languageName: node
   linkType: hard
 
@@ -3444,7 +3444,7 @@ __metadata:
     css-loader: "npm:^6.7.2"
     just-throttle: "npm:^4.2.0"
     mini-css-extract-plugin: "npm:^2.6.1"
-    nanoid: "npm:^4.0.0"
+    nanoid: "npm:^5.1.5"
     sass: "npm:^1.56.1"
     sass-loader: "npm:^13.2.0"
     web-ext: "npm:^8.8.0"
