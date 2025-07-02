@@ -1,7 +1,7 @@
 CHANGES
 =======
 
-## 4.0.0 (?)
+## 4.0.0 (2025-07-02)
 
 * Introduce default settings, with 3 built-in sounds:
   * Pickup Coin: generated with jsfxr (https://sfxr.me/)
