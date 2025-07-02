@@ -78,6 +78,14 @@ Alternatives
 - [Navigational Sounds][]
 
 
+About Findbar Wrapped
+---------------------
+
+Firefox (135 onwards) users can bring the old **Findbar wrapped** sound alive,
+by setting `accessibility.typeaheadfind.wrappedSoundURL` in `about:config`,
+which accepts values like `beep` or `file:///C:/your.wav`.
+
+
 
 [web-ext]: https://github.com/mozilla/web-ext
 [Notification Sound]: https://addons.mozilla.org/firefox/addon/notification-sound/
