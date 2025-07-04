@@ -1,6 +1,11 @@
 CHANGES
 =======
 
+## 4.0.2 (2025-07-04)
+
+* Fix some tab events (pin / attention) broken when browser doesn't support `tabGroups` API.
+* Previous version (4.0.1) has incorrect changes, here rework it.
+
 ## 4.0.1 (2025-07-04)
 
 * Fix some tab events (pin / attention) broken when browser doesn't support `tabGroups` API.
