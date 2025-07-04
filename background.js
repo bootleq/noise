@@ -138,6 +138,13 @@ async function loadConfig() {
 
 function addListeners() {
   let types = Object.keys(gEvents);
+
+  const tabGroupAvailable = typeof browser.tabGroups === 'object';
+  const tabUpdateFilterProps = ['attention', 'pinned'];
+  if (tabGroupAvailable) {
+    tabUpdateFilterProps.append('groupId');
+  }
+
   toggleListener(browser.downloads.onCreated, onDownloadCreated, types.includes('download.new'));
   toggleListener(browser.downloads.onChanged, onDownloadChanged, hasAny(['download.completed', 'download.interrupted'], types));
 
@@ -150,14 +157,14 @@ function addListeners() {
     hasAny(['tabs.attention', 'tabs.pinned', 'tabs.unpinned', 'tabs.group-in', 'tabs.group-out'], types),
     {
       urls: ['<all_urls>'],
-      properties: ['attention', 'pinned', 'groupId']
+      properties: tabUpdateFilterProps
     }
   );
 
   toggleListener(browser.windows.onCreated, onWindowCreated, hasAny(['windows.created', 'windows.created-private'], types));
   toggleListener(browser.windows.onRemoved, onWindowRemoved, types.includes('windows.removed'));
 
-  if (typeof browser.tabGroups === 'object') {
+  if (tabGroupAvailable) {
     toggleListener(browser.tabGroups.onCreated, onTabGroupCreated, types.includes('tabGroups.created'));
     toggleListener(browser.tabGroups.onRemoved, onTabGroupRemoved, types.includes('tabGroups.removed'));
     toggleListener(browser.tabGroups.onMoved, onTabGroupMoved, types.includes('tabGroups.moved'));

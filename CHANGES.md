@@ -1,6 +1,10 @@
 CHANGES
 =======
 
+## 4.0.1 (2025-07-04)
+
+* Fix some tab events (e.g., pin) broken when browser doesn't support tabGroups API.
+
 ## 4.0.0 (2025-07-02)
 
 * Introduce default settings, with 3 built-in sounds:
