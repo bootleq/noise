@@ -142,7 +142,7 @@ function addListeners() {
   const tabGroupAvailable = typeof browser.tabGroups === 'object';
   const tabUpdateFilterProps = ['attention', 'pinned'];
   if (tabGroupAvailable) {
-    tabUpdateFilterProps.append('groupId');
+    tabUpdateFilterProps.push('groupId');
   }
 
   toggleListener(browser.downloads.onCreated, onDownloadCreated, types.includes('download.new'));
