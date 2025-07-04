@@ -68,7 +68,11 @@ async function save() {
   });
   await browser.storage.local.remove(deadKeys);
 
-  return browser.storage.local.set(config);
+  await browser.storage.local.set(config);
+
+  browser.runtime.sendMessage({
+    type: 'options_saving_check',
+  });
 }
 
 async function exportConfig() {

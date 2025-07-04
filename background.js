@@ -12,6 +12,7 @@ const contentEvents = {}; // cache events specific to content script, example: {
 
 let ports = [];
 let hasStarted = false;
+let savingChecked = false; // flag for options page, could be set during onStorageChange, to avoid ditto check in options_saving_check
 
 async function init() {
   window.addEventListener('unload', destroy, {once: true});
@@ -32,6 +33,25 @@ function destroy() {
   broadcast({type: 'unbind'});
 }
 
+function rebindListenersWithCatcher() {
+  try {
+    removeListeners();
+    addListeners();
+    broadcast({type: 'bind', events: contentEvents});
+  } catch (error) {
+    console.error(`Event binding failed`, error);
+
+    browser.runtime.sendMessage({
+      type: 'rebinding_failed',
+      details: {
+        reason: 'Rebinding',
+        errorName: error.name,
+        errorMessage: error.message
+      }
+    });
+  }
+}
+
 function onStorageChange(changes, _area) {
   if ('sounds' in changes) {
     resetSounds(changes.sounds.newValue);
@@ -39,23 +59,8 @@ function onStorageChange(changes, _area) {
 
   if ('events' in changes) {
     resetEvents(changes.events.newValue);
-
-    try {
-      removeListeners();
-      addListeners();
-      broadcast({type: 'bind', events: contentEvents});
-    } catch (error) {
-      console.error(`Event binding failed`, error);
-
-      browser.runtime.sendMessage({
-        type: 'rebinding_failed',
-        details: {
-          reason: 'Rebinding',
-          errorName: error.name,
-          errorMessage: error.message
-        }
-      });
-    }
+    rebindListenersWithCatcher();
+    savingChecked = true;
   }
 }
 
@@ -65,20 +70,28 @@ function onMessage(msg, sender, respond) {
   }
 
   switch (msg.type) {
-  case 'listeners':
-    if ('action' in msg) {
-      if (msg.action === 'bind') {
-        addListeners();
-        broadcast({type: 'bind', events: contentEvents});
+    case 'listeners':
+      if ('action' in msg) {
+        if (msg.action === 'bind') {
+          addListeners();
+          broadcast({type: 'bind', events: contentEvents});
+        } else {
+          removeListeners();
+          broadcast({type: 'unbind'});
+        }
       } else {
         removeListeners();
-        broadcast({type: 'unbind'});
+        addListeners();
+        broadcast({type: 'bind', events: contentEvents});
       }
-    } else {
-      removeListeners();
-      addListeners();
-      broadcast({type: 'bind', events: contentEvents});
-    }
+      break;
+
+    case 'options_saving_check':
+      if (!savingChecked) {
+        rebindListenersWithCatcher();
+      }
+      savingChecked = false;
+      break;
   }
 }
 
