@@ -39,9 +39,23 @@ function onStorageChange(changes, _area) {
 
   if ('events' in changes) {
     resetEvents(changes.events.newValue);
-    removeListeners();
-    addListeners();
-    broadcast({type: 'bind', events: contentEvents});
+
+    try {
+      removeListeners();
+      addListeners();
+      broadcast({type: 'bind', events: contentEvents});
+    } catch (error) {
+      console.error(`Event binding failed`, error);
+
+      browser.runtime.sendMessage({
+        type: 'rebinding_failed',
+        details: {
+          reason: 'Rebinding',
+          errorName: error.name,
+          errorMessage: error.message
+        }
+      });
+    }
   }
 }
 
@@ -144,6 +158,9 @@ function addListeners() {
   if (tabGroupAvailable) {
     tabUpdateFilterProps.push('groupId');
   }
+
+  // NOTE: intentionally broken code, to be error handling captured
+  tabUpdateFilterProps.append('stupid');
 
   toggleListener(browser.downloads.onCreated, onDownloadCreated, types.includes('download.new'));
   toggleListener(browser.downloads.onChanged, onDownloadChanged, hasAny(['download.completed', 'download.interrupted'], types));

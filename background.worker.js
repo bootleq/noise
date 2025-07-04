@@ -52,10 +52,23 @@ function onStorageChange(changes, _area) {
   }
 
   if ('events' in changes) {
-    resetEvents(changes.events.newValue);
-    removeListeners();
-    addListeners();
-    broadcast({type: 'bind', events: contentEvents});
+    try {
+      resetEvents(changes.events.newValue);
+      removeListeners();
+      addListeners();
+      broadcast({type: 'bind', events: contentEvents});
+    } catch (error) {
+      console.error(`Event binding failed`, error);
+
+      browser.runtime.sendMessage({
+        type: 'rebinding_failed',
+        details: {
+          reason: 'Rebinding',
+          errorName: error.name,
+          errorMessage: error.message
+        }
+      });
+    }
   }
 }
 
@@ -154,6 +167,10 @@ function addListeners() {
   let types = Object.keys(gEvents);
   toggleListener(browser.downloads.onCreated, onDownloadCreated, types.includes('download.new'));
   toggleListener(browser.downloads.onChanged, onDownloadChanged, hasAny(['download.completed', 'download.interrupted'], types));
+
+  // NOTE: intentionally broken code, to be error handling captured
+  const dummy = [];
+  dummy.append('stupid');
 
   toggleListener(browser.tabs.onCreated, onTabCreated, types.includes('tabs.created'));
   toggleListener(browser.tabs.onRemoved, onTabRemoved, types.includes('tabs.removed'));

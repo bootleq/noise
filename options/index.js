@@ -159,6 +159,24 @@ function toggleImportMenu(force) {
   $importMenu.classList.toggle('show', force);
 }
 
+function onMessage(msg, sender, sendResponse) {
+  if (typeof msg.type !== 'string') {
+    return;
+  }
+
+  switch (msg.type) {
+    case 'rebinding_failed':
+      console.log('Rebinding Error:', msg);
+      const $box = document.querySelector('#error-report');
+      if ($box) {
+        $box.classList.toggle('hidden', false);
+        $box.querySelector('.error-body').textContent = JSON.stringify(msg.details, null, 2);
+        $box.scrollIntoView();
+      }
+      break;
+  }
+}
+
 async function loadDefaults() {
   const cfgURL = browser.runtime.getURL('defaults.json');
   const response = await fetch(cfgURL);
@@ -194,6 +212,7 @@ async function init() {
   let $permsBtn   = document.querySelector('#review-permission');
 
   const $defaultLoaded = document.querySelector('#defaults-loaded-msg');
+  const $errorReport = document.querySelector('#error-report');
 
   function hideFloatMenus() {
     events.toggleOptionMenu.bind(events)(null, false);
@@ -329,6 +348,7 @@ async function init() {
   $permsBtn.addEventListener('click', permissions.toggleDialog.bind(permissions, $permsBtn));
 
   $defaultLoaded.querySelector('button').addEventListener('click', () => $defaultLoaded.classList.add('hidden'));
+  $errorReport.querySelector('button').addEventListener('click', () => $errorReport.classList.add('hidden'));
 
   document.body.addEventListener('click', e => {
     if (e.target.tagName === 'BODY') {
@@ -347,4 +367,5 @@ async function init() {
   });
 }
 
+browser.runtime.onMessage.addListener(onMessage);
 window.addEventListener('DOMContentLoaded', init, {once: true});
