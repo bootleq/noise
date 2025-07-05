@@ -22,6 +22,14 @@ Available Events
 - Composition started
 
 
+About Findbar Wrapped
+---------------------
+
+Firefox (135 onwards) users can bring the old **Findbar wrapped** sound alive,
+by setting `accessibility.typeaheadfind.wrappedSoundURL` in `about:config`,
+which accepts values like `beep` or `file:///C:/your.wav`.
+
+
 Development
 -----------
 
@@ -77,14 +85,6 @@ Alternatives
 - [Download Sound][Download Sound - Chrome] - can use speech output as a sound
 - [Navigational Sounds][]
 - [Extra Sounds][]
-
-
-About Findbar Wrapped
----------------------
-
-Firefox (135 onwards) users can bring the old **Findbar wrapped** sound alive,
-by setting `accessibility.typeaheadfind.wrappedSoundURL` in `about:config`,
-which accepts values like `beep` or `file:///C:/your.wav`.
 
 
 
