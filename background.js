@@ -41,12 +41,18 @@ function rebindListenersWithCatcher() {
   } catch (error) {
     console.error(`Event binding failed`, error);
 
+    const errorProps = {};
+
+    if (error instanceof Error) {
+      errorProps['errorName'] = error.name;
+      errorProps['errorMessage'] = error.message;
+    }
+
     browser.runtime.sendMessage({
       type: 'rebinding_failed',
       details: {
         reason: 'Rebinding',
-        errorName: error.name,
-        errorMessage: error.message
+        ...errorProps
       }
     });
   }
