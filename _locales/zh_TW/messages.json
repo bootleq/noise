@@ -14,12 +14,7 @@
     "message": "發現錯誤"
   },
   "options_msg_errorDetectedReport": {
-    "message": "抱歉造成不便，您可以到技術支援網址 ($REPO$) 回報錯誤 (issues)",
-    "placeholders": {
-      "repo": {
-        "content": "https://github.com/bootleq/noise"
-      }
-    }
+    "message": "抱歉造成不便，您可以到技術支援網址 REPO 回報錯誤 (issues)"
   },
 
   "options_header_sounds": {

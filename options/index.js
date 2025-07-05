@@ -23,6 +23,7 @@ const $import = document.querySelector('#import');
 const $export = document.querySelector('#export');
 const $importMenu = document.querySelector('#import-menu');
 const importConfirmMsg = browser.i18n.getMessage('options_prompt_importDefaultsConfirm');
+const repoURL = 'https://github.com/bootleq/noise';
 
 // {{{
 function currentSoundsConfig() {
@@ -352,7 +353,14 @@ async function init() {
   $permsBtn.addEventListener('click', permissions.toggleDialog.bind(permissions, $permsBtn));
 
   $defaultLoaded.querySelector('button').addEventListener('click', () => $defaultLoaded.classList.add('hidden'));
+
   $errorReport.querySelector('button').addEventListener('click', () => $errorReport.classList.add('hidden'));
+  const $errorReportInstruct = $errorReport.querySelector('[data-i18n$="_msg_errorDetectedReport"');
+  if ($errorReportInstruct) {
+    const text = $errorReportInstruct.textContent;
+    const html = text.replace('REPO', `<a href="${repoURL}" target="_blank">(GitHub/noise)</a>`);
+    $errorReportInstruct.innerHTML = html;
+  }
 
   document.body.addEventListener('click', e => {
     if (e.target.tagName === 'BODY') {

@@ -16,12 +16,8 @@
     "description": "When detected error, option page will display message box on top of Save button. With this term as its caption."
   },
   "options_msg_errorDetectedReport": {
-    "message": "Sorry for the inconvenience. Feel free to report issue at support URL ($REPO$).",
-    "placeholders": {
-      "repo": {
-        "content": "https://github.com/bootleq/noise"
-      }
-    }
+    "message": "Sorry for the inconvenience. Feel free to report issues at support page REPO.",
+    "description": "Guide users to report issues, The 'REPO' part must be kept, will be replaced by link during runtime."
   },
 
   "options_header_sounds": {
