@@ -1,9 +1,9 @@
 CHANGES
 =======
 
-## 4.x.x (?)
+## 4.1.0 (?)
 
-* Display an error message when binding events (after saving options) fails, to help diagnose related issues.
+* Detect event binding errors when saving options, show a message to help diagnose issues.
 
 ## 4.0.2 (2025-07-04)
 
