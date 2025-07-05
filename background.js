@@ -59,6 +59,7 @@ function onStorageChange(changes, _area) {
 
   if ('events' in changes) {
     resetEvents(changes.events.newValue);
+    console.log('rebind & check (onStorageChange)');
     rebindListenersWithCatcher();
     savingChecked = true;
   }
@@ -88,6 +89,7 @@ function onMessage(msg, sender, respond) {
 
     case 'options_saving_check':
       if (!savingChecked) {
+        console.log('rebind & check (options_saving_check)');
         rebindListenersWithCatcher();
       }
       savingChecked = false;
