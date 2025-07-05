@@ -10,6 +10,12 @@
   "options_msg_defaultsLoaded": {
     "message": "已載入初始設定。\n請記得按下 SAVE_BUTTON 讓設定生效。"
   },
+  "options_msg_errorDetected": {
+    "message": "發現錯誤"
+  },
+  "options_msg_errorDetectedReport": {
+    "message": "抱歉造成不便，您可以到技術支援網址 REPO 回報錯誤 (issues)"
+  },
 
   "options_header_sounds": {
     "message": "聲音"

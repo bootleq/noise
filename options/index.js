@@ -23,6 +23,7 @@ const $import = document.querySelector('#import');
 const $export = document.querySelector('#export');
 const $importMenu = document.querySelector('#import-menu');
 const importConfirmMsg = browser.i18n.getMessage('options_prompt_importDefaultsConfirm');
+const repoURL = 'https://github.com/bootleq/noise';
 
 // {{{
 function currentSoundsConfig() {
@@ -68,7 +69,11 @@ async function save() {
   });
   await browser.storage.local.remove(deadKeys);
 
-  return browser.storage.local.set(config);
+  await browser.storage.local.set(config);
+
+  browser.runtime.sendMessage({
+    type: 'options_saving_check',
+  });
 }
 
 async function exportConfig() {
@@ -159,6 +164,24 @@ function toggleImportMenu(force) {
   $importMenu.classList.toggle('show', force);
 }
 
+function onMessage(msg, sender, sendResponse) {
+  if (typeof msg.type !== 'string') {
+    return;
+  }
+
+  switch (msg.type) {
+    case 'rebinding_failed':
+      console.log('Rebinding Error:', msg);
+      const $box = document.querySelector('#error-report');
+      if ($box) {
+        $box.classList.toggle('hidden', false);
+        $box.querySelector('.error-body').textContent = JSON.stringify(msg.details, null, 2);
+        $box.scrollIntoView();
+      }
+      break;
+  }
+}
+
 async function loadDefaults() {
   const cfgURL = browser.runtime.getURL('defaults.json');
   const response = await fetch(cfgURL);
@@ -194,6 +217,7 @@ async function init() {
   let $permsBtn   = document.querySelector('#review-permission');
 
   const $defaultLoaded = document.querySelector('#defaults-loaded-msg');
+  const $errorReport = document.querySelector('#error-report');
 
   function hideFloatMenus() {
     events.toggleOptionMenu.bind(events)(null, false);
@@ -330,6 +354,14 @@ async function init() {
 
   $defaultLoaded.querySelector('button').addEventListener('click', () => $defaultLoaded.classList.add('hidden'));
 
+  $errorReport.querySelector('button').addEventListener('click', () => $errorReport.classList.add('hidden'));
+  const $errorReportInstruct = $errorReport.querySelector('[data-i18n$="_msg_errorDetectedReport"');
+  if ($errorReportInstruct) {
+    const text = $errorReportInstruct.textContent;
+    const html = text.replace('REPO', `<a href="${repoURL}" target="_blank">(GitHub/noise)</a>`);
+    $errorReportInstruct.innerHTML = html;
+  }
+
   document.body.addEventListener('click', e => {
     if (e.target.tagName === 'BODY') {
       hideFloatMenus();
@@ -347,4 +379,5 @@ async function init() {
   });
 }
 
+browser.runtime.onMessage.addListener(onMessage);
 window.addEventListener('DOMContentLoaded', init, {once: true});

@@ -11,6 +11,14 @@
     "message": "Default settings loaded.\nPlease note that you have to click SAVE_BUTTON to make it effective.",
     "description": "Shown when auto loading defaults. First line will be shown in bold font. The 'SAVE_BUTTON' must be kept, will be replaced during runtime."
   },
+  "options_msg_errorDetected": {
+    "message": "Error Detected",
+    "description": "When detected error, option page will display message box on top of Save button. With this term as its caption."
+  },
+  "options_msg_errorDetectedReport": {
+    "message": "Sorry for the inconvenience. Feel free to report issues at support page REPO.",
+    "description": "Guide users to report issues, The 'REPO' part must be kept, will be replaced by link during runtime."
+  },
 
   "options_header_sounds": {
     "message": "Sounds"

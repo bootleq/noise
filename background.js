@@ -12,6 +12,7 @@ const contentEvents = {}; // cache events specific to content script, example: {
 
 let ports = [];
 let hasStarted = false;
+let savingChecked = false; // flag for options page, could be set during onStorageChange, to avoid ditto check in options_saving_check
 
 async function init() {
   window.addEventListener('unload', destroy, {once: true});
@@ -32,6 +33,31 @@ function destroy() {
   broadcast({type: 'unbind'});
 }
 
+function rebindListenersWithCatcher() {
+  try {
+    removeListeners();
+    addListeners();
+    broadcast({type: 'bind', events: contentEvents});
+  } catch (error) {
+    console.error(`Event binding failed`, error);
+
+    const errorProps = {};
+
+    if (error instanceof Error) {
+      errorProps['errorName'] = error.name;
+      errorProps['errorMessage'] = error.message;
+    }
+
+    browser.runtime.sendMessage({
+      type: 'rebinding_failed',
+      details: {
+        reason: 'Rebinding',
+        ...errorProps
+      }
+    });
+  }
+}
+
 function onStorageChange(changes, _area) {
   if ('sounds' in changes) {
     resetSounds(changes.sounds.newValue);
@@ -39,9 +65,9 @@ function onStorageChange(changes, _area) {
 
   if ('events' in changes) {
     resetEvents(changes.events.newValue);
-    removeListeners();
-    addListeners();
-    broadcast({type: 'bind', events: contentEvents});
+    console.log('rebind & check (onStorageChange)');
+    rebindListenersWithCatcher();
+    savingChecked = true;
   }
 }
 
@@ -51,20 +77,29 @@ function onMessage(msg, sender, respond) {
   }
 
   switch (msg.type) {
-  case 'listeners':
-    if ('action' in msg) {
-      if (msg.action === 'bind') {
-        addListeners();
-        broadcast({type: 'bind', events: contentEvents});
+    case 'listeners':
+      if ('action' in msg) {
+        if (msg.action === 'bind') {
+          addListeners();
+          broadcast({type: 'bind', events: contentEvents});
+        } else {
+          removeListeners();
+          broadcast({type: 'unbind'});
+        }
       } else {
         removeListeners();
-        broadcast({type: 'unbind'});
+        addListeners();
+        broadcast({type: 'bind', events: contentEvents});
       }
-    } else {
-      removeListeners();
-      addListeners();
-      broadcast({type: 'bind', events: contentEvents});
-    }
+      break;
+
+    case 'options_saving_check':
+      if (!savingChecked) {
+        console.log('rebind & check (options_saving_check)');
+        rebindListenersWithCatcher();
+      }
+      savingChecked = false;
+      break;
   }
 }
 
@@ -144,6 +179,9 @@ function addListeners() {
   if (tabGroupAvailable) {
     tabUpdateFilterProps.push('groupId');
   }
+
+  // NOTE: intentionally broken code, to be error handling captured
+  tabUpdateFilterProps.append('stupid');
 
   toggleListener(browser.downloads.onCreated, onDownloadCreated, types.includes('download.new'));
   toggleListener(browser.downloads.onChanged, onDownloadChanged, hasAny(['download.completed', 'download.interrupted'], types));

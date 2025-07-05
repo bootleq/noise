@@ -1,6 +1,10 @@
 CHANGES
 =======
 
+## 4.x.x (?)
+
+* Display an error message when binding events (after saving options) fails, to help diagnose related issues.
+
 ## 4.0.2 (2025-07-04)
 
 * Fix some tab events (pin / attention) broken when browser doesn't support `tabGroups` API.
