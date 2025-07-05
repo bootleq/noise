@@ -65,7 +65,6 @@ function onStorageChange(changes, _area) {
 
   if ('events' in changes) {
     resetEvents(changes.events.newValue);
-    console.log('rebind & check (onStorageChange)');
     rebindListenersWithCatcher();
     savingChecked = true;
   }
@@ -95,7 +94,6 @@ function onMessage(msg, sender, respond) {
 
     case 'options_saving_check':
       if (!savingChecked) {
-        console.log('rebind & check (options_saving_check)');
         rebindListenersWithCatcher();
       }
       savingChecked = false;
@@ -179,9 +177,6 @@ function addListeners() {
   if (tabGroupAvailable) {
     tabUpdateFilterProps.push('groupId');
   }
-
-  // NOTE: intentionally broken code, to be error handling captured
-  tabUpdateFilterProps.append('stupid');
 
   toggleListener(browser.downloads.onCreated, onDownloadCreated, types.includes('download.new'));
   toggleListener(browser.downloads.onChanged, onDownloadChanged, hasAny(['download.completed', 'download.interrupted'], types));

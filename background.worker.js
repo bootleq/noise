@@ -79,7 +79,6 @@ function onStorageChange(changes, _area) {
 
   if ('events' in changes) {
     resetEvents(changes.events.newValue);
-    console.log('rebind & check (onStorageChange)');
     rebindListenersWithCatcher();
     savingChecked = true;
   }
@@ -109,7 +108,6 @@ function onMessage(msg, sender, respond) {
 
     case 'options_saving_check':
       if (!savingChecked) {
-        console.log('rebind & check (options_saving_check)');
         rebindListenersWithCatcher();
       }
       savingChecked = false;
@@ -189,10 +187,6 @@ function addListeners() {
   let types = Object.keys(gEvents);
   toggleListener(browser.downloads.onCreated, onDownloadCreated, types.includes('download.new'));
   toggleListener(browser.downloads.onChanged, onDownloadChanged, hasAny(['download.completed', 'download.interrupted'], types));
-
-  // NOTE: intentionally broken code, to be error handling captured
-  const dummy = [];
-  dummy.append('stupid');
 
   toggleListener(browser.tabs.onCreated, onTabCreated, types.includes('tabs.created'));
   toggleListener(browser.tabs.onRemoved, onTabRemoved, types.includes('tabs.removed'));
