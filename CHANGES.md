@@ -1,7 +1,7 @@
 CHANGES
 =======
 
-## 4.1.0 (?)
+## 4.1.0 (2025-07-08)
 
 * Detect event binding errors when saving options, show a message to help diagnose issues.
 
