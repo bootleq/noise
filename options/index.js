@@ -97,8 +97,12 @@ function rewriteDuplicatedIds(config) {
       const nId = newId();
       cfg['id'] = nId;
 
-      config['events'].filter(e => e['soundId'] === id).forEach(e => {
-        e['soundId'] = nId;
+      config['events'].forEach((event) => {
+        for (let idx = 0; idx < event.soundIds.length; idx++) {
+          if (event.soundIds[idx] === id) {
+            event.soundIds[idx] = nId;
+          }
+        }
       });
 
       if (config[`src.${id}`]) {

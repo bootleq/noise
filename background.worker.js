@@ -271,7 +271,7 @@ function resetEvents(configs) {
   configs.forEach(cfg => {
     let type = cfg.type;
 
-    if (cfg.enabled && gSounds[cfg.soundId]) {
+    if (cfg.enabled && cfg.soundIds.length) {
       const e = new EventSetting(cfg);
 
       if (!(type in gEvents)) gEvents[type] = [];
@@ -299,7 +299,7 @@ function play(type, filter = () => true) {
   let events = gEvents[type] || [];
 
   events.filter(filter).forEach(e => {
-    let sound = gSounds[e.soundId];
+    let sound = gSounds[e.soundIds[0]];
     if (sound) {
       sound.loadSrc().then(src => {
         postToOffscreenDoc(
