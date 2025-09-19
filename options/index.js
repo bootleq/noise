@@ -243,7 +243,18 @@ async function init() {
       sounds.addSound(cfg);
       store.Sounds[cfg.id].src = newConfig[`src.${cfg.id}`];
     });
-    newConfig['events'].forEach((cfg) => events.addEvent(cfg));
+
+    newConfig['events'].forEach((cfg) => {
+      // Backward compatibility, soundIds was once soundId
+      if (typeof cfg['soundId'] === 'string') {
+        if (typeof cfg['soundIds'] === 'undefined') {
+          cfg['soundIds'] = [cfg['soundId']];
+        }
+        delete cfg['soundId'];
+      }
+      return events.addEvent(cfg);
+    });
+
     events.updateAvailability();
     events.updateBrowserCompatibility();
     events.updateSoundMenu();
