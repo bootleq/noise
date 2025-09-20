@@ -17,7 +17,7 @@
     <fieldset id="sounds">
       <legend data-i18n='_header_sounds'>Sounds</legend>
 
-      <label id='play-select-toggle' data-i18n-title='_btn_togglePlaySelect'>
+      <label id='play-select-toggle' class='toggle' data-i18n-title='_btn_togglePlaySelect'>
         <input type='checkbox' class='sr-only' />
         <div></div>
         <span data-i18n='_btn_togglePlaySelect'>Play select</span>
@@ -128,6 +128,13 @@
     <div id='menus'>
       <select class='types'><option value=''></option></select>
       <select class='sounds'><option value=''></option></select>
+      <div class='shuffle'>
+        <label class='toggle'>
+          <span>Play in shuffle order</span>
+          <input type='checkbox' class='sr-only' />
+          <div></div>
+        </label>
+      </div>
       <div class='options' style='display: none'>
         <button data-i18n-title='_btn_close'>✖</button>
         <div class='form'></div>

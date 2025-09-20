@@ -4,6 +4,7 @@
   --color-fx-red-80: #5a0002;
   --color-fx-blue-60: #0060df;
   --color-thead: #ebebeb;
+  --color-green: #497d00;
 }
 
 body * {
@@ -224,11 +225,7 @@ table {
   }
 }
 
-#play-select-toggle {
-  position: absolute;
-  top: 3px;
-  right: 5px;
-  z-index: 99;
+.toggle {
   display: inline-flex;
   align-items: center;
   gap: 9px;
@@ -271,6 +268,13 @@ table {
       transform: translateX(100%);
     }
   }
+}
+
+#play-select-toggle {
+  position: absolute;
+  top: 3px;
+  right: 5px;
+  z-index: 99;
 }
 
 #sound_detail {
@@ -615,13 +619,31 @@ table {
   }
 
   .e-sound {
+    display: flex;
+    align-items: center;
+
     ul {
       list-style: none;
     }
     .more {
-      margin-left: 8px;
-      color: #497d00;
+      margin-left: 14px;
+      color: var(--color-green);
       font-family: 'Noto Mono TC', 'ui-monospace', 'SFMono-Regular', 'Menlo', 'Monaco', 'Consolas', 'Liberation Mono', "Courier New", monospace;
+    }
+    span.shuffle {
+      margin-left: 8px;
+      display: inline-block;
+      font-size: larger;
+      width: 1em;
+      height: 100%;
+      background-image: url(shuffle.svg);
+      background-position: center 70%;
+      background-repeat: no-repeat;
+      background-size: contain;
+
+      &.shuffle-off {
+        display: none;
+      }
     }
   }
 
@@ -685,6 +707,8 @@ table {
       }
 
       td.e-sound {
+        display: table-cell;
+
         ul {
           display: flex;
           flex-direction: column;
@@ -703,6 +727,13 @@ table {
         }
         button.add {
           margin-left: 4px;
+        }
+        .shuffle {
+          margin-block: 6px;
+          label {
+            font-size: small;
+            text-indent: 2em;
+          }
         }
       }
 

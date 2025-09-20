@@ -121,12 +121,13 @@ const Types = {
 
 class EventSetting {
   constructor(config) {
-    this.id       = config ? config.id       : newId();
-    this.name     = config ? config.name     : '';
-    this.type     = config ? config.type     : null;
-    this.options  = config ? config.options  : {};
-    this.soundIds = config ? config.soundIds : [];
-    this.enabled  = config ? config.enabled  : false;
+    this.id       = config ? config.id        : newId();
+    this.name     = config ? config.name      : '';
+    this.type     = config ? config.type      : null;
+    this.options  = config ? config.options   : {};
+    this.soundIds = config ? config.soundIds  : [];
+    this.shuffle  = config ? !!config.shuffle : false;
+    this.enabled  = config ? config.enabled   : false;
   }
 
   static get Types() {
@@ -140,6 +141,7 @@ class EventSetting {
       type:     this.type,
       options:  this.options,
       soundIds: this.soundIds,
+      shuffle:  this.shuffle,
       enabled:  this.enabled
     }
     return obj;

@@ -20,6 +20,7 @@ class Events {
     this.$menus = {
       types:   document.querySelector('#menus .types'),
       sounds:  document.querySelector('#menus .sounds'),
+      shuffle: document.querySelector('#menus .shuffle'),
       options: document.querySelector('#menus .options')
     };
     this.$hints = {
@@ -206,7 +207,7 @@ class Events {
     this.updateNoSoundHint();
   }
 
-  renderSoundDisplay($sound, sounds) {
+  renderSoundDisplay($sound, sounds, shuffle) {
     if (!sounds.length) {
       $sound.textContent = browser.i18n.getMessage('options_event_soundNotSet');
       return;
@@ -223,6 +224,11 @@ class Events {
       $more.classList.add('more');
       $more.textContent = `(+${sounds.length - 1})`;
       $sound.appendChild($more);
+
+      const $shuffle = document.createElement('span');
+      $shuffle.classList.add('shuffle');
+      $shuffle.classList.add(shuffle ? 'shuffle-on' : 'shuffle-off');
+      $sound.appendChild($shuffle);
     }
   }
 
@@ -260,6 +266,12 @@ class Events {
     const $editing = this.$selected.querySelector('td.e-sound');
     $editing.innerHTML = '';
     $editing.appendChild($ul);
+
+    if (soundIds.length > 1) {
+      const $shuffle = this.$menus.shuffle.cloneNode(true);
+      $shuffle.querySelector('input').checked = this.editing.shuffle;
+      $editing.appendChild($shuffle);
+    }
   }
 
   updateOptionsMenu(type, options) {
@@ -286,6 +298,7 @@ class Events {
     let options  = JSON.parse(data.options);
     let soundIds = JSON.parse(data.soundIds);
     let sounds   = soundIds.map(id => this.store.Sounds[id]);
+    let shuffle  = data.shuffle ? JSON.parse(data.shuffle) : false;
     let $name    = $row.querySelector('.e-name');
     let type     = EventSetting.getTypeDef(data.type, 'name');
     let $type    = $row.querySelector('.e-type');
@@ -299,7 +312,7 @@ class Events {
       }
 
       $type.textContent = type || browser.i18n.getMessage('options_event_typeNotSet');
-      this.renderSoundDisplay($sound, sounds);
+      this.renderSoundDisplay($sound, sounds, shuffle);
     }
 
     this.updateOptionSlot($row, data.type);
@@ -600,6 +613,7 @@ class Events {
     if (browsers.length) {
       data.browsers = JSON.stringify(browsers);
     }
+    data.shuffle = JSON.stringify(e.shuffle);
 
     tmpl.querySelector('.e-toggle input').checked = e.enabled;
     this.$list.appendChild(tmpl);
@@ -618,9 +632,10 @@ class Events {
   datasetToEvent(data, gEvent) {
     const {name, type} = data;
     const soundIds = JSON.parse(data.soundIds);
+    const shuffle = JSON.parse(data.shuffle);
     const options = JSON.parse(data.options);
 
-    Object.assign(gEvent, {name, type, soundIds, options});
+    Object.assign(gEvent, {name, type, soundIds, shuffle, options});
   }
 
   acceptType(set, $row) {
@@ -658,8 +673,10 @@ class Events {
       acc.push($opt.value);
       return acc;
     }, []);
+    const $shuffle = $row.querySelector('.shuffle input[type="checkbox"]')
 
     set.soundIds = JSON.stringify(ids);
+    set.shuffle = JSON.stringify($shuffle ? $shuffle.checked : false);
     set.tempSoundId = $opts[0]?.value;
     set.soundText = $opts[0]?.textContent;
   }
