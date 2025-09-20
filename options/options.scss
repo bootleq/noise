@@ -614,6 +614,17 @@ table {
     }
   }
 
+  .e-sound {
+    ul {
+      list-style: none;
+    }
+    .more {
+      margin-left: 8px;
+      color: #497d00;
+      font-family: 'Noto Mono TC', 'ui-monospace', 'SFMono-Regular', 'Menlo', 'Monaco', 'Consolas', 'Liberation Mono', "Courier New", monospace;
+    }
+  }
+
   .e-ctrl,
   .e-edit {
     button {
@@ -670,6 +681,28 @@ table {
         &:not(.unavailable):hover {
           background-color: rgba(0,149,221,0.25);
           cursor: pointer;
+        }
+      }
+
+      td.e-sound {
+        ul {
+          display: flex;
+          flex-direction: column;
+          gap: 4px;
+        }
+        li {
+          display: flex;
+        }
+        li:first-child button.remove {
+          display: none;
+        }
+        button.add,
+        button.remove {
+          border: none;
+          background: none;
+        }
+        button.add {
+          margin-left: 4px;
         }
       }
 

@@ -206,25 +206,60 @@ class Events {
     this.updateNoSoundHint();
   }
 
+  renderSoundDisplay($sound, sounds) {
+    if (!sounds.length) {
+      $sound.textContent = browser.i18n.getMessage('options_event_soundNotSet');
+      return;
+    }
+
+    const $mainSound = document.createElement('span');
+    $mainSound.textContent = sounds[0]?.name;
+
+    $sound.innerHTML = '';
+    $sound.appendChild($mainSound);
+
+    if (sounds.length > 1) {
+      const $more = document.createElement('span');
+      $more.classList.add('more');
+      $more.textContent = `(+${sounds.length - 1})`;
+      $sound.appendChild($more);
+    }
+  }
+
   renderSoundSelect() {
     if (!this.editing || !this.$selected) {
       return;
     }
 
-    const $editing = this.$selected.querySelector('td.e-sound');
-    const $editingSelected = $editing && $editing.querySelector('option:checked');
-    const soundId = this.editing ? this.editing.soundIds[0] : ($editingSelected && $editingSelected.value);
-    const soundIds = [soundId];
-    const $soundSelect = this.$menus.sounds.cloneNode(true);
+    const $ul = document.createElement('ul');
+    const soundIds = this.editing.soundIds.length ? this.editing.soundIds : [null];
+    soundIds.forEach(id => {
+      const $li = document.createElement('li');
+      const $soundSelect = this.$menus.sounds.cloneNode(true);
 
-    if (soundIds.length) {
-      let $opt = $soundSelect.querySelector(`option[value='${soundIds[0]}']`);
-      if ($opt) {
-        $opt.selected = true;
+      const $addBtn = document.createElement('button');
+      $addBtn.classList.add('add');
+      $addBtn.textContent = '➕';
+
+      const $delBtn = document.createElement('button');
+      $delBtn.classList.add('remove');
+      $delBtn.textContent = '➖';
+
+      if (id) {
+        let $opt = $soundSelect.querySelector(`option[value='${id}']`);
+        if ($opt) {
+          $opt.selected = true;
+        }
       }
-    }
-    $editing.textContent = '';
-    $editing.appendChild($soundSelect);
+      $li.appendChild($soundSelect);
+      $li.appendChild($addBtn);
+      $li.appendChild($delBtn);
+      $ul.appendChild($li);
+    });
+
+    const $editing = this.$selected.querySelector('td.e-sound');
+    $editing.innerHTML = '';
+    $editing.appendChild($ul);
   }
 
   updateOptionsMenu(type, options) {
@@ -249,8 +284,8 @@ class Events {
   render($row) {
     let data     = $row.dataset;
     let options  = JSON.parse(data.options);
-    let sounds   = JSON.parse(data.soundIds);
-    let sound    = this.store.Sounds[sounds[0]];
+    let soundIds = JSON.parse(data.soundIds);
+    let sounds   = soundIds.map(id => this.store.Sounds[id]);
     let $name    = $row.querySelector('.e-name');
     let type     = EventSetting.getTypeDef(data.type, 'name');
     let $type    = $row.querySelector('.e-type');
@@ -264,7 +299,7 @@ class Events {
       }
 
       $type.textContent = type || browser.i18n.getMessage('options_event_typeNotSet');
-      $sound.textContent = sound ? sound.name : browser.i18n.getMessage('options_event_soundNotSet');
+      this.renderSoundDisplay($sound, sounds);
     }
 
     this.updateOptionSlot($row, data.type);
@@ -273,7 +308,7 @@ class Events {
 
     $type.classList.toggle('not-set', !!!type);
 
-    $sound.classList.toggle('not-set', !!!sound);
+    $sound.classList.toggle('not-set', sounds.length < 1);
     this.updatePlayButton($row);
   }
 
@@ -345,6 +380,13 @@ class Events {
 
         case $button && $button.matches('button.cancel'):
           this.cancelEdit($row);
+          break;
+
+        case $button && $button.matches('button.add'):
+          this.addEventSound($row);
+          break;
+        case $button && $button.matches('button.remove'):
+          this.removeEventSound($button);
           break;
 
         default:
@@ -512,6 +554,17 @@ class Events {
     this.render($row);
   }
 
+  addEventSound($row) {
+    const $ul = $row.querySelector('ul');
+    const $li = $ul.lastElementChild;
+    const $newLi = $li.cloneNode(true);
+    $ul.appendChild($newLi);
+  }
+  removeEventSound($btn) {
+    const $li = $btn.closest('li');
+    $li.remove();
+  }
+
   toggleOptionMenu($btn, force) {
     const $menu = this.$menus.options;
     const show = (typeof force === 'boolean') ? force : $menu.style.display === 'none';
@@ -600,13 +653,15 @@ class Events {
   }
 
   acceptSound(set, $row) {
-    const $opt = $row.querySelector('select.sounds option:checked');
-    if ($opt) {
-      const {value, textContent} = $opt;
-      set.soundIds = JSON.stringify([value]);
-      set.tempSoundId = value;
-      set.soundText = textContent;
-    }
+    const $opts = $row.querySelectorAll('select.sounds option:checked');
+    const ids = Array.from($opts).reduce((acc, $opt) => {
+      acc.push($opt.value);
+      return acc;
+    }, []);
+
+    set.soundIds = JSON.stringify(ids);
+    set.tempSoundId = $opts[0]?.value;
+    set.soundText = $opts[0]?.textContent;
   }
 
   acceptName(set, $row) {
