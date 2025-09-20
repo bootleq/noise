@@ -299,7 +299,11 @@ function play(type, filter = () => true) {
   let events = gEvents[type] || [];
 
   events.filter(filter).forEach(e => {
-    let sound = gSounds[e.soundIds[0]];
+    let idx = 0;
+    if (e.soundIds.length > 1) {
+      idx = Math.floor(Math.random() * e.soundIds.length);
+    }
+    const sound = gSounds[e.soundIds[idx]];
     if (sound) {
       sound.loadSrc().then(src => {
         postToOffscreenDoc(
