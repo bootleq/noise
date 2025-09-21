@@ -663,7 +663,7 @@ class Events {
   }
 
   acceptSound(set, $row) {
-    const $opts = $row.querySelectorAll('select.sounds option:checked');
+    const $opts = $row.querySelectorAll('select.sounds option:checked:not([value=""])');
     const ids = Array.from($opts).reduce((acc, $opt) => {
       acc.push($opt.value);
       return acc;
