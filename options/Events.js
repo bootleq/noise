@@ -16,7 +16,9 @@ class Events {
 
     this.$el    = el;
     this.$list  = this.$el.querySelector('tbody');
-    this.tmpl   = this.$el.querySelector('template').content;
+    this.tmplTr = this.$el.querySelector('template#tmpl-events-row').content;
+    this.tmplAddSound = this.$el.querySelector('template#tmpl-events-add-remove-sound').content;
+
     this.$menus = {
       types:   document.querySelector('#menus .types'),
       sounds:  document.querySelector('#menus .sounds'),
@@ -243,13 +245,7 @@ class Events {
       const $li = document.createElement('li');
       const $soundSelect = this.$menus.sounds.cloneNode(true);
 
-      const $addBtn = document.createElement('button');
-      $addBtn.classList.add('add');
-      $addBtn.textContent = '➕';
-
-      const $delBtn = document.createElement('button');
-      $delBtn.classList.add('remove');
-      $delBtn.textContent = '➖';
+      const tmpl = document.importNode(this.tmplAddSound, true);
 
       if (id) {
         let $opt = $soundSelect.querySelector(`option[value='${id}']`);
@@ -258,8 +254,7 @@ class Events {
         }
       }
       $li.appendChild($soundSelect);
-      $li.appendChild($addBtn);
-      $li.appendChild($delBtn);
+      $li.appendChild(tmpl);
       $ul.appendChild($li);
     });
 
@@ -598,7 +593,7 @@ class Events {
     let e = new EventSetting(config);
     this.store.Events[e.id] = e;
 
-    let tmpl = document.importNode(this.tmpl, true);
+    let tmpl = document.importNode(this.tmplTr, true);
     let data = tmpl.querySelector('tr').dataset;
     let perms = EventSetting.getTypeDef(e.type, 'permissions');
     let browsers = EventSetting.getTypeDef(e.type, 'browsers');

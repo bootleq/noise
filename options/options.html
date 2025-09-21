@@ -96,7 +96,7 @@
 
         <tbody></tbody>
 
-        <template>
+        <template id='tmpl-events-row'>
           <tr draggable='true'>
             <td class='e-ctrl e-toggle'><label data-i18n-title='_checkbox_event_enabled'><input type='checkbox'/></label></td>
             <td class='e-name'></td>
@@ -119,6 +119,10 @@
               </div>
             </td>
           </tr>
+        </template>
+        <template id='tmpl-events-add-remove-sound'>
+          <button class='add'><span class='sr-only'>Add</span></button>
+          <button class='remove'><span class='sr-only'>Remove</span></button>
         </template>
       </table>
 

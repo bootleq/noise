@@ -636,10 +636,7 @@ table {
       font-size: larger;
       width: 1em;
       height: 100%;
-      background-image: url(shuffle.svg);
-      background-position: center 70%;
-      background-repeat: no-repeat;
-      background-size: contain;
+      background: url(shuffle.svg) no-repeat center 70% / contain;
 
       &.shuffle-off {
         display: none;
@@ -716,6 +713,7 @@ table {
         }
         li {
           display: flex;
+          align-items: center;
         }
         li:first-child button.remove {
           display: none;
@@ -723,10 +721,20 @@ table {
         button.add,
         button.remove {
           border: none;
-          background: none;
+          border-radius: 4px;
+          background: no-repeat center 70% / contain;
+          width: 1em;
+          height: 1em;
+          &:hover {
+            background-color: white;
+          }
         }
         button.add {
           margin-left: 4px;
+          background-image: url(plus.svg);
+        }
+        button.remove {
+          background-image: url(minus.svg);
         }
         .shuffle {
           margin-block: 6px;
