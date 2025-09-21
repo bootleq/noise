@@ -114,6 +114,9 @@
   "options_title_checkbox_event_enabled": {
     "message": "Enabled"
   },
+  "options_btn_toggleEventSoundShuffle": {
+    "message": "Play in shuffled order"
+  },
   "options_btn_event_edit": {
     "message": "✏️ Edit"
   },
