@@ -725,6 +725,7 @@ table {
           background: no-repeat center 70% / contain;
           width: 1em;
           height: 1em;
+          flex-shrink: 0;
           &:hover {
             background-color: white;
           }
