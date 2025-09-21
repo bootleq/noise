@@ -119,6 +119,8 @@ const Types = {
   },
 };
 
+const eventState = new WeakMap();
+
 class EventSetting {
   constructor(config) {
     this.id       = config ? config.id        : newId();
@@ -145,6 +147,22 @@ class EventSetting {
       enabled:  this.enabled
     }
     return obj;
+  }
+
+  nextSoundId() {
+    if (this.soundIds.length <= 1) {
+      return this.soundIds[0];
+    }
+
+    let idx = 0;
+    if (this.shuffle) {
+      idx = Math.floor(Math.random() * this.soundIds.length);
+    } else {
+      idx = eventState.get(this)?.lastIdx || 0;
+      const nextIdx = (idx + 1) % this.soundIds.length;
+      eventState.set(this, { lastIdx: nextIdx});
+    }
+    return this.soundIds[idx];
   }
 
   static getTypeDef(type, prop) {

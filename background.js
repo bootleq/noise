@@ -291,11 +291,8 @@ function play(type, filter = () => true) {
   let events = gEvents[type] || [];
 
   events.filter(filter).forEach(e => {
-    let idx = 0;
-    if (e.soundIds.length > 1) {
-      idx = Math.floor(Math.random() * e.soundIds.length);
-    }
-    const sound = gSounds[e.soundIds[idx]];
+    let id = e.nextSoundId();
+    const sound = gSounds[id];
     if (sound) {
       sound.play();
     }
