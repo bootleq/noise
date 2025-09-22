@@ -76,15 +76,14 @@ class Events {
 
   async load() {
     browser.storage.local.get({events: []}).then(items => {
-      for (let config of items['events']) {
+      for (let cfg of items['events']) {
         // Backward compatibility, soundIds was once soundId
-        if (typeof config['soundId'] === 'string') {
-          if (typeof config['soundIds'] === 'undefined') {
-            config['soundIds'] = [config['soundId']];
-          }
-          delete config['soundId'];
+        if (typeof cfg.soundId === 'string' && typeof cfg.soundIds === 'undefined') {
+          cfg.soundIds = [cfg.soundId];
+          delete cfg.soundId;
         }
-        this.addEvent(config);
+
+        this.addEvent(cfg);
       };
       this.store.Loaded.push('events');
       this.notifyObservers('load');

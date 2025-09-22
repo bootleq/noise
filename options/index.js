@@ -246,12 +246,11 @@ async function init() {
 
     newConfig['events'].forEach((cfg) => {
       // Backward compatibility, soundIds was once soundId
-      if (typeof cfg['soundId'] === 'string') {
-        if (typeof cfg['soundIds'] === 'undefined') {
-          cfg['soundIds'] = [cfg['soundId']];
-        }
-        delete cfg['soundId'];
+      if (typeof cfg.soundId === 'string' && typeof cfg.soundIds === 'undefined') {
+        cfg.soundIds = [cfg.soundId];
+        delete cfg.soundId;
       }
+
       return events.addEvent(cfg);
     });
 

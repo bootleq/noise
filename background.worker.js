@@ -271,6 +271,12 @@ function resetEvents(configs) {
   configs.forEach(cfg => {
     let type = cfg.type;
 
+    // Backward compatibility, soundIds was once soundId
+    if (typeof cfg.soundId === 'string' && typeof cfg.soundIds === 'undefined') {
+      cfg['soundIds'] = [cfg.soundId];
+      delete cfg.soundId;
+    }
+
     if (cfg.enabled && cfg.soundIds.length) {
       const e = new EventSetting(cfg);
 
