@@ -215,23 +215,25 @@ class Events {
       return;
     }
 
+    const $container = document.createElement('div');
     const $mainSound = document.createElement('span');
     $mainSound.textContent = sounds[0]?.name;
-
-    $sound.innerHTML = '';
-    $sound.appendChild($mainSound);
+    $container.appendChild($mainSound);
 
     if (sounds.length > 1) {
       const $more = document.createElement('span');
       $more.classList.add('more');
       $more.textContent = `(+${sounds.length - 1})`;
-      $sound.appendChild($more);
+      $container.appendChild($more);
 
       const $shuffle = document.createElement('span');
       $shuffle.classList.add('shuffle');
       $shuffle.classList.add(shuffle ? 'shuffle-on' : 'shuffle-off');
-      $sound.appendChild($shuffle);
+      $container.appendChild($shuffle);
     }
+
+    $sound.innerHTML = '';
+    $sound.appendChild($container);
   }
 
   renderSoundSelect() {
