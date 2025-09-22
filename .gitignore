@@ -8,6 +8,7 @@ build
 dist
 node_modules
 .tool-versions
+.ignore
 .yarn/*
 !.yarn/patches
 !.yarn/plugins
