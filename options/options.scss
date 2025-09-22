@@ -480,6 +480,8 @@ table {
 }
 
 #events {
+  container: events / inline-size;
+  min-width: 760px;
   margin-top: 2em;
   margin-bottom: 2em;
 
@@ -750,6 +752,21 @@ table {
             span {
               white-space: nowrap;
             }
+          }
+        }
+      }
+
+      @container events (width < 1100px) {
+        td.e-edit {
+          text-align: right;
+        }
+      }
+
+      @container events (width < 900px) {
+        td.e-edit {
+          button {
+            display: block;
+            margin: 6px 0 6px auto;
           }
         }
       }
