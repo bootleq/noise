@@ -119,14 +119,17 @@ const Types = {
   },
 };
 
+const eventState = new WeakMap();
+
 class EventSetting {
   constructor(config) {
-    this.id      = config ? config.id      : newId();
-    this.name    = config ? config.name    : '';
-    this.type    = config ? config.type    : null;
-    this.options = config ? config.options : {};
-    this.soundId = config ? config.soundId : null;
-    this.enabled = config ? config.enabled : false;
+    this.id       = config ? config.id        : newId();
+    this.name     = config ? config.name      : '';
+    this.type     = config ? config.type      : null;
+    this.options  = config ? config.options   : {};
+    this.soundIds = config ? config.soundIds  : [];
+    this.shuffle  = config ? !!config.shuffle : false;
+    this.enabled  = config ? config.enabled   : false;
   }
 
   static get Types() {
@@ -135,14 +138,31 @@ class EventSetting {
 
   toPersistedProps() {
     let obj = {
-      id:      this.id,
-      name:    this.name || '',
-      type:    this.type,
-      options: this.options,
-      soundId: this.soundId,
-      enabled: this.enabled
+      id:       this.id,
+      name:     this.name || '',
+      type:     this.type,
+      options:  this.options,
+      soundIds: this.soundIds,
+      shuffle:  this.shuffle,
+      enabled:  this.enabled
     }
     return obj;
+  }
+
+  nextSoundId() {
+    if (this.soundIds.length <= 1) {
+      return this.soundIds[0];
+    }
+
+    let idx = 0;
+    if (this.shuffle) {
+      idx = Math.floor(Math.random() * this.soundIds.length);
+    } else {
+      idx = eventState.get(this)?.lastIdx || 0;
+      const nextIdx = (idx + 1) % this.soundIds.length;
+      eventState.set(this, { lastIdx: nextIdx});
+    }
+    return this.soundIds[idx];
   }
 
   static getTypeDef(type, prop) {

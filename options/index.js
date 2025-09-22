@@ -97,8 +97,12 @@ function rewriteDuplicatedIds(config) {
       const nId = newId();
       cfg['id'] = nId;
 
-      config['events'].filter(e => e['soundId'] === id).forEach(e => {
-        e['soundId'] = nId;
+      config['events'].forEach((event) => {
+        for (let idx = 0; idx < event.soundIds.length; idx++) {
+          if (event.soundIds[idx] === id) {
+            event.soundIds[idx] = nId;
+          }
+        }
       });
 
       if (config[`src.${id}`]) {
@@ -239,7 +243,18 @@ async function init() {
       sounds.addSound(cfg);
       store.Sounds[cfg.id].src = newConfig[`src.${cfg.id}`];
     });
-    newConfig['events'].forEach((cfg) => events.addEvent(cfg));
+
+    newConfig['events'].forEach((cfg) => {
+      // Backward compatibility, soundIds was once soundId
+      if (typeof cfg['soundId'] === 'string') {
+        if (typeof cfg['soundIds'] === 'undefined') {
+          cfg['soundIds'] = [cfg['soundId']];
+        }
+        delete cfg['soundId'];
+      }
+      return events.addEvent(cfg);
+    });
+
     events.updateAvailability();
     events.updateBrowserCompatibility();
     events.updateSoundMenu();

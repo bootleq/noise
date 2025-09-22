@@ -17,7 +17,7 @@
     <fieldset id="sounds">
       <legend data-i18n='_header_sounds'>Sounds</legend>
 
-      <label id='play-select-toggle' data-i18n-title='_btn_togglePlaySelect'>
+      <label id='play-select-toggle' class='toggle' data-i18n-title='_btn_togglePlaySelect'>
         <input type='checkbox' class='sr-only' />
         <div></div>
         <span data-i18n='_btn_togglePlaySelect'>Play select</span>
@@ -96,7 +96,7 @@
 
         <tbody></tbody>
 
-        <template>
+        <template id='tmpl-events-row'>
           <tr draggable='true'>
             <td class='e-ctrl e-toggle'><label data-i18n-title='_checkbox_event_enabled'><input type='checkbox'/></label></td>
             <td class='e-name'></td>
@@ -120,6 +120,10 @@
             </td>
           </tr>
         </template>
+        <template id='tmpl-events-add-remove-sound'>
+          <button class='add'><span class='sr-only'>Add</span></button>
+          <button class='remove'><span class='sr-only'>Remove</span></button>
+        </template>
       </table>
 
       <button class='add_event' data-i18n='_btn_event_add'>➕ Add Event</button>
@@ -128,6 +132,13 @@
     <div id='menus'>
       <select class='types'><option value=''></option></select>
       <select class='sounds'><option value=''></option></select>
+      <div class='shuffle'>
+        <label class='toggle'>
+          <span data-i18n='_btn_toggleEventSoundShuffle'>Play in shuffled order</span>
+          <input type='checkbox' class='sr-only' />
+          <div></div>
+        </label>
+      </div>
       <div class='options' style='display: none'>
         <button data-i18n-title='_btn_close'>✖</button>
         <div class='form'></div>

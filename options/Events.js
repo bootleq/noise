@@ -16,10 +16,13 @@ class Events {
 
     this.$el    = el;
     this.$list  = this.$el.querySelector('tbody');
-    this.tmpl   = this.$el.querySelector('template').content;
+    this.tmplTr = this.$el.querySelector('template#tmpl-events-row').content;
+    this.tmplAddSound = this.$el.querySelector('template#tmpl-events-add-remove-sound').content;
+
     this.$menus = {
       types:   document.querySelector('#menus .types'),
       sounds:  document.querySelector('#menus .sounds'),
+      shuffle: document.querySelector('#menus .shuffle'),
       options: document.querySelector('#menus .options')
     };
     this.$hints = {
@@ -74,6 +77,13 @@ class Events {
   async load() {
     browser.storage.local.get({events: []}).then(items => {
       for (let config of items['events']) {
+        // Backward compatibility, soundIds was once soundId
+        if (typeof config['soundId'] === 'string') {
+          if (typeof config['soundIds'] === 'undefined') {
+            config['soundIds'] = [config['soundId']];
+          }
+          delete config['soundId'];
+        }
         this.addEvent(config);
       };
       this.store.Loaded.push('events');
@@ -199,24 +209,66 @@ class Events {
     this.updateNoSoundHint();
   }
 
+  renderSoundDisplay($sound, sounds, shuffle) {
+    if (!sounds.length) {
+      $sound.textContent = browser.i18n.getMessage('options_event_soundNotSet');
+      return;
+    }
+
+    const $container = document.createElement('div');
+    const $mainSound = document.createElement('span');
+    $mainSound.textContent = sounds[0]?.name;
+    $container.appendChild($mainSound);
+
+    if (sounds.length > 1) {
+      const $more = document.createElement('span');
+      $more.classList.add('more');
+      $more.textContent = `(+${sounds.length - 1})`;
+      $container.appendChild($more);
+
+      const $shuffle = document.createElement('span');
+      $shuffle.classList.add('shuffle');
+      $shuffle.classList.add(shuffle ? 'shuffle-on' : 'shuffle-off');
+      $container.appendChild($shuffle);
+    }
+
+    $sound.innerHTML = '';
+    $sound.appendChild($container);
+  }
+
   renderSoundSelect() {
     if (!this.editing || !this.$selected) {
       return;
     }
 
-    const $editing = this.$selected.querySelector('td.e-sound');
-    const $editingSelected = $editing && $editing.querySelector('option:checked');
-    const soundId = this.editing ? this.editing.soundId : ($editingSelected && $editingSelected.value);
-    const $soundSelect = this.$menus.sounds.cloneNode(true);
+    const $ul = document.createElement('ul');
+    const soundIds = this.editing.soundIds.length ? this.editing.soundIds : [null];
+    soundIds.forEach(id => {
+      const $li = document.createElement('li');
+      const $soundSelect = this.$menus.sounds.cloneNode(true);
 
-    if (soundId) {
-      let $opt = $soundSelect.querySelector(`option[value='${soundId}']`);
-      if ($opt) {
-        $opt.selected = true;
+      const tmpl = document.importNode(this.tmplAddSound, true);
+
+      if (id) {
+        let $opt = $soundSelect.querySelector(`option[value='${id}']`);
+        if ($opt) {
+          $opt.selected = true;
+        }
       }
+      $li.appendChild($soundSelect);
+      $li.appendChild(tmpl);
+      $ul.appendChild($li);
+    });
+
+    const $editing = this.$selected.querySelector('td.e-sound');
+    $editing.innerHTML = '';
+    $editing.appendChild($ul);
+
+    if (soundIds.length > 1) {
+      const $shuffle = this.$menus.shuffle.cloneNode(true);
+      $shuffle.querySelector('input').checked = this.editing.shuffle;
+      $editing.appendChild($shuffle);
     }
-    $editing.textContent = '';
-    $editing.appendChild($soundSelect);
   }
 
   updateOptionsMenu(type, options) {
@@ -241,7 +293,9 @@ class Events {
   render($row) {
     let data     = $row.dataset;
     let options  = JSON.parse(data.options);
-    let sound    = this.store.Sounds[data.soundId];
+    let soundIds = JSON.parse(data.soundIds);
+    let sounds   = soundIds.map(id => this.store.Sounds[id]);
+    let shuffle  = data.shuffle ? JSON.parse(data.shuffle) : false;
     let $name    = $row.querySelector('.e-name');
     let type     = EventSetting.getTypeDef(data.type, 'name');
     let $type    = $row.querySelector('.e-type');
@@ -255,7 +309,7 @@ class Events {
       }
 
       $type.textContent = type || browser.i18n.getMessage('options_event_typeNotSet');
-      $sound.textContent = sound ? sound.name : browser.i18n.getMessage('options_event_soundNotSet');
+      this.renderSoundDisplay($sound, sounds, shuffle);
     }
 
     this.updateOptionSlot($row, data.type);
@@ -264,7 +318,7 @@ class Events {
 
     $type.classList.toggle('not-set', !!!type);
 
-    $sound.classList.toggle('not-set', !!!sound);
+    $sound.classList.toggle('not-set', sounds.length < 1);
     this.updatePlayButton($row);
   }
 
@@ -315,7 +369,8 @@ class Events {
     let $target = e.target;
     let $button = $target.closest('button');
     let $row    = $target.closest('tr');
-    const { eventId, soundId, tempSoundId } = $row.dataset;
+    const { eventId, tempSoundId } = $row.dataset;
+    const soundIds = JSON.parse($row.dataset.soundIds);
     let sound, $cell;
 
     if ($target.matches('.e-toggle input')) {
@@ -335,6 +390,13 @@ class Events {
 
         case $button && $button.matches('button.cancel'):
           this.cancelEdit($row);
+          break;
+
+        case $button && $button.matches('button.add'):
+          this.addEventSound($row);
+          break;
+        case $button && $button.matches('button.remove'):
+          this.removeEventSound($button);
           break;
 
         default:
@@ -364,7 +426,7 @@ class Events {
           break;
 
         case $button.matches('.play'):
-          sound = this.store.Sounds[soundId];
+          sound = this.store.Sounds[soundIds[0]];
           sound?.play();
           break;
 
@@ -458,7 +520,8 @@ class Events {
     } else {
       $row.draggable = false;
 
-      $row.dataset.tempSoundId = $row.dataset.soundId;
+      const soundIds = JSON.parse($row.dataset.soundIds);
+      $row.dataset.tempSoundId = soundIds[0];
 
       this.editing = this.store.Events[$row.dataset.eventId];
       this._before = JSON.stringify(this.editing);
@@ -494,11 +557,22 @@ class Events {
     data.name = before.name;
     data.type = before.type;
     data.options = JSON.stringify(before.options);
-    data.soundId = before.soundId;
+    data.soundIds = JSON.stringify(before.soundIds);
     delete data.tempSoundId;
     $row.querySelector('.e-name').textContent = data.name;
     this.$menus.options.style.display = 'none';
     this.render($row);
+  }
+
+  addEventSound($row) {
+    const $ul = $row.querySelector('ul');
+    const $li = $ul.lastElementChild;
+    const $newLi = $li.cloneNode(true);
+    $ul.appendChild($newLi);
+  }
+  removeEventSound($btn) {
+    const $li = $btn.closest('li');
+    $li.remove();
   }
 
   toggleOptionMenu($btn, force) {
@@ -521,21 +595,22 @@ class Events {
     let e = new EventSetting(config);
     this.store.Events[e.id] = e;
 
-    let tmpl = document.importNode(this.tmpl, true);
+    let tmpl = document.importNode(this.tmplTr, true);
     let data = tmpl.querySelector('tr').dataset;
     let perms = EventSetting.getTypeDef(e.type, 'permissions');
     let browsers = EventSetting.getTypeDef(e.type, 'browsers');
-    data.eventId = e.id;
-    data.name    = e.name || '';
-    data.type    = e.type;
-    data.options = JSON.stringify(e.options);
-    data.soundId = e.soundId;
+    data.eventId  = e.id;
+    data.name     = e.name || '';
+    data.type     = e.type;
+    data.options  = JSON.stringify(e.options);
+    data.soundIds = JSON.stringify(e.soundIds);
     if (perms.length) {
       data.permissions = JSON.stringify(perms);
     }
     if (browsers.length) {
       data.browsers = JSON.stringify(browsers);
     }
+    data.shuffle = JSON.stringify(e.shuffle);
 
     tmpl.querySelector('.e-toggle input').checked = e.enabled;
     this.$list.appendChild(tmpl);
@@ -552,10 +627,12 @@ class Events {
   }
 
   datasetToEvent(data, gEvent) {
-    const {name, type, soundId} = data;
+    const {name, type} = data;
+    const soundIds = JSON.parse(data.soundIds);
+    const shuffle = JSON.parse(data.shuffle);
     const options = JSON.parse(data.options);
 
-    Object.assign(gEvent, {name, type, soundId, options});
+    Object.assign(gEvent, {name, type, soundIds, shuffle, options});
   }
 
   acceptType(set, $row) {
@@ -588,13 +665,17 @@ class Events {
   }
 
   acceptSound(set, $row) {
-    const $opt = $row.querySelector('select.sounds option:checked');
-    if ($opt) {
-      const {value, textContent} = $opt;
-      set.soundId = value;
-      set.tempSoundId = value;
-      set.soundText = textContent;
-    }
+    const $opts = $row.querySelectorAll('select.sounds option:checked:not([value=""])');
+    const ids = Array.from($opts).reduce((acc, $opt) => {
+      acc.push($opt.value);
+      return acc;
+    }, []);
+    const $shuffle = $row.querySelector('.shuffle input[type="checkbox"]')
+
+    set.soundIds = JSON.stringify(ids);
+    set.shuffle = JSON.stringify($shuffle ? $shuffle.checked : false);
+    set.tempSoundId = $opts[0]?.value;
+    set.soundText = $opts[0]?.textContent;
   }
 
   acceptName(set, $row) {
@@ -634,13 +715,15 @@ class Events {
   }
 
   updatePlayButton($row) {
-    const { soundId, tempSoundId } = $row.dataset;
+    const dataset = $row.dataset;
+    const { tempSoundId } = dataset;
+    const soundIds = JSON.parse(dataset.soundIds);
     const $btn = $row.querySelector('button.play');
 
     if (this.editing) {
       $btn.disabled = !!!tempSoundId;
     } else {
-      $btn.disabled = !!!soundId;
+      $btn.disabled = soundIds.length < 1;
     }
   }
 

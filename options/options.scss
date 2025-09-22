@@ -4,6 +4,7 @@
   --color-fx-red-80: #5a0002;
   --color-fx-blue-60: #0060df;
   --color-thead: #ebebeb;
+  --color-green: #497d00;
 }
 
 body * {
@@ -224,11 +225,7 @@ table {
   }
 }
 
-#play-select-toggle {
-  position: absolute;
-  top: 3px;
-  right: 5px;
-  z-index: 99;
+.toggle {
   display: inline-flex;
   align-items: center;
   gap: 9px;
@@ -271,6 +268,13 @@ table {
       transform: translateX(100%);
     }
   }
+}
+
+#play-select-toggle {
+  position: absolute;
+  top: 3px;
+  right: 5px;
+  z-index: 99;
 }
 
 #sound_detail {
@@ -476,6 +480,8 @@ table {
 }
 
 #events {
+  container: events / inline-size;
+  min-width: 760px;
   margin-top: 2em;
   margin-bottom: 2em;
 
@@ -587,6 +593,7 @@ table {
       font-size: 14px;
       border: none;
       background-color: transparent;
+      max-width: 100%;
       &:focus {
         border-bottom: 2px solid rgba(0,149,221,0.25);
       }
@@ -610,6 +617,36 @@ table {
       &.enabled {
         opacity: 1;
         background-color: var(--color-fx-blue-60) !important;
+      }
+    }
+  }
+
+  .e-sound {
+    > div {
+      display: flex;
+      align-items: center;
+    }
+
+    ul {
+      list-style: none;
+    }
+    .more {
+      margin-left: 14px;
+      color: var(--color-green);
+      font-family: 'Noto Mono TC', 'ui-monospace', 'SFMono-Regular', 'Menlo', 'Monaco', 'Consolas', 'Liberation Mono', "Courier New", monospace;
+    }
+    span.shuffle {
+      margin-left: 8px;
+      display: inline-block;
+      font-size: larger;
+      width: 1em;
+      height: 1em;
+      flex-shrink: 0;
+      background: url(shuffle.svg) no-repeat center/ contain;
+      transform: translateY(1px);
+
+      &.shuffle-off {
+        display: none;
       }
     }
   }
@@ -671,6 +708,71 @@ table {
           background-color: rgba(0,149,221,0.25);
           cursor: pointer;
         }
+      }
+
+      td.e-sound {
+        display: table-cell;
+
+        ul {
+          display: flex;
+          flex-direction: column;
+          gap: 4px;
+        }
+        li {
+          display: flex;
+          align-items: center;
+        }
+        li:first-child button.remove {
+          display: none;
+        }
+        button.add,
+        button.remove {
+          border: none;
+          border-radius: 4px;
+          background: no-repeat center 70% / contain;
+          width: 1em;
+          height: 1em;
+          flex-shrink: 0;
+          &:hover {
+            background-color: white;
+          }
+        }
+        button.add {
+          margin-left: 4px;
+          background-image: url(plus.svg);
+        }
+        button.remove {
+          background-image: url(minus.svg);
+        }
+        .shuffle {
+          margin-block: 6px;
+          label {
+            font-size: small;
+            text-indent: 2em;
+            span {
+              white-space: nowrap;
+            }
+          }
+        }
+      }
+
+      @container events (width < 1100px) {
+        td.e-edit {
+          text-align: right;
+        }
+      }
+
+      @container events (width < 900px) {
+        td.e-edit {
+          button {
+            display: block;
+            margin: 6px 0 6px auto;
+          }
+        }
+      }
+
+      select {
+        max-width: 100%;
       }
 
       button:hover {

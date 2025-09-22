@@ -106,6 +106,9 @@
   "options_title_checkbox_event_enabled": {
     "message": "啟用"
   },
+  "options_btn_toggleEventSoundShuffle": {
+    "message": "以隨機順序播放"
+  },
   "options_btn_event_edit": {
     "message": "✏️ 編輯"
   },
