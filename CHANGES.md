@@ -1,6 +1,11 @@
 CHANGES
 =======
 
+## 4.2.0 (2025-09-23)
+
+* Allow set multiple sounds for single event, play one of them randomly or in sequence.
+* Settings exported from this version can not be imported to order versions.
+
 ## 4.1.0 (2025-07-08)
 
 * Detect event binding errors when saving options, show a message to help diagnose issues.
