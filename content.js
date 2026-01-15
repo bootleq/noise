@@ -26,7 +26,8 @@ function onEvent(e) {
   port.postMessage({
     type: 'content.on',
     event: {
-      type: e.type
+      type: e.type,
+      ctx: e.ctx,
     }
   });
 }
@@ -40,6 +41,15 @@ function onFullscreenChange(e) {
     type = 'leave-fullscreen';
   }
   onEvent({ type });
+}
+
+function onNavigate(e) {
+  onEvent({
+    type: 'navigate',
+    ctx: {
+      navigationType: e.navigationType,
+    }
+  });
 }
 
 function toggleListener(target, eventName, handler, toggle) {
@@ -58,6 +68,10 @@ function addListeners(events) {
   toggleListener(window, 'paste', onEvent, types.includes('window.paste'));
   toggleListener(window, 'compositionstart', onEvent, types.includes('window.compositionstart'));
   toggleListener(document, 'fullscreenchange', onFullscreenChange, hasAny(['doc.fullscreenEnter', 'doc.fullscreenLeave'], types));
+
+  if (typeof navigation === 'object') {
+    toggleListener(navigation, 'navigate', onNavigate, types.includes('navigate'));
+  }
 }
 
 function removeListeners() {
@@ -66,6 +80,10 @@ function removeListeners() {
   window.removeEventListener('paste', onEvent);
   window.removeEventListener('compositionstart', onEvent);
   document.removeEventListener('fullscreenchange', onFullscreenChange);
+
+  if (typeof navigation === 'object') {
+    navigation.removeEventListener('navigate', onNavigate);
+  }
 }
 
 globalThis.requestIdleCallback(() => {
