@@ -1,6 +1,7 @@
 'use strict';
 
 import browser from "webextension-polyfill";
+import groupBy from 'core-js-pure/actual/object/group-by';
 
 import { EventSetting } from '../common/event.js';
 import { browserInfo, emptyObject } from '../common/utils.js';
@@ -801,7 +802,7 @@ class Events {
       switch (true) {
         case $target.matches('.accept'):
           const $propInputs = $menu.querySelectorAll('.form [data-prop]');
-          const { a: $checks = [], b: $normalInputs = [] } = Object.groupBy($propInputs, (item) => {
+          const { a: $checks = [], b: $normalInputs = [] } = groupBy($propInputs, (item) => {
             return item.type === 'checkbox' ? 'a' : 'b';
           });
 
@@ -814,7 +815,7 @@ class Events {
           });
 
           Object.entries(
-            Object.groupBy($checks, i => i.dataset.prop)
+            groupBy($checks, i => i.dataset.prop)
           ).forEach(([prop, $inputs]) => {
             options[type][prop] = $inputs.filter(i => i.checked).map(i => i.value);
           });
