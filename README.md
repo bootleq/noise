@@ -16,6 +16,7 @@ Available Events
 - Tab groups created / moved / updated / closed
 - Window opened / closed
 - Back or Forward navigation
+- Navigation start, and so on (push/reload/replace)
 - Request completed, like 404, 500 response
 - Enter or leave fullscreen mode
 - Clipboard copy / paste
