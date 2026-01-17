@@ -46,7 +46,10 @@
   "browser_specific_settings": {
     "gecko": {
       "id": "noise@bootleq",
-      "strict_min_version": "69.0"
+      "strict_min_version": "69.0",
+      "data_collection_permissions": {
+        "required": ["none"]
+      }
     }
   }
 }
