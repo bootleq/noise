@@ -1,10 +1,14 @@
 CHANGES
 =======
 
-## 4.3.0 (2026-01-??)
+## 4.3.0 (2026-01-17)
 
-* Add "Navigate" event.
-  Has limited browser compatibility, see https://developer.mozilla.org/en-US/docs/Web/API/NavigateEvent
+* Add "Navigate" event. It fires similarly to the old IE navigation sound.
+
+  Note the `Navigation` API has limited browser compatibility,
+  see https://developer.mozilla.org/en-US/docs/Web/API/NavigateEvent
+
+* Add "Data Collection" declaration for Firefox's new consent process, we collect nothing.
 
 ## 4.2.0 (2025-09-23)
 

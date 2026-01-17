@@ -1,6 +1,15 @@
 CHANGES
 =======
 
+## 4.3.0 (2026-01-17)
+
+* 新增「瀏覽導航」事件，時機類似舊版 IE 的瀏覽音效
+
+  請留意 `Navigation` API 在比較舊的瀏覽器並不支援，參考
+  https://developer.mozilla.org/en-US/docs/Web/API/NavigateEvent
+
+* 宣告「資料收集」項目以符合 Firefox 新政策，此套件不收集任何資料
+
 ## 4.2.0 (2025-09-23)
 
 * 可以在一個事件上設定多個聲音，隨機或依序播放其中之一
