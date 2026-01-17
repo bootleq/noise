@@ -1,6 +1,11 @@
 CHANGES
 =======
 
+## 4.3.0 (2026-01-??)
+
+* Add "Navigate" event.
+  Has limited browser compatibility, see https://developer.mozilla.org/en-US/docs/Web/API/NavigateEvent
+
 ## 4.2.0 (2025-09-23)
 
 * Allow set multiple sounds for single event, play one of them randomly or in sequence.

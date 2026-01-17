@@ -111,6 +111,7 @@ async function onPortMessage(msg, port) {
   }
 
   const eType = msg.event?.type;
+  const eCtx = msg.event?.ctx;
 
   switch (msg.type) {
   case 'content.on':
@@ -133,6 +134,18 @@ async function onPortMessage(msg, port) {
         break;
       case 'leave-fullscreen':
         play('doc.fullscreenLeave');
+        break;
+
+      case 'navigate':
+        const { navigationType } = eCtx;
+        let filter = (event) => {
+          if ('filter_navType' in event.options) {
+            let validTypes = event.options['filter_navType']['types'];
+            return validTypes.includes(navigationType);
+          }
+          return true;
+        };
+        play('navigate', filter);
         break;
     }
     break;

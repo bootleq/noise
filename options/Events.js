@@ -1,6 +1,7 @@
 'use strict';
 
 import browser from "webextension-polyfill";
+import '../common/polyfill.js';
 
 import { EventSetting } from '../common/event.js';
 import { browserInfo, emptyObject } from '../common/utils.js';
@@ -283,7 +284,12 @@ class Events {
     tmpl = document.importNode(tmpl, true);
     tmpl.querySelectorAll('[data-prop]').forEach($input => {
       let prop = $input.dataset.prop;
-      $input.value = prop in props ? props[prop] : '';
+      if ($input.type === 'checkbox') {
+        const values = prop in props ? props[prop] : [];
+        $input.checked = values.includes($input.value);
+      } else {
+        $input.value = prop in props ? props[prop] : '';
+      }
     });
     $form.appendChild(tmpl);
     $desc.innerHTML = browser.i18n.getMessage(`event_slots_desc_${type}`);
@@ -795,11 +801,23 @@ class Events {
 
       switch (true) {
         case $target.matches('.accept'):
-          $menu.querySelectorAll('.form [data-prop]').forEach($input => {
-            if (!(type in options)) {
-              options[type] = {};
-            }
+          const $propInputs = $menu.querySelectorAll('.form [data-prop]');
+          const { a: $checks = [], b: $normalInputs = [] } = Object.groupBy($propInputs, (item) => {
+            return item.type === 'checkbox' ? 'a' : 'b';
+          });
+
+          if (!(type in options)) {
+            options[type] = {};
+          }
+
+          $normalInputs.forEach($input => {
             options[type][$input.dataset.prop] = $input.value;
+          });
+
+          Object.entries(
+            Object.groupBy($checks, i => i.dataset.prop)
+          ).forEach(([prop, $inputs]) => {
+            options[type][prop] = $inputs.filter(i => i.checked).map(i => i.value);
           });
 
           $row.dataset.options = JSON.stringify(options);

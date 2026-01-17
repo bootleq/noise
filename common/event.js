@@ -59,6 +59,15 @@ const Types = {
     name: browser.i18n.getMessage(`${scope}docFullscreenLeave`),
     forContent: true
   },
+  'navigate': {
+    name: browser.i18n.getMessage(`${scope}navigate`),
+    forContent: true,
+    slots: [
+      {
+        name: 'filter_navType'
+      }
+    ]
+  },
   'hr.tabs': {},
   'tabs.created': {
     name: browser.i18n.getMessage(`${scope}tabsCreated`)

@@ -340,6 +340,9 @@
   "event_types_name_docFullscreenLeave": {
     "message": "Leave Fullscreen Mode"
   },
+  "event_types_name_navigate": {
+    "message": "Navigate"
+  },
 
   "event_slots_name_filter_statusCode": {
     "message": "Filter: status code"
@@ -365,5 +368,27 @@
   },
   "options_ignoreWinClose_ignore": {
     "message": "Ignore, quiet"
+  },
+
+  "event_slots_name_filter_navType": {
+    "message": "Filter: Navigation Types"
+  },
+  "options_header_slot_filter_navType": {
+    "message": "Navigation Type"
+  },
+  "event_slots_desc_filter_navType": {
+    "message": "Only respond to selected types.<br><br>Note the <strong>Navigation</strong> feature has limited availability, see MDN <a href='https://developer.mozilla.org/en-US/docs/Web/API/NavigateEvent/navigationType#browser_compatibility' title='NavigateEvent: navigationType property - Web APIs | MDN' target='_blank'>navigationType</a>."
+  },
+  "options_navType_push": {
+    "message": "Push"
+  },
+  "options_navType_reload": {
+    "message": "Reload"
+  },
+  "options_navType_replace": {
+    "message": "Replace"
+  },
+  "options_navType_traverse": {
+    "message": "Traverse"
   }
 }
