@@ -3,7 +3,6 @@
   "description": "Make sound response when events happen",
   "private": true,
   "dependencies": {
-    "core-js-pure": "^3.47.0",
     "just-throttle": "^4.2.0",
     "nanoid": "^5.1.5"
   },

@@ -1446,13 +1446,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"core-js-pure@npm:^3.47.0":
-  version: 3.47.0
-  resolution: "core-js-pure@npm:3.47.0"
-  checksum: 10c0/7eb5f897e532b33e6ea85ec2c60073fc2fe943e4543ec9903340450fc0f3b46b5b118d57d332e9f2c3d681a8b7b219a4cc64ccf548d933f6b79f754b682696dd
-  languageName: node
-  linkType: hard
-
 "core-util-is@npm:~1.0.0":
   version: 1.0.3
   resolution: "core-util-is@npm:1.0.3"
@@ -3447,7 +3440,6 @@ __metadata:
   dependencies:
     clean-webpack-plugin: "npm:^4.0.0"
     copy-webpack-plugin: "npm:^11.0.0"
-    core-js-pure: "npm:^3.47.0"
     cross-env: "npm:^7.0.3"
     css-loader: "npm:^6.7.2"
     just-throttle: "npm:^4.2.0"
