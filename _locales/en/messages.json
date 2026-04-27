@@ -298,6 +298,12 @@
   "event_types_name_tabsGroupOut": {
     "message": "Remove Tab from Group"
   },
+  "event_types_name_tabsSplitJoined": {
+    "message": "Split View"
+  },
+  "event_types_name_tabsSplitOff": {
+    "message": "Leave Split View"
+  },
   "event_types_name_tabGroupsCreated": {
     "message": "Create New Tab Group"
   },

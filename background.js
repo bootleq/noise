@@ -186,7 +186,7 @@ function addListeners() {
   let types = Object.keys(gEvents);
 
   const tabGroupAvailable = typeof browser.tabGroups === 'object';
-  const tabUpdateFilterProps = ['attention', 'pinned'];
+  const tabUpdateFilterProps = ['attention', 'pinned', 'splitViewId'];
   if (tabGroupAvailable) {
     tabUpdateFilterProps.push('groupId');
   }
@@ -200,7 +200,7 @@ function addListeners() {
   toggleListener(
     browser.tabs.onUpdated,
     onTabUpdated,
-    hasAny(['tabs.attention', 'tabs.pinned', 'tabs.unpinned', 'tabs.group-in', 'tabs.group-out'], types),
+    hasAny(['tabs.attention', 'tabs.pinned', 'tabs.unpinned', 'tabs.group-in', 'tabs.group-out', 'tabs.split-joined', 'tabs.split-off'], types),
     {
       urls: ['<all_urls>'],
       properties: tabUpdateFilterProps
@@ -389,6 +389,14 @@ function onTabUpdated(tabId, changeInfo, tabInfo) {
       play('tabs.group-out');
     } else {
       play('tabs.group-in');
+    }
+  }
+
+  if (keys.includes('splitViewId')) {
+    if (changeInfo['splitViewId'] === browser.tabs.SPLIT_VIEW_ID_NONE) {
+      play('tabs.split-off');
+    } else {
+      play('tabs.split-joined');
     }
   }
 }
