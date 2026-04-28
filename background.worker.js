@@ -10,6 +10,16 @@ const gSounds = {};
 const gEvents = {};
 const contentEvents = {}; // cache events specific to content script, example: {'window.cut': [{options: ...}] }
 
+const AllTabUpdateEvents = [
+  // 'attention',
+  'pinned',
+  'unpinned',
+  'group-in',
+  'group-out',
+  'split-joined',
+  'split-joined'
+].map(name => `tabs.${name}`);
+
 let ports = [];
 let hasStarted = false;
 let savingChecked = false; // flag for options page, could be set during onStorageChange, to avoid ditto check in options_saving_check
@@ -208,7 +218,7 @@ function addListeners() {
   toggleListener(
     browser.tabs.onUpdated,
     onTabUpdated,
-    hasAny(['tabs.pinned', 'tabs.unpinned', 'tabs.group-in', 'tabs.group-out', 'tabs.split-joined', 'tabs.split-off'], types)
+    hasAny(AllTabUpdateEvents, types),
     // {
     //   urls: ['<all_urls>'],
     //   properties: ['attention', 'pinned']
