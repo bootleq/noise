@@ -1,6 +1,10 @@
 CHANGES
 =======
 
+## 4.4.0 (2026-04-29)
+
+* Add Split View events: when enter or leave Split View.
+
 ## 4.3.0 (2026-01-17)
 
 * Add "Navigate" event. It fires similarly to the old IE navigation sound.
