@@ -20,6 +20,9 @@ const AllTabUpdateEvents = [
   'split-off'
 ].map(name => `tabs.${name}`);
 
+const tabGroupAvailable = typeof browser.tabGroups === 'object';
+const splitViewAvailable = typeof browser.tabs.SPLIT_VIEW_ID_NONE === 'number';
+
 let ports = [];
 let hasStarted = false;
 let savingChecked = false; // flag for options page, could be set during onStorageChange, to avoid ditto check in options_saving_check
@@ -195,10 +198,12 @@ async function loadConfig() {
 function addListeners() {
   let types = Object.keys(gEvents);
 
-  const tabGroupAvailable = typeof browser.tabGroups === 'object';
-  const tabUpdateFilterProps = ['attention', 'pinned', 'splitViewId'];
+  const tabUpdateFilterProps = ['attention', 'pinned'];
   if (tabGroupAvailable) {
     tabUpdateFilterProps.push('groupId');
+  }
+  if (splitViewAvailable) {
+    tabUpdateFilterProps.push('splitViewId');
   }
 
   toggleListener(browser.downloads.onCreated, onDownloadCreated, types.includes('download.new'));
