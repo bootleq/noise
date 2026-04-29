@@ -1,6 +1,10 @@
 CHANGES
 =======
 
+## 4.4.1 (2026-04-29)
+
+* Fix splitViewId related error on older versions of Firefox.
+
 ## 4.4.0 (2026-04-29)
 
 * Add Split View events: when enter or leave Split View.
