@@ -14,6 +14,7 @@ Available Events
 - Download start / completed / interrupted / failed
 - Tab opened / closed / attached / attention / pin / unpin
 - Tab groups created / moved / updated / closed
+- Split View entered / left
 - Window opened / closed
 - Back or Forward navigation
 - Navigation start, and so on (push/reload/replace)
