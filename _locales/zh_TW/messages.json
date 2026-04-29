@@ -278,6 +278,12 @@
   "event_types_name_tabsGroupOut": {
     "message": "將分頁移出群組"
   },
+  "event_types_name_tabsSplitJoined": {
+    "message": "分割畫面"
+  },
+  "event_types_name_tabsSplitOff": {
+    "message": "脫離分割畫面"
+  },
   "event_types_name_tabGroupsCreated": {
     "message": "新增分頁群組"
   },

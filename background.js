@@ -10,6 +10,16 @@ const gSounds = {};
 const gEvents = {};
 const contentEvents = {}; // cache events specific to content script, example: {'window.cut': [{options: ...}] }
 
+const AllTabUpdateEvents = [
+  'attention',
+  'pinned',
+  'unpinned',
+  'group-in',
+  'group-out',
+  'split-joined',
+  'split-off'
+].map(name => `tabs.${name}`);
+
 let ports = [];
 let hasStarted = false;
 let savingChecked = false; // flag for options page, could be set during onStorageChange, to avoid ditto check in options_saving_check
@@ -186,7 +196,7 @@ function addListeners() {
   let types = Object.keys(gEvents);
 
   const tabGroupAvailable = typeof browser.tabGroups === 'object';
-  const tabUpdateFilterProps = ['attention', 'pinned'];
+  const tabUpdateFilterProps = ['attention', 'pinned', 'splitViewId'];
   if (tabGroupAvailable) {
     tabUpdateFilterProps.push('groupId');
   }
@@ -200,7 +210,7 @@ function addListeners() {
   toggleListener(
     browser.tabs.onUpdated,
     onTabUpdated,
-    hasAny(['tabs.attention', 'tabs.pinned', 'tabs.unpinned', 'tabs.group-in', 'tabs.group-out'], types),
+    hasAny(AllTabUpdateEvents, types),
     {
       urls: ['<all_urls>'],
       properties: tabUpdateFilterProps
@@ -389,6 +399,14 @@ function onTabUpdated(tabId, changeInfo, tabInfo) {
       play('tabs.group-out');
     } else {
       play('tabs.group-in');
+    }
+  }
+
+  if (keys.includes('splitViewId')) {
+    if (changeInfo['splitViewId'] === browser.tabs.SPLIT_VIEW_ID_NONE) {
+      play('tabs.split-off');
+    } else {
+      play('tabs.split-joined');
     }
   }
 }

@@ -93,6 +93,12 @@ const Types = {
     name: browser.i18n.getMessage(`${scope}tabsAttention`),
     browsers: ['firefox']
   },
+  'tabs.split-joined': {
+    name: browser.i18n.getMessage(`${scope}tabsSplitJoined`)
+  },
+  'tabs.split-off': {
+    name: browser.i18n.getMessage(`${scope}tabsSplitOff`)
+  },
   'hr.tabGroups': {},
   'tabGroups.created': {
     name: browser.i18n.getMessage(`${scope}tabGroupsCreated`),
