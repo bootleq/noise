@@ -42,6 +42,7 @@ const RAW_RUNTIME_STATE =
           ["webextension-polyfill", "npm:0.12.0"],\
           ["webpack", "virtual:b9ceb0608e5705eaa30075b6de321256d05330de76c0b0279f37d5f0bf9066b0e3064987b04346994ac207efc6970c399ca136bbd2a7007b3ce7be13bd0cb318#npm:5.105.0"],\
           ["webpack-cli", "virtual:b9ceb0608e5705eaa30075b6de321256d05330de76c0b0279f37d5f0bf9066b0e3064987b04346994ac207efc6970c399ca136bbd2a7007b3ce7be13bd0cb318#npm:4.10.0"],\
+          ["webpack-sources", "npm:3.5.0"],\
           ["yargs", "npm:17.6.2"],\
           ["zip-webpack-plugin", "virtual:b9ceb0608e5705eaa30075b6de321256d05330de76c0b0279f37d5f0bf9066b0e3064987b04346994ac207efc6970c399ca136bbd2a7007b3ce7be13bd0cb318#npm:4.0.3"]\
         ],\
@@ -4150,6 +4151,7 @@ const RAW_RUNTIME_STATE =
           ["webextension-polyfill", "npm:0.12.0"],\
           ["webpack", "virtual:b9ceb0608e5705eaa30075b6de321256d05330de76c0b0279f37d5f0bf9066b0e3064987b04346994ac207efc6970c399ca136bbd2a7007b3ce7be13bd0cb318#npm:5.105.0"],\
           ["webpack-cli", "virtual:b9ceb0608e5705eaa30075b6de321256d05330de76c0b0279f37d5f0bf9066b0e3064987b04346994ac207efc6970c399ca136bbd2a7007b3ce7be13bd0cb318#npm:4.10.0"],\
+          ["webpack-sources", "npm:3.5.0"],\
           ["yargs", "npm:17.6.2"],\
           ["zip-webpack-plugin", "virtual:b9ceb0608e5705eaa30075b6de321256d05330de76c0b0279f37d5f0bf9066b0e3064987b04346994ac207efc6970c399ca136bbd2a7007b3ce7be13bd0cb318#npm:4.0.3"]\
         ],\
@@ -6062,6 +6064,13 @@ const RAW_RUNTIME_STATE =
           ["webpack-sources", "npm:3.3.3"]\
         ],\
         "linkType": "HARD"\
+      }],\
+      ["npm:3.5.0", {\
+        "packageLocation": "../../.local/share/yarn/berry/cache/webpack-sources-npm-3.5.0-b448c72415-10c0.zip/node_modules/webpack-sources/",\
+        "packageDependencies": [\
+          ["webpack-sources", "npm:3.5.0"]\
+        ],\
+        "linkType": "HARD"\
       }]\
     ]],\
     ["when", [\
@@ -6335,7 +6344,7 @@ const RAW_RUNTIME_STATE =
           ["@types/webpack", null],\
           ["@types/webpack-sources", null],\
           ["webpack", "virtual:b9ceb0608e5705eaa30075b6de321256d05330de76c0b0279f37d5f0bf9066b0e3064987b04346994ac207efc6970c399ca136bbd2a7007b3ce7be13bd0cb318#npm:5.105.0"],\
-          ["webpack-sources", null],\
+          ["webpack-sources", "npm:3.5.0"],\
           ["yazl", "npm:2.5.1"],\
           ["zip-webpack-plugin", "virtual:b9ceb0608e5705eaa30075b6de321256d05330de76c0b0279f37d5f0bf9066b0e3064987b04346994ac207efc6970c399ca136bbd2a7007b3ce7be13bd0cb318#npm:4.0.3"]\
         ],\
