@@ -30,5 +30,5 @@
     "build:prod:chrome": "cross-env NODE_ENV=production BROWSER=chrome webpack"
   },
   "license": "MIT",
-  "packageManager": "yarn@4.9.2"
+  "packageManager": "yarn@4.15.0"
 }
