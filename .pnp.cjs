@@ -2716,7 +2716,7 @@ const RAW_RUNTIME_STATE =
         "packageDependencies": [\
           ["@types/picomatch", null],\
           ["fdir", "virtual:d4e4bcf80e67f9de0540c123c7c4882e34dce6a8ba807a0a834f267f9132ee6bd264e69a49c6203aa89877ed3a5a5d633bfa002384881be452cc3a2d2fbcce0b#npm:6.4.6"],\
-          ["picomatch", "npm:4.0.2"]\
+          ["picomatch", "npm:4.0.4"]\
         ],\
         "packagePeers": [\
           "@types/picomatch",\
@@ -3940,7 +3940,7 @@ const RAW_RUNTIME_STATE =
         "packageDependencies": [\
           ["braces", "npm:3.0.3"],\
           ["micromatch", "npm:4.0.8"],\
-          ["picomatch", "npm:2.3.1"]\
+          ["picomatch", "npm:2.3.2"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -4579,17 +4579,17 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["picomatch", [\
-      ["npm:2.3.1", {\
-        "packageLocation": "../../.local/share/yarn/berry/cache/picomatch-npm-2.3.1-c782cfd986-10c0.zip/node_modules/picomatch/",\
+      ["npm:2.3.2", {\
+        "packageLocation": "../../.local/share/yarn/berry/cache/picomatch-npm-2.3.2-4d85543a37-10c0.zip/node_modules/picomatch/",\
         "packageDependencies": [\
-          ["picomatch", "npm:2.3.1"]\
+          ["picomatch", "npm:2.3.2"]\
         ],\
         "linkType": "HARD"\
       }],\
-      ["npm:4.0.2", {\
-        "packageLocation": "../../.local/share/yarn/berry/cache/picomatch-npm-4.0.2-e93516ddf2-10c0.zip/node_modules/picomatch/",\
+      ["npm:4.0.4", {\
+        "packageLocation": "../../.local/share/yarn/berry/cache/picomatch-npm-4.0.4-e82d450244-10c0.zip/node_modules/picomatch/",\
         "packageDependencies": [\
-          ["picomatch", "npm:4.0.2"]\
+          ["picomatch", "npm:4.0.4"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -5705,7 +5705,7 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "../../.local/share/yarn/berry/cache/tinyglobby-npm-0.2.14-d4e4bcf80e-10c0.zip/node_modules/tinyglobby/",\
         "packageDependencies": [\
           ["fdir", "virtual:d4e4bcf80e67f9de0540c123c7c4882e34dce6a8ba807a0a834f267f9132ee6bd264e69a49c6203aa89877ed3a5a5d633bfa002384881be452cc3a2d2fbcce0b#npm:6.4.6"],\
-          ["picomatch", "npm:4.0.2"],\
+          ["picomatch", "npm:4.0.4"],\
           ["tinyglobby", "npm:0.2.14"]\
         ],\
         "linkType": "HARD"\
