@@ -89,7 +89,7 @@ const RAW_RUNTIME_STATE =
           ["bluebird", "npm:3.7.2"],\
           ["commander", "npm:9.5.0"],\
           ["debug", "virtual:4748821a45ae3ab4dfc0734ae922bf9a72b9a50dc6dbe6b9e03677ce66465048db959da0ca989f4d00315b2b16fbd43cb8ce730505b0610bfcff20f1ece30fd1#npm:4.3.7"],\
-          ["node-forge", "npm:1.3.2"],\
+          ["node-forge", "npm:1.4.0"],\
           ["split", "npm:1.0.1"]\
         ],\
         "linkType": "HARD"\
@@ -4193,10 +4193,10 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["node-forge", [\
-      ["npm:1.3.2", {\
-        "packageLocation": "../../.local/share/yarn/berry/cache/node-forge-npm-1.3.2-39b26c0214-10c0.zip/node_modules/node-forge/",\
+      ["npm:1.4.0", {\
+        "packageLocation": "../../.local/share/yarn/berry/cache/node-forge-npm-1.4.0-646822c506-10c0.zip/node_modules/node-forge/",\
         "packageDependencies": [\
-          ["node-forge", "npm:1.3.2"]\
+          ["node-forge", "npm:1.4.0"]\
         ],\
         "linkType": "HARD"\
       }]\
