@@ -197,7 +197,7 @@ const RAW_RUNTIME_STATE =
           ["globals", "npm:14.0.0"],\
           ["ignore", "npm:5.3.2"],\
           ["import-fresh", "npm:3.3.1"],\
-          ["js-yaml", "npm:4.1.1"],\
+          ["js-yaml", "npm:4.3.0"],\
           ["minimatch", "npm:3.1.5"],\
           ["strip-json-comments", "npm:3.1.1"]\
         ],\
@@ -3546,11 +3546,11 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["js-yaml", [\
-      ["npm:4.1.1", {\
-        "packageLocation": "../../.yarn/berry/cache/js-yaml-npm-4.1.1-86ec786790-10c0.zip/node_modules/js-yaml/",\
+      ["npm:4.3.0", {\
+        "packageLocation": "../../.yarn/berry/cache/js-yaml-npm-4.3.0-1586601382-10c0.zip/node_modules/js-yaml/",\
         "packageDependencies": [\
           ["argparse", "npm:2.0.1"],\
-          ["js-yaml", "npm:4.1.1"]\
+          ["js-yaml", "npm:4.3.0"]\
         ],\
         "linkType": "HARD"\
       }]\
