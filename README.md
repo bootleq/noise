@@ -27,9 +27,11 @@ Available Events
 About Findbar Wrapped
 ---------------------
 
-Firefox (135 onwards) users can bring the old **Findbar wrapped** sound alive,
+Firefox (version 135 ~ 151) users can bring the old **Findbar wrapped** sound alive,
 by setting `accessibility.typeaheadfind.wrappedSoundURL` in `about:config`,
 which accepts values like `beep` or `file:///C:/your.wav`.
+
+Unfortunately the custom sound feature has been removed in 152, See [Bug 2049074][].
 
 
 Development
@@ -99,3 +101,4 @@ Alternatives
 [Sunny Tseng]: https://sunnytseng.ca/
 [xeno-canto.org/559593]: https://www.xeno-canto.org/559593
 [CC BY-NC-SA 4.0]: https://creativecommons.org/licenses/by-nc-sa/4.0/
+[Bug 2049074]: https://bugzilla.mozilla.org/show_bug.cgi?id=2049074
