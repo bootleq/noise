@@ -3226,12 +3226,10 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["ip-address", [\
-      ["npm:9.0.5", {\
-        "packageLocation": "../../.local/share/yarn/berry/cache/ip-address-npm-9.0.5-9fa024d42a-10c0.zip/node_modules/ip-address/",\
+      ["npm:10.7.0", {\
+        "packageLocation": "../../.local/share/yarn/berry/cache/ip-address-npm-10.7.0-668ec9d508-10c0.zip/node_modules/ip-address/",\
         "packageDependencies": [\
-          ["ip-address", "npm:9.0.5"],\
-          ["jsbn", "npm:1.1.0"],\
-          ["sprintf-js", "npm:1.1.3"]\
+          ["ip-address", "npm:10.7.0"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -3501,15 +3499,6 @@ const RAW_RUNTIME_STATE =
         "packageDependencies": [\
           ["argparse", "npm:2.0.1"],\
           ["js-yaml", "npm:4.3.2"]\
-        ],\
-        "linkType": "HARD"\
-      }]\
-    ]],\
-    ["jsbn", [\
-      ["npm:1.1.0", {\
-        "packageLocation": "../../.local/share/yarn/berry/cache/jsbn-npm-1.1.0-1da0181838-10c0.zip/node_modules/jsbn/",\
-        "packageDependencies": [\
-          ["jsbn", "npm:1.1.0"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -5290,12 +5279,12 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["socks", [\
-      ["npm:2.8.5", {\
-        "packageLocation": "../../.local/share/yarn/berry/cache/socks-npm-2.8.5-d96a42ad79-10c0.zip/node_modules/socks/",\
+      ["npm:2.8.10", {\
+        "packageLocation": "../../.local/share/yarn/berry/cache/socks-npm-2.8.10-ac11676661-10c0.zip/node_modules/socks/",\
         "packageDependencies": [\
-          ["ip-address", "npm:9.0.5"],\
+          ["ip-address", "npm:10.7.0"],\
           ["smart-buffer", "npm:4.2.0"],\
-          ["socks", "npm:2.8.5"]\
+          ["socks", "npm:2.8.10"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -5306,7 +5295,7 @@ const RAW_RUNTIME_STATE =
         "packageDependencies": [\
           ["agent-base", "npm:7.1.3"],\
           ["debug", "virtual:643ed7cc338bcf145a82d8b05b3bef6bcf150ca545df386225596f10ce53cc90b88b3ca83e348ade1ccea5f3f8e76c92d2f0e2ba544da60d40aff9921c56872d#npm:4.4.1"],\
-          ["socks", "npm:2.8.5"],\
+          ["socks", "npm:2.8.10"],\
           ["socks-proxy-agent", "npm:8.0.5"]\
         ],\
         "linkType": "HARD"\
@@ -5366,15 +5355,6 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "../../.local/share/yarn/berry/cache/split2-npm-4.2.0-16aa3883ba-10c0.zip/node_modules/split2/",\
         "packageDependencies": [\
           ["split2", "npm:4.2.0"]\
-        ],\
-        "linkType": "HARD"\
-      }]\
-    ]],\
-    ["sprintf-js", [\
-      ["npm:1.1.3", {\
-        "packageLocation": "../../.local/share/yarn/berry/cache/sprintf-js-npm-1.1.3-b99efd75b2-10c0.zip/node_modules/sprintf-js/",\
-        "packageDependencies": [\
-          ["sprintf-js", "npm:1.1.3"]\
         ],\
         "linkType": "HARD"\
       }]\
