@@ -34,7 +34,7 @@ const RAW_RUNTIME_STATE =
           ["css-loader", "virtual:b9ceb0608e5705eaa30075b6de321256d05330de76c0b0279f37d5f0bf9066b0e3064987b04346994ac207efc6970c399ca136bbd2a7007b3ce7be13bd0cb318#npm:6.11.0"],\
           ["just-throttle", "npm:4.2.0"],\
           ["mini-css-extract-plugin", "virtual:b9ceb0608e5705eaa30075b6de321256d05330de76c0b0279f37d5f0bf9066b0e3064987b04346994ac207efc6970c399ca136bbd2a7007b3ce7be13bd0cb318#npm:2.9.2"],\
-          ["nanoid", "npm:5.1.5"],\
+          ["nanoid", "npm:5.1.16"],\
           ["noise", "workspace:."],\
           ["sass", "npm:1.89.2"],\
           ["sass-loader", "virtual:b9ceb0608e5705eaa30075b6de321256d05330de76c0b0279f37d5f0bf9066b0e3064987b04346994ac207efc6970c399ca136bbd2a7007b3ce7be13bd0cb318#npm:13.3.3"],\
@@ -4147,10 +4147,10 @@ const RAW_RUNTIME_STATE =
         ],\
         "linkType": "HARD"\
       }],\
-      ["npm:5.1.5", {\
-        "packageLocation": "../../.local/share/yarn/berry/cache/nanoid-npm-5.1.5-79b61a9d37-10c0.zip/node_modules/nanoid/",\
+      ["npm:5.1.16", {\
+        "packageLocation": "../../.local/share/yarn/berry/cache/nanoid-npm-5.1.16-4584eba352-10c0.zip/node_modules/nanoid/",\
         "packageDependencies": [\
-          ["nanoid", "npm:5.1.5"]\
+          ["nanoid", "npm:5.1.16"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -4239,7 +4239,7 @@ const RAW_RUNTIME_STATE =
           ["css-loader", "virtual:b9ceb0608e5705eaa30075b6de321256d05330de76c0b0279f37d5f0bf9066b0e3064987b04346994ac207efc6970c399ca136bbd2a7007b3ce7be13bd0cb318#npm:6.11.0"],\
           ["just-throttle", "npm:4.2.0"],\
           ["mini-css-extract-plugin", "virtual:b9ceb0608e5705eaa30075b6de321256d05330de76c0b0279f37d5f0bf9066b0e3064987b04346994ac207efc6970c399ca136bbd2a7007b3ce7be13bd0cb318#npm:2.9.2"],\
-          ["nanoid", "npm:5.1.5"],\
+          ["nanoid", "npm:5.1.16"],\
           ["noise", "workspace:."],\
           ["sass", "npm:1.89.2"],\
           ["sass-loader", "virtual:b9ceb0608e5705eaa30075b6de321256d05330de76c0b0279f37d5f0bf9066b0e3064987b04346994ac207efc6970c399ca136bbd2a7007b3ce7be13bd0cb318#npm:13.3.3"],\
