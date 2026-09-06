@@ -197,7 +197,7 @@ const RAW_RUNTIME_STATE =
           ["globals", "npm:14.0.0"],\
           ["ignore", "npm:5.3.2"],\
           ["import-fresh", "npm:3.3.1"],\
-          ["js-yaml", "npm:4.3.0"],\
+          ["js-yaml", "npm:4.3.2"],\
           ["minimatch", "npm:3.1.5"],\
           ["strip-json-comments", "npm:3.1.1"]\
         ],\
@@ -1586,7 +1586,7 @@ const RAW_RUNTIME_STATE =
           ["parse5", "npm:7.3.0"],\
           ["parse5-htmlparser2-tree-adapter", "npm:7.1.0"],\
           ["parse5-parser-stream", "npm:7.1.2"],\
-          ["undici", "npm:7.26.0"],\
+          ["undici", "npm:7.29.1"],\
           ["whatwg-mimetype", "npm:4.0.0"]\
         ],\
         "linkType": "HARD"\
@@ -3535,11 +3535,11 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["js-yaml", [\
-      ["npm:4.3.0", {\
-        "packageLocation": "../../.local/share/yarn/berry/cache/js-yaml-npm-4.3.0-1586601382-10c0.zip/node_modules/js-yaml/",\
+      ["npm:4.3.2", {\
+        "packageLocation": "../../.local/share/yarn/berry/cache/js-yaml-npm-4.3.2-d3b0efff68-10c0.zip/node_modules/js-yaml/",\
         "packageDependencies": [\
           ["argparse", "npm:2.0.1"],\
-          ["js-yaml", "npm:4.3.0"]\
+          ["js-yaml", "npm:4.3.2"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -5748,10 +5748,10 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["undici", [\
-      ["npm:7.26.0", {\
-        "packageLocation": "../../.local/share/yarn/berry/cache/undici-npm-7.26.0-f7179e01ec-10c0.zip/node_modules/undici/",\
+      ["npm:7.29.1", {\
+        "packageLocation": "../../.local/share/yarn/berry/cache/undici-npm-7.29.1-e8955914fd-10c0.zip/node_modules/undici/",\
         "packageDependencies": [\
-          ["undici", "npm:7.26.0"]\
+          ["undici", "npm:7.29.1"]\
         ],\
         "linkType": "HARD"\
       }]\
