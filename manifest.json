@@ -1,7 +1,7 @@
 {
   "name": "Noise",
   "description": "__MSG_extDescription__",
-  "version": "4.4.1",
+  "version": "4.4.2",
   "homepage_url": "https://github.com/bootleq/noise",
   "icons": {
     "32": "icons/32.png",
@@ -35,6 +35,14 @@
       "js": ["content.js"]
     }
   ],
+
+  "browser_action": {
+    "default_icon": {
+      "32": "icons/32.png",
+      "48": "icons/48.png"
+    },
+    "default_title": "__MSG_actionTitleOn__"
+  },
 
   "options_ui": {
     "page": "options.html",

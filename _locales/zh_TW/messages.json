@@ -3,6 +3,15 @@
     "message": "事件發生的時候，製造一點聲響。"
   },
 
+  "actionTitleOn": {
+    "message": "Noise：音效已開啟（點擊關閉）",
+    "description": "Toolbar button tooltip when sounds are globally enabled."
+  },
+  "actionTitleOff": {
+    "message": "Noise：音效已關閉（點擊開啟）",
+    "description": "Toolbar button tooltip when sounds are globally disabled."
+  },
+
   "optionPageTitle": {
     "message": "Noise 設定"
   },
