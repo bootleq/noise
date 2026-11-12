@@ -38,6 +38,14 @@
     }
   ],
 
+  "action": {
+    "default_icon": {
+      "32": "icons/32.png",
+      "48": "icons/48.png"
+    },
+    "default_title": "__MSG_actionTitleOn__"
+  },
+
   "options_ui": {
     "page": "options.html",
     "open_in_tab": true,
