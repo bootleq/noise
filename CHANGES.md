@@ -1,6 +1,10 @@
 CHANGES
 =======
 
+## Unreleased
+
+* Add a toolbar button to turn all sounds ON/OFF globally, can be pinned to the toolbar.
+
 ## 4.4.1 (2026-04-29)
 
 * Fix splitViewId related error on older versions of Firefox.
