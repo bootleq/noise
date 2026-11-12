@@ -4,11 +4,11 @@
   },
 
   "actionTitleOn": {
-    "message": "Noise：音效已開啟（點擊關閉）",
+    "message": "停用音效",
     "description": "Toolbar button tooltip when sounds are globally enabled."
   },
   "actionTitleOff": {
-    "message": "Noise：音效已關閉（點擊開啟）",
+    "message": "啟用音效",
     "description": "Toolbar button tooltip when sounds are globally disabled."
   },
 

@@ -4,11 +4,11 @@
   },
 
   "actionTitleOn": {
-    "message": "Noise: sounds ON (click to turn off)",
+    "message": "Disable sounds",
     "description": "Toolbar button tooltip when sounds are globally enabled."
   },
   "actionTitleOff": {
-    "message": "Noise: sounds OFF (click to turn on)",
+    "message": "Enable sounds",
     "description": "Toolbar button tooltip when sounds are globally disabled."
   },
 
