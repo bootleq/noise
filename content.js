@@ -86,7 +86,7 @@ function removeListeners() {
   }
 }
 
-globalThis.requestIdleCallback(() => {
+function connect() {
   port = browser.runtime.connect();
   port.postMessage({type: 'ready'});
 
@@ -95,9 +95,21 @@ globalThis.requestIdleCallback(() => {
     port = null;
     removeListeners();
   });
-  window.addEventListener('unload', () => {
+}
+
+globalThis.requestIdleCallback(() => {
+  connect();
+
+  window.addEventListener('pagehide', () => {
     if (port) {
       port.disconnect();
+      port = null;
+    }
+    removeListeners();
+  });
+  window.addEventListener('pageshow', (e) => {
+    if (e.persisted && !port) {
+      connect();
     }
   });
 });
