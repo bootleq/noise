@@ -1,7 +1,7 @@
 CHANGES
 =======
 
-## Unreleased
+## 4.4.2 (2026-11-13)
 
 * Add a toolbar button to turn all sounds ON/OFF globally, can be pinned to the toolbar.
 
