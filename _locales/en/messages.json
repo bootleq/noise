@@ -3,6 +3,15 @@
     "message": "Make sound response when events happen"
   },
 
+  "actionTitleOn": {
+    "message": "Disable sounds",
+    "description": "Toolbar button tooltip when sounds are globally enabled."
+  },
+  "actionTitleOff": {
+    "message": "Enable sounds",
+    "description": "Toolbar button tooltip when sounds are globally disabled."
+  },
+
   "optionPageTitle": {
     "message": "Noise - Options"
   },

@@ -1,6 +1,12 @@
 CHANGES
 =======
 
+## 4.4.2 (unreleased)
+
+* 新增工具列按鈕，可全域開啟／關閉所有音效
+* 修正 Chrome 出現的「unload is not allowed」權限政策錯誤
+* 更新相依套件
+
 ## 4.4.1 (2026-04-29)
 
 * 修正舊版 Firefox 會遇到的 splitViewId 錯誤

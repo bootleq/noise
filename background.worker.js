@@ -21,6 +21,8 @@ const AllTabUpdateEvents = [
 ].map(name => `tabs.${name}`);
 
 let ports = [];
+let gEnabled = true; // global ON/OFF, persisted as storage key 'enabled'
+const actionApi = browser.action; // MV3
 let hasStarted = false;
 let savingChecked = false; // flag for options page, could be set during onStorageChange, to avoid ditto check in options_saving_check
 
@@ -61,7 +63,7 @@ function rebindListenersWithCatcher() {
   try {
     removeListeners();
     addListeners();
-    broadcast({type: 'bind', events: contentEvents});
+    broadcast(contentBindMessage());
   } catch (error) {
     console.error(`Event binding failed`, error);
 
@@ -83,6 +85,10 @@ function rebindListenersWithCatcher() {
 }
 
 function onStorageChange(changes, _area) {
+  if ('enabled' in changes) {
+    setEnabled(changes.enabled.newValue !== false);
+  }
+
   if ('sounds' in changes) {
     resetSounds(changes.sounds.newValue);
   }
@@ -104,7 +110,7 @@ function onMessage(msg, sender, respond) {
       if ('action' in msg) {
         if (msg.action === 'bind') {
           addListeners();
-          broadcast({type: 'bind', events: contentEvents});
+          broadcast(contentBindMessage());
         } else {
           removeListeners();
           broadcast({type: 'unbind'});
@@ -112,7 +118,7 @@ function onMessage(msg, sender, respond) {
       } else {
         removeListeners();
         addListeners();
-        broadcast({type: 'bind', events: contentEvents});
+        broadcast(contentBindMessage());
       }
       break;
 
@@ -123,6 +129,39 @@ function onMessage(msg, sender, respond) {
       savingChecked = false;
       break;
   }
+}
+
+function contentBindMessage() {
+  return gEnabled ? {type: 'bind', events: contentEvents} : {type: 'unbind'};
+}
+
+function setEnabled(enabled) {
+  if (gEnabled === enabled) {
+    return;
+  }
+  gEnabled = enabled;
+  updateActionUI();
+
+  if (gEnabled) {
+    rebindListenersWithCatcher();
+  } else {
+    removeListeners();
+    broadcast({type: 'unbind'});
+  }
+}
+
+function updateActionUI() {
+  actionApi.setIcon({
+    path: gEnabled
+      ? {32: 'icons/32.png', 48: 'icons/48.png'}
+      : {32: 'icons/off-32.png', 48: 'icons/off-48.png'}
+  });
+  actionApi.setTitle({title: browser.i18n.getMessage(gEnabled ? 'actionTitleOn' : 'actionTitleOff')});
+}
+
+async function onActionClicked() {
+  const { enabled } = await browser.storage.local.get('enabled');
+  await browser.storage.local.set({enabled: enabled === false});
 }
 
 function broadcast(...args) {
@@ -174,7 +213,7 @@ async function onPortMessage(msg, port) {
       }
       break;
   case 'ready':
-    port.postMessage({type: 'bind', events: contentEvents});
+    port.postMessage(contentBindMessage());
     break;
   }
 }
@@ -194,7 +233,9 @@ function onConnect(port) {
 }
 
 async function loadConfig() {
-  return browser.storage.local.get(['sounds', 'events']).then(items => {
+  return browser.storage.local.get(['sounds', 'events', 'enabled']).then(items => {
+    gEnabled = items.enabled !== false;
+    updateActionUI();
     if ('sounds' in items) {
       resetSounds(items.sounds);
     }
@@ -207,6 +248,10 @@ async function loadConfig() {
 }
 
 function addListeners() {
+  if (!gEnabled) {
+    return;
+  }
+
   let types = Object.keys(gEvents);
   toggleListener(browser.downloads.onCreated, onDownloadCreated, types.includes('download.new'));
   toggleListener(browser.downloads.onChanged, onDownloadChanged, hasAny(['download.completed', 'download.interrupted'], types));
@@ -325,6 +370,10 @@ function toggleListener(host, listener, toggle, ...args) {
 }
 
 function play(type, filter = () => true) {
+  if (!gEnabled) {
+    return;
+  }
+
   let events = gEvents[type] || [];
 
   events.filter(filter).forEach(e => {
@@ -483,3 +532,4 @@ browser.runtime.onSuspend.addListener(destroy);
 
 browser.runtime.onStartup.addListener(onStartup);
 browser.runtime.onConnect.addListener(onConnect);
+actionApi.onClicked.addListener(onActionClicked);
