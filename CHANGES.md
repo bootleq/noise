@@ -1,9 +1,9 @@
 CHANGES
 =======
 
-## 4.4.2 (unreleased)
+## 4.4.2 (2026-11-13)
 
-* Add a toolbar button to turn all sounds ON/OFF globally, can be pinned to the toolbar.
+* Add a toolbar button to turn all sounds ON/OFF globally, and can be pinned to the toolbar.
 * Fix "Permissions policy violation: unload is not allowed" error in Chrome.
 * Update dependencies.
 

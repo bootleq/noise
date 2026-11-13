@@ -1,7 +1,7 @@
 CHANGES
 =======
 
-## 4.4.2 (unreleased)
+## 4.4.2 (2026-11-13)
 
 * 新增工具列按鈕，可全域開啟／關閉所有音效
 * 修正 Chrome 出現的「unload is not allowed」權限政策錯誤
